@@ -11,13 +11,13 @@ public class PathRequestManager : MonoBehaviour {
 
 	Queue<PathResult> results = new Queue<PathResult>();
 	
-	static PathRequestManager instance;
+	//static PathRequestManager instance;
 	Pathfinding pathfinding;
 
 	//bool isProcessingPath;
 
 	void Awake() {
-		instance = this;
+		//instance = this;
 		pathfinding = GetComponent<Pathfinding>();
 	}
 
@@ -39,9 +39,9 @@ public class PathRequestManager : MonoBehaviour {
 	//	instance.TryProcessNext();
 	//}
 
-	public static void RequestPath(PathRequest request) {
+	public void RequestPath(PathRequest request) {
 		ThreadStart threadStart = delegate {
-			instance.pathfinding.FindPath(request, FinishedProcessingPath);
+			pathfinding.FindPath(request, FinishedProcessingPath);
 		};
 		threadStart.Invoke();
 	}
@@ -60,9 +60,9 @@ public class PathRequestManager : MonoBehaviour {
 	//	TryProcessNext();
 	//}
 
-	public static void FinishedProcessingPath(PathResult result) {
-		lock (instance.results) {
-			instance.results.Enqueue(result);
+	public void FinishedProcessingPath(PathResult result) {
+		lock (results) {
+			results.Enqueue(result);
 		}
 	}
 
