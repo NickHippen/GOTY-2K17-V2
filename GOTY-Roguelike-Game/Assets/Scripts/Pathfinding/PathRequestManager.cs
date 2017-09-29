@@ -6,15 +6,9 @@ using UnityEngine;
 
 public class PathRequestManager : MonoBehaviour {
 
-	//Queue<PathRequest> pathRequestQueue = new Queue<PathRequest>();
-	//PathRequest currentPathRequest;
-
 	Queue<PathResult> results = new Queue<PathResult>();
 	
-	//static PathRequestManager instance;
 	Pathfinding pathfinding;
-
-	//bool isProcessingPath;
 
 	void Awake() {
 		//instance = this;
@@ -33,32 +27,12 @@ public class PathRequestManager : MonoBehaviour {
 		}
 	}
 
-	//public static void RequestPath(Vector3 pathStart, Vector3 pathEnd, Action<Vector3[], bool> callback) {
-	//	PathRequest newRequest = new PathRequest(pathStart, pathEnd, callback);
-	//	instance.pathRequestQueue.Enqueue(newRequest);
-	//	instance.TryProcessNext();
-	//}
-
 	public void RequestPath(PathRequest request) {
 		ThreadStart threadStart = delegate {
 			pathfinding.FindPath(request, FinishedProcessingPath);
 		};
 		threadStart.Invoke();
 	}
-
-	//void TryProcessNext() {
-	//	if (!isProcessingPath && pathRequestQueue.Count > 0) {
-	//		currentPathRequest = pathRequestQueue.Dequeue();
-	//		isProcessingPath = true;
-	//		pathfinding.StartFindPath(currentPathRequest.pathStart, currentPathRequest.pathEnd);
-	//	}
-	//}
-
-	//public void FinishedProcessingPath(Vector3[] path, bool success) {
-	//	currentPathRequest.callback(path, success);
-	//	isProcessingPath = false;
-	//	TryProcessNext();
-	//}
 
 	public void FinishedProcessingPath(PathResult result) {
 		lock (results) {

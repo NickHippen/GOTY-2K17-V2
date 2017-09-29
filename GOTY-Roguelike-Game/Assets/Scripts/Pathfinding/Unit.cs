@@ -13,20 +13,15 @@ public class Unit : MonoBehaviour {
 	public float turnSpeed = 3;
 	public float turnDist = 2;
 
-	Path path;
-	//Vector3[] path;
-	//int targetIndex;
+	private Path path;
 
 	void Start() {
 		StartCoroutine(UpdatePath());
-		//PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 	}
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
 		if (pathSuccessful) {
-			//path = newPath;
 			path = new Path(waypoints, transform.position, turnDist);
-			//targetIndex = 0;
 			StopCoroutine("FollowPath");
 			StartCoroutine("FollowPath");
 		}
@@ -37,7 +32,6 @@ public class Unit : MonoBehaviour {
 		if (Time.timeSinceLevelLoad < 0.3f) {
 			yield return new WaitForSeconds(0.3f);
 		}
-		//PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 		pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
 
 		float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
@@ -46,7 +40,6 @@ public class Unit : MonoBehaviour {
 		while (true) {
 			yield return new WaitForSeconds(minPathUpdateTime);
 			if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
-				//PathRequestManager.RequestPath(transform.position, target.position, OnPathFound);
 				pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
 				targetPosOld = target.position;
 			}
@@ -54,21 +47,6 @@ public class Unit : MonoBehaviour {
 	}
 
 	IEnumerator FollowPath() {
-		//Vector3 currentWaypoint = path[0];
-
-		//while (true) {
-		//	if (transform.position == currentWaypoint) {
-		//		targetIndex++;
-		//		if (targetIndex >= path.Length) {
-		//			targetIndex = 0;
-		//			path = new Vector3[0];
-		//			yield break;
-		//		}
-		//		currentWaypoint = path[targetIndex];
-		//	}
-		//	transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-		//	yield return null;
-		//}
 		bool followingPath = true;
 		int pathIndex = 0;
 		transform.LookAt(path.lookPoints[0]);
@@ -97,16 +75,6 @@ public class Unit : MonoBehaviour {
 	public void OnDrawGizmos() {
 		if (path != null) {
 			path.DrawWithGizmos();
-			//for (int i = targetIndex; i < path.Length; i++) {
-			//	Gizmos.color = Color.black;
-			//	Gizmos.DrawCube(path[i], Vector3.one);
-
-			//	if (i == targetIndex) {
-			//		Gizmos.DrawLine(transform.position, path[i]);
-			//	} else {
-			//		Gizmos.DrawLine(path[i - 1], path[i]);
-			//	}
-			//}
 		}
 	}
 
