@@ -200,17 +200,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		//New code for collecting objects
-		/*void OnTriggerEnter(Collider other) {
-			if (other.gameObject.CompareTag ("Pickup")) {
-				inventory.addWeapon (other.gameObject<WeaponData>);
+		//Investigate layerd based collision detection
+		void OnTriggerEnter(Collider other) {
+			if ((other.gameObject.CompareTag ("Pickup")) && (inventory.isEmpty() || !other.gameObject.Equals(inventory.getCurrentWeapon()))) {
+				inventory.addWeapon (other.gameObject);
 				other.gameObject.SetActive (false);
+				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
-				inventory.getCurrentWeapon ().transform.position = hand.transform.position;
 				inventory.getCurrentWeapon ().transform.parent = hand.transform;
-				//count++;
-				//setCountText();
+				inventory.getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
-		}*/
+		}
 
 		void CheckGroundStatus()
 		{

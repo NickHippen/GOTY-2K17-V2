@@ -4,24 +4,40 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour {
 
-	public List<WeaponData> weapons = new List<WeaponData>();
+	public List<GameObject> weapons = new List<GameObject>();
 	// Use this for initialization
-	private int current=0;
+	private int current=-1;
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (!isEmpty()) {
+			//weapons [current].transform.position = weapons [current].transform.parent.position;
+			weapons[current].transform.parent.localPosition = new Vector3 (0, 0, 0);
+		}
 	}
 
-	public void addWeapon(WeaponData weapon){
+	public void addWeapon(GameObject weapon){
+		current++;
 		weapons.Add (weapon);
 		Debug.Log ("Weapon added");
 	}
 
-	public WeaponData getCurrentWeapon(){
-		return weapons [current];
+	public GameObject getCurrentWeapon(){
+		if (weapons.Count != 0) {
+			return weapons [current];
+		} else {
+			return null;
+		}
+	}
+
+	public bool isEmpty(){
+		if (weapons.Count == 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

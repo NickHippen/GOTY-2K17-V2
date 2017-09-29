@@ -21,4 +21,10 @@ public class WeaponData : MonoBehaviour{
 		damage = dmg;
 		model = m;
 	}
+
+	void Update(){
+		if (transform.parent != null) {
+			transform.position = transform.parent.position;
+		}
+	}
 }
