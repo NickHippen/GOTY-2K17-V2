@@ -29,6 +29,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 		PlayerInventory inventory = new PlayerInventory ();
+		public GameObject hand;
 
 		void Start()
 		{
@@ -199,14 +200,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		//New code for collecting objects
-		void OnTriggerEnter(Collider other) {
+		/*void OnTriggerEnter(Collider other) {
 			if (other.gameObject.CompareTag ("Pickup")) {
-				inventory.addWeapon (other.gameObject);
+				inventory.addWeapon (other.gameObject<WeaponData>);
 				other.gameObject.SetActive (false);
+				inventory.getCurrentWeapon ().SetActive (true);
+				inventory.getCurrentWeapon ().transform.position = hand.transform.position;
+				inventory.getCurrentWeapon ().transform.parent = hand.transform;
 				//count++;
 				//setCountText();
 			}
-		}
+		}*/
 
 		void CheckGroundStatus()
 		{

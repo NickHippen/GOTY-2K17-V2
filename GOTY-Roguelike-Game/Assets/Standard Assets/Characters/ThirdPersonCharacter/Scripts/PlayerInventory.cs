@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour {
 
-	public List<GameObject> weapons = new List<GameObject>();
+	public List<WeaponData> weapons = new List<WeaponData>();
 	// Use this for initialization
+	private int current=0;
 	void Start () {
 		
 	}
@@ -15,8 +16,12 @@ public class PlayerInventory : MonoBehaviour {
 		
 	}
 
-	public void addWeapon(GameObject weapon){
+	public void addWeapon(WeaponData weapon){
 		weapons.Add (weapon);
 		Debug.Log ("Weapon added");
+	}
+
+	public WeaponData getCurrentWeapon(){
+		return weapons [current];
 	}
 }

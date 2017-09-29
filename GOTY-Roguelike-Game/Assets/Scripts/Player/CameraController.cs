@@ -6,8 +6,8 @@ public class CameraController : MonoBehaviour {
 
 	private const float Y_ANGLE_MIN = 0f;
 	private const float Y_ANGLE_MAX = 30f;
-	private const float ZOOM_MIN = 5f;
-	private const float ZOOM_MAX = 25f;
+	private const float ZOOM_MIN = 2f;
+	private const float ZOOM_MAX = 5f;
 
 	public Transform lookAt;
 
