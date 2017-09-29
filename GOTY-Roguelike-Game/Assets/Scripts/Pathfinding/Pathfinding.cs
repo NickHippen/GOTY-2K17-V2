@@ -23,8 +23,8 @@ public class Pathfinding : MonoBehaviour {
 		Vector3[] waypoints = new Vector3[0];
 		bool pathSuccess = false;
 
-		Node startNode = grid.NodeFromWorldPoint(request.pathStart);
-		Node targetNode = grid.NodeFromWorldPoint(request.pathEnd);
+		Node startNode = grid.FindNodeFromWorldPosition(request.pathStart);
+		Node targetNode = grid.FindNodeFromWorldPosition(request.pathEnd);
 
 		if (startNode.walkable && targetNode.walkable) {
 			Heap<Node> openSet = new Heap<Node>(grid.MaxSize);

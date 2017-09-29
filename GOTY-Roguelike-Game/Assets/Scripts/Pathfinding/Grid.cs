@@ -137,9 +137,9 @@ public class Grid : MonoBehaviour {
 		return neighbors;
 	}
 
-	public Node NodeFromWorldPoint(Vector3 worldPosition) {
-		float percentX = 1 - ((transform.position.x + gridWorldSize.x / 2) - worldPosition.x) / 100;
-		float percentY = 1 - ((transform.position.z + gridWorldSize.y / 2) - worldPosition.z) / 100;
+	public Node FindNodeFromWorldPosition(Vector3 worldPosition) {
+		float percentX = (worldPosition.x - transform.position.x) / gridWorldSize.x + 0.5f;
+		float percentY = (worldPosition.z - transform.position.z) / gridWorldSize.y + 0.5f;
 		percentX = Mathf.Clamp01(percentX);
 		percentY = Mathf.Clamp01(percentY);
 
@@ -148,13 +148,11 @@ public class Grid : MonoBehaviour {
 		return grid[x, y];
 	}
 
-	public List<Node> path;
 	void OnDrawGizmos() {
 		Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
 
 		if (grid != null && displayGridGizmos) {
 			foreach (Node n in grid) {
-
 				Gizmos.color = Color.Lerp(Color.white, Color.black, Mathf.InverseLerp(penaltyMin, penaltyMax, n.movementPenalty));
 				Gizmos.color = n.walkable ? Gizmos.color : Color.red;
 				Gizmos.DrawCube(n.worldPosition, Vector3.one * (nodeDiameter));
