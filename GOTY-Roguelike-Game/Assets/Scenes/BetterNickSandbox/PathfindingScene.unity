@@ -2404,7 +2404,6 @@ GameObject:
   - component: {fileID: 379807444}
   - component: {fileID: 379807443}
   - component: {fileID: 379807442}
-  - component: {fileID: 379807440}
   - component: {fileID: 379807441}
   m_Layer: 0
   m_Name: Seeker
@@ -2413,23 +2412,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &379807440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 379807439}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412dbc12e13df044faee80748eaea5c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  target: {fileID: 291478216}
-  pathRequestManager: {fileID: 60134933}
-  speed: 5
-  turnSpeed: 3
-  turnDist: 2
 --- !u!114 &379807441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3568,7 +3550,6 @@ GameObject:
   - component: {fileID: 714062875}
   - component: {fileID: 714062879}
   - component: {fileID: 714062878}
-  - component: {fileID: 714062877}
   - component: {fileID: 714062876}
   m_Layer: 0
   m_Name: Seeker (2)
@@ -3612,23 +3593,6 @@ MonoBehaviour:
   turnDist: 2
   targetTag: Player
   aggroRadius: 20
---- !u!114 &714062877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 714062874}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412dbc12e13df044faee80748eaea5c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  target: {fileID: 291478216}
-  pathRequestManager: {fileID: 60134933}
-  speed: 5
-  turnSpeed: 3
-  turnDist: 2
 --- !u!136 &714062878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7241,7 +7205,6 @@ GameObject:
   - component: {fileID: 1497406649}
   - component: {fileID: 1497406653}
   - component: {fileID: 1497406652}
-  - component: {fileID: 1497406651}
   - component: {fileID: 1497406650}
   m_Layer: 0
   m_Name: Seeker (1)
@@ -7285,23 +7248,6 @@ MonoBehaviour:
   turnDist: 2
   targetTag: Player
   aggroRadius: 20
---- !u!114 &1497406651
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1497406648}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 412dbc12e13df044faee80748eaea5c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  target: {fileID: 291478216}
-  pathRequestManager: {fileID: 60134933}
-  speed: 5
-  turnSpeed: 3
-  turnDist: 2
 --- !u!136 &1497406652
 CapsuleCollider:
   m_ObjectHideFlags: 0
