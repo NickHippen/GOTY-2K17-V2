@@ -7,6 +7,8 @@ public class Unit : MonoBehaviour {
 	const float minPathUpdateTime = 0.2f;
 	const float pathUpdateMoveThreshold = 0.5f;
 
+	public bool debugMode;
+
 	public Transform target;
 	public PathRequestManager pathRequestManager;
 	public float speed = 5f;
@@ -16,7 +18,12 @@ public class Unit : MonoBehaviour {
 	private Path path;
 
 	void Start() {
-		StartCoroutine(UpdatePath());
+		if (target != null) {
+			BeginPathing();
+		}
+	}
+
+	protected void Update() {
 	}
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
@@ -25,6 +32,10 @@ public class Unit : MonoBehaviour {
 			StopCoroutine("FollowPath");
 			StartCoroutine("FollowPath");
 		}
+	}
+
+	public void BeginPathing() {
+		StartCoroutine(UpdatePath());
 	}
 
 	IEnumerator UpdatePath() {
@@ -73,7 +84,7 @@ public class Unit : MonoBehaviour {
 	}
 
 	public void OnDrawGizmos() {
-		if (path != null) {
+		if (debugMode && path != null) {
 			path.DrawWithGizmos();
 		}
 	}
