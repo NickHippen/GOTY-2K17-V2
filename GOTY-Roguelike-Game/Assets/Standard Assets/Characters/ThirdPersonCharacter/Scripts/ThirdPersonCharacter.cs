@@ -30,6 +30,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Crouching;
 		PlayerInventory inventory = new PlayerInventory ();
 		public GameObject hand;
+		bool m_Use;
 
 		void Start()
 		{
@@ -202,7 +203,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		//New code for collecting objects
 		//Investigate layerd based collision detection
 		void OnTriggerEnter(Collider other) {
-			if ((other.gameObject.CompareTag ("Pickup")) && (inventory.isEmpty() || !other.gameObject.Equals(inventory.getCurrentWeapon()))) {
+			if ((other.gameObject.CompareTag ("Pickup") && m_Use)/*(inventory.isEmpty() || !other.gameObject.Equals(inventory.getCurrentWeapon()))*/) {
+				other.gameObject.tag = "Equipped";
 				inventory.addWeapon (other.gameObject);
 				other.gameObject.SetActive (false);
 				//Move into Weapon class later
@@ -210,6 +212,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				inventory.getCurrentWeapon ().transform.parent = hand.transform;
 				inventory.getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
+		}
+
+		public void isUse(bool E_Press){
+			m_Use = E_Press;
 		}
 
 		void CheckGroundStatus()
