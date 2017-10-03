@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
-	private const float Y_ANGLE_MIN = 0f;
+	private const float Y_ANGLE_MIN = -30f;
 	private const float Y_ANGLE_MAX = 30f;
-	private const float ZOOM_MIN = 5f;
-	private const float ZOOM_MAX = 25f;
+	private const float ZOOM_MIN = 2f;
+	private const float ZOOM_MAX = 5f;
 
+	public bool lockMouse = true;
 	public Transform lookAt;
 
 	private Camera cam;
@@ -22,8 +23,10 @@ public class CameraController : MonoBehaviour {
 	private float sensitivityZoom = 50f;
 
 	void Start () {
-		Cursor.visible = false;
-		Cursor.lockState = CursorLockMode.Locked;
+		if (lockMouse) {
+			Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+		}
 
 		camTransform = transform;
 		cam = Camera.main;
