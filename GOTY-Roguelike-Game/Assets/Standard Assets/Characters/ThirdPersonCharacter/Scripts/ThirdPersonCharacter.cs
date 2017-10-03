@@ -28,12 +28,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
-		PlayerInventory inventory = new PlayerInventory ();
+		PlayerInventory inventory;
 		public GameObject hand;
-		bool m_Use;
-
+		public bool m_Use;
+		GameObject object1;
 		void Start()
 		{
+			inventory = GetComponent<PlayerInventory> ();
 			m_Animator = GetComponent<Animator>();
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
@@ -203,19 +204,23 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		//New code for collecting objects
 		//Investigate layerd based collision detection
 		void OnTriggerEnter(Collider other) {
-			if ((other.gameObject.CompareTag ("Pickup") && m_Use)/*(inventory.isEmpty() || !other.gameObject.Equals(inventory.getCurrentWeapon()))*/) {
+			if (other.gameObject.CompareTag ("Pickup") && m_Use) {
 				other.gameObject.tag = "Equipped";
+				Debug.Log (other.gameObject.name);
 				inventory.addWeapon (other.gameObject);
 				other.gameObject.SetActive (false);
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
 				inventory.getCurrentWeapon ().transform.parent = hand.transform;
-				inventory.getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
+				inventory.getCurrentWeapon ().transform.position = hand.transform.position;
 			}
 		}
 
 		public void isUse(bool E_Press){
 			m_Use = E_Press;
+			if (m_Use) {
+				Debug.Log ("Pressed");
+			}
 		}
 
 		void CheckGroundStatus()

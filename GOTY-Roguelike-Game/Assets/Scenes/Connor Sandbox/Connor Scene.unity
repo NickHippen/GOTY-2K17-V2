@@ -383,6 +383,11 @@ Prefab:
       propertyPath: m_Center.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 54697599946620038, guid: eca72fa6718ee3e49964bfa0a1ff24a2,
+        type: 2}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_ParentPrefab: {fileID: 100100000, guid: eca72fa6718ee3e49964bfa0a1ff24a2, type: 2}
@@ -1351,6 +1356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb0801aa79933a469b8363ae278e20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lockMouse: 1
   lookAt: {fileID: 1136534722}
 --- !u!1 &847995279
 GameObject:
@@ -3340,6 +3346,7 @@ MonoBehaviour:
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
   hand: {fileID: 847995279}
+  m_Use: 0
 --- !u!114 &2095191419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3352,6 +3359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521b611700410be45810047f0a74e899, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Use: 0
 --- !u!136 &2095191420
 CapsuleCollider:
   m_ObjectHideFlags: 0
