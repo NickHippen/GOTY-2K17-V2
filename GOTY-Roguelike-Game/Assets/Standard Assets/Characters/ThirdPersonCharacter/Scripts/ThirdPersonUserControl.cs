@@ -39,6 +39,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
+			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
+				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
+			}
         }
 
 

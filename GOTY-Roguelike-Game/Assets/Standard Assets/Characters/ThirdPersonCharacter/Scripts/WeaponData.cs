@@ -22,9 +22,10 @@ public class WeaponData : MonoBehaviour{
 		model = m;
 	}
 
-	void Update(){
+	void fixedUpdate(){
 		if (transform.parent != null) {
-			transform.position = transform.parent.position;
+			Debug.Log ("Update Position");
+			transform.localPosition = new Vector3 (0, 0, 0);
 		}
 	}
 }

@@ -13,10 +13,11 @@ public class PlayerInventory : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!isEmpty()) {
+		/*if (!isEmpty()) {
 			//weapons [current].transform.position = weapons [current].transform.parent.position;
-			weapons[current].transform.parent.localPosition = new Vector3 (0, 0, 0);
-		}
+			Debug.Log("Recenter");
+			weapons[current].transform.localPosition = new Vector3 (0, 0, 0);
+		}*/
 	}
 
 	public void addWeapon(GameObject weapon){
