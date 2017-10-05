@@ -186,6 +186,8 @@ public class BoardManager : MonoBehaviour {
 	}
 
 	public void GenerateMap(){
+		Random.seed = System.DateTime.Now.Millisecond;
+
 		for (var i = 0; i < mapw; i++)
 		{
 			for (var j = 0; j < maph; j++)
