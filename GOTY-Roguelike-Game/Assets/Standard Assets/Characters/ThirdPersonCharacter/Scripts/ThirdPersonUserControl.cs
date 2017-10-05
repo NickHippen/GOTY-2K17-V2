@@ -42,8 +42,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
+			WeaponSelect ();
         }
 
+		private void WeaponSelect(){
+			int selection = 0;
+			if(Input.GetKeyDown(KeyCode.Alpha1)){
+				selection = 0;
+				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
+			}else if(Input.GetKeyDown(KeyCode.Alpha2)){
+				selection = 1;
+				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
+			}else if(Input.GetKeyDown(KeyCode.Alpha3)){
+				selection = 2;
+				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
+			}else if(Input.GetKeyDown(KeyCode.Alpha4)){
+				selection = 3;
+				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
+			}
+		}
 
         // Fixed update is called in sync with physics
         private void FixedUpdate()
@@ -52,7 +69,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
-			m_Character.isUse(Input.GetKey(KeyCode.E));
+			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
 
             // calculate move direction to pass to character
             if (m_Cam != null)

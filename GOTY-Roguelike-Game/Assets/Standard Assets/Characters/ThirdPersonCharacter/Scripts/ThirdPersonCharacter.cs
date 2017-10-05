@@ -204,15 +204,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		//New code for collecting objects
 		//Investigate layerd based collision detection
 		void OnTriggerEnter(Collider other) {
-			if (other.gameObject.CompareTag ("Pickup") && m_Use) {
+			if (other.gameObject.CompareTag ("Pickup") && !inventory.isFull() /*&& m_Use*/) {
 				other.gameObject.tag = "Equipped";
+				other.gameObject.transform.parent = hand.transform;
+				other.gameObject.transform.position = hand.transform.position;
+				other.gameObject.transform.rotation = hand.transform.rotation;
 				Debug.Log (other.gameObject.name);
 				inventory.addWeapon (other.gameObject);
 				other.gameObject.SetActive (false);
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
-				inventory.getCurrentWeapon ().transform.parent = hand.transform;
-				inventory.getCurrentWeapon ().transform.position = hand.transform.position;
+				/*inventory.getCurrentWeapon ().transform.parent = hand.transform;
+				inventory.getCurrentWeapon ().transform.position = hand.transform.position;*/
 			}
 		}
 

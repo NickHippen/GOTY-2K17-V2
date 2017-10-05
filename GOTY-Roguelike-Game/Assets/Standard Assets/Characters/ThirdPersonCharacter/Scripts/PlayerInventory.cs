@@ -6,24 +6,25 @@ public class PlayerInventory : MonoBehaviour {
 
 	public List<GameObject> weapons = new List<GameObject>();
 	// Use this for initialization
-	private int current=-1;
+	public int test = 0;
+	private int current= 0;
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		/*if (!isEmpty()) {
-			//weapons [current].transform.position = weapons [current].transform.parent.position;
-			Debug.Log("Recenter");
-			weapons[current].transform.localPosition = new Vector3 (0, 0, 0);
-		}*/
+	void deltaUpdate () {
+		if (Input.GetKey (KeyCode.R)) {
+			test++;
+		}
 	}
 
 	public void addWeapon(GameObject weapon){
-		current++;
-		weapons.Add (weapon);
-		Debug.Log ("Weapon added");
+		if (weapons.Count < 4) {
+			//current++;
+			weapons.Add (weapon);
+			Debug.Log ("Weapon added");
+		}
 	}
 
 	public GameObject getCurrentWeapon(){
@@ -34,8 +35,24 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void setCurrentWeapon(int x){
+		if (x < weapons.Count) {
+			weapons [current].SetActive(false);
+			current = x;
+			weapons [current].SetActive(true);
+		}
+	}
+
 	public bool isEmpty(){
 		if (weapons.Count == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public bool isFull(){
+		if (weapons.Count == 4) {
 			return true;
 		} else {
 			return false;
