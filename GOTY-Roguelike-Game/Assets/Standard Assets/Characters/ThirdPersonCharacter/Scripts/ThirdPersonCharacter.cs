@@ -204,8 +204,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			
 		//New code for collecting objects
 		//Investigate layerd based collision detection
-		void OnTriggerEnter(Collider other) {
-			if (other.gameObject.CompareTag ("Pickup") && !inventory.isFull() /*&& m_Use*/) {
+		/*void OnTriggerEnter(Collider other) {
+			if (other.gameObject.CompareTag ("Pickup") && !inventory.isFull() /*&& m_Use) {
 				other.gameObject.tag = "Equipped";
 				other.gameObject.transform.parent = hand.transform;
 				other.gameObject.transform.position = hand.transform.position;
@@ -215,17 +215,40 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				other.gameObject.SetActive (false);
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
-				/*inventory.getCurrentWeapon ().transform.parent = hand.transform;
-				inventory.getCurrentWeapon ().transform.position = hand.transform.position;*/
 			}
-		}
+		}*/
 
 		public void isUse(bool E_Press){
 			m_Use = E_Press;
 			if (m_Use) {
 				Debug.Log ("Pressed");
+				pickupNearby (transform.position, .75f);
 			}
 		}
+
+		void pickupNearby(Vector3 center, float radius){
+			Collider[] hitColliders = Physics.OverlapSphere (center, radius);
+			for (int x = 0; x < hitColliders.Length; x++) {
+				Debug.Log (hitColliders [x]);
+			}
+			int i = 0;
+			while (i < hitColliders.Length) {
+				if (/*hitColliders != null &&*/ hitColliders [i].gameObject.CompareTag ("Pickup") && !inventory.isFull ()) {
+					hitColliders [i].gameObject.tag = "Equipped";
+					hitColliders [i].gameObject.transform.parent = hand.transform;
+					hitColliders [i].gameObject.transform.position = hand.transform.position;
+					hitColliders [i].gameObject.transform.rotation = hand.transform.rotation;
+					Debug.Log (hitColliders [i].gameObject.name);
+					inventory.addWeapon (hitColliders [i].gameObject);
+					hitColliders [i].gameObject.SetActive (false);
+					//Move into Weapon class later
+					inventory.getCurrentWeapon ().SetActive (true);
+					break;
+				}
+				i++;
+			}
+		}
+				
 
 		void CheckGroundStatus()
 		{
