@@ -43,7 +43,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
-			//WeaponSelect ();
+			WeaponSelect ();
         }
 
 		private void WeaponSelect(){
