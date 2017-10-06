@@ -78,7 +78,7 @@ public class Unit : MonoBehaviour {
 
 				Collider[] hitColliders = Physics.OverlapSphere(transform.position, destinationRadius);
 				foreach (Collider collider in hitColliders) {
-					if (collider.Equals(target.GetComponent<Collider>())) {
+					if (collider.Equals(target.GetComponent<Collider>()) && HasLineOfSight(target.transform)) { // Within range & has LoS
 						followingPath = false;
 						break;
 					}
@@ -93,6 +93,15 @@ public class Unit : MonoBehaviour {
 				yield return null;
 			}
 		}
+	}
+
+	public bool HasLineOfSight(Transform targetTransform) {
+		Vector3 rayDirection = targetTransform.position - transform.position;
+		RaycastHit hit;
+		if (Physics.Raycast(transform.position, rayDirection, out hit, destinationRadius)) { // Note: Currently will be blocked by ALL colldiers (not just unwalkable)
+			return hit.transform == targetTransform;
+		}
+		return false;
 	}
 
 	public void OnDrawGizmos() {
