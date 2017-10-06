@@ -43,11 +43,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
-			WeaponSelect ();
+			if (Input.anyKeyDown) {
+				WeaponSelect ();
+			}
         }
 
 		private void WeaponSelect(){
-			int selection = 0;
+			int selection = -1;
 			if(Input.GetKeyDown(KeyCode.Alpha1)){
 				selection = 0;
 				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
@@ -60,6 +62,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}else if(Input.GetKeyDown(KeyCode.Alpha4)){
 				selection = 3;
 				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
+			}
+
+			if (selection != -1) {
+				//m_Character.setAnimatorController ();
 			}
 		}
 

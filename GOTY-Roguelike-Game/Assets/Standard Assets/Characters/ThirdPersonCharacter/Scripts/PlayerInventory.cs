@@ -43,6 +43,10 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void setCurrentWeapon(GameObject thing){
+		weapons [current] = thing;
+	}
+
 	public bool isEmpty(){
 		if (weapons.Count == 0) {
 			return true;

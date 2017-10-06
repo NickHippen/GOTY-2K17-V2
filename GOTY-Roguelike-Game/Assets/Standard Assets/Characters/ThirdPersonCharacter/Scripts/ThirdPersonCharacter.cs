@@ -28,6 +28,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
+
+		public RuntimeAnimatorController gunController;
+		public RuntimeAnimatorController meleeController;
 		bool m_Use;
 		PlayerInventory inventory;
 		public GameObject hand;
@@ -37,6 +40,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		{
 			inventory = GetComponent<PlayerInventory>();
 			m_Animator = GetComponent<Animator>();
+			//gunController = Resources.Load("Assets/Characters/Animators/GunslingerAnimatorController.controller") as RuntimeAnimatorController;
+			//meleeController = Resources.Load("Assets/Characters/Animators/BerserkerAnimatorController.controller") as RuntimeAnimatorController;
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
@@ -44,6 +49,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
+			Debug.Log (gunController);
 		}
 
 
@@ -201,22 +207,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_Rigidbody.velocity = v;
 			}
 		}
-			
-		//New code for collecting objects
-		//Investigate layerd based collision detection
-		/*void OnTriggerEnter(Collider other) {
-			if (other.gameObject.CompareTag ("Pickup") && !inventory.isFull() /*&& m_Use) {
-				other.gameObject.tag = "Equipped";
-				other.gameObject.transform.parent = hand.transform;
-				other.gameObject.transform.position = hand.transform.position;
-				other.gameObject.transform.rotation = hand.transform.rotation;
-				Debug.Log (other.gameObject.name);
-				inventory.addWeapon (other.gameObject);
-				other.gameObject.SetActive (false);
-				//Move into Weapon class later
-				inventory.getCurrentWeapon ().SetActive (true);
-			}
-		}*/
 
 		public void isUse(bool E_Press){
 			m_Use = E_Press;
@@ -233,20 +223,48 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 			int i = 0;
 			while (i < hitColliders.Length) {
-				if (/*hitColliders != null &&*/ hitColliders [i].gameObject.CompareTag ("Pickup") && !inventory.isFull ()) {
-					hitColliders [i].gameObject.tag = "Equipped";
-					hitColliders [i].gameObject.transform.parent = hand.transform;
-					hitColliders [i].gameObject.transform.position = hand.transform.position;
-					hitColliders [i].gameObject.transform.rotation = hand.transform.rotation;
-					Debug.Log (hitColliders [i].gameObject.name);
-					inventory.addWeapon (hitColliders [i].gameObject);
-					hitColliders [i].gameObject.SetActive (false);
+				GameObject temp = hitColliders [i].gameObject;
+				if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
+					temp.tag = "Equipped";
+					temp.GetComponent<Rigidbody> ().useGravity = false;
+					temp = editCollider (temp, false);
+					temp.gameObject.transform.parent = hand.transform;
+					temp.gameObject.transform.position = hand.transform.position;
+					temp.gameObject.transform.rotation = hand.transform.rotation;
+					//8, 83.5, 89
+					Debug.Log (temp.name);
+					inventory.addWeapon (temp);
+					temp.gameObject.SetActive (false);
 					//Move into Weapon class later
 					inventory.getCurrentWeapon ().SetActive (true);
+					if (temp.name.Contains("Gun")) {
+						m_Animator.runtimeAnimatorController = gunController;
+						temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
+						inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
+					}
 					break;
 				}
 				i++;
 			}
+		}
+
+		public void setAnimatorController(){
+			if (inventory.getCurrentWeapon ().name.Contains ("Gun")) {
+				m_Animator.runtimeAnimatorController = gunController;
+			} else {
+				m_Animator.runtimeAnimatorController = meleeController as RuntimeAnimatorController;
+			}
+		}
+
+		GameObject editCollider(GameObject x, bool state){
+			if (x.GetComponent<CapsuleCollider> () != null) {
+				x.GetComponent<CapsuleCollider> ().enabled = state;
+			}
+			if (x.GetComponent<BoxCollider> () != null) {
+				x.GetComponent<BoxCollider> ().enabled = state;
+			}
+			return x;
+
 		}
 				
 
