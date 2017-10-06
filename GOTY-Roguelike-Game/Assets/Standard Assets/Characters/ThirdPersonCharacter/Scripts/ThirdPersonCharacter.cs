@@ -237,8 +237,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 					temp.gameObject.SetActive (false);
 					//Move into Weapon class later
 					inventory.getCurrentWeapon ().SetActive (true);
+					setAnimatorController ();
 					if (temp.name.Contains("Gun")) {
-						m_Animator.runtimeAnimatorController = gunController;
+						//m_Animator.runtimeAnimatorController = gunController;
 						temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
 						inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
 					}
@@ -252,7 +253,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (inventory.getCurrentWeapon ().name.Contains ("Gun")) {
 				m_Animator.runtimeAnimatorController = gunController;
 			} else {
-				m_Animator.runtimeAnimatorController = meleeController as RuntimeAnimatorController;
+				m_Animator.runtimeAnimatorController = meleeController ;
 			}
 		}
 

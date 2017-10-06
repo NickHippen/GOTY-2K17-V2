@@ -43,6 +43,23 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public void scrollWeapon(float scrolled){
+		int selection;
+		if (scrolled > 0) {
+			selection = current + 1;
+			if (selection >= weapons.Count) {
+				selection = 0;
+			}
+			setCurrentWeapon (selection);
+		} else if (scrolled < 0) {
+			selection = current - 1;
+			if (selection < 0) {
+				selection = weapons.Count - 1;
+			}
+			setCurrentWeapon (selection);
+		}
+	}
+
 	public void setCurrentWeapon(GameObject thing){
 		weapons [current] = thing;
 	}

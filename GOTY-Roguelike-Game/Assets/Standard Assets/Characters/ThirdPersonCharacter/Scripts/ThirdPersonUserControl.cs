@@ -43,12 +43,15 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
 			}
-			if (Input.anyKeyDown) {
-				WeaponSelect ();
+			float scroll = Input.GetAxis("Mouse ScrollWheel");
+			//Debug.Log (scroll);
+			if (Input.anyKeyDown || scroll != 0) {
+				Debug.Log ("Pressed");
+				WeaponSelect (scroll);
 			}
         }
 
-		private void WeaponSelect(){
+		private void WeaponSelect(float scrolled){
 			int selection = -1;
 			if(Input.GetKeyDown(KeyCode.Alpha1)){
 				selection = 0;
@@ -64,8 +67,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_Character.gameObject.GetComponent<PlayerInventory> ().setCurrentWeapon (selection);
 			}
 
-			if (selection != -1) {
-				//m_Character.setAnimatorController ();
+			m_Character.gameObject.GetComponent<PlayerInventory> ().scrollWeapon (scrolled);
+
+			if (selection != -1 || scrolled != 0) {
+				m_Character.setAnimatorController ();
 			}
 		}
 

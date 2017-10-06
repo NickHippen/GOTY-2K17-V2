@@ -35,7 +35,7 @@ public class CameraController : MonoBehaviour {
 	private void Update() {
 		currentX += Input.GetAxis("Mouse X");
 		currentY -= Input.GetAxis("Mouse Y");
-		currentZoom -= Input.GetAxis("Mouse ScrollWheel") * sensitivityZoom;
+		//currentZoom -= Input.GetAxis("Mouse ScrollWheel") * sensitivityZoom;
 
 		currentY = Mathf.Clamp(currentY, Y_ANGLE_MIN, Y_ANGLE_MAX);
 		currentZoom = Mathf.Clamp(currentZoom, ZOOM_MIN, ZOOM_MAX);
