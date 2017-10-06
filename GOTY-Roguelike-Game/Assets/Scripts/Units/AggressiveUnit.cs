@@ -8,11 +8,6 @@ public class AggressiveUnit : Unit {
 	public string targetTag;
 	public float aggroRadius = 20f;
 
-	void OnDrawGizmosSelected() {
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawWireSphere(transform.position, aggroRadius);
-	}
-
 	protected new void Update() {
 		base.Update();
 		if (target == null) { // Only search if no target already
@@ -25,6 +20,12 @@ public class AggressiveUnit : Unit {
 				}
 			}
 		}
+	}
+
+	public void OnDrawGizmosSelected() {
+		base.OnDrawGizmosSelected();
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawWireSphere(transform.position, aggroRadius);
 	}
 
 }

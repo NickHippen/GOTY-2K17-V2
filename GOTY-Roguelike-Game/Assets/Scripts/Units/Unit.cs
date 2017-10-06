@@ -14,6 +14,7 @@ public class Unit : MonoBehaviour {
 	public float speed = 5f;
 	public float turnSpeed = 3;
 	public float turnDist = 2;
+	public float destinationRadius = 1f;
 
 	private Path path;
 
@@ -60,26 +61,37 @@ public class Unit : MonoBehaviour {
 	IEnumerator FollowPath() {
 		bool followingPath = true;
 		int pathIndex = 0;
-		transform.LookAt(path.lookPoints[0]);
-
-		while (followingPath) {
-			Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
-			while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D)) {
-				if (pathIndex == path.finishLineIndex) {
-					followingPath = false;
-					break;
-				} else {
-					pathIndex++;
+		if (path.lookPoints.Length > 0) {
+			transform.LookAt(path.lookPoints[0]);
+		}
+		if (path.turnBoundaries.Length > 0) {
+			while (followingPath) {
+				Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
+				while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D)) {
+					if (pathIndex == path.finishLineIndex) {
+						followingPath = false;
+						break;
+					} else {
+						pathIndex++;
+					}
 				}
-			}
 
-			if (followingPath) {
-				Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
-				transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
-				transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
-			}
+				Collider[] hitColliders = Physics.OverlapSphere(transform.position, destinationRadius);
+				foreach (Collider collider in hitColliders) {
+					if (collider.Equals(target.GetComponent<Collider>())) {
+						followingPath = false;
+						break;
+					}
+				}
 
-			yield return null;
+				if (followingPath) {
+					Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
+					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+					transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+				}
+
+				yield return null;
+			}
 		}
 	}
 
@@ -87,6 +99,11 @@ public class Unit : MonoBehaviour {
 		if (debugMode && path != null) {
 			path.DrawWithGizmos();
 		}
+	}
+
+	public void OnDrawGizmosSelected() {
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(transform.position, destinationRadius);
 	}
 
 }
