@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
+public abstract class Unit : MonoBehaviour {
 
 	const float minPathUpdateTime = 0.2f;
 	const float pathUpdateMoveThreshold = 0.5f;
@@ -12,19 +12,21 @@ public class Unit : MonoBehaviour {
 	public Transform target;
 	public PathRequestManager pathRequestManager;
 	public float speed = 5f;
-	public float turnSpeed = 3;
-	public float turnDist = 2;
+	public float turnSpeed = 4f;
+	public float turnDist = 1f;
 	public float destinationRadius = 1f;
+
+	public bool atGoal;
 
 	private Path path;
 
-	void Start() {
+	protected void Start() {
 		if (target != null) {
 			BeginPathing();
 		}
 	}
 
-	protected void Update() {
+	protected virtual void Update() {
 	}
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
@@ -88,6 +90,9 @@ public class Unit : MonoBehaviour {
 					Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
 					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
 					transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+					atGoal = false;
+				} else {
+					atGoal = true;
 				}
 
 				yield return null;
@@ -104,13 +109,13 @@ public class Unit : MonoBehaviour {
 		return false;
 	}
 
-	public void OnDrawGizmos() {
+	protected virtual void OnDrawGizmos() {
 		if (debugMode && path != null) {
 			path.DrawWithGizmos();
 		}
 	}
 
-	public void OnDrawGizmosSelected() {
+	protected virtual void OnDrawGizmosSelected() {
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, destinationRadius);
 	}

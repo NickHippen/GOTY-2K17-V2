@@ -345,6 +345,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 46810963}
+  - component: {fileID: 46810964}
   m_Layer: 0
   m_Name: RaycastPoint
   m_TagString: Untagged
@@ -365,6 +366,20 @@ Transform:
   m_Father: {fileID: 1549114038}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &46810964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 46810962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 480b9a891a96a83478ed68cc70dd9016, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 291686528}
+  target: {fileID: 714062875}
+  force: 1000
 --- !u!1 &60134932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1899,6 +1914,91 @@ Transform:
   m_Father: {fileID: 1042021604}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &291686528
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 291686532}
+  - component: {fileID: 291686531}
+  - component: {fileID: 291686529}
+  - component: {fileID: 291686533}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &291686529
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291686528}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &291686531
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291686528}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &291686532
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291686528}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -257.43713, y: -27.6, z: 173.15784}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &291686533
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 291686528}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &292838972
 GameObject:
   m_ObjectHideFlags: 0
@@ -2679,7 +2779,6 @@ GameObject:
   - component: {fileID: 379807444}
   - component: {fileID: 379807443}
   - component: {fileID: 379807442}
-  - component: {fileID: 379807441}
   m_Layer: 2
   m_Name: Seeker
   m_TagString: Untagged
@@ -2687,26 +2786,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &379807441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 379807439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9ca24dc41dea14eb7076634ff96aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  target: {fileID: 0}
-  pathRequestManager: {fileID: 60134933}
-  speed: 5
-  turnSpeed: 6
-  turnDist: 0.5
-  destinationRadius: 3
-  targetTag: Player
-  aggroRadius: 20
 --- !u!136 &379807442
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3259,6 +3338,7 @@ MonoBehaviour:
   turnSpeed: 3
   turnDist: 2
   destinationRadius: 3
+  atGoal: 0
 --- !u!23 &472999394
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -4297,18 +4377,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 714062874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9ca24dc41dea14eb7076634ff96aa8, type: 3}
+  m_Script: {fileID: 11500000, guid: 98cdbccf8b81ea34b9d3a1eb19b4dca1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugMode: 1
+  debugMode: 0
   target: {fileID: 0}
   pathRequestManager: {fileID: 60134933}
   speed: 5
-  turnSpeed: 3
-  turnDist: 0.5
-  destinationRadius: 3
+  turnSpeed: 4
+  turnDist: 1
+  destinationRadius: 1
+  atGoal: 0
+  health: 0
   targetTag: Player
-  aggroRadius: 109.48
+  aggroRadius: 101.49
 --- !u!136 &714062878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9025,7 +9107,6 @@ GameObject:
   - component: {fileID: 1497406649}
   - component: {fileID: 1497406653}
   - component: {fileID: 1497406652}
-  - component: {fileID: 1497406650}
   m_Layer: 2
   m_Name: Seeker (1)
   m_TagString: Untagged
@@ -9049,26 +9130,6 @@ Transform:
   m_Father: {fileID: 1972430417}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1497406650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1497406648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d9ca24dc41dea14eb7076634ff96aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debugMode: 0
-  target: {fileID: 0}
-  pathRequestManager: {fileID: 60134933}
-  speed: 5
-  turnSpeed: 3
-  turnDist: 0.5
-  destinationRadius: 3
-  targetTag: Player
-  aggroRadius: 20
 --- !u!136 &1497406652
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -9426,6 +9487,8 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
+  gunController: {fileID: 0}
+  meleeController: {fileID: 0}
   hand: {fileID: 753495694}
 --- !u!114 &1549114041
 MonoBehaviour:
