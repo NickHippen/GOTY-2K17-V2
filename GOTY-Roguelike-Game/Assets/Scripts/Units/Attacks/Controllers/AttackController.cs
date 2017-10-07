@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AttackController : MonoBehaviour {
+public abstract class AttackController {
 
 	/**
 	 * <summary>Determines whether or not this controller should be triggered</summary>
