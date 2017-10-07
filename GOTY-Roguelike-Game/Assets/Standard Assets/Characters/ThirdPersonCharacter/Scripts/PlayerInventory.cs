@@ -7,7 +7,7 @@ public class PlayerInventory : MonoBehaviour {
 	public List<GameObject> weapons = new List<GameObject>();
 	// Use this for initialization
 	public int test = 0;
-	private int current= 0;
+	public int current= 0;
 	void Start () {
 		
 	}
@@ -62,6 +62,16 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void setCurrentWeapon(GameObject thing){
 		weapons [current] = thing;
+	}
+
+	public void dropCurrentWeapon(){
+		//weapons [current].GetComponent<Rigidbody> ().useGravity = true;
+
+		weapons.RemoveAt (current);
+		if (current >= weapons.Count && current != 0) {
+			current--;
+		}
+		setCurrentWeapon (current);
 	}
 
 	public bool isEmpty(){

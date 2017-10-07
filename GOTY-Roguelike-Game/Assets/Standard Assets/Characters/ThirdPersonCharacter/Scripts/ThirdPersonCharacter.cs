@@ -249,6 +249,17 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		public void drop(bool dropPress){
+			if(dropPress && !inventory.isEmpty()){
+				inventory.getCurrentWeapon ().tag = "Pickup";
+				inventory.getCurrentWeapon ().transform.parent = null;
+				inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
+				editCollider (inventory.getCurrentWeapon (), true);
+				inventory.dropCurrentWeapon ();
+				setAnimatorController ();
+			}
+		}
+
 		public void setAnimatorController(){
 			if (inventory.getCurrentWeapon ().name.Contains ("Gun")) {
 				m_Animator.runtimeAnimatorController = gunController;

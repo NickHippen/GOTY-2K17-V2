@@ -46,7 +46,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			float scroll = Input.GetAxis("Mouse ScrollWheel");
 			//Debug.Log (scroll);
 			if (Input.anyKeyDown || scroll != 0) {
-				Debug.Log ("Pressed");
+				//Debug.Log ("Pressed");
 				WeaponSelect (scroll);
 			}
         }
@@ -83,6 +83,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             bool crouch = Input.GetKey(KeyCode.C);
 
 			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
+			m_Character.drop (Input.GetKeyDown (KeyCode.Q));
 
             // calculate move direction to pass to character
             if (m_Cam != null)
