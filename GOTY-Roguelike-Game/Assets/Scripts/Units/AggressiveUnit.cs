@@ -10,6 +10,11 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public List<Attack> attacks = new List<Attack>();
 
+	protected new void Start() {
+		base.Start();
+		ApplyAttackBehavior();
+	}
+
 	protected virtual new void Update() {
 		base.Update();
 		if (target == null) { // Only search if no target already
@@ -43,5 +48,7 @@ public abstract class AggressiveUnit : LivingUnit {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere(transform.position, aggroRadius);
 	}
+
+	protected abstract void ApplyAttackBehavior();
 
 }

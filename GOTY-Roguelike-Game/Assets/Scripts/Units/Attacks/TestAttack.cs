@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TestAttack : Attack {
 
-	public TestAttack(AttackController controller) : base(controller) {
+	private string text;
+
+	public TestAttack(AttackController controller, string text) : base(controller) {
+		this.text = text;
 	}
 
 	public override void Use() {
-		MonoBehaviour.print("Used test attack");
+		MonoBehaviour.print(text);
 	}
 
 }
