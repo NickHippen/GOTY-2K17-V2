@@ -32,7 +32,7 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	private void UpdateAttacks() {
 		foreach (Attack attack in attacks) {
-			if (attack.controller.Check()) {
+			if (attack.Controller.Check()) {
 				attack.Use();
 			}
 		}

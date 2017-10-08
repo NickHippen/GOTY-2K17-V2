@@ -4,11 +4,13 @@ using UnityEngine;
 
 public abstract class Attack {
 
-	public AttackController controller;
+	private AttackController controller;
 
 	public Attack(AttackController controller) {
-		this.controller = controller;
+		this.Controller = controller;
 	}
+
+	public AttackController Controller { get; set; }
 
 	public abstract void Use();
 

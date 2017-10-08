@@ -16,7 +16,7 @@ public class IntervalAttackController : AttackController {
 		SetNextAttackTime();
 	}
 
-	public override bool Check() {
+	protected override bool CheckSpecifics() {
 		timeSinceAttack += Time.deltaTime;
 		if (timeSinceAttack >= nextAttackTime) {
 			timeSinceAttack = 0; // Reset attack time
