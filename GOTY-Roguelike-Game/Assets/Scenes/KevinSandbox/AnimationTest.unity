@@ -500,7 +500,7 @@ Prefab:
     - target: {fileID: 9500000, guid: f850ec18cec4d664e862890e7565a010, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
+      objectReference: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
     - target: {fileID: 9500000, guid: f850ec18cec4d664e862890e7565a010, type: 3}
       propertyPath: m_ApplyRootMotion
       value: 0
@@ -542,6 +542,9 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
+  gunController: {fileID: 0}
+  meleeController: {fileID: 0}
+  hand: {fileID: 0}
 --- !u!136 &2021535990
 CapsuleCollider:
   m_ObjectHideFlags: 0
