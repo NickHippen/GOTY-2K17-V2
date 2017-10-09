@@ -261,7 +261,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void setAnimatorController(){
-			if (inventory.getCurrentWeapon ().name.Contains ("Gun")) {
+			if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon ().name.Contains ("Gun")) {
 				m_Animator.runtimeAnimatorController = gunController;
 			} else {
 				m_Animator.runtimeAnimatorController = meleeController ;
