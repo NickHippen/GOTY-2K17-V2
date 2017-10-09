@@ -56,9 +56,11 @@ public class BoardManager : MonoBehaviour
 	public GameObject ground;
 	public GameObject[] walls;
 	public GameObject[] doors;
+	public GameObject player;
 	static int mapw = 60;
 	static int maph = 40;
 	string[,] maparr = new string[mapw, maph];
+	List<Room> roomList = new List<Room> ();
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3> ();
@@ -106,6 +108,18 @@ public class BoardManager : MonoBehaviour
 				//Instantiate (walls[0], position, Quaternion.identity);
 			}
 		}
+
+		//Spawn player
+		int randomSpot = Random.Range (0,roomList.Count);
+
+		Spawn (roomList [randomSpot].startx, roomList [randomSpot].starty, player);
+
+	}
+
+	void Spawn(int x, int z, GameObject tospawn){
+		GameObject instance = Instantiate (tospawn, new Vector3 (x * 5, .5f, z * 5), Quaternion.identity) as GameObject;
+		GameObject mycam = GameObject.Find ("Main Camera");
+		mycam.GetComponent<CameraController> ().lookAt = instance.transform;
 	}
 
 	//Creates a new map and builds the scene with our objects
@@ -215,7 +229,6 @@ public class BoardManager : MonoBehaviour
 		}
 
 		//Generate the rooms of the dungeon
-		List<Room> roomList = new List<Room> ();
 		var room_place_attempts = 1000;
 		for (var i = 1; i < room_place_attempts; i++) {
 			int[] roomsize = { 5, 7, 9 };

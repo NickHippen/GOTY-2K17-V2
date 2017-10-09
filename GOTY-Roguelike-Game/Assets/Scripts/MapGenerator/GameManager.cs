@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour {
 		SceneManager.sceneLoaded -= OnLevelFinishedLoading;
 	}
 
-	void InitGame()
+	public void InitGame()
 	{
 		doingSetup = true;
 		boardScript.SetupScene(level);
