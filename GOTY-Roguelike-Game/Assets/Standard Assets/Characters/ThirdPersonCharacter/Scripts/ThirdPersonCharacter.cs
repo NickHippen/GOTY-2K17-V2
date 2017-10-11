@@ -29,10 +29,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+		//Temp varaible for attacking
+		public bool m_Attacking;
+
+		//Public objects for the types of controllers available
 		public RuntimeAnimatorController gunController;
 		public RuntimeAnimatorController meleeController;
+		//Status of the Use Key 'E'
 		bool m_Use;
 		PlayerInventory inventory;
+
+		//Game Object for players hand, used for equipping and the radius that a player can be
+		//from an object and still pick it up
 		public GameObject hand;
 		public float grabRadius = 1f;
 
@@ -46,9 +54,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
+			//m_Attacking = true;
+
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 			//Debug.Log (gunController);
+
+			//Initialize the weapon held at the start of the game
 			initializeEquip(inventory.getCurrentWeapon());
 			inventory.getCurrentWeapon ().SetActive (true);
 			setAnimatorController();
@@ -134,6 +146,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetBool ("Attack", m_Attacking);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -210,6 +223,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		//Initiates the various functionality of the Use key when pressed
 		public void isUse(bool E_Press){
 			m_Use = E_Press;
 			if (m_Use) {
@@ -218,6 +232,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*This method is called when the use key is pressed. It returns an array of gameobjects located within a defined
+		radius of the player location. The first object it finds with the tag "Pickup" (if any are found) are added
+		to the player's inventory*/
 		void pickupNearby(Vector3 center, float radius){
 			Collider[] hitColliders = Physics.OverlapSphere (center, radius);
 			for (int x = 0; x < hitColliders.Length; x++) {
@@ -252,6 +269,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*Changes characteristics of an object that has been picked up or equipped. Most notably, setting the parents
+		and transforms.*/
 		void initializeEquip(GameObject temp){
 			temp.tag = "Equipped";
 			temp.GetComponent<Rigidbody> ().useGravity = false;
@@ -268,6 +287,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		}
 
+		/*Drops an item from the player inventory if the drop button has been pressed and there is more than
+		one item in the inventory. The dropped item is changed to be a pickup again and can be re-picked up
+		if so desired.*/
 		public void drop(bool dropPress){
 			if(dropPress && !inventory.lastItem()){
 				inventory.getCurrentWeapon ().tag = "Pickup";
@@ -279,6 +301,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 		public void setAnimatorController(){
 			if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon ().name.Contains ("Gun")) {
 				m_Animator.runtimeAnimatorController = gunController;
@@ -287,6 +310,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*Turns the colliders of an item either on or off*/
 		GameObject editCollider(GameObject x, bool state){
 			if (x.GetComponent<CapsuleCollider> () != null) {
 				x.GetComponent<CapsuleCollider> ().enabled = state;
