@@ -8,6 +8,7 @@ public class PlayerInventory : MonoBehaviour {
 	// Use this for initialization
 	public int test = 0;
 	public int current= 0;
+	int maxCapacity = 4;
 	void Start () {
 		
 	}
@@ -20,7 +21,7 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void addWeapon(GameObject weapon){
-		if (weapons.Count < 4) {
+		if (weapons.Count < maxCapacity) {
 			//current++;
 			weapons.Add (weapon);
 			Debug.Log ("Weapon added");
@@ -40,6 +41,7 @@ public class PlayerInventory : MonoBehaviour {
 			weapons [current].SetActive(false);
 			current = x;
 			weapons [current].SetActive(true);
+			weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 		}
 	}
 
@@ -62,6 +64,7 @@ public class PlayerInventory : MonoBehaviour {
 
 	public void setCurrentWeapon(GameObject thing){
 		weapons [current] = thing;
+		weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 	}
 
 	public void dropCurrentWeapon(){
@@ -72,6 +75,7 @@ public class PlayerInventory : MonoBehaviour {
 			current--;
 		}
 		setCurrentWeapon (current);
+		weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 	}
 
 	public bool isEmpty(){
@@ -82,8 +86,16 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	public bool lastItem(){
+		if (weapons.Count == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public bool isFull(){
-		if (weapons.Count == 4) {
+		if (weapons.Count == maxCapacity) {
 			return true;
 		} else {
 			return false;

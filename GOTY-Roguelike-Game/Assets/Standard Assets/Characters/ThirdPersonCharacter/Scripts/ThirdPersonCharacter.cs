@@ -34,14 +34,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		bool m_Use;
 		PlayerInventory inventory;
 		public GameObject hand;
+		public float grabRadius = 1f;
 
 
 		void Start()
 		{
 			inventory = GetComponent<PlayerInventory>();
 			m_Animator = GetComponent<Animator>();
-			//gunController = Resources.Load("Assets/Characters/Animators/GunslingerAnimatorController.controller") as RuntimeAnimatorController;
-			//meleeController = Resources.Load("Assets/Characters/Animators/BerserkerAnimatorController.controller") as RuntimeAnimatorController;
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
@@ -49,7 +48,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
-			Debug.Log (gunController);
+			//Debug.Log (gunController);
+			initializeEquip(inventory.getCurrentWeapon());
+			inventory.getCurrentWeapon ().SetActive (true);
+			setAnimatorController();
 		}
 
 
@@ -212,7 +214,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Use = E_Press;
 			if (m_Use) {
 				Debug.Log ("Pressed");
-				pickupNearby (transform.position, .75f);
+				pickupNearby (transform.position, grabRadius);
 			}
 		}
 
@@ -225,32 +227,49 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			while (i < hitColliders.Length) {
 				GameObject temp = hitColliders [i].gameObject;
 				if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
-					temp.tag = "Equipped";
+					/*temp.tag = "Equipped";
 					temp.GetComponent<Rigidbody> ().useGravity = false;
 					temp = editCollider (temp, false);
 					temp.gameObject.transform.parent = hand.transform;
 					temp.gameObject.transform.position = hand.transform.position;
 					temp.gameObject.transform.rotation = hand.transform.rotation;
-					//8, 83.5, 89
+					//8, 83.5, 89*/
+					initializeEquip (temp);
 					Debug.Log (temp.name);
 					inventory.addWeapon (temp);
 					temp.gameObject.SetActive (false);
 					//Move into Weapon class later
 					inventory.getCurrentWeapon ().SetActive (true);
 					setAnimatorController ();
-					if (temp.name.Contains("Gun")) {
+					/*if (temp.name.Contains("Gun")) {
 						//m_Animator.runtimeAnimatorController = gunController;
 						temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
 						inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-					}
+					}*/
 					break;
 				}
 				i++;
 			}
 		}
 
+		void initializeEquip(GameObject temp){
+			temp.tag = "Equipped";
+			temp.GetComponent<Rigidbody> ().useGravity = false;
+			temp = editCollider (temp, false);
+			temp.gameObject.transform.parent = hand.transform;
+			temp.gameObject.transform.position = hand.transform.position;
+			temp.gameObject.transform.rotation = hand.transform.rotation;
+			//8, 83.5, 89
+			if (temp.name.Contains("Gun")) {
+				//m_Animator.runtimeAnimatorController = gunController;
+				//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
+				inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
+			}
+
+		}
+
 		public void drop(bool dropPress){
-			if(dropPress && !inventory.isEmpty()){
+			if(dropPress && !inventory.lastItem()){
 				inventory.getCurrentWeapon ().tag = "Pickup";
 				inventory.getCurrentWeapon ().transform.parent = null;
 				inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
