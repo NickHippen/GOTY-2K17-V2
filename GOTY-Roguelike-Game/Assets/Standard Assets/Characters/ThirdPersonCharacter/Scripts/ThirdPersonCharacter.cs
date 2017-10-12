@@ -223,6 +223,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		public void attack(bool click){
+			m_Attacking = click;
+			/*if (!m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
+				m_Animator.Play ("Attack");
+			}*/
+		}
+
 		//Initiates the various functionality of the Use key when pressed
 		public void isUse(bool E_Press){
 			m_Use = E_Press;

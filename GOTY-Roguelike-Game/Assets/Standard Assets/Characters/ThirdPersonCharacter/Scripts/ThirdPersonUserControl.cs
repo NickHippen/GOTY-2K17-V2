@@ -84,9 +84,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             bool crouch = Input.GetKey(KeyCode.C);
 
 			//Temporary test of attack animation
-			if (Input.GetMouseButton (1)) {
-				m_Character.m_Attacking = !m_Character.m_Attacking;
-			}
+			m_Character.attack (Input.GetMouseButton(0));
 
 			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
 			m_Character.drop (Input.GetKeyDown (KeyCode.Q));
