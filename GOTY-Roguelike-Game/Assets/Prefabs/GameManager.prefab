@@ -52,9 +52,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84affe162073cd249968a7c837e4b033, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 8
-  rows: 8
-  ground: {fileID: 0}
   walls:
   - {fileID: 1365391391775608, guid: fcf4c397a321d574d83629b5198e2205, type: 2}
   - {fileID: 1317838219146376, guid: 019c7afaff3587a439de8048dc48668e, type: 2}
@@ -62,6 +59,8 @@ MonoBehaviour:
   - {fileID: 1567159415700802, guid: 3f534bbf31bc6844d97adb04a42f5bb7, type: 2}
   doors: []
   player: {fileID: 1794486144257104, guid: 9497f99deb3e0bc48ab76db5bf59ad84, type: 2}
+  mapGenerator: {fileID: 114281106395256080, guid: da2ca4b3c15614e4b8584db3daf1da28,
+    type: 2}
 --- !u!114 &114310218738678238
 MonoBehaviour:
   m_ObjectHideFlags: 1
