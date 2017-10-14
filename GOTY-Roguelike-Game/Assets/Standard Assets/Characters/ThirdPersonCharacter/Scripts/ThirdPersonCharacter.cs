@@ -29,27 +29,41 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		CapsuleCollider m_Capsule;
 		bool m_Crouching;
 
+		//Temp varaible for attacking
+		public bool m_Attacking;
+
+		//Public objects for the types of controllers available
 		public RuntimeAnimatorController gunController;
 		public RuntimeAnimatorController meleeController;
+		//Status of the Use Key 'E'
 		bool m_Use;
 		PlayerInventory inventory;
+
+		//Game Object for players hand, used for equipping and the radius that a player can be
+		//from an object and still pick it up
 		public GameObject hand;
+		public float grabRadius = 1f;
 
 
 		void Start()
 		{
 			inventory = GetComponent<PlayerInventory>();
 			m_Animator = GetComponent<Animator>();
-			//gunController = Resources.Load("Assets/Characters/Animators/GunslingerAnimatorController.controller") as RuntimeAnimatorController;
-			//meleeController = Resources.Load("Assets/Characters/Animators/BerserkerAnimatorController.controller") as RuntimeAnimatorController;
 			m_Rigidbody = GetComponent<Rigidbody>();
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
+			//m_Attacking = true;
+
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
-			Debug.Log (gunController);
+			//Debug.Log (gunController);
+
+			//Initialize the weapon held at the start of the game
+			initializeEquip(inventory.getCurrentWeapon());
+			inventory.getCurrentWeapon ().SetActive (true);
+			setAnimatorController();
 		}
 
 
@@ -132,6 +146,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
+			m_Animator.SetBool ("Attack", m_Attacking);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -208,14 +223,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		public void attack(bool click){
+			m_Attacking = click;
+			/*if (!m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
+				m_Animator.Play ("Attack");
+			}*/
+		}
+
+		//Initiates the various functionality of the Use key when pressed
 		public void isUse(bool E_Press){
 			m_Use = E_Press;
 			if (m_Use) {
 				Debug.Log ("Pressed");
-				pickupNearby (transform.position, .75f);
+				pickupNearby (transform.position, grabRadius);
 			}
 		}
 
+		/*This method is called when the use key is pressed. It returns an array of gameobjects located within a defined
+		radius of the player location. The first object it finds with the tag "Pickup" (if any are found) are added
+		to the player's inventory*/
 		void pickupNearby(Vector3 center, float radius){
 			Collider[] hitColliders = Physics.OverlapSphere (center, radius);
 			for (int x = 0; x < hitColliders.Length; x++) {
@@ -225,32 +251,54 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			while (i < hitColliders.Length) {
 				GameObject temp = hitColliders [i].gameObject;
 				if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
-					temp.tag = "Equipped";
+					/*temp.tag = "Equipped";
 					temp.GetComponent<Rigidbody> ().useGravity = false;
 					temp = editCollider (temp, false);
 					temp.gameObject.transform.parent = hand.transform;
 					temp.gameObject.transform.position = hand.transform.position;
 					temp.gameObject.transform.rotation = hand.transform.rotation;
-					//8, 83.5, 89
+					//8, 83.5, 89*/
+					initializeEquip (temp);
 					Debug.Log (temp.name);
 					inventory.addWeapon (temp);
 					temp.gameObject.SetActive (false);
 					//Move into Weapon class later
 					inventory.getCurrentWeapon ().SetActive (true);
 					setAnimatorController ();
-					if (temp.name.Contains("Gun")) {
+					/*if (temp.name.Contains("Gun")) {
 						//m_Animator.runtimeAnimatorController = gunController;
 						temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
 						inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-					}
+					}*/
 					break;
 				}
 				i++;
 			}
 		}
 
+		/*Changes characteristics of an object that has been picked up or equipped. Most notably, setting the parents
+		and transforms.*/
+		void initializeEquip(GameObject temp){
+			temp.tag = "Equipped";
+			temp.GetComponent<Rigidbody> ().useGravity = false;
+			temp = editCollider (temp, false);
+			temp.gameObject.transform.parent = hand.transform;
+			temp.gameObject.transform.position = hand.transform.position;
+			temp.gameObject.transform.rotation = hand.transform.rotation;
+			//8, 83.5, 89
+			if (temp.name.Contains("Gun")) {
+				//m_Animator.runtimeAnimatorController = gunController;
+				//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
+				inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
+			}
+
+		}
+
+		/*Drops an item from the player inventory if the drop button has been pressed and there is more than
+		one item in the inventory. The dropped item is changed to be a pickup again and can be re-picked up
+		if so desired.*/
 		public void drop(bool dropPress){
-			if(dropPress && !inventory.isEmpty()){
+			if(dropPress && !inventory.lastItem()){
 				inventory.getCurrentWeapon ().tag = "Pickup";
 				inventory.getCurrentWeapon ().transform.parent = null;
 				inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
@@ -260,6 +308,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 		public void setAnimatorController(){
 			if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon ().name.Contains ("Gun")) {
 				m_Animator.runtimeAnimatorController = gunController;
@@ -268,6 +317,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		/*Turns the colliders of an item either on or off*/
 		GameObject editCollider(GameObject x, bool state){
 			if (x.GetComponent<CapsuleCollider> () != null) {
 				x.GetComponent<CapsuleCollider> ().enabled = state;

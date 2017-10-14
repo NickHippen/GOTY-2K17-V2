@@ -51,6 +51,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
         }
 
+		//Changes selected weapon based on key input or from scrolled wheel
 		private void WeaponSelect(float scrolled){
 			int selection = -1;
 			if(Input.GetKeyDown(KeyCode.Alpha1)){
@@ -81,6 +82,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
             float v = CrossPlatformInputManager.GetAxis("Vertical");
             bool crouch = Input.GetKey(KeyCode.C);
+
+			//Temporary test of attack animation
+			m_Character.attack (Input.GetMouseButtonDown(0));
 
 			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
 			m_Character.drop (Input.GetKeyDown (KeyCode.Q));

@@ -628,6 +628,23 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 118234, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
   m_PrefabInternal: {fileID: 1735512460}
+--- !u!114 &192545349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 192545348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52ec88547e54bc34ca273ef043db16eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  name: GUN
+  desc: 
+  damage: 100
+  rotation: {x: 8, y: 83.5, z: 89}
+  model: {fileID: 0}
 --- !u!54 &192545352
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1593,6 +1610,7 @@ MonoBehaviour:
   name: Test
   desc: 
   damage: 100
+  rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 588992090}
 --- !u!54 &588992092
 Rigidbody:
@@ -2427,6 +2445,7 @@ MonoBehaviour:
   name: Test 2
   desc: 
   damage: 100
+  rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 821460536}
 --- !u!54 &821460538
 Rigidbody:
@@ -3027,6 +3046,7 @@ MonoBehaviour:
   gunController: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
   meleeController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
   hand: {fileID: 1696559774}
+  grabRadius: 1
 --- !u!114 &1005892155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3120,8 +3140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ce6c708689d7a44bd6a64e98c0a059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
+  weapons:
+  - {fileID: 192545348}
   test: 0
+  current: 0
 --- !u!1 &1006061824
 GameObject:
   m_ObjectHideFlags: 0
@@ -3685,6 +3707,7 @@ MonoBehaviour:
   name: Test
   desc: 
   damage: 100
+  rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 1095482367}
 --- !u!54 &1095482369
 Rigidbody:
@@ -4627,6 +4650,7 @@ MonoBehaviour:
   name: Test
   desc: 
   damage: 100
+  rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 1324846442}
 --- !u!1 &1333512499
 GameObject:
@@ -5297,6 +5321,7 @@ MonoBehaviour:
   name: Test
   desc: 
   damage: 100
+  rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 1598820917}
 --- !u!54 &1598820919
 Rigidbody:
@@ -5827,6 +5852,10 @@ Prefab:
     - target: {fileID: 118234, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
       propertyPath: m_TagString
       value: Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 118234, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
@@ -7182,6 +7211,7 @@ MonoBehaviour:
   gunController: {fileID: 0}
   meleeController: {fileID: 0}
   hand: {fileID: 847995279}
+  grabRadius: 1
 --- !u!114 &2095191419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7255,6 +7285,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons: []
   test: 0
+  current: 0
 --- !u!1 &2119899155
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,6 +8,7 @@ public class WeaponData : MonoBehaviour{
 	public string name;
 	public string desc;
 	public int damage;
+	public Vector3 rotation;
 	public GameObject model;
 	
 	public WeaponData(){
@@ -25,7 +26,7 @@ public class WeaponData : MonoBehaviour{
 	void fixedUpdate(){
 		if (transform.parent != null) {
 			Debug.Log ("Update Position");
-			transform.localPosition = new Vector3 (0, 0, 0);
+			//transform.localPosition = new Vector3 (0, 0, 0);
 		}
 	}
 }
