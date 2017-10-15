@@ -19,7 +19,8 @@ public abstract class Unit : MonoBehaviour {
 	public bool atGoal;
 
 	private Path path;
-	private Animator unitAnimator;
+
+	public Animator UnitAnimator { get; set; }
 
 	protected void Start() {
 		UnitAnimator = GetComponent<Animator>();
@@ -30,6 +31,18 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	protected virtual void Update() {
+		if (atGoal) {
+			// Turn towards target
+			// Find the vector pointing from our position to the target
+			Vector3 direction = (target.position - transform.position).normalized;
+			direction.y = 0;
+
+			// Create the rotation we need to be in to look at the target
+			Quaternion lookRotation = Quaternion.LookRotation(direction);
+
+			// Rotate over time according to speed until we are in the required rotation
+			transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * turnSpeed);
+		}
 	}
 
 	public void OnPathFound(Vector3[] waypoints, bool pathSuccessful) {
@@ -118,10 +131,6 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	protected virtual void AnimationComplete(AnimationEvent animationEvent) {
-	}
-
-	public Animator UnitAnimator {
-		get; set;
 	}
 
 	protected virtual void OnDrawGizmos() {
