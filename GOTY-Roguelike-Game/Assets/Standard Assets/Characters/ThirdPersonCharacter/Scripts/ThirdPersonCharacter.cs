@@ -41,7 +41,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		//Game Object for players hand, used for equipping and the radius that a player can be
 		//from an object and still pick it up
-		public GameObject hand;
+		public GameObject rightHand;
+		public GameObject leftHand;
 		public float grabRadius = 1f;
 
 
@@ -282,6 +283,14 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			temp.tag = "Equipped";
 			temp.GetComponent<Rigidbody> ().useGravity = false;
 			temp = editCollider (temp, false);
+			GameObject hand;
+			if (temp.name.Contains ("Gun")) {
+				hand = rightHand;
+			} else if (temp.name.Contains ("sword")) {
+				hand = leftHand;
+			} else {
+				hand = rightHand;
+			}
 			temp.gameObject.transform.parent = hand.transform;
 			temp.gameObject.transform.position = hand.transform.position;
 			temp.gameObject.transform.rotation = hand.transform.rotation;
