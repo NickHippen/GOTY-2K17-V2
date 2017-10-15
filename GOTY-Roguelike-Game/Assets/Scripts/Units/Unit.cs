@@ -104,6 +104,7 @@ public abstract class Unit : MonoBehaviour {
 
 				if (followingPath) {
 					Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
+					//targetRotation.y = 0;
 					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
 					transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
 					atGoal = false;
@@ -131,6 +132,10 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	protected virtual void AnimationComplete(AnimationEvent animationEvent) {
+		if (animationEvent.stringParameter.StartsWith("reset_")) {
+			string animationName = animationEvent.stringParameter.Substring(6);
+			UnitAnimator.SetBool(animationName, false);
+		}
 	}
 
 	protected virtual void OnDrawGizmos() {

@@ -59,13 +59,6 @@ public abstract class AggressiveUnit : LivingUnit {
 		base.UpdateAnimator();
 	}
 
-	protected override void AnimationComplete(AnimationEvent animationEvent) {
-		base.AnimationComplete(animationEvent);
-		if (animationEvent.stringParameter.Equals("Attack")) {
-			UnitAnimator.SetBool("Attack", false);
-		}
-	}
-
 	public float CalculateAttackPower() {
 		return attackPower;
 	}
