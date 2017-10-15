@@ -300,6 +300,7 @@ public class GenerateMap : MonoBehaviour
 
 
 		//Removes rooms that have no connection to the main dungeon
+		List<Room> roomList2 = new List<Room>();
 		foreach (Room room in roomList) {
 			var count = 0;
 			for (int i = room.startx; i < room.startx + room.width; i++) {
@@ -308,8 +309,10 @@ public class GenerateMap : MonoBehaviour
 						count++;
 				}
 			}
-			if (count != 0)
+			if (count != 0) {
+				roomList2.Add (room);
 				continue;
+			}
 			for (int i = room.startx; i < room.startx + room.width; i++) {
 				for (int j = room.starty; j < room.starty + room.height; j++) {
 					maparr [i, j] = "wall";
@@ -317,7 +320,7 @@ public class GenerateMap : MonoBehaviour
 			}
 		}
 
-		return new Map (maparr, roomList);
+		return new Map (maparr, roomList2);
 	}
 }
 

@@ -19,7 +19,8 @@ public class BoardManager : MonoBehaviour
 
 	private Transform boardHolder;
 	private List <Vector3> gridPositions = new List<Vector3> ();
-
+	private int tilesize = 8;
+	private float walloffset = 3.72f;
 	void Start(){
 
 	}
@@ -43,29 +44,29 @@ public class BoardManager : MonoBehaviour
 				if (maparr [i, j] == "room")
 					index = 2;
 				GameObject toInstantiate = walls [index];
-				GameObject instance = Instantiate (toInstantiate, new Vector3 (i * 5, 0f, j * 5), Quaternion.identity) as GameObject;
+				GameObject instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, 0f, j * tilesize), Quaternion.identity) as GameObject;
 				instance.transform.SetParent (boardHolder);
 
 				if (maparr [i, j] == "wall")
 					continue;
-				if (i < mapw - 1 && maparr[i + 1, j] == "wall") {
+				if ((i < mapw - 1 && maparr[i + 1, j] == "wall") || (i < mapw - 1 && maparr[i,j] == "room" && maparr[i+1,j] == "hall")) {
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * 5 + 2.2f, -0.2f, j * 5), Quaternion.identity) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize + walloffset, -0.2f, j * tilesize), Quaternion.identity) as GameObject;
 					instance.transform.SetParent(boardHolder);
 				}
-				if (i > 0 && maparr[i - 1, j] == "wall") {
+				if ((i > 0 && maparr[i - 1, j] == "wall")  || (i > 0 && maparr[i,j] == "room" && maparr[i-1,j] == "hall")) {
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * 5 - 2.2f, -0.2f, j * 5), Quaternion.identity) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize - walloffset, -0.2f, j * tilesize), Quaternion.identity) as GameObject;
 					instance.transform.SetParent(boardHolder);
 				}
-				if (j < maph - 1 && maparr[i, j + 1] == "wall") {
+				if ((j < maph - 1 && maparr[i, j + 1] == "wall")  || (j < maph - 1 && maparr[i,j] == "room" && maparr[i,j+1] == "hall")){
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * 5, -0.2f, j * 5 + 2.2f), Quaternion.Euler(0,90,0)) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize + walloffset), Quaternion.Euler(0,90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
 				}
-				if (j > 0 && maparr [i, j - 1] == "wall") {
+				if ((j > 0 && maparr [i, j - 1] == "wall")  || (j > 0 && maparr[i,j] == "room" && maparr[1,j-1] == "hall")) {
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * 5, -0.2f, j * 5 - 2.2f), Quaternion.Euler(0,90,0)) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize - walloffset), Quaternion.Euler(0,90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
 				}
 				//Vector3 position = new Vector3 (j, 0, i);
@@ -81,7 +82,7 @@ public class BoardManager : MonoBehaviour
 	}
 
 	void Spawn(int x, int z, GameObject tospawn){
-		GameObject instance = Instantiate (tospawn, new Vector3 (x * 5, .5f, z * 5), Quaternion.identity) as GameObject;
+		GameObject instance = Instantiate (tospawn, new Vector3 (x * tilesize, .5f, z * tilesize), Quaternion.identity) as GameObject;
 		GameObject mycam = GameObject.Find ("Main Camera");
 		mycam.GetComponent<CameraController> ().lookAt = instance.transform;
 	}
