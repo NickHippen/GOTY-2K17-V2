@@ -12,6 +12,8 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	protected bool attacking;
 
+	public float attackPower = 5f;
+
 	protected new void Start() {
 		base.Start();
 		ApplyAttackBehavior();
@@ -62,6 +64,10 @@ public abstract class AggressiveUnit : LivingUnit {
 		if (animationEvent.stringParameter.Equals("Attack")) {
 			UnitAnimator.SetBool("Attack", false);
 		}
+	}
+
+	public float CalculateAttackPower() {
+		return attackPower;
 	}
 
 }
