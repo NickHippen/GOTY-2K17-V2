@@ -19,8 +19,11 @@ public abstract class Unit : MonoBehaviour {
 	public bool atGoal;
 
 	private Path path;
+	private Animator unitAnimator;
 
 	protected void Start() {
+		UnitAnimator = GetComponent<Animator>();
+
 		if (target != null) {
 			BeginPathing();
 		}
@@ -95,6 +98,8 @@ public abstract class Unit : MonoBehaviour {
 					atGoal = true;
 				}
 
+				UnitAnimator.SetBool("Move", followingPath);
+
 				yield return null;
 			}
 		}
@@ -107,6 +112,16 @@ public abstract class Unit : MonoBehaviour {
 			return hit.transform == targetTransform;
 		}
 		return false;
+	}
+
+	protected virtual void UpdateAnimator() {
+	}
+
+	protected virtual void AnimationComplete(AnimationEvent animationEvent) {
+	}
+
+	public Animator UnitAnimator {
+		get; set;
 	}
 
 	protected virtual void OnDrawGizmos() {

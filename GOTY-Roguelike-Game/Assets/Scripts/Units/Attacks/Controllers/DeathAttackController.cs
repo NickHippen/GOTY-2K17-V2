@@ -4,16 +4,13 @@ using UnityEngine;
 
 public class DeathAttackController : AttackController {
 
-	private AggressiveUnit attacker;
-
 	private bool used = false;
 
-	public DeathAttackController(AggressiveUnit attacker) {
-		this.attacker = attacker;
+	public DeathAttackController(AggressiveUnit attacker) : base(attacker) {
 	}
 
 	protected override bool CheckSpecifics() {
-		if (!used && !attacker.Living) {
+		if (!used && !Attacker.Living) {
 			used = true;
 			return true;
 		}

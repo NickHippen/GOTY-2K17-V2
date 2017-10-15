@@ -10,10 +10,10 @@ public class IntervalAttackController : AttackController {
 	private float timeSinceAttack = 0f;
 	private float nextAttackTime;
 
-	public IntervalAttackController(float minAttackRate, float maxAttackRate) {
+	public IntervalAttackController(AggressiveUnit attacker, float minAttackRate, float maxAttackRate) : base(attacker) {
 		this.minAttackRate = minAttackRate;
 		this.maxAttackRate = maxAttackRate;
-		SetNextAttackTime();
+		nextAttackTime = 0f; // Set to 0 first so enemies attack on arrival
 	}
 
 	protected override bool CheckSpecifics() {

@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class HealthAttackController : AttackController {
 
-	private AggressiveUnit attacker;
 	private float healthPercentageTrigger;
 	private bool used = false;
 
-	public HealthAttackController(AggressiveUnit attacker, float healthPercentageTrigger) {
-		this.attacker = attacker;
+	public HealthAttackController(AggressiveUnit attacker, float healthPercentageTrigger) : base(attacker) {
 		this.healthPercentageTrigger = healthPercentageTrigger;
 	}
 
 	protected override bool CheckSpecifics() {
-		if (!used && attacker.GetHealthPercentage() <= healthPercentageTrigger) {
+		if (!used && Attacker.GetHealthPercentage() <= healthPercentageTrigger) {
 			used = true;
 			return true;
 		}

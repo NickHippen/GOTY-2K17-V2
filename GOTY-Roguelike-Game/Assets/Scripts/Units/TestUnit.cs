@@ -6,7 +6,7 @@ public class TestUnit : AggressiveUnit {
 
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new TestAttack(
-			new IntervalAttackController(2, 3)
+			new IntervalAttackController(this, 2, 3)
 				.AddConditional(() => GetHealthPercentage() > 0.5f),
 			"Interval Attack"
 		));
