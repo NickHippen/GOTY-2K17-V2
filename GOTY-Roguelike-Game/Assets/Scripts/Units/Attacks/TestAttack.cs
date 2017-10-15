@@ -12,7 +12,7 @@ public class TestAttack : Attack {
 
 	public override void Use() {
 		MonoBehaviour.print(text);
-		Controller.Attacker.UnitAnimator.SetBool("Attack", true);
+		Attacker.UnitAnimator.SetBool("Attack", true);
 	}
 
 }

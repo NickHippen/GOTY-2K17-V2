@@ -12,7 +12,7 @@ public class HealthAttackController : AttackController {
 	}
 
 	protected override bool CheckSpecifics() {
-		if (!used && Attacker.GetHealthPercentage() <= healthPercentageTrigger) {
+		if (!used && Attacker.HealthPercentage <= healthPercentageTrigger) {
 			used = true;
 			return true;
 		}

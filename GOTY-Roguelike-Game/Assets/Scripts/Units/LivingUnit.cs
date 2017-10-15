@@ -5,25 +5,17 @@ using UnityEngine;
 
 public abstract class LivingUnit : Unit {
 
-	private bool living;
-	public float health;
-	public float maxHealth;
-
-	public bool Living { get; set; }
-
 	public virtual float Health {
 		get {
-			return health;
+			return Health;
 		}
 		set {
-			health = value;
-			if (health <= 0) {
-				health = 0;
-				Living = false;
+			Health = value;
+			if (Health <= 0) {
+				Health = 0;
 			} else {
-				Living = true;
-				if (health > MaxHealth) {
-					health = MaxHealth;
+				if (Health > MaxHealth) {
+					Health = MaxHealth;
 				}
 			}
 		}
@@ -31,13 +23,25 @@ public abstract class LivingUnit : Unit {
 
 	public float MaxHealth {
 		get {
-			return maxHealth;
+			return MaxHealth;
 		}
 		private set {
 			if (value <= 0) {
 				throw new ArgumentException("Max health must be > 0");
 			}
-			maxHealth = value;
+			MaxHealth = value;
+		}
+	}
+
+	public bool Living {
+		get {
+			return Health >= 0;
+		}
+	}
+
+	public float HealthPercentage {
+		get {
+			return Health / MaxHealth;
 		}
 	}
 
@@ -47,10 +51,6 @@ public abstract class LivingUnit : Unit {
 
 	public void Heal(float amount) {
 		Health += amount;
-	}
-
-	public float GetHealthPercentage() {
-		return Health / MaxHealth;
 	}
 
 }
