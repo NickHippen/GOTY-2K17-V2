@@ -10,6 +10,8 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public List<Attack> attacks = new List<Attack>();
 
+	protected bool attacking;
+
 	protected new void Start() {
 		base.Start();
 		ApplyAttackBehavior();
@@ -50,5 +52,16 @@ public abstract class AggressiveUnit : LivingUnit {
 	}
 
 	protected abstract void ApplyAttackBehavior();
+
+	protected override void UpdateAnimator() {
+		base.UpdateAnimator();
+	}
+
+	protected override void AnimationComplete(AnimationEvent animationEvent) {
+		base.AnimationComplete(animationEvent);
+		if (animationEvent.stringParameter.Equals("Attack")) {
+			UnitAnimator.SetBool("Attack", false);
+		}
+	}
 
 }

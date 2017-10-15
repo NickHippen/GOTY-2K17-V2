@@ -7,11 +7,19 @@ public abstract class AttackController {
 
 	private readonly List<AttackPredicate> conditionals = new List<AttackPredicate>();
 
+	private AggressiveUnit attacker;
+
+	public AttackController(AggressiveUnit attacker) {
+		this.Attacker = attacker;
+	}
+
 	public List<AttackPredicate> Conditionals {
 		get {
 			return conditionals;
 		}
 	}
+
+	public AggressiveUnit Attacker { get; set; }
 
 	public AttackController AddConditional(AttackPredicate conditional) {
 		Conditionals.Add(conditional);
