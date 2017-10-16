@@ -9,6 +9,8 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] walls;
 	public GameObject[] doors;
 	public GameObject player;
+	public DrawMiniMap miniMap;
+
 	static int mapw = 60;
 	static int maph = 40;
 	public GenerateMap mapGenerator;
@@ -35,7 +37,6 @@ public class BoardManager : MonoBehaviour
 		boardHolder = new GameObject ("Board").transform;
 		for (int i = 0; i < mapw; i++) {
 			for (int j = 0; j < maph; j++) {
-				Debug.Log (i + " " + j);
 				int index = 0;
 				if (maparr [i, j] == "hall")
 					index = 2;
@@ -78,11 +79,11 @@ public class BoardManager : MonoBehaviour
 		int randomSpot = Random.Range (0,roomList.Count);
 
 		Spawn (roomList [randomSpot].startx, roomList [randomSpot].starty, player);
-
+		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 	}
 
 	void Spawn(int x, int z, GameObject tospawn){
-		GameObject instance = Instantiate (tospawn, new Vector3 (x * tilesize, .5f, z * tilesize), Quaternion.identity) as GameObject;
+		GameObject instance = Instantiate (tospawn, new Vector3 (x * tilesize, .6f, z * tilesize), Quaternion.identity) as GameObject;
 		GameObject mycam = GameObject.Find ("Main Camera");
 		mycam.GetComponent<CameraController> ().lookAt = instance.transform;
 	}
