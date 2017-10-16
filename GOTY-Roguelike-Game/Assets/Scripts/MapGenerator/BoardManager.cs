@@ -65,7 +65,7 @@ public class BoardManager : MonoBehaviour
 					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize + walloffset), Quaternion.Euler(0,90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
 				}
-				if ((j > 0 && maparr [i, j - 1] == "wall")  || (j > 0 && maparr[i,j] == "room" && maparr[1,j-1] == "hall")) {
+				if ((j > 0 && maparr [i, j - 1] == "wall")  || (j > 0 && maparr[i,j] == "room" && maparr[i,j-1] == "hall")) {
 					toInstantiate = walls [1];
 					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize - walloffset), Quaternion.Euler(0,90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
