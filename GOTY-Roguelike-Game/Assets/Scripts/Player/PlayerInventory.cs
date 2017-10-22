@@ -20,6 +20,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Addd GameObject weapon to the weapons list
 	public void addWeapon(GameObject weapon){
 		if (weapons.Count < maxCapacity) {
 			//current++;
@@ -28,6 +29,8 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//returns the current weapon the player is holding if they are holding
+	//one at all
 	public GameObject getCurrentWeapon(){
 		if (weapons.Count != 0) {
 			return weapons [current];
@@ -36,6 +39,8 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Sets the current weapon to the weapon found in the given list position x. If the number is bigger
+	//than the number than the number of weapons currently possesed, then nothing happens
 	public void setCurrentWeapon(int x){
 		if (x < weapons.Count) {
 			weapons [current].SetActive(false);
@@ -45,6 +50,8 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Checks if scrolling input is in a forwards or backwards direction and changes the current
+	//Weapon accordingly.
 	public void scrollWeapon(float scrolled){
 		int selection;
 		if (scrolled > 0) {
@@ -62,11 +69,13 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Sets the current weapon based on a given GameOBject
 	public void setCurrentWeapon(GameObject thing){
 		weapons [current] = thing;
 		weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 	}
 
+	//Removes current weapon from inventory then changes current weapon to the next weapon below it.
 	public void dropCurrentWeapon(){
 		//weapons [current].GetComponent<Rigidbody> ().useGravity = true;
 
@@ -78,6 +87,7 @@ public class PlayerInventory : MonoBehaviour {
 		weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 	}
 
+	//Checks if list has no more items
 	public bool isEmpty(){
 		if (weapons.Count == 0) {
 			return true;
@@ -86,6 +96,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Checks if list has only one item left
 	public bool lastItem(){
 		if (weapons.Count == 1) {
 			return true;
@@ -94,6 +105,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 	}
 
+	//Checks whether the inventory is full.
 	public bool isFull(){
 		if (weapons.Count == maxCapacity) {
 			return true;
