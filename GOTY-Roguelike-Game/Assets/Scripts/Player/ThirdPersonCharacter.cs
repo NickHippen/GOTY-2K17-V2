@@ -242,7 +242,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		and transforms.*/
 		void initializeEquip(GameObject temp){
 			temp.tag = "Equipped";
-			temp.GetComponent<Rigidbody> ().useGravity = false;
+			temp.GetComponent<Rigidbody>().useGravity = false;
 			temp = editCollider (temp, false);
 			GameObject hand;
 			if (temp.name.Contains ("Gun")) {
@@ -289,12 +289,12 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		/*Turns the colliders of an item either on or off*/
 		GameObject editCollider(GameObject x, bool state){
-			if (x.GetComponent<CapsuleCollider> () != null) {
-				x.GetComponent<CapsuleCollider> ().enabled = state;
-			}
-			if (x.GetComponent<BoxCollider> () != null) {
-				x.GetComponent<BoxCollider> ().enabled = state;
-			}
+			//if (x.GetComponent<CapsuleCollider> () != null) {
+			//	x.GetComponent<CapsuleCollider> ().enabled = state;
+			//}
+			//if (x.GetComponent<BoxCollider> () != null) {
+			//	x.GetComponent<BoxCollider> ().enabled = state;
+			//}
 			return x;
 
 		}
