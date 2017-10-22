@@ -12,15 +12,14 @@ public class CameraController : MonoBehaviour {
 	public bool lockMouse = true;
 	public Transform lookAt;
 
-	private Camera cam;
+	//private Camera cam;
 	private Transform camTransform;
 
 	private float currentX = 0f;
 	private float currentY = 0f;
 	private float currentZoom = 200f;
-	private float sensitivityX = 4f;
-	private float sensitivityY = 1f;
-	private float sensitivityZoom = 50f;
+	//private float sensitivityX = 4f;
+	//private float sensitivityY = 1f;
 
 	void Start () {
 		if (lockMouse) {
@@ -29,7 +28,7 @@ public class CameraController : MonoBehaviour {
 		}
 
 		camTransform = transform;
-		cam = Camera.main;
+		//cam = Camera.main;
 	}
 
 	private void Update() {
