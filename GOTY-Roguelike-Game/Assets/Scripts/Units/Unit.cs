@@ -22,7 +22,7 @@ public abstract class Unit : MonoBehaviour {
 
 	public Animator UnitAnimator { get; set; }
 
-	protected void Start() {
+	protected virtual void Start() {
 		UnitAnimator = GetComponent<Animator>();
 
 		if (target != null) {

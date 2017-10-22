@@ -94,7 +94,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// send input and other state parameters to the animator
 			UpdateAnimator(move);
 		}
-
+			
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters

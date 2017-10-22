@@ -10,13 +10,16 @@ GameObject:
   - component: {fileID: 453068}
   - component: {fileID: 3316574}
   - component: {fileID: 2346984}
+  - component: {fileID: 54474092867204526}
+  - component: {fileID: 136978280128364132}
+  - component: {fileID: 114488012592221670}
   m_Layer: 0
   m_Name: SciFiGunLightBlack
-  m_TagString: Untagged
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &453068
 Transform:
   m_ObjectHideFlags: 1
@@ -24,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.472161, y: 2.0237794, z: 5.4314585}
+  m_LocalPosition: {x: 0, y: 1.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,3 +83,49 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118234}
   m_IsPrefabParent: 1
+--- !u!54 &54474092867204526
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118234}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &114488012592221670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 1
+  name: GUN
+  desc: 
+  damage: 100
+  rotation: {x: 8, y: 83.5, z: 89}
+  model: {fileID: 118234}
+  icon: {fileID: 21300000, guid: 49833c8300bf97349b5d27d51207a34e, type: 3}
+--- !u!136 &136978280128364132
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118234}
+  m_Material: {fileID: 13400000, guid: 01571ba68fb2dad46aa03094ab219579, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.15
+  m_Height: 0.81
+  m_Direction: 2
+  m_Center: {x: 0.000000044703484, y: 0.02280002, z: 0.27416432}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInventory : MonoBehaviour {
 
@@ -9,8 +10,14 @@ public class PlayerInventory : MonoBehaviour {
 	public int test = 0;
 	public int current= 0;
 	int maxCapacity = 4;
+	public List<GameObject> slots;
+	public Sprite empty;
+
 	void Start () {
-		
+		for (int x = 0; x < maxCapacity; x++) {
+			slots.Add (GameObject.Find ("Weapon " + x));
+		}
+		slots [current].GetComponent<Image>().sprite = weapons [current].GetComponent<WeaponData>().icon;
 	}
 	
 	// Update is called once per frame
@@ -27,6 +34,8 @@ public class PlayerInventory : MonoBehaviour {
 			weapons.Add (weapon);
 			Debug.Log ("Weapon added");
 		}
+		//slots [weapons.Count - 1].GetComponent<Image> ().sprite = weapons [weapons.Count - 1].GetComponent<WeaponData> ().icon;
+		UpdateUI();
 	}
 
 	//returns the current weapon the player is holding if they are holding
@@ -85,6 +94,7 @@ public class PlayerInventory : MonoBehaviour {
 		}
 		setCurrentWeapon (current);
 		weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
+		UpdateUI ();
 	}
 
 	//Checks if list has no more items
@@ -111,6 +121,16 @@ public class PlayerInventory : MonoBehaviour {
 			return true;
 		} else {
 			return false;
+		}
+	}
+
+	void UpdateUI(){
+		for (int x = 0; x < maxCapacity; x++) {
+			slots [x].GetComponent<Image> ().sprite = empty;
+		}
+
+		for (int x = 0; x < weapons.Count; x++) {
+			slots [x].GetComponent<Image> ().sprite = weapons [x].GetComponent<WeaponData> ().icon;
 		}
 	}
 }
