@@ -10,7 +10,8 @@ public class WeaponData : MonoBehaviour{
 	public int damage;
 	public Vector3 rotation;
 	public GameObject model;
-	
+	public Sprite icon;
+
 	public WeaponData(){
 		id = -1;
 	}
