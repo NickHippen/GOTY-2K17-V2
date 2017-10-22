@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class LivingUnit : Unit {
 
@@ -9,6 +10,11 @@ public abstract class LivingUnit : Unit {
 	public float maxHealth = 100;
 
 	private bool destroying;
+	public Image healthBar;
+
+	protected override void Start() {
+		base.Start();
+	}
 
 	public virtual float Health {
 		get {
@@ -23,6 +29,7 @@ public abstract class LivingUnit : Unit {
 					health = MaxHealth;
 				}
 			}
+			healthBar.fillAmount = HealthPercentage;
 		}
 	}
 
