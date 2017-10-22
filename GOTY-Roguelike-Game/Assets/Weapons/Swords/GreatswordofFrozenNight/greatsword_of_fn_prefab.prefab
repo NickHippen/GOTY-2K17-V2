@@ -23,10 +23,10 @@ GameObject:
   - component: {fileID: 23747885978468466}
   - component: {fileID: 54817703364823676}
   - component: {fileID: 65032383660921026}
-  - component: {fileID: 114607109527534454}
+  - component: {fileID: 114064116952648568}
   m_Layer: 0
   m_Name: greatsword_of_fn_prefab
-  m_TagString: Equipped
+  m_TagString: Pickup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534932496154960}
   m_LocalRotation: {x: 0.04625101, y: -0.08347439, z: -0.009677708, w: 0.995389}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.86, y: 0.36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,7 +53,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -69,7 +68,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -95,7 +93,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -108,11 +106,11 @@ BoxCollider:
   m_GameObject: {fileID: 1534932496154960}
   m_Material: {fileID: 13400000, guid: 01571ba68fb2dad46aa03094ab219579, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.122332, y: 2.357289, z: 0.597947}
   m_Center: {x: 0.0017899983, y: 0.83684146, z: 0.0012505054}
---- !u!114 &114607109527534454
+--- !u!114 &114064116952648568
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -120,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1534932496154960}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52ec88547e54bc34ca273ef043db16eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   id: 2
@@ -129,3 +127,4 @@ MonoBehaviour:
   damage: 200
   rotation: {x: 73, y: 0, z: 17}
   model: {fileID: 1534932496154960}
+  icon: {fileID: 21300000, guid: ac394e6e5080d754e8b437e5936fca3b, type: 3}
