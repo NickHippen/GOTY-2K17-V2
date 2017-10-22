@@ -66,29 +66,31 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			setAnimatorController();
 		}
 			
-		public void Move(Vector3 move, bool jump)
+		public void Move(Vector3 move, bool jump, bool attack)
 		{
+			m_Attacking = attack;
+			if (m_Attacking || m_Animator.IsInTransition (0) || !this.m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
+				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
+			} else {
+				// convert the world relative moveInput vector into a local-relative
+				// turn amount and forward amount required to head in the desired
+				// direction.
+				if (move.magnitude > 1f)
+					move.Normalize ();
+				move = transform.InverseTransformDirection (move);
+				CheckGroundStatus ();
+				move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+				m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+				m_ForwardAmount = move.z;
 
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
-			CheckGroundStatus();
-			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
+				ApplyExtraTurnRotation ();
 
-			ApplyExtraTurnRotation();
-
-			// control and velocity handling is different when grounded and airborne:
-			if (m_IsGrounded)
-			{
-				HandleGroundedMovement(jump);
-			}
-			else
-			{
-				HandleAirborneMovement();
+				// control and velocity handling is different when grounded and airborne:
+				if (m_IsGrounded) {
+					HandleGroundedMovement (jump);
+				} else {
+					HandleAirborneMovement ();
+				}
 			}
 
 			// send input and other state parameters to the animator
@@ -183,11 +185,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			/*if (!m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
 				m_Animator.Play ("Attack");
 			}*/
-			if (m_Animator.IsInTransition(0) || click || this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
-				m_ForwardAmount = 0;
-				m_TurnAmount = 0;
-				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
-			}
+//			if (m_Animator.IsInTransition (0) || click || this.m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attacking")) {
+////				m_ForwardAmount = 0;
+////				m_TurnAmount = 0;
+//				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
+//			}
 		}
 
 		//Initiates the various functionality of the Use key when pressed
