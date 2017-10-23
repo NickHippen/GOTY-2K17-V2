@@ -11,6 +11,7 @@ public class DrawMiniMap : MonoBehaviour {
 	public GameObject roomIcon;
 	public GameObject playerIcon;
 
+	Vector3 v3;
 	public void Draw(string[,] maparr){
 		GameObject map = GameObject.Find ("MiniMap");
 		GameObject toInstantiate = null;
@@ -45,21 +46,28 @@ public class DrawMiniMap : MonoBehaviour {
 		}
 		instance = Instantiate (playerIcon, new Vector3 (0 * 5f, 0 * 5f, 0f), Quaternion.identity) as GameObject;
 		instance.transform.SetParent (map.transform);
+
 	}
 
 
 	// Use this for initialization
 	void Start () {
-		
+		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
+		GameObject instance = Instantiate (doorIcon, new Vector3 (exitPos.x* 5 / 8f, exitPos.z * 5 / 8f, 0f), Quaternion.identity);
+		instance.transform.SetParent (GameObject.Find("MiniMap").transform);
+		v3 = instance.transform.position;
+		v3.y += 270;
+		instance.transform.position = v3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		Vector3 remyPos = GameObject.Find ("remy2(Clone)").transform.localPosition;
+		GameObject instance;
 		if (GameObject.Find ("playerIcon(Clone)") != null) {
-			GameObject instance = GameObject.Find ("playerIcon(Clone)");
+			instance = GameObject.Find ("playerIcon(Clone)");
 			instance.transform.localPosition = new Vector3 (remyPos.x * 5 / 8, remyPos.z * 5 / 8, 0f);
-			Vector3 v3 = instance.transform.position;
+			v3 = instance.transform.position;
 			v3.y -= 200;
 			instance.transform.position = v3;
 		}
