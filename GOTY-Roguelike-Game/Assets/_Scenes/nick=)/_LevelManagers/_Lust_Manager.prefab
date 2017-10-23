@@ -1,0 +1,84 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1860060297083786}
+  m_IsPrefabParent: 1
+--- !u!1 &1860060297083786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4061349588195168}
+  - component: {fileID: 114144974914406810}
+  - component: {fileID: 114310218738678238}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4061349588195168
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114144974914406810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84affe162073cd249968a7c837e4b033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walls:
+  - {fileID: 1365391391775608, guid: fcf4c397a321d574d83629b5198e2205, type: 2}
+  - {fileID: 1549515493027492, guid: 019c7afaff3587a439de8048dc48668e, type: 2}
+  - {fileID: 1732383957279304, guid: 3f534bbf31bc6844d97adb04a42f5bb7, type: 2}
+  - {fileID: 100000, guid: de3b8c31d809a0442bdf5e22edaf92be, type: 2}
+  doors: []
+  monsters:
+  - {fileID: 1214333580271422, guid: a247e2b15b233e547964bd623c2ad02e, type: 2}
+  - {fileID: 1923139183645982, guid: b9dbf54f5fcd69d42959160aaac0829a, type: 2}
+  torch: {fileID: 1281317626351866, guid: 188207eedac6aba47b07914a4a37ded3, type: 2}
+  texture: {fileID: 2800000, guid: 8251da9eb4f39854e97838f8a4e87d44, type: 3}
+  player: {fileID: 1391203536114520, guid: a552d48c391903345bb67eedcf54e023, type: 2}
+  miniMap: {fileID: 114271782723061750, guid: 4c52f665f407215489856da05959db53, type: 2}
+  mapGenerator: {fileID: 114281106395256080, guid: da2ca4b3c15614e4b8584db3daf1da28,
+    type: 2}
+--- !u!114 &114310218738678238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1274bbccd3dcaf49a5ae0b9520bd6aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelStartDelay: 2
+  turnDelay: 0.1
+  boardScript: {fileID: 0}
+  playersTurn: 1
