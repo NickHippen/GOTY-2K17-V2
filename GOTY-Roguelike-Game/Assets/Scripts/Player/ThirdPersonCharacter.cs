@@ -69,7 +69,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		public void Move(Vector3 move, bool jump, bool attack)
 		{
 			m_Attacking = attack;
-			if (m_Attacking || m_Animator.IsInTransition (0) || !this.m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
+			if (m_Attacking) {
 				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
 			} else {
 				// convert the world relative moveInput vector into a local-relative

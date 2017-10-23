@@ -111,12 +111,16 @@ public class BoardManager : MonoBehaviour
 
 		//Spawn player
 		int randomSpot = Random.Range (0,roomList.Count);
+
 		Spawn (roomList [randomSpot].startx, roomList [randomSpot].starty, player);
 		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 
+		//Spawn monsters
 		foreach (Room room in roomList) {
 			int randomMonster = Random.Range (0, monsters.Length);
-			instance = Instantiate (monsters[randomMonster], new Vector3 (room.startx * tilesize, 2f, room.starty * tilesize), Quaternion.Euler(0,90,0)) as GameObject;
+			instance = Instantiate (monsters[randomMonster], new Vector3 (room.startx * tilesize, .2f, room.starty * tilesize), Quaternion.Euler(0,90,0)) as GameObject;
+
+			instance.GetComponent<Unit> ().pathRequestManager = GameObject.Find ("A_").GetComponent<PathRequestManager>();
 			instance.transform.SetParent(monsterHolder);
 		}
 	}
