@@ -17,9 +17,6 @@ public class Pathfinding : MonoBehaviour {
 	//}
 
 	public void FindPath(PathRequest request, Action<PathResult> callback) {
-		Stopwatch sw = new Stopwatch();
-		sw.Start();
-
 		Vector3[] waypoints = new Vector3[0];
 		bool pathSuccess = false;
 
@@ -36,7 +33,10 @@ public class Pathfinding : MonoBehaviour {
 				closedSet.Add(currentNode);
 
 				if (currentNode == targetNode) {
+<<<<<<< HEAD
 					sw.Stop();
+=======
+>>>>>>> 8544f8f26253cd8540513d48af8e35f340c13b1a
 					pathSuccess = true;
 					break;
 				}

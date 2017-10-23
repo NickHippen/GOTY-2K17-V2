@@ -138,6 +138,8 @@ public abstract class Unit : MonoBehaviour {
 		}
 	}
 
+	public abstract void OnRigCollisionEnter(Collision collision);
+
 	protected virtual void OnDrawGizmos() {
 		if (debugMode && path != null) {
 			path.DrawWithGizmos();

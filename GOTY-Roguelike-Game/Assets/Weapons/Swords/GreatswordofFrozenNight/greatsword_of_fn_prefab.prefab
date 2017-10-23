@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23747885978468466}
   - component: {fileID: 65032383660921026}
   - component: {fileID: 114064116952648568}
-  - component: {fileID: 54111812353666646}
   m_Layer: 0
   m_Name: greatsword_of_fn_prefab
   m_TagString: Pickup
@@ -83,21 +82,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534932496154960}
   m_Mesh: {fileID: 4300000, guid: 29fbdd5c415a9eb4ba2b52d82337ab2f, type: 3}
---- !u!54 &54111812353666646
-Rigidbody:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1534932496154960}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: Infinity
-  m_AngularDrag: Infinity
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &65032383660921026
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -105,7 +89,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1534932496154960}
   m_Material: {fileID: 13400000, guid: 01571ba68fb2dad46aa03094ab219579, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.122332, y: 2.357289, z: 0.597947}

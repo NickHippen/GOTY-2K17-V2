@@ -134,6 +134,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 
+		protected void OnAnimationComplete(AnimationEvent animationEvent) {
+			if (animationEvent.stringParameter.StartsWith("reset_")) {
+				string animationName = animationEvent.stringParameter.Substring(6);
+				m_Animator.SetBool(animationName, false);
+			}
+		}
+
 
 		void HandleAirborneMovement()
 		{
@@ -181,15 +188,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 		public void attack(bool click){
+			//if (click) {
+			//	m_Attacking = true;
+			//}
+
 			m_Attacking = click;
-			/*if (!m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attack")) {
-				m_Animator.Play ("Attack");
-			}*/
-//			if (m_Animator.IsInTransition (0) || click || this.m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Attacking")) {
-////				m_ForwardAmount = 0;
-////				m_TurnAmount = 0;
-//				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
-//			}
 		}
 
 		//Initiates the various functionality of the Use key when pressed
@@ -242,7 +245,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		and transforms.*/
 		void initializeEquip(GameObject temp){
 			temp.tag = "Equipped";
-			temp.GetComponent<Rigidbody>().useGravity = false;
+			//temp.GetComponent<Rigidbody>().useGravity = false;
 			temp = editCollider (temp, false);
 			GameObject hand;
 			if (temp.name.Contains ("Gun")) {
@@ -323,4 +326,5 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 		}
 	}
+
 }
