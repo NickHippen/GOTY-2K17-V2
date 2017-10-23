@@ -10,9 +10,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         private ThirdPersonCharacter m_Character; // A reference to the ThirdPersonCharacter on the object
         private Transform m_Cam;                  // A reference to the main camera in the scenes transform
         private Vector3 m_CamForward;             // The current forward direction of the camera
-        private Vector3 m_Move;
-        private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-
+		private Vector3 m_Move;					  // the world-relative desired move direction, calculated from the camForward and user input.
+		private bool m_Jump;
+		private bool m_Attacking;
+		private bool m_Ability1, m_Ability2, m_Ability3, m_Ability4;
         
         private void Start()
         {
@@ -39,6 +40,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
+
+			m_Attacking = Input.GetMouseButton (0);
+			m_Ability1 = Input.GetKeyDown (KeyCode.Z);
+			m_Ability2 = Input.GetKeyDown (KeyCode.X);
+			m_Ability3 = Input.GetKeyDown (KeyCode.C);
+			m_Ability4 = Input.GetKeyDown (KeyCode.V);
+			grenade = Input.GetKeyDown (KeyCode.B);
 
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
@@ -83,7 +91,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             float v = CrossPlatformInputManager.GetAxis("Vertical");
 
 			//Temporary test of attack animation
-			m_Character.attack (Input.GetMouseButtonDown(0));
+//			m_Character.attack (Input.GetMouseButton(0));
 
 			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
 			m_Character.drop (Input.GetKeyDown (KeyCode.Q));
@@ -107,7 +115,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-			m_Character.Move(m_Move, m_Jump, Input.GetMouseButtonDown(0));
+			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2, m_Ability4);
             m_Jump = false;
         }
     }
