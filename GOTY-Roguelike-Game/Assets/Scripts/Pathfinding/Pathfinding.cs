@@ -33,7 +33,6 @@ public class Pathfinding : MonoBehaviour {
 				closedSet.Add(currentNode);
 
 				if (currentNode == targetNode) {
-//					sw.Stop();
 					pathSuccess = true;
 					break;
 				}
