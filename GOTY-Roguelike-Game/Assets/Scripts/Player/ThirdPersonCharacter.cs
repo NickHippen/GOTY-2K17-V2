@@ -27,7 +27,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		float m_CapsuleHeight;
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
-		bool m_Crouching;
 
 		//Temp varaible for attacking
 		public bool m_Attacking;
@@ -66,85 +65,43 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			inventory.getCurrentWeapon ().SetActive (true);
 			setAnimatorController();
 		}
-
-		public void Move(Vector3 move, bool crouch, bool jump)
+			
+		public void Move(Vector3 move, bool jump, bool attack)
 		{
+			m_Attacking = attack;
+			if (m_Attacking || m_Animator.IsInTransition (0) || !this.m_Animator.GetCurrentAnimatorStateInfo (0).IsName ("Grounded")) {
+				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
+			} else {
+				// convert the world relative moveInput vector into a local-relative
+				// turn amount and forward amount required to head in the desired
+				// direction.
+				if (move.magnitude > 1f)
+					move.Normalize ();
+				move = transform.InverseTransformDirection (move);
+				CheckGroundStatus ();
+				move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+				m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+				m_ForwardAmount = move.z;
 
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			if (move.magnitude > 1f) move.Normalize();
-			move = transform.InverseTransformDirection(move);
-			CheckGroundStatus();
-			move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2(move.x, move.z);
-			m_ForwardAmount = move.z;
+				ApplyExtraTurnRotation ();
 
-			ApplyExtraTurnRotation();
-
-			// control and velocity handling is different when grounded and airborne:
-			if (m_IsGrounded)
-			{
-				HandleGroundedMovement(crouch, jump);
+				// control and velocity handling is different when grounded and airborne:
+				if (m_IsGrounded) {
+					HandleGroundedMovement (jump);
+				} else {
+					HandleAirborneMovement ();
+				}
 			}
-			else
-			{
-				HandleAirborneMovement();
-			}
-
-			ScaleCapsuleForCrouching(crouch);
-			PreventStandingInLowHeadroom();
 
 			// send input and other state parameters to the animator
 			UpdateAnimator(move);
 		}
-
-
-		void ScaleCapsuleForCrouching(bool crouch)
-		{
-			if (m_IsGrounded && crouch)
-			{
-				if (m_Crouching) return;
-				m_Capsule.height = m_Capsule.height / 2f;
-				m_Capsule.center = m_Capsule.center / 2f;
-				m_Crouching = true;
-			}
-			else
-			{
-				//Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_Capsule.radius * k_Half, Vector3.up);
-				//float crouchRayLength = m_CapsuleHeight - m_Capsule.radius * k_Half;
-				//if (Physics.SphereCast(crouchRay, m_Capsule.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-				//{
-				//	m_Crouching = true;
-				//	return;
-				//}
-				//m_Capsule.height = m_CapsuleHeight;
-				//m_Capsule.center = m_CapsuleCenter;
-				//m_Crouching = false;
-			}
-		}
-
-		void PreventStandingInLowHeadroom()
-		{
-			// prevent standing up in crouch-only zones
-			//if (!m_Crouching)
-			//{
-			//	Ray crouchRay = new Ray(m_Rigidbody.position + Vector3.up * m_Capsule.radius * k_Half, Vector3.up);
-			//	float crouchRayLength = m_CapsuleHeight - m_Capsule.radius * k_Half;
-			//	if (Physics.SphereCast(crouchRay, m_Capsule.radius * k_Half, crouchRayLength, Physics.AllLayers, QueryTriggerInteraction.Ignore))
-			//	{
-			//		m_Crouching = true;
-			//	}
-			//}
-		}
-
-
+			
 		void UpdateAnimator(Vector3 move)
 		{
 			// update the animator parameters
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
-			m_Animator.SetBool("Crouch", m_Crouching);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
 			m_Animator.SetBool ("Attack", m_Attacking);
 			if (!m_IsGrounded)
@@ -195,10 +152,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		}
 
 
-		void HandleGroundedMovement(bool crouch, bool jump)
+		void HandleGroundedMovement(bool jump)
 		{
 			// check whether conditions are right to allow a jump:
-			if (jump && !crouch && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
+			if (jump && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
 			{
 				// jump!
 				m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);

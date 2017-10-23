@@ -857,7 +857,7 @@ GameObject:
   - component: {fileID: 114610923707966420}
   m_Layer: 0
   m_Name: remy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2260,9 +2260,12 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
+  m_Attacking: 0
   gunController: {fileID: 0}
   meleeController: {fileID: 0}
-  hand: {fileID: 0}
+  rightHand: {fileID: 0}
+  leftHand: {fileID: 0}
+  grabRadius: 1
 --- !u!136 &136357508216000910
 CapsuleCollider:
   m_ObjectHideFlags: 1

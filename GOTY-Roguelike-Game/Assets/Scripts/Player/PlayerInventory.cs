@@ -13,6 +13,9 @@ public class PlayerInventory : MonoBehaviour {
 	public List<GameObject> slots;
 	public Sprite empty;
 
+	public float defautIconSize = 30f;
+	public float selectedIconSize = 35f;
+
 	void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
@@ -57,6 +60,7 @@ public class PlayerInventory : MonoBehaviour {
 			weapons [current].SetActive(true);
 			weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
 		}
+		UpdateUI ();
 	}
 
 	//Checks if scrolling input is in a forwards or backwards direction and changes the current
@@ -127,10 +131,13 @@ public class PlayerInventory : MonoBehaviour {
 	void UpdateUI(){
 		for (int x = 0; x < maxCapacity; x++) {
 			slots [x].GetComponent<Image> ().sprite = empty;
+			slots [x].GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (defautIconSize, defautIconSize);
 		}
 
 		for (int x = 0; x < weapons.Count; x++) {
 			slots [x].GetComponent<Image> ().sprite = weapons [x].GetComponent<WeaponData> ().icon;
 		}
+
+		slots [current].GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (selectedIconSize, selectedIconSize);
 	}
 }

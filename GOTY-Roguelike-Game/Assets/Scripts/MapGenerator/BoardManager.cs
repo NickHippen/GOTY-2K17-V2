@@ -56,41 +56,50 @@ public class BoardManager : MonoBehaviour
 				GameObject toInstantiate = walls [index];
 				instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, 0f, j * tilesize), Quaternion.identity) as GameObject;
 				instance.transform.SetParent (boardHolder);
-
+				Debug.Log ((i + j) % 2 == 0);
 				if (maparr [i, j] == "wall")
 					continue;
+
+				//East wall
 				if ((i < mapw - 1 && maparr[i + 1, j] == "wall") || (i < mapw - 1 && maparr[i,j] == "room" && maparr[i+1,j] == "hall")) {
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize + walloffset, -0.2f, j * tilesize), Quaternion.identity) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize + walloffset, -0.2f, j * tilesize), Quaternion.Euler(0,0,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
-					if (j % 2 == 0) {
-						instance = Instantiate(torch, new Vector3 (i * tilesize + torchoffset, 3f, j * tilesize), Quaternion.identity) as GameObject;
+					if ((i + j) % 2 == 0) {
+						Debug.Log ("MY DUDES");
+						instance = Instantiate(torch, new Vector3 (i * tilesize + torchoffset, 3f, j * tilesize), Quaternion.Euler(0,0,0)) as GameObject;
 						instance.transform.SetParent(boardHolder);
 					}
 				}
+				//West wall
 				if ((i > 0 && maparr[i - 1, j] == "wall")  || (i > 0 && maparr[i,j] == "room" && maparr[i-1,j] == "hall")) {
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize - walloffset, -0.2f, j * tilesize), Quaternion.identity) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize - walloffset, -0.2f, j * tilesize), Quaternion.Euler(0,180,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
-					if (j % 2 == 0) {
-						instance = Instantiate (torch,  new Vector3 (i * tilesize - torchoffset, 3f, j * tilesize), Quaternion.identity) as GameObject;
+					if ((i + j) % 2 == 0) {
+						Debug.Log ("MY DUDES");
+						instance = Instantiate (torch,  new Vector3 (i * tilesize - torchoffset, 3f, j * tilesize), Quaternion.Euler(0,180,0))as GameObject;
 						instance.transform.SetParent (boardHolder);
 					}
 				}
+
+				//North wall
 				if ((j < maph - 1 && maparr[i, j + 1] == "wall")  || (j < maph - 1 && maparr[i,j] == "room" && maparr[i,j+1] == "hall")){
 					toInstantiate = walls [1];
-					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize + walloffset), Quaternion.Euler(0,90,0)) as GameObject;
+					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize + walloffset), Quaternion.Euler(0,-90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
-					if (j % 2 == 0) {
-						instance = Instantiate(torch, new Vector3 (i * tilesize, 3f, j * tilesize + torchoffset), Quaternion.Euler(0,90,0)) as GameObject;
+					if ((i + j) % 2 == 0) {
+						instance = Instantiate(torch, new Vector3 (i * tilesize, 3f, j * tilesize + torchoffset), Quaternion.Euler(0,-90,0)) as GameObject;
 						instance.transform.SetParent(boardHolder);
 					}
 				}
+
+				//South wall
 				if ((j > 0 && maparr [i, j - 1] == "wall")  || (j > 0 && maparr[i,j] == "room" && maparr[i,j-1] == "hall")) {
 					toInstantiate = walls [1];
 					instance = Instantiate (toInstantiate, new Vector3 (i * tilesize, -0.2f, j * tilesize - walloffset), Quaternion.Euler(0,90,0)) as GameObject;
 					instance.transform.SetParent(boardHolder);
-					if (j % 2 == 0) {
+					if ((i + j) % 2 == 0) {
 						instance = Instantiate(torch, new Vector3 (i * tilesize, 3f, j * tilesize - torchoffset), Quaternion.Euler(0,90,0)) as GameObject;
 						instance.transform.SetParent(boardHolder);
 					}
