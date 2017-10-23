@@ -20,7 +20,8 @@ public class PlayerInventory : MonoBehaviour {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
 		}
-		slots [current].GetComponent<Image>().sprite = weapons [current].GetComponent<WeaponData>().icon;
+		//slots [current].GetComponent<Image>().sprite = weapons [current].GetComponent<WeaponData>().icon;
+		UpdateUI();
 	}
 	
 	// Update is called once per frame
