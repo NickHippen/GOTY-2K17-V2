@@ -10,8 +10,6 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public List<Attack> attacks = new List<Attack>();
 
-	protected bool attacking;
-
 	public float attackPower = 5f;
 
 	protected new void Start() {
@@ -61,6 +59,17 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public float CalculateAttackPower() {
 		return attackPower;
+	}
+
+	public override void OnRigCollisionEnter(Collision collision) {
+		if (this.UnitAnimator.GetBool("Attack") && collision.gameObject.tag == "Player") {
+			HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+			if (healthManager == null) {
+				return;
+			}
+			Debug.Log("Damage");
+			healthManager.Damage(CalculateAttackPower());
+		}
 	}
 
 }

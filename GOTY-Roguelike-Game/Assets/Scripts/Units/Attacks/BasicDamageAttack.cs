@@ -10,7 +10,7 @@ public class BasicDamageAttack : Attack {
 	public override void Use() {
 		HealthManager healthManager = Attacker.target.GetComponent<HealthManager>();
 		if (healthManager != null) {
-			healthManager.Damage(Attacker.CalculateAttackPower());
+			//healthManager.Damage(Attacker.CalculateAttackPower());
 		} else {
 			Debug.LogError("Can't damage target without HealthManager");
 		}

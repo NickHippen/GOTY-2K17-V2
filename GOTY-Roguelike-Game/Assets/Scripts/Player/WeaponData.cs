@@ -31,23 +31,15 @@ public class WeaponData : MonoBehaviour{
 		}
 	}
 
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.tag == "Monster") {
-			AggressiveUnit monster = collision.gameObject.GetComponent<AggressiveUnit>();
-			monster.Damage(10f);
+	void OnTriggerEnter(Collider collision) {
+		RigCollider rigCollider = collision.gameObject.GetComponent<RigCollider>();
+		Debug.Log(collision);
+		if (rigCollider != null) {
+			Debug.Log("Hit");
 		}
-		//List<ICollection> interfaceList;
-		//GetInterfaces<ICollection>(out interfaceList, collision.gameObject);
-	}
-
-	private void GetInterfaces<T>(out List<T> resultList, GameObject objectToSearch) where T : class {
-		MonoBehaviour[] list = objectToSearch.GetComponents<MonoBehaviour>();
-		resultList = new List<T>();
-		foreach (MonoBehaviour mb in list) {
-			if (mb is T) {
-				//found one
-				resultList.Add((T)((System.Object)mb));
-			}
+		if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
+			Debug.Log("Damaging!!!");
+			((AggressiveUnit)rigCollider.RootUnit).Damage(10f);
 		}
 	}
 
