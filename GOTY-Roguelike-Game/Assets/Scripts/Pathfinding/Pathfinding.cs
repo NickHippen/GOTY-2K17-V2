@@ -33,10 +33,6 @@ public class Pathfinding : MonoBehaviour {
 				closedSet.Add(currentNode);
 
 				if (currentNode == targetNode) {
-<<<<<<< HEAD
-					sw.Stop();
-=======
->>>>>>> 8544f8f26253cd8540513d48af8e35f340c13b1a
 					pathSuccess = true;
 					break;
 				}
