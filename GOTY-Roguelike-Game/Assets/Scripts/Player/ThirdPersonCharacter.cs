@@ -279,7 +279,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if(dropPress && !inventory.lastItem()){
 				inventory.getCurrentWeapon ().tag = "Pickup";
 				inventory.getCurrentWeapon ().transform.parent = null;
-				inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
+				//inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
 				editCollider (inventory.getCurrentWeapon (), true);
 				inventory.dropCurrentWeapon ();
 				setAnimatorController ();
