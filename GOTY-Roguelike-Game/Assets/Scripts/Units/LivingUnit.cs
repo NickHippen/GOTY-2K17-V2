@@ -73,7 +73,7 @@ public abstract class LivingUnit : Unit {
 		Health += amount;
 	}
 
-	public void OnDeath() {
+	public virtual void OnDeath() {
 		if (destroying) {
 			return; // Already destroying
 		}

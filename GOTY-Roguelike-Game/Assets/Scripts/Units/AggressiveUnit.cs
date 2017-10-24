@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AggressiveUnit : LivingUnit {
 
 	[TagSelector]
-	public string targetTag;
+	public string targetTag = "Player";
 	public float aggroRadius = 20f;
 
 	public List<Attack> attacks = new List<Attack>();
