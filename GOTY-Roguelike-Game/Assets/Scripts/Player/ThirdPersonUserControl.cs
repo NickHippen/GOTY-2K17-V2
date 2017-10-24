@@ -114,7 +114,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2);
+			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2, m_Ability3, m_Ability4);
             m_Jump = false;
         }
     }

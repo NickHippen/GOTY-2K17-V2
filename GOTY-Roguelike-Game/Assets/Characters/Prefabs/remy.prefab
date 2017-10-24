@@ -2264,9 +2264,11 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  m_Attacking: 0
   gunController: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
-  meleeController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
+  swordController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
+  gunslingerOverride: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64, type: 2}
+  berserkerOverride: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd, type: 2}
+  classType: Berserker
   rightHand: {fileID: 1592952675830588}
   leftHand: {fileID: 1840281323029356}
   grabRadius: 3
@@ -2287,6 +2289,8 @@ MonoBehaviour:
   current: 0
   slots: []
   empty: {fileID: 0}
+  defautIconSize: 30
+  selectedIconSize: 35
 --- !u!114 &114889000566917930
 MonoBehaviour:
   m_ObjectHideFlags: 1
