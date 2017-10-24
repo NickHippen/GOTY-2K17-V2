@@ -1197,6 +1197,23 @@ Prefab:
       propertyPath: grabRadius
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
+        type: 2}
+      propertyPath: swordController
+      value: 
+      objectReference: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
+    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
+        type: 2}
+      propertyPath: berserkerOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd,
+        type: 2}
+    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
+        type: 2}
+      propertyPath: gunslingerOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
   m_IsPrefabParent: 0
@@ -1878,7 +1895,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 926556088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 420, y: 15, z: 0}
+  m_LocalPosition: {x: 483.5, y: 15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647676108}
@@ -2805,7 +2822,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1225788397}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 420, y: -55, z: 0}
+  m_LocalPosition: {x: 483.5, y: -55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647676108}
@@ -3816,7 +3833,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1647676104}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 440, y: 152.5, z: 0}
+  m_LocalPosition: {x: 503.5, y: 148.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2039984222}
@@ -4433,7 +4450,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1913343297}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 420, y: -20, z: 0}
+  m_LocalPosition: {x: 483.5, y: -20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647676108}
@@ -4614,7 +4631,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2039984221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 420, y: 50, z: 0}
+  m_LocalPosition: {x: 483.5, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1647676108}
@@ -4885,9 +4902,11 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  m_Attacking: 0
   gunController: {fileID: 0}
-  meleeController: {fileID: 0}
+  swordController: {fileID: 0}
+  gunslingerOverride: {fileID: 0}
+  berserkerOverride: {fileID: 0}
+  classType: 
   rightHand: {fileID: 0}
   leftHand: {fileID: 0}
   grabRadius: 1
