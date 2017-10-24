@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -899,22 +899,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 472999391}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &685420526 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1197116336955146, guid: 5751a4218c2e4eb4aa1adc2994234f8c,
-    type: 2}
-  m_PrefabInternal: {fileID: 878380914}
---- !u!114 &685420534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 685420526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb90bb8f48bdd514d873cd1fc86daba9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &699888875
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1091,23 @@ Prefab:
       propertyPath: weapons.Array.data[0]
       value: 
       objectReference: {fileID: 1264513595}
+    - target: {fileID: 114663637519005592, guid: 5751a4218c2e4eb4aa1adc2994234f8c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114663637519005592, guid: 5751a4218c2e4eb4aa1adc2994234f8c,
+        type: 2}
+      propertyPath: gunslingerOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64,
+        type: 2}
+    - target: {fileID: 114663637519005592, guid: 5751a4218c2e4eb4aa1adc2994234f8c,
+        type: 2}
+      propertyPath: berserkerOverride
+      value: 
+      objectReference: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5751a4218c2e4eb4aa1adc2994234f8c, type: 2}
   m_IsPrefabParent: 0

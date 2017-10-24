@@ -32,6 +32,13 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		//Public objects for the types of controllers available
 		public RuntimeAnimatorController gunController;
 		public RuntimeAnimatorController meleeController;
+
+        public AnimatorOverrideController gunslingerOverride;
+        public AnimatorOverrideController berserkerOverride;
+
+        // Class type temporarily using a string
+        public string classType = "Berserker";
+
 		//Status of the Use Key 'E'
 		bool m_Use;
 		PlayerInventory inventory;
@@ -51,7 +58,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Capsule = GetComponent<CapsuleCollider>();
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
-
 			//m_Attacking = true;
 
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
@@ -284,12 +290,25 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 		public void setAnimatorController(){
 			if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon ().name.Contains ("Gun")) {
-				m_Animator.runtimeAnimatorController = gunController;
+				m_Animator.runtimeAnimatorController = getClassOverrideController(gunController);
 			} else {
-				m_Animator.runtimeAnimatorController = meleeController ;
+                m_Animator.runtimeAnimatorController = getClassOverrideController(meleeController);
 			}
 		}
 
+        private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
+        {
+            if (classType.Equals("Berserker"))
+            {
+                berserkerOverride.runtimeAnimatorController = anim;
+                return berserkerOverride;
+            }
+            else
+            {
+                gunslingerOverride.runtimeAnimatorController = anim;
+                return gunslingerOverride;
+            }
+        }
 		public Animator getAnimatorController() {
 			return m_Animator;
 		}

@@ -46,7 +46,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Ability2 = Input.GetKeyDown (KeyCode.X);
 			m_Ability3 = Input.GetKeyDown (KeyCode.C);
 			m_Ability4 = Input.GetKeyDown (KeyCode.V);
-			grenade = Input.GetKeyDown (KeyCode.B);
 
 			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
 				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
@@ -115,7 +114,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2, m_Ability4);
+			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2);
             m_Jump = false;
         }
     }
