@@ -27,13 +27,18 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		float m_CapsuleHeight;
 		Vector3 m_CapsuleCenter;
 		CapsuleCollider m_Capsule;
-
-		//Temp varaible for attacking
-		public bool m_Attacking;
+		bool m_isDead;
 
 		//Public objects for the types of controllers available
 		public RuntimeAnimatorController gunController;
-		public RuntimeAnimatorController meleeController;
+		public RuntimeAnimatorController swordController;
+
+        public AnimatorOverrideController gunslingerOverride;
+        public AnimatorOverrideController berserkerOverride;
+
+        // Class type temporarily using a string
+        public string classType;
+
 		//Status of the Use Key 'E'
 		bool m_Use;
 		PlayerInventory inventory;
@@ -54,8 +59,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_CapsuleHeight = m_Capsule.height;
 			m_CapsuleCenter = m_Capsule.center;
 
-			//m_Attacking = true;
-
 			m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 			m_OrigGroundCheckDistance = m_GroundCheckDistance;
 			//Debug.Log (gunController);
@@ -66,12 +69,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			setAnimatorController();
 		}
 			
-		public void Move(Vector3 move, bool jump, bool attack)
+		public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
 		{
-			m_Attacking = attack;
-			if (m_Attacking || m_Animator.IsInTransition(0) || this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Attacking")) {
-				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
-			} else {
+			// lock movement and point character with camera if in mid-action
+			if(!isPerformingAction(atk)) {
 				// convert the world relative moveInput vector into a local-relative
 				// turn amount and forward amount required to head in the desired
 				// direction.
@@ -85,25 +86,39 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 				ApplyExtraTurnRotation ();
 			}
+
 			// control and velocity handling is different when grounded and airborne:
 			if (m_IsGrounded) {
 				HandleGroundedMovement (jump);
 			} else {
 				HandleAirborneMovement ();
 			}
-			
 
 			// send input and other state parameters to the animator
-			UpdateAnimator(move);
+			UpdateAnimator(move, atk, a1, a2, a3, a4);
+		}
+
+		// if player is in the middle of an attack/ability animation
+		private bool isPerformingAction(bool attack){
+			if (attack || m_Animator.IsInTransition(0) || !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded") && !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Airborne")) {
+				transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
+				return true;
+			}
+			return false;
 		}
 			
-		void UpdateAnimator(Vector3 move)
+		void UpdateAnimator(Vector3 move, bool atk, bool a1, bool a2, bool a3, bool a4)
 		{
 			// update the animator parameters
 			m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 			m_Animator.SetBool("OnGround", m_IsGrounded);
-			m_Animator.SetBool ("Attack", m_Attacking);
+			m_Animator.SetBool("Attack", atk);
+			m_Animator.SetBool("Ability1", a1);
+			m_Animator.SetBool("Ability2", a2);
+            m_Animator.SetBool("Ability3", a3);
+            m_Animator.SetBool("Ability4", a4);
+			m_Animator.SetBool ("Dead", m_isDead);
 			if (!m_IsGrounded)
 			{
 				m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
@@ -112,9 +127,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			// calculate which leg is behind, so as to leave that leg trailing in the jump animation
 			// (This code is reliant on the specific run cycle offset in our animations,
 			// and assumes one leg passes the other at the normalized clip times of 0.0 and 0.5)
-			float runCycle =
-				Mathf.Repeat(
-					m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
+			float runCycle = Mathf.Repeat(m_Animator.GetCurrentAnimatorStateInfo(0).normalizedTime + m_RunCycleLegOffset, 1);
 			float jumpLeg = (runCycle < k_Half ? 1 : -1) * m_ForwardAmount;
 			if (m_IsGrounded)
 			{
@@ -164,7 +177,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				m_GroundCheckDistance = 0.1f;
 			}
 		}
-
+			
 		void ApplyExtraTurnRotation()
 		{
 			// help the character turn faster (this is in addition to root rotation in the animation)
@@ -185,14 +198,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				v.y = m_Rigidbody.velocity.y;
 				m_Rigidbody.velocity = v;
 			}
-		}
-
-		public void attack(bool click){
-			//if (click) {
-			//	m_Attacking = true;
-			//}
-
-			m_Attacking = click;
 		}
 
 		//Initiates the various functionality of the Use key when pressed
@@ -284,10 +289,28 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 		public void setAnimatorController(){
 			if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon ().name.Contains ("Gun")) {
-				m_Animator.runtimeAnimatorController = gunController;
+				m_Animator.runtimeAnimatorController = getClassOverrideController(gunController);
 			} else {
-				m_Animator.runtimeAnimatorController = meleeController ;
+                m_Animator.runtimeAnimatorController = getClassOverrideController(swordController);
 			}
+		}
+
+        // applies the override controller of the current class type to weapon animations
+        private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
+        {
+            if (classType.ToLower().Equals("berserker"))
+            {
+                berserkerOverride.runtimeAnimatorController = anim;
+                return berserkerOverride;
+            }
+            else
+            {
+                gunslingerOverride.runtimeAnimatorController = anim;
+                return gunslingerOverride;
+            }
+        }
+		public Animator getAnimatorController() {
+			return m_Animator;
 		}
 
 		/*Turns the colliders of an item either on or off*/
@@ -302,7 +325,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 		}
 				
-
 		void CheckGroundStatus()
 		{
 			RaycastHit hitInfo;
