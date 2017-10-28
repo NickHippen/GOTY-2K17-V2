@@ -21,6 +21,8 @@ public class PlayerInventory : MonoBehaviour {
 			slots.Add (GameObject.Find ("Weapon " + x));
 		}
 		//slots [current].GetComponent<Image>().sprite = weapons [current].GetComponent<WeaponData>().icon;
+		//weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
+		setCurrentWeapon(0);
 		UpdateUI();
 	}
 	
@@ -55,6 +57,9 @@ public class PlayerInventory : MonoBehaviour {
 	//Sets the current weapon to the weapon found in the given list position x. If the number is bigger
 	//than the number than the number of weapons currently possesed, then nothing happens
 	public void setCurrentWeapon(int x){
+		if (weapons[current].GetComponent<Floating> () != null) {
+			weapons[current].GetComponent<Floating> ().enabled = false;
+		}
 		if (x < weapons.Count) {
 			weapons [current].SetActive(false);
 			current = x;

@@ -242,8 +242,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		and transforms.*/
 		void initializeEquip(GameObject temp){
 			temp.tag = "Equipped";
-			//temp.GetComponent<Rigidbody>().useGravity = false;
-			//temp = editCollider (temp, false);
 			GameObject hand;
 			if (temp.name.Contains ("Gun")) {
 				hand = rightHand;
@@ -255,13 +253,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			temp.gameObject.transform.parent = hand.transform;
 			temp.gameObject.transform.position = hand.transform.position;
 			temp.gameObject.transform.rotation = hand.transform.rotation;
-			//8, 83.5, 89
-			/*if (temp.name.Contains("Gun")) {
-				//m_Animator.runtimeAnimatorController = gunController;
-				//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
-				inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-			}*/
-
 		}
 
 		/*Drops an item from the player inventory if the drop button has been pressed and there is more than
