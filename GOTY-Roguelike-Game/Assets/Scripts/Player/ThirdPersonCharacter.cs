@@ -232,11 +232,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 					//Move into Weapon class later
 					inventory.getCurrentWeapon ().SetActive (true);
 					setAnimatorController ();
-					/*if (temp.name.Contains("Gun")) {
-						//m_Animator.runtimeAnimatorController = gunController;
-						temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
-						inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-					}*/
 					break;
 				}
 				i++;
@@ -248,7 +243,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		void initializeEquip(GameObject temp){
 			temp.tag = "Equipped";
 			//temp.GetComponent<Rigidbody>().useGravity = false;
-			temp = editCollider (temp, false);
+			//temp = editCollider (temp, false);
 			GameObject hand;
 			if (temp.name.Contains ("Gun")) {
 				hand = rightHand;
@@ -261,11 +256,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			temp.gameObject.transform.position = hand.transform.position;
 			temp.gameObject.transform.rotation = hand.transform.rotation;
 			//8, 83.5, 89
-			if (temp.name.Contains("Gun")) {
+			/*if (temp.name.Contains("Gun")) {
 				//m_Animator.runtimeAnimatorController = gunController;
 				//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
 				inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-			}
+			}*/
 
 		}
 
@@ -274,14 +269,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		if so desired.*/
 		public void drop(bool dropPress){
 			if(dropPress && !inventory.lastItem()){
-				inventory.getCurrentWeapon ().tag = "Pickup";
-				inventory.getCurrentWeapon ().transform.parent = null;
-				if (inventory.getCurrentWeapon ().GetComponent<Floating>() != null) {
-					inventory.getCurrentWeapon ().GetComponent<Floating>().enabled = true;
-				}
-				inventory.getCurrentWeapon ().transform.rotation = new Quaternion (0, 0, 0, 0);
-				//inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
-				editCollider (inventory.getCurrentWeapon (), true);
 				inventory.dropCurrentWeapon ();
 				setAnimatorController ();
 			}
@@ -312,18 +299,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 		public Animator getAnimatorController() {
 			return m_Animator;
-		}
-
-		/*Turns the colliders of an item either on or off*/
-		GameObject editCollider(GameObject x, bool state){
-			//if (x.GetComponent<CapsuleCollider> () != null) {
-			//	x.GetComponent<CapsuleCollider> ().enabled = state;
-			//}
-			//if (x.GetComponent<BoxCollider> () != null) {
-			//	x.GetComponent<BoxCollider> ().enabled = state;
-			//}
-			return x;
-
 		}
 				
 		void CheckGroundStatus()

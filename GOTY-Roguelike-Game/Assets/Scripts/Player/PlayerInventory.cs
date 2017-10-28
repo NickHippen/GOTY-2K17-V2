@@ -92,7 +92,14 @@ public class PlayerInventory : MonoBehaviour {
 	//Removes current weapon from inventory then changes current weapon to the next weapon below it.
 	public void dropCurrentWeapon(){
 		//weapons [current].GetComponent<Rigidbody> ().useGravity = true;
+		GameObject temp = getCurrentWeapon();
 
+		temp.tag = "Pickup";
+		temp.transform.parent = null;
+		if (temp.GetComponent<Floating>() != null) {
+			temp.GetComponent<Floating>().enabled = true;
+		}
+		temp.transform.rotation = new Quaternion (0, 0, 0, 0);
 		weapons.RemoveAt (current);
 		if (current >= weapons.Count && current != 0) {
 			current--;
