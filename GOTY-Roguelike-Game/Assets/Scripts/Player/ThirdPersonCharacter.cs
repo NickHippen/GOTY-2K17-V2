@@ -221,13 +221,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			while (i < hitColliders.Length) {
 				GameObject temp = hitColliders [i].gameObject;
 				if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
-					/*temp.tag = "Equipped";
-					temp.GetComponent<Rigidbody> ().useGravity = false;
-					temp = editCollider (temp, false);
-					temp.gameObject.transform.parent = hand.transform;
-					temp.gameObject.transform.position = hand.transform.position;
-					temp.gameObject.transform.rotation = hand.transform.rotation;
-					//8, 83.5, 89*/
+					
+					if (temp.GetComponent<Floating> () != null) {
+						temp.GetComponent<Floating> ().enabled = false;
+					}
 					initializeEquip (temp);
 					Debug.Log (temp.name);
 					inventory.addWeapon (temp);
@@ -279,6 +276,10 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if(dropPress && !inventory.lastItem()){
 				inventory.getCurrentWeapon ().tag = "Pickup";
 				inventory.getCurrentWeapon ().transform.parent = null;
+				if (inventory.getCurrentWeapon ().GetComponent<Floating>() != null) {
+					inventory.getCurrentWeapon ().GetComponent<Floating>().enabled = true;
+				}
+				inventory.getCurrentWeapon ().transform.rotation = new Quaternion (0, 0, 0, 0);
 				//inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
 				editCollider (inventory.getCurrentWeapon (), true);
 				inventory.dropCurrentWeapon ();
