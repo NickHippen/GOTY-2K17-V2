@@ -18,6 +18,9 @@ public abstract class AggressiveUnit : LivingUnit {
 	}
 
 	protected virtual new void Update() {
+		if (!Living) {
+			return;
+		}
 		base.Update();
 		if (target == null) { // Only search if no target already
 			CheckAggro();

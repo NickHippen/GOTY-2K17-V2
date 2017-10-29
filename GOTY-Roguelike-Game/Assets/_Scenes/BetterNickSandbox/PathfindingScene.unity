@@ -1428,6 +1428,11 @@ Prefab:
       propertyPath: m_Name
       value: A*
       objectReference: {fileID: 0}
+    - target: {fileID: 114035187083870232, guid: 4c43c13897e5be84d94dec41425dabb1,
+        type: 2}
+      propertyPath: calculateOnAwake
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 4c43c13897e5be84d94dec41425dabb1, type: 2}
   m_IsPrefabParent: 0
@@ -2695,6 +2700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3652b8f79c70ea943accc515f08d2f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  calculateOnAwake: 0
   displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
@@ -2919,11 +2925,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1972430417}
     m_Modifications:
-    - target: {fileID: 114807029528659942, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: slots.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4010012870244974, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
       propertyPath: m_LocalPosition.x
       value: -26.73999
@@ -2961,46 +2962,6 @@ Prefab:
       propertyPath: weapons.Array.data[0]
       value: 
       objectReference: {fileID: 700279995}
-    - target: {fileID: 114807029528659942, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: empty
-      value: 
-      objectReference: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 114807029528659942, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: selectedIconSize
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 1965549580411552, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: grabRadius
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: swordController
-      value: 
-      objectReference: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
-    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: berserkerOverride
-      value: 
-      objectReference: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd,
-        type: 2}
-    - target: {fileID: 114489036251763970, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
-        type: 2}
-      propertyPath: gunslingerOverride
-      value: 
-      objectReference: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64,
-        type: 2}
-    - target: {fileID: 4010012870244974, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
   m_IsPrefabParent: 0

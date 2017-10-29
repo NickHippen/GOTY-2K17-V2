@@ -1066,9 +1066,10 @@ GameObject:
   - component: {fileID: 114980428918515934}
   - component: {fileID: 114807029528659942}
   - component: {fileID: 114489036251763970}
+  - component: {fileID: 114874731516769152}
   m_Layer: 0
   m_Name: remy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1123,7 +1124,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1971714310617656
 GameObject:
   m_ObjectHideFlags: 1
@@ -1202,8 +1203,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1948262310839342}
-  m_LocalRotation: {x: 0, y: -0.38096038, z: 0, w: -0.92459136}
-  m_LocalPosition: {x: 4.437606, y: 0.000000029802322, z: 2.0228615}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalPosition: {x: -26.73999, y: 14.169365, z: -14.029999}
   m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
   m_Children:
   - {fileID: 4496114724686968}
@@ -1216,7 +1217,7 @@ Transform:
   - {fileID: 4058694715681328}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!4 &4035587877637864
 Transform:
   m_ObjectHideFlags: 1
@@ -2357,12 +2358,14 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  m_Attacking: 0
   gunController: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
-  meleeController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
+  swordController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
+  gunslingerOverride: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64, type: 2}
+  berserkerOverride: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd, type: 2}
+  classType: 
   rightHand: {fileID: 1277444977101748}
   leftHand: {fileID: 1123764398520138}
-  grabRadius: 1
+  grabRadius: 5
 --- !u!114 &114807029528659942
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2375,17 +2378,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 1965549580411552}
+  - {fileID: 0}
   test: 0
   current: 0
-  slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  empty: {fileID: 21300000, guid: 926725c27b2c35648b7d060feb8f9404, type: 3}
+  slots: []
+  empty: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   defautIconSize: 30
   selectedIconSize: 40
+--- !u!114 &114874731516769152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1948262310839342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc33b26ed27f90c4ab188e3eaa7e03b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  health: 100
 --- !u!114 &114980428918515934
 MonoBehaviour:
   m_ObjectHideFlags: 1
