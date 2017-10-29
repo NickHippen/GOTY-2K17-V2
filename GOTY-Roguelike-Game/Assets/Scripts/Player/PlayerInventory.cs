@@ -13,8 +13,8 @@ public class PlayerInventory : MonoBehaviour {
 	public List<GameObject> slots;
 	public Sprite empty;
 
-	public float defautIconSize = 30f;
-	public float selectedIconSize = 35f;
+	public float defautIconSize = 40f;
+	public float selectedIconSize = 50f;
 
 	void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
