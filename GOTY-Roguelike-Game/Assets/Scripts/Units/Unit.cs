@@ -76,7 +76,7 @@ public abstract class Unit : MonoBehaviour {
 		}
 	}
 
-	IEnumerator FollowPath() {
+	protected virtual IEnumerator FollowPath() {
 		bool followingPath = true;
 		int pathIndex = 0;
 		if (path.lookPoints.Length > 0) {
