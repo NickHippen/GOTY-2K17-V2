@@ -8,9 +8,11 @@ public abstract class AttackController {
 	private readonly List<AttackPredicate> conditionals = new List<AttackPredicate>();
 
 	private AggressiveUnit attacker;
+	public bool RequireGoal { get; set; }
 
-	public AttackController(AggressiveUnit attacker) {
+	public AttackController(AggressiveUnit attacker, bool requireGoal) {
 		this.Attacker = attacker;
+		this.RequireGoal = requireGoal;
 	}
 
 	public List<AttackPredicate> Conditionals {

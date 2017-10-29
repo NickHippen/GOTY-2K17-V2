@@ -6,12 +6,13 @@ public class DeathAttackController : AttackController {
 
 	private bool used = false;
 
-	public DeathAttackController(AggressiveUnit attacker) : base(attacker) {
+	public DeathAttackController(AggressiveUnit attacker) : base(attacker, false) {
 	}
 
 	protected override bool CheckSpecifics() {
 		if (!used && !Attacker.Living) {
 			used = true;
+			Debug.Log("DEATH ATTACK");
 			return true;
 		}
 		return false;
