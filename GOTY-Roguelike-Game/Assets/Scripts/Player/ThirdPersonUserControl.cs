@@ -56,6 +56,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 				//Debug.Log ("Pressed");
 				WeaponSelect (scroll);
 			}
+			if (m_Attacking) {
+				m_Character.ProcessAttack();
+			}
         }
 
 		//Changes selected weapon based on key input or from scrolled wheel
@@ -117,5 +120,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2, m_Ability3, m_Ability4);
             m_Jump = false;
         }
+
     }
 }
