@@ -199,11 +199,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 	}
 
 	//Initiates the various functionality of the Use key when pressed
-	public void isUse(bool E_Press){
+	public void isUse(bool E_Press) {
 		m_Use = E_Press;
 		if (m_Use) {
-			Debug.Log ("Pressed");
-			pickupNearby (transform.position, grabRadius);
+			Debug.Log("Pressed");
+			pickupNearby(transform.position, grabRadius);
 		}
 	}
 
@@ -219,13 +219,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 		while (i < hitColliders.Length) {
 			GameObject temp = hitColliders [i].gameObject;
 			if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
-				/*temp.tag = "Equipped";
-				temp.GetComponent<Rigidbody> ().useGravity = false;
-				temp = editCollider (temp, false);
-				temp.gameObject.transform.parent = hand.transform;
-				temp.gameObject.transform.position = hand.transform.position;
-				temp.gameObject.transform.rotation = hand.transform.rotation;
-				//8, 83.5, 89*/
+					
+				if (temp.GetComponent<Floating> () != null) {
+					temp.GetComponent<Floating> ().enabled = false;
+				}
 				initializeEquip (temp);
 				Debug.Log (temp.name);
 				inventory.addWeapon (temp);
@@ -233,11 +230,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
 				setAnimatorController ();
-				/*if (temp.name.Contains("Gun")) {
-					//m_Animator.runtimeAnimatorController = gunController;
-					temp.gameObject.transform.localEulerAngles = new Vector3(8f, 83.5f, 89f);
-					inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-				}*/
 				break;
 			}
 			i++;
@@ -249,7 +241,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	void initializeEquip(GameObject temp){
 		temp.tag = "Equipped";
 		//temp.GetComponent<Rigidbody>().useGravity = false;
-		temp = editCollider (temp, false);
 		GameObject hand;
 		WeaponData weaponData = temp.GetComponent<WeaponData>();
 		if (weaponData is GunData) {
@@ -267,7 +258,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		if (weaponData is GunData) {
 			//m_Animator.runtimeAnimatorController = gunController;
 			//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
-			inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
+			//inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
 		}
 
 	}
@@ -277,10 +268,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	if so desired.*/
 	public void drop(bool dropPress){
 		if(dropPress && !inventory.lastItem()){
-			inventory.getCurrentWeapon ().tag = "Pickup";
-			inventory.getCurrentWeapon ().transform.parent = null;
-			//inventory.getCurrentWeapon ().GetComponent<Rigidbody> ().useGravity = true;
-			editCollider (inventory.getCurrentWeapon (), true);
 			inventory.dropCurrentWeapon ();
 			setAnimatorController ();
 		}
@@ -311,18 +298,6 @@ public class ThirdPersonCharacter : MonoBehaviour
     }
 	public Animator getAnimatorController() {
 		return m_Animator;
-	}
-
-	/*Turns the colliders of an item either on or off*/
-	GameObject editCollider(GameObject x, bool state){
-		//if (x.GetComponent<CapsuleCollider> () != null) {
-		//	x.GetComponent<CapsuleCollider> ().enabled = state;
-		//}
-		//if (x.GetComponent<BoxCollider> () != null) {
-		//	x.GetComponent<BoxCollider> ().enabled = state;
-		//}
-		return x;
-
 	}
 				
 	void CheckGroundStatus()
