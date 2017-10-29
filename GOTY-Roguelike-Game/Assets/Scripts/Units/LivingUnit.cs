@@ -60,7 +60,9 @@ public abstract class LivingUnit : Unit {
 	}
 
 	protected override void Update() {
-		base.Update();
+		if (Living) {
+			base.Update();
+		}
 	}
 
 	public void Damage(float amount) {

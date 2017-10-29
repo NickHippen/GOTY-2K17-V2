@@ -12,7 +12,6 @@ public class DeathAttackController : AttackController {
 	protected override bool CheckSpecifics() {
 		if (!used && !Attacker.Living) {
 			used = true;
-			Debug.Log("DEATH ATTACK");
 			return true;
 		}
 		return false;
