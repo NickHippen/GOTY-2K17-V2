@@ -12,14 +12,22 @@ public class WeaponData : MonoBehaviour {
 	public GameObject model;
 	public Sprite icon;
 
+	public ParticleSystem effect;
+
 	private AudioSource audioSource;
 
 	protected virtual void Start() {
 		audioSource = GetComponent<AudioSource>();
+		//effect.transform.parent = transform.parent;
+		//effect.transform.position = transform.position;
 	}
 
 	public virtual void Attack() {
 		PlayAttackAudio();
+		if (effect != null) {
+			//effect.transform.position = transform.position + transform.forward;
+			effect.Emit (1);
+		}
 	}
 
 	protected virtual void PlayAttackAudio() {
