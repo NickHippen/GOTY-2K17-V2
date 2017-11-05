@@ -52,17 +52,19 @@ public class DrawMiniMap : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		//Draws exit portal
 		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
-		GameObject instance = Instantiate (doorIcon, new Vector3 (exitPos.x* 5 / 8f, exitPos.z * 5 / 8f, 0f), Quaternion.identity);
+		GameObject instance = Instantiate (hallIcon, new Vector3 (exitPos.x* 5 / 8f, exitPos.z * 5 / 8f, 0f), Quaternion.identity);
 		instance.transform.SetParent (GameObject.Find("MiniMap").transform);
+		instance.transform.localPosition = new Vector3 (exitPos.x* 5 / 8f, exitPos.z * 5 / 8f, 0f);
 		v3 = instance.transform.position;
-		v3.y += 270;
+		v3.y -= 200;
 		instance.transform.position = v3;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 remyPos = GameObject.Find ("remy2(Clone)").transform.localPosition;
+		Vector3 remyPos = GameObject.Find ("remy(Clone)").transform.localPosition;
 		GameObject instance;
 		if (GameObject.Find ("playerIcon(Clone)") != null) {
 			instance = GameObject.Find ("playerIcon(Clone)");
