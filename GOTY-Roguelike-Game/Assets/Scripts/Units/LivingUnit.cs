@@ -15,6 +15,8 @@ public abstract class LivingUnit : Unit {
 	private GameObject monsterCanvas;
 	private Image healthBar;
 
+	private List<Status> statuses = new List<Status>();
+
 	public virtual float Health {
 		get {
 			return health;
@@ -64,6 +66,7 @@ public abstract class LivingUnit : Unit {
 		monsterCanvas.transform.SetParent(this.transform);
 		monsterCanvas.transform.position = this.transform.position;
 		healthBar = monsterCanvas.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+		statuses.Add(new StatusPoison(this, 20f, 10f, 2));
 	}
 
 	protected override void Update() {
@@ -71,6 +74,23 @@ public abstract class LivingUnit : Unit {
 			base.Update();
 		}
 		monsterCanvas.GetComponent<RectTransform>().localPosition = new Vector3(0, canvasHeight, 0);
+		UpdateStatuses();
+	}
+
+	void UpdateStatuses() {
+		for (int i = 0; i < healthBar.transform.childCount; i++) {
+			healthBar.transform.GetChild(i).gameObject.SetActive(false);
+		}
+		Debug.Log(statuses.Count);
+		for (int i = statuses.Count - 1; i >= 0; i--) {
+			Status status = statuses[i];
+			healthBar.transform.GetChild(status.IconIndex()).gameObject.SetActive(true);
+			if (status.IsActive()) {
+				status.Update();
+			} else {
+				statuses.RemoveAt(i);
+			}
+		}
 	}
 
 	public void Damage(float amount) {
