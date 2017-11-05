@@ -26,7 +26,7 @@ public class WeaponData : MonoBehaviour {
 		PlayAttackAudio();
 		if (effect != null) {
 			//effect.transform.position = transform.position + transform.forward;
-			effect.Emit (1);
+			effect.Emit(10);
 		}
 	}
 

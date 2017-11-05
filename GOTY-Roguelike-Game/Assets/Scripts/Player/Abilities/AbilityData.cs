@@ -6,6 +6,7 @@ public class AbilityData : MonoBehaviour {
 
 	public float damage;
 	public ParticleSystem effect;
+	public string name;
 	public Vector3 effectPos;
 
 	// Use this for initialization
@@ -13,7 +14,7 @@ public class AbilityData : MonoBehaviour {
 		//effect = Instantiate (effect);
 		//effect.transform.SetParent (gameObject.transform);
 		effect.transform.position = effectPos;
-		effect.Emit (10);
+		//effect.Play();
 	}
 	
 	// Update is called once per frame
