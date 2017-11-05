@@ -7,7 +7,7 @@ public class HealthAttackController : AttackController {
 	private float healthPercentageTrigger;
 	private bool used = false;
 
-	public HealthAttackController(AggressiveUnit attacker, float healthPercentageTrigger) : base(attacker) {
+	public HealthAttackController(AggressiveUnit attacker, float healthPercentageTrigger) : base(attacker, false) {
 		this.healthPercentageTrigger = healthPercentageTrigger;
 	}
 

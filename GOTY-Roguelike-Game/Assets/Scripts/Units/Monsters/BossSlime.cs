@@ -21,7 +21,7 @@ public class BossSlime : AggressiveUnit {
 
 	public override void OnDeath() {
 		if (slimeUnit != null) {
-			Destroy(gameObject);
+			Destroy(gameObject, 1f);
 		} else {
 			base.OnDeath();
 		}

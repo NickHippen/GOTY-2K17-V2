@@ -13,14 +13,16 @@ public class PlayerInventory : MonoBehaviour {
 	public List<GameObject> slots;
 	public Sprite empty;
 
-	public float defautIconSize = 30f;
-	public float selectedIconSize = 35f;
+	public float defautIconSize = 40f;
+	public float selectedIconSize = 50f;
 
 	void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
 		}
 		//slots [current].GetComponent<Image>().sprite = weapons [current].GetComponent<WeaponData>().icon;
+		//weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
+		setCurrentWeapon(0);
 		UpdateUI();
 	}
 	
@@ -55,6 +57,9 @@ public class PlayerInventory : MonoBehaviour {
 	//Sets the current weapon to the weapon found in the given list position x. If the number is bigger
 	//than the number than the number of weapons currently possesed, then nothing happens
 	public void setCurrentWeapon(int x){
+		if (weapons[current].GetComponent<Floating> () != null) {
+			weapons[current].GetComponent<Floating> ().enabled = false;
+		}
 		if (x < weapons.Count) {
 			weapons [current].SetActive(false);
 			current = x;
@@ -92,7 +97,14 @@ public class PlayerInventory : MonoBehaviour {
 	//Removes current weapon from inventory then changes current weapon to the next weapon below it.
 	public void dropCurrentWeapon(){
 		//weapons [current].GetComponent<Rigidbody> ().useGravity = true;
+		GameObject temp = getCurrentWeapon();
 
+		temp.tag = "Pickup";
+		temp.transform.parent = null;
+		if (temp.GetComponent<Floating>() != null) {
+			temp.GetComponent<Floating>().enabled = true;
+		}
+		temp.transform.rotation = new Quaternion (0, 0, 0, 0);
 		weapons.RemoveAt (current);
 		if (current >= weapons.Count && current != 0) {
 			current--;

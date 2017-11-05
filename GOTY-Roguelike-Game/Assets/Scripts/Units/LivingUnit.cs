@@ -12,10 +12,6 @@ public abstract class LivingUnit : Unit {
 	private bool destroying;
 	public Image healthBar;
 
-	protected override void Start() {
-		base.Start();
-	}
-
 	public virtual float Health {
 		get {
 			return health;
@@ -24,6 +20,8 @@ public abstract class LivingUnit : Unit {
 			health = value;
 			if (health <= 0) {
 				health = 0;
+				UnitAnimator.SetBool("Dead", true);
+				OnDeath();
 			} else {
 				if (health > MaxHealth) {
 					health = MaxHealth;
@@ -57,11 +55,13 @@ public abstract class LivingUnit : Unit {
 		}
 	}
 
+	protected override void Start() {
+		base.Start();
+	}
+
 	protected override void Update() {
-		base.Update();
-		UnitAnimator.SetBool("Dead", !Living);
-		if (!Living) {
-			OnDeath();
+		if (Living) {
+			base.Update();
 		}
 	}
 
@@ -79,6 +79,13 @@ public abstract class LivingUnit : Unit {
 		}
 		destroying = true;
 		Destroy(gameObject, 5f);
+	}
+
+	protected override IEnumerator FollowPath() {
+		if (Living) {
+			return base.FollowPath();
+		}
+		return null;
 	}
 
 }

@@ -21,9 +21,8 @@ public abstract class AggressiveUnit : LivingUnit {
 		base.Update();
 		if (target == null) { // Only search if no target already
 			CheckAggro();
-		} else if (atGoal) { // Has target & at goal
-			UpdateAttacks();
 		}
+		UpdateAttacks();
 	}
 
 	private void CheckAggro() {
@@ -39,6 +38,10 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	private void UpdateAttacks() {
 		foreach (Attack attack in attacks) {
+			if ((!atGoal && attack.Controller.RequireGoal) // Does the controller require a goal?
+					|| (Living && !(attack.Controller is DeathAttackController))) { // Is the monster dead?
+				continue;
+			}
 			if (attack.Controller.Check()) {
 				attack.Use();
 			}

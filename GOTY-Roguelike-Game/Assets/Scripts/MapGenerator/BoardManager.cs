@@ -140,8 +140,13 @@ public class BoardManager : MonoBehaviour
 		}
 		instance = Instantiate(exitPortal, new Vector3 ((farthestRoom.startx + farthestRoom.width / 2)*tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2)*tilesize), Quaternion.Euler(-90,0,0));
 		instance.transform.SetParent (exitHolder);
-	
+
+		// Calculate pathfinding walk regions
+		Grid grid = GameObject.Find("A_").GetComponent<Grid>();
+		grid.CreateGrid();
+
 		//Spawn monsters
+		PathRequestManager prm = GameObject.Find("A_").GetComponent<PathRequestManager>();
 		foreach (Room room in roomList) {
 			int roomsize = room.width;
 			if (room.height > roomsize)
