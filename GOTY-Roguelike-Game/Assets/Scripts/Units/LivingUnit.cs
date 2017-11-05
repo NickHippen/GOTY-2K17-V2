@@ -9,8 +9,11 @@ public abstract class LivingUnit : Unit {
 	public float health = 100;
 	public float maxHealth = 100;
 
+	public float canvasHeight = 0.03f;
+
 	private bool destroying;
-	public Image healthBar;
+	private GameObject monsterCanvas;
+	private Image healthBar;
 
 	public virtual float Health {
 		get {
@@ -57,12 +60,17 @@ public abstract class LivingUnit : Unit {
 
 	protected override void Start() {
 		base.Start();
+		monsterCanvas = (GameObject)Instantiate(Resources.Load("MonsterCanvas"));
+		monsterCanvas.transform.SetParent(this.transform);
+		monsterCanvas.transform.position = this.transform.position;
+		healthBar = monsterCanvas.transform.GetChild(0).GetChild(0).GetComponent<Image>();
 	}
 
 	protected override void Update() {
 		if (Living) {
 			base.Update();
 		}
+		monsterCanvas.GetComponent<RectTransform>().localPosition = new Vector3(0, canvasHeight, 0);
 	}
 
 	public void Damage(float amount) {
