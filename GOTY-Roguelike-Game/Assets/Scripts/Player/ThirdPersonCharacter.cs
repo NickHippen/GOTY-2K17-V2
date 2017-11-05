@@ -26,6 +26,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
+	AbilityController abilities;
 
 	//Public objects for the types of controllers available
 	public RuntimeAnimatorController gunController;
@@ -51,6 +52,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	void Start()
 	{
 		inventory = GetComponent<PlayerInventory>();
+		abilities = GetComponent<AbilityController> ();
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -117,6 +119,12 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_Animator.SetBool("Ability3", a3);
         m_Animator.SetBool("Ability4", a4);
 		m_Animator.SetBool ("Dead", m_isDead);
+
+		//If any abilities are true, activate use ability
+		if (a1 || a2 || a3 || a4) {
+			abilities.useAbility (a1, a2, a3, a4);
+		}
+
 		if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
