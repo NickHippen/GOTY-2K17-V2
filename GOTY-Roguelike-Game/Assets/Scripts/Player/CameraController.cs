@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour {
 	private Transform camTransform;
 
 	private float currentX = 0f;
-	private float currentY = 0f;
+	private float currentY = 5f;
 	private float currentZoom = 200f;
 	//private float sensitivityX = 4f;
 	//private float sensitivityY = 1f;
@@ -26,7 +26,7 @@ public class CameraController : MonoBehaviour {
 			Cursor.visible = false;
 			Cursor.lockState = CursorLockMode.Locked;
 		}
-
+			
 		camTransform = transform;
 		//cam = Camera.main;
 	}
@@ -41,7 +41,7 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		Vector3 dir = new Vector3(0, 1, -currentZoom);
+		Vector3 dir = new Vector3(0, 5, -currentZoom);
 		Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
 		camTransform.position = lookAt.position + rotation * dir;
 

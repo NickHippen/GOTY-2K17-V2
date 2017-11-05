@@ -9,6 +9,7 @@ public class BoardManager : MonoBehaviour
 	public LevelManager levelmanager;
 
 	public GameObject[] monsters;
+	public GameObject[] items;
 	public GameObject tile;
 	public GameObject wall;
 	public GameObject torch;
@@ -119,7 +120,10 @@ public class BoardManager : MonoBehaviour
 		//Spawn player
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
+		Spawn((roomList[playerSpawn].startx + roomList[playerSpawn].width/2 + 1), (roomList[playerSpawn].starty + roomList[playerSpawn].height/2), items[0]);
+
 		Spawn ((roomList[playerSpawn].startx + roomList[playerSpawn].width/2), (roomList[playerSpawn].starty + roomList[playerSpawn].height/2), player);
+
 		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 		playerRoom = roomList [playerSpawn];
 		roomList.Remove (playerRoom);
@@ -139,10 +143,20 @@ public class BoardManager : MonoBehaviour
 	
 		//Spawn monsters
 		foreach (Room room in roomList) {
-			int randomMonster = Random.Range (0, monsters.Length);
-			instance = Instantiate (monsters[randomMonster], new Vector3 (room.startx * tilesize, .2f, room.starty * tilesize), Quaternion.Euler(0,90,0)) as GameObject;
-			instance.GetComponent<Unit> ().pathRequestManager = GameObject.Find ("A_").GetComponent<PathRequestManager>();
-			instance.transform.SetParent(monsterHolder);
+			int roomsize = room.width;
+			if (room.height > roomsize)
+				roomsize = room.height;
+			int[] sizes = { roomsize, roomsize - 1, roomsize - 2 };
+			int randomsize = Random.Range (0, 3);
+
+			for (int i = 0; i < sizes [randomsize]; i++) {
+				int randomMonster = Random.Range (0, monsters.Length);
+				int randomx = Random.Range (0, room.width);
+				int randomy = Random.Range (0, room.height);
+				instance = Instantiate (monsters[randomMonster], new Vector3 ((room.startx + randomx) * tilesize, .2f, (room.starty + randomy) * tilesize), Quaternion.Euler(0,90,0)) as GameObject;
+				instance.GetComponent<Unit> ().pathRequestManager = GameObject.Find ("A_").GetComponent<PathRequestManager>();
+				instance.transform.SetParent(monsterHolder);
+			}
 		}
 	}
 
@@ -161,12 +175,13 @@ public class BoardManager : MonoBehaviour
 
 	public void Update()
 	{
-		Vector3 remyPos = GameObject.Find ("remy2(Clone)").transform.localPosition;
+		Vector3 remyPos = GameObject.Find ("remy(Clone)").transform.localPosition;
 		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
 
 		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)) < 1);
+		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)));
 		if (Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z) < 1){
-			levelmanager.LoadLevel ("11 Lust");
+			levelmanager.LoadNextLevel ();
 		}
 	}
 }
