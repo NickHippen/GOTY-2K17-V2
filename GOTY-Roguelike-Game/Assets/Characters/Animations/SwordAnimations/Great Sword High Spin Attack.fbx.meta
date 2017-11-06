@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c42d8172c1f44974283eefc689b1d5f8
-timeCreated: 1507577917
+guid: 94c0935def944b34888b67ec7528ac3a
+timeCreated: 1510006684
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -151,7 +151,7 @@ ModelImporter:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
     resampleCurves: 1
-    optimizeGameObjects: 0
+    optimizeGameObjects: 1
     motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: 
@@ -171,7 +171,7 @@ ModelImporter:
       name: mixamo.com
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 165
+      lastFrame: 112
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -185,7 +185,7 @@ ModelImporter:
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
+      keepOriginalPositionXZ: 1
       heightFromFeet: 0
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
@@ -194,7 +194,7 @@ ModelImporter:
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+      additiveReferencePoseFrame: 112
     isReadable: 1
   meshes:
     lODScreenPercentages: []
