@@ -35,9 +35,6 @@ public class ThirdPersonCharacter : MonoBehaviour
     public AnimatorOverrideController gunslingerOverride;
     public AnimatorOverrideController berserkerOverride;
 
-    // Class type temporarily using a string
-    public string classType;
-
 	//Status of the Use Key 'E'
 	bool m_Use;
 	PlayerInventory inventory;
@@ -52,7 +49,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	void Start()
 	{
 		inventory = GetComponent<PlayerInventory>();
-		abilities = GetComponent<AbilityController> ();
+		abilities = GetComponent<AbilityController>();
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -120,12 +117,13 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_Animator.SetBool("Ability4", a4);
 		m_Animator.SetBool ("Dead", m_isDead);
 
-		//If any abilities are true, activate use ability
-		if (a1 || a2 || a3 || a4) {
-			abilities.useAbility (a1, a2, a3, a4);
-		}
+        //If any abilities are true, activate use ability
+        if (a1 || a2 || a3 || a4)
+        {
+            abilities.useAbility(a1, a2, a3, a4);
+        }
 
-		if (!m_IsGrounded)
+        if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 		}
@@ -293,7 +291,7 @@ public class ThirdPersonCharacter : MonoBehaviour
     // applies the override controller of the current class type to weapon animations
     private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
     {
-        if (classType.ToLower().Equals("berserker"))
+        if (abilities.getClassType().ToLower().Equals("berserker"))
         {
             berserkerOverride.runtimeAnimatorController = anim;
             return berserkerOverride;
