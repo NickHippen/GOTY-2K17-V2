@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 453068}
   - component: {fileID: 3316574}
   - component: {fileID: 2346984}
+  - component: {fileID: 114735652507934824}
   - component: {fileID: 54474092867204526}
   - component: {fileID: 136978280128364132}
   - component: {fileID: 82619847828676078}
@@ -233,6 +234,18 @@ MonoBehaviour:
   shootPoint: {fileID: 4959815475252926}
   range: 100
   bulletsPerSecond: 10
+--- !u!114 &114735652507934824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c530615d7795b1a4ab57655da98047b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 1.5
 --- !u!120 &120740972109151914
 LineRenderer:
   m_ObjectHideFlags: 1

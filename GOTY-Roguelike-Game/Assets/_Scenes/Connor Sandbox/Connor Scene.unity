@@ -461,10 +461,6 @@ Transform:
   m_Father: {fileID: 973245667}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &192545348 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 118234, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
-  m_PrefabInternal: {fileID: 1735512460}
 --- !u!1 &214724769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1178,7 @@ Prefab:
         type: 2}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 192545348}
+      objectReference: {fileID: 1972091241}
     - target: {fileID: 114807029528659942, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
         type: 2}
       propertyPath: selectedIconSize
