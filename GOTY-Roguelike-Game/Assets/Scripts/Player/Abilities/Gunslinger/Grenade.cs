@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Grenade : AbilityData
 {
-
-    public Grenade(float damage, ParticleSystem effect, string name)
-    {
-        this.damage = damage;
-        this.effect = effect;
-        this.abilityName = name;
-    }
-
     public override void applyEffect()
     {
         Collider[] colliders = Physics.OverlapSphere(effectPos, 1f);

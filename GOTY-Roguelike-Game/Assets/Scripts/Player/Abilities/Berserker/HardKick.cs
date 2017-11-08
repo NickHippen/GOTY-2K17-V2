@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class HardKick : AbilityData {
 
-	public HardKick (float damage, ParticleSystem effect, string name)
-    {
-        this.damage = damage;
-        this.effect = effect;
-        this.abilityName = name;
-    }
-
     public override void applyEffect()
     {
         Collider[] colliders = Physics.OverlapSphere(effectPos, 1f);

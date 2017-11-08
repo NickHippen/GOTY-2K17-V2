@@ -19,20 +19,20 @@ public class AbilityController : MonoBehaviour {
     void Start() {
         txt = GameObject.Find("UIText").GetComponent<Text>();
 
-        //abilities[0] = Instantiate(abilities[0]);
-        //abilities[0].transform.SetParent(gameObject.transform);
+        abilities[0] = Instantiate(abilities[0]);
+        abilities[0].transform.SetParent(gameObject.transform);
         //print(abilities[0].effect);
 
-        if (classType.ToLower().Equals("berserker"))
-        {
-            setBerserkerData();
-        }
-        else
-        {
-            setGunslingerData();
-        }
+        //if (classType.ToLower().Equals("berserker"))
+        //{
+        //    setBerserkerData();
+        //}
+        //else
+        //{
+        //    setGunslingerData();
+        //}
 
-        string uitext = string.Format(abiltyText, abilities[0].name, "", "", "");
+        string uitext = string.Format(abiltyText, abilities[0].abilityName, "", "", "");
         txt.text = uitext;
 
         //abilities [0].transform.position = gameObject.transform.position;
@@ -65,18 +65,19 @@ public class AbilityController : MonoBehaviour {
         }
     }
 
-    private void setBerserkerData() {
-        abilities.Add(new Cyclone(10f, new ParticleSystem(), "Cyclone"));
-        abilities.Add(new HardKick(10f, new ParticleSystem(), "Hard Kick"));
-        abilities.Add(new TankUp(10f, new ParticleSystem(), "Tank Up"));
-        abilities.Add(new Adrenaline(10f, new ParticleSystem(), "Adrenaline"));
-    }
+    //private void setBerserkerData()
+    //{
+    //    abilities.Add(new Cyclone());
+    //    abilities.Add(new HardKick());
+    //    abilities.Add(new TankUp());
+    //    abilities.Add(new Adrenaline());
+    //}
 
-    private void setGunslingerData()
-    {
-        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
-        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
-        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
-        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
-    }
+    //private void setGunslingerData()
+    //{
+    //    abilities.Add(new Grenade());
+    //    abilities.Add(new Grenade());
+    //    abilities.Add(new Grenade());
+    //    abilities.Add(new Grenade());
+    //}
 }

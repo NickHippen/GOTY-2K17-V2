@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class TankUp : AbilityData {
 
-	public TankUp (float damage, ParticleSystem effect, string name)
-    {
-        this.damage = damage;
-        this.effect = effect;
-        this.abilityName = name;
-    }
-
     public override void applyEffect()
     {
         // need external method
