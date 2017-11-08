@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AbilityData : MonoBehaviour {
+public abstract class AbilityData : MonoBehaviour {
 
 	public float damage;
 	public ParticleSystem effect;
-	public string name;
+	public string abilityName;
 	public Vector3 effectPos;
 
 	// Use this for initialization
@@ -21,4 +21,7 @@ public class AbilityData : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public abstract void applyEffect();
+
 }

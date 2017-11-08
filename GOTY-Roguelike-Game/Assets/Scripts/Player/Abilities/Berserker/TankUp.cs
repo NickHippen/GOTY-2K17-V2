@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class TankUp : AbilityData {
 
-	public TankUp (float damage, ParticleSystem effect, Vector3 effectPosition, string name)
+	public TankUp (float damage, ParticleSystem effect, string name)
     {
         this.damage = damage;
         this.effect = effect;
-        this.effectPos = effectPosition;
-        this.name = name;
+        this.abilityName = name;
     }
 
-    public void applyEffect()
+    public override void applyEffect()
     {
         // need external method
     }

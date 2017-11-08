@@ -32,8 +32,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public RuntimeAnimatorController gunController;
 	public RuntimeAnimatorController swordController;
 
-    public AnimatorOverrideController gunslingerOverride;
-    public AnimatorOverrideController berserkerOverride;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -282,26 +280,13 @@ public class ThirdPersonCharacter : MonoBehaviour
 	/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 	public void setAnimatorController(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
-			m_Animator.runtimeAnimatorController = getClassOverrideController(gunController);
+			m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
-            m_Animator.runtimeAnimatorController = getClassOverrideController(swordController);
+            m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
 		}
 	}
 
-    // applies the override controller of the current class type to weapon animations
-    private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
-    {
-        if (abilities.getClassType().ToLower().Equals("berserker"))
-        {
-            berserkerOverride.runtimeAnimatorController = anim;
-            return berserkerOverride;
-        }
-        else
-        {
-            gunslingerOverride.runtimeAnimatorController = anim;
-            return gunslingerOverride;
-        }
-    }
+
 	public Animator getAnimatorController() {
 		return m_Animator;
 	}

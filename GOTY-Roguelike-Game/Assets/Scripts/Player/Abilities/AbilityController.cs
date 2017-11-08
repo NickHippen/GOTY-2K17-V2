@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class AbilityController : MonoBehaviour {
 
     public List<AbilityData> abilities;
+
     public string classType;
+    public AnimatorOverrideController gunslingerOverride;
+    public AnimatorOverrideController berserkerOverride;
 
     public Text txt;
 
@@ -16,9 +19,18 @@ public class AbilityController : MonoBehaviour {
     void Start() {
         txt = GameObject.Find("UIText").GetComponent<Text>();
 
-        abilities[0] = Instantiate(abilities[0]);
-        abilities[0].transform.SetParent(gameObject.transform);
-        print(abilities[0].effect);
+        //abilities[0] = Instantiate(abilities[0]);
+        //abilities[0].transform.SetParent(gameObject.transform);
+        //print(abilities[0].effect);
+
+        if (classType.ToLower().Equals("berserker"))
+        {
+            setBerserkerData();
+        }
+        else
+        {
+            setGunslingerData();
+        }
 
         string uitext = string.Format(abiltyText, abilities[0].name, "", "", "");
         txt.text = uitext;
@@ -38,7 +50,33 @@ public class AbilityController : MonoBehaviour {
         return classType;
     }
 
+    // applies the override controller of the current class type to weapon animations
+    public AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
+    {
+        if (classType.ToLower().Equals("berserker"))
+        {
+            berserkerOverride.runtimeAnimatorController = anim;
+            return berserkerOverride;
+        }
+        else
+        {
+            gunslingerOverride.runtimeAnimatorController = anim;
+            return gunslingerOverride;
+        }
+    }
+
     private void setBerserkerData() {
-        //abilities.Add(new Cyclone());
+        abilities.Add(new Cyclone(10f, new ParticleSystem(), "Cyclone"));
+        abilities.Add(new HardKick(10f, new ParticleSystem(), "Hard Kick"));
+        abilities.Add(new TankUp(10f, new ParticleSystem(), "Tank Up"));
+        abilities.Add(new Adrenaline(10f, new ParticleSystem(), "Adrenaline"));
+    }
+
+    private void setGunslingerData()
+    {
+        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
+        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
+        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
+        abilities.Add(new Grenade(10f, new ParticleSystem(), "Grenade"));
     }
 }

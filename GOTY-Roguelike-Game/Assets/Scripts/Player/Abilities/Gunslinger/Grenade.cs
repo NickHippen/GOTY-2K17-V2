@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : AbilityData {
+public class Grenade : AbilityData
+{
 
-	public Grenade (float damage, ParticleSystem effect, Vector3 effectPosition, string name)
+    public Grenade(float damage, ParticleSystem effect, string name)
     {
         this.damage = damage;
         this.effect = effect;
-        this.effectPos = effectPosition;
-        this.name = name;
+        this.abilityName = name;
     }
 
-    public void applyEffect()
+    public override void applyEffect()
     {
         Collider[] colliders = Physics.OverlapSphere(effectPos, 1f);
-        foreach(Collider collider in colliders)
+        foreach (Collider collider in colliders)
         {
-            if(collider.tag == "Monster")
+            if (collider.tag == "Monster")
             {
                 AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
                 unit.health -= damage;
