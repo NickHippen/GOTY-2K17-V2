@@ -32,11 +32,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public RuntimeAnimatorController gunController;
 	public RuntimeAnimatorController swordController;
 
-    public AnimatorOverrideController gunslingerOverride;
-    public AnimatorOverrideController berserkerOverride;
-
-    // Class type temporarily using a string
-    public string classType;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -52,7 +47,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	void Start()
 	{
 		inventory = GetComponent<PlayerInventory>();
-		abilities = GetComponent<AbilityController> ();
+		abilities = GetComponent<AbilityController>();
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -120,12 +115,13 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_Animator.SetBool("Ability4", a4);
 		m_Animator.SetBool ("Dead", m_isDead);
 
-		//If any abilities are true, activate use ability
-		if (a1 || a2 || a3 || a4) {
-			abilities.useAbility (a1, a2, a3, a4);
-		}
+        //If any abilities are true, activate use ability
+        if (a1 || a2 || a3 || a4)
+        {
+            abilities.useAbility(a1, a2, a3, a4);
+        }
 
-		if (!m_IsGrounded)
+        if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 		}
@@ -284,26 +280,13 @@ public class ThirdPersonCharacter : MonoBehaviour
 	/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 	public void setAnimatorController(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
-			m_Animator.runtimeAnimatorController = getClassOverrideController(gunController);
+			m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
-            m_Animator.runtimeAnimatorController = getClassOverrideController(swordController);
+            m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
 		}
 	}
 
-    // applies the override controller of the current class type to weapon animations
-    private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
-    {
-        if (classType.ToLower().Equals("berserker"))
-        {
-            berserkerOverride.runtimeAnimatorController = anim;
-            return berserkerOverride;
-        }
-        else
-        {
-            gunslingerOverride.runtimeAnimatorController = anim;
-            return gunslingerOverride;
-        }
-    }
+
 	public Animator getAnimatorController() {
 		return m_Animator;
 	}
