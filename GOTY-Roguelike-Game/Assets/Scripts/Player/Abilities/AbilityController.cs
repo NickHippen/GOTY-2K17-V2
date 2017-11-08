@@ -17,7 +17,11 @@ public class AbilityController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        txt = GameObject.Find("UIText").GetComponent<Text>();
+		if (txt != null) {
+			txt = GameObject.Find ("UIText").GetComponent<Text> ();
+			string uitext = string.Format (abiltyText, abilities [0].abilityName, "", "", "");
+			txt.text = uitext;
+		}
 
         abilities[0] = Instantiate(abilities[0]);
         abilities[0].transform.SetParent(gameObject.transform);
@@ -31,9 +35,6 @@ public class AbilityController : MonoBehaviour {
         //{
         //    setGunslingerData();
         //}
-
-        string uitext = string.Format(abiltyText, abilities[0].abilityName, "", "", "");
-        txt.text = uitext;
 
         //abilities [0].transform.position = gameObject.transform.position;
     }
