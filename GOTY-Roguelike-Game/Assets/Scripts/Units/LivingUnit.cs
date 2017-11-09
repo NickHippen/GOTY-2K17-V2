@@ -66,7 +66,6 @@ public abstract class LivingUnit : Unit {
 		monsterCanvas.transform.SetParent(this.transform);
 		monsterCanvas.transform.position = this.transform.position;
 		healthBar = monsterCanvas.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-		statuses.Add(new StatusPoison(this, 20f, 10f, 2));
 	}
 
 	protected override void Update() {
@@ -75,6 +74,17 @@ public abstract class LivingUnit : Unit {
 		}
 		monsterCanvas.GetComponent<RectTransform>().localPosition = new Vector3(0, canvasHeight, 0);
 		UpdateStatuses();
+	}
+
+	public void ApplyStatus(Status status) {
+		for (int i = statuses.Count - 1; i >= 0; i--) {
+			Status existingStatus = statuses[i];
+			if (existingStatus.GetType().Equals(status.GetType())) {
+				statuses.RemoveAt(i);
+				break;
+			}
+		}
+		statuses.Add(status);
 	}
 
 	void UpdateStatuses() {
