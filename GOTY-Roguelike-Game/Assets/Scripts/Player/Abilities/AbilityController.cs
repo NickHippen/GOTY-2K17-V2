@@ -19,12 +19,15 @@ public class AbilityController : MonoBehaviour {
     void Start() {
 		if (txt != null) {
 			txt = GameObject.Find ("UIText").GetComponent<Text> ();
-			string uitext = string.Format (abiltyText, abilities [0].abilityName, "", "", "");
+
+			string uitext = string.Format (abiltyText, abilities [0].abilityName, abilities [1].abilityName, "", "");
 			txt.text = uitext;
 		}
 
-        abilities[0] = Instantiate(abilities[0]);
-        abilities[0].transform.SetParent(gameObject.transform);
+		for (int x = 0; x < abilities.Count; x++) {
+			abilities [x] = Instantiate (abilities [x]);
+			abilities [x].transform.SetParent (gameObject.transform);
+		}
         //print(abilities[0].effect);
 
         //if (classType.ToLower().Equals("berserker"))
@@ -44,6 +47,21 @@ public class AbilityController : MonoBehaviour {
             Debug.Log("Entered");
             abilities[0].effect.Emit(10);
         }
+
+		if (a2 && abilities[1].effect != null) {
+			Debug.Log("Entered");
+			abilities[1].effect.Emit(100);
+		}
+
+		if (a1 && abilities[2].effect != null) {
+			Debug.Log("Entered");
+			abilities[0].effect.Emit(10);
+		}
+
+		if (a2 && abilities[3].effect != null) {
+			Debug.Log("Entered");
+			abilities[1].effect.Emit(100);
+		}
     }
 
     public string getClassType()
