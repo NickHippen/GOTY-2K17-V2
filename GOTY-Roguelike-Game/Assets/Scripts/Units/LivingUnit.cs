@@ -91,7 +91,6 @@ public abstract class LivingUnit : Unit {
 		for (int i = 0; i < healthBar.transform.childCount; i++) {
 			healthBar.transform.GetChild(i).gameObject.SetActive(false);
 		}
-		Debug.Log(statuses.Count);
 		for (int i = statuses.Count - 1; i >= 0; i--) {
 			Status status = statuses[i];
 			healthBar.transform.GetChild(status.IconIndex()).gameObject.SetActive(true);

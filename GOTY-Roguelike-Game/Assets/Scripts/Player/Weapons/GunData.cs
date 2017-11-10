@@ -39,8 +39,9 @@ public class GunData : WeaponData {
 			this.line.SetPosition(1, hit.point);
 			//Debug.Log(hit);
 			LivingUnit livingUnit = hit.transform.GetComponent<LivingUnit>();
-			Debug.Log(livingUnit);	
 			if (livingUnit != null) {
+				float damage = this.damage;
+				damage = WeaponEmotionActionHandler.GetAction(Emotion)(this, livingUnit, damage);
 				livingUnit.Damage(damage);
 			}
 			//if (hit.rigidbody != null) {

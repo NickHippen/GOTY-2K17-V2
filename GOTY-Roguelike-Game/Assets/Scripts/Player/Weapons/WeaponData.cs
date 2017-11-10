@@ -12,6 +12,8 @@ public class WeaponData : MonoBehaviour {
 	public GameObject model;
 	public Sprite icon;
 
+	public WeaponEmotion Emotion { get; set; }
+
 	public ParticleSystem effect;
 
 	private AudioSource audioSource;

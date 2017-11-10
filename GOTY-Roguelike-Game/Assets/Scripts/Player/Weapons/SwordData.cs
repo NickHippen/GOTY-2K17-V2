@@ -11,8 +11,10 @@ public class SwordData : WeaponData {
 			Debug.Log("Hit");
 		}
 		if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
-			Debug.Log("Damaging!!!");
-			((AggressiveUnit)rigCollider.RootUnit).Damage(this.damage);
+			AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+			float damage = this.damage;
+			damage = WeaponEmotionActionHandler.GetAction(Emotion)(this, monster, damage);
+			monster.Damage(damage);
 		}
 	}
 
