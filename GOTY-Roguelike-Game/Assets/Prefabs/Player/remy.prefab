@@ -2133,7 +2133,7 @@ Transform:
   m_GameObject: {fileID: 1771943447879508}
   m_LocalRotation: {x: 0, y: 0.9834926, z: 0, w: -0.18094844}
   m_LocalPosition: {x: -3.3890667, y: -0.000000029802322, z: -4.16988}
-  m_LocalScale: {x: 0.5, y: 0.6, z: 0.5}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_Children:
   - {fileID: 4630817612005842}
   - {fileID: 4328791778199074}
@@ -2965,8 +2965,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  gunController: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
-  swordController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
   rightHand: {fileID: 1253046186213056}
   leftHand: {fileID: 1079411380483412}
   grabRadius: 5
@@ -3148,9 +3146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - {fileID: 114238564871700064, guid: 99de7e79054a22c40ba66f9ff693c1c6, type: 2}
-  classType: 
-  gunslingerOverride: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64, type: 2}
-  berserkerOverride: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd, type: 2}
+  classType: berserker
   txt: {fileID: 0}
 --- !u!120 &120985891583014190
 LineRenderer:
