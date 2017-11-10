@@ -28,11 +28,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	bool m_isDead;
 	AbilityController abilities;
 
-	//Public objects for the types of controllers available
-	public RuntimeAnimatorController gunController;
-	public RuntimeAnimatorController swordController;
-
-
 	//Status of the Use Key 'E'
 	bool m_Use;
 	PlayerInventory inventory;
@@ -42,7 +37,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public GameObject rightHand;
 	public GameObject leftHand;
 	public float grabRadius = 1f;
-
 
 	void Start()
 	{
@@ -61,26 +55,29 @@ public class ThirdPersonCharacter : MonoBehaviour
 		//Initialize the weapon held at the start of the game
 		initializeEquip(inventory.getCurrentWeapon());
 		inventory.getCurrentWeapon ().SetActive (true);
-		setAnimatorController();
+		setWeaponAnimations();
+        abilities.setClassAbilities(m_Animator); // set proper layer for abilities
 	}
 			
 	public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
-	{
-		// lock movement and point character with camera if in mid-action
-		if(!isPerformingAction(atk)) {
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			if (move.magnitude > 1f)
-				move.Normalize ();
-			move = transform.InverseTransformDirection (move);
-			CheckGroundStatus ();
-			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-			m_ForwardAmount = move.z;
+	{   
+		// convert the world relative moveInput vector into a local-relative
+		// turn amount and forward amount required to head in the desired
+		// direction.
+		if (move.magnitude > 1f)
+			move.Normalize ();
+		move = transform.InverseTransformDirection (move);
+		CheckGroundStatus ();
+		move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+		m_TurnAmount = Mathf.Atan2 (move.x, move.z);
+		m_ForwardAmount = move.z;
 
-			ApplyExtraTurnRotation ();
-		}
+        // if using a ranged weapon, have camera over shoulder
+		if(!isRangedAttacking(atk))
+        {
+            ApplyExtraTurnRotation();
+        }
+		
 
 		// control and velocity handling is different when grounded and airborne:
 		if (m_IsGrounded) {
@@ -94,8 +91,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 	}
 
 	// if player is in the middle of an attack/ability animation
-	private bool isPerformingAction(bool attack){
-		if (attack || m_Animator.IsInTransition(0) || !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded") && !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Airborne")) {
+	private bool isRangedAttacking(bool attack){
+            if (inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData && attack) {
 			transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
 			return true;
 		}
@@ -233,7 +230,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 				temp.gameObject.SetActive (false);
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
-				setAnimatorController ();
+				setWeaponAnimations();
 				break;
 			}
 			i++;
@@ -273,19 +270,22 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void drop(bool dropPress){
 		if(dropPress && !inventory.lastItem()){
 			inventory.dropCurrentWeapon ();
-			setAnimatorController ();
+			setWeaponAnimations();
 		}
 	}
 
 	/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
-	public void setAnimatorController(){
+	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
-			m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
+            m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
+            m_Animator.SetLayerWeight(1, 0); // turn off sword weapon layer
+            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
-            m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
+            m_Animator.SetLayerWeight(1, 1); // turn on sword weapon layer
+            m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
+            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
 		}
 	}
-
 
 	public Animator getAnimatorController() {
 		return m_Animator;

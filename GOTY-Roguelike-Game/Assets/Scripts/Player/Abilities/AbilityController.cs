@@ -8,8 +8,6 @@ public class AbilityController : MonoBehaviour {
     public List<AbilityData> abilities;
 
     public string classType;
-    public AnimatorOverrideController gunslingerOverride;
-    public AnimatorOverrideController berserkerOverride;
 
     public Text txt;
 
@@ -28,6 +26,7 @@ public class AbilityController : MonoBehaviour {
 			abilities [x] = Instantiate (abilities [x]);
 			abilities [x].transform.SetParent (gameObject.transform);
 		}
+
         //print(abilities[0].effect);
 
         //if (classType.ToLower().Equals("berserker"))
@@ -64,23 +63,16 @@ public class AbilityController : MonoBehaviour {
 		}
     }
 
-    public string getClassType()
-    {
-        return classType;
-    }
-
-    // applies the override controller of the current class type to weapon animations
-    public AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
+    // applies the proper layer of ability animations in animator
+    public void setClassAbilities(Animator anim)
     {
         if (classType.ToLower().Equals("berserker"))
         {
-            berserkerOverride.runtimeAnimatorController = anim;
-            return berserkerOverride;
+            anim.SetLayerWeight(3, 1);
         }
         else
         {
-            gunslingerOverride.runtimeAnimatorController = anim;
-            return gunslingerOverride;
+            anim.SetLayerWeight(4, 1);
         }
     }
 
