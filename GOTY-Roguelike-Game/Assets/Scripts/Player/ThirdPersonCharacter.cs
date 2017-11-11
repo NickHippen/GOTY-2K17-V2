@@ -62,25 +62,27 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
 	{   
 		// convert the world relative moveInput vector into a local-relative
-		// turn amount and forward amount required to head in the desired
-		// direction.
+		// turn amount and forward amount required to head in the desired direction.
 		if (move.magnitude > 1f)
 			move.Normalize ();
 		move = transform.InverseTransformDirection (move);
 		CheckGroundStatus ();
 		move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-		m_TurnAmount = Mathf.Atan2 (move.x, move.z);
 		m_ForwardAmount = move.z;
 
         // if using a ranged weapon, have camera over shoulder
-		if(!isRangedAttacking(atk))
-        {
+        if (isRangedAttacking(atk))
+        {   // no apply turn amount relative to direction controls rather than cartesian
+            m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
+        }
+        else
+        {   // camera is independent of player rotation, use cartesian controls
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
             ApplyExtraTurnRotation();
         }
-		
 
-		// control and velocity handling is different when grounded and airborne:
-		if (m_IsGrounded) {
+        // control and velocity handling is different when grounded and airborne:
+        if (m_IsGrounded) {
 			HandleGroundedMovement (jump);
 		} else {
 			HandleAirborneMovement ();
@@ -278,13 +280,15 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
             m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
-            m_Animator.SetLayerWeight(1, 0); // turn off sword weapon layer
+            m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
+            m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
-            m_Animator.SetLayerWeight(1, 1); // turn on sword weapon layer
+            m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
             m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
-            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
-		}
+            m_Animator.SetLayerWeight(1, 0); // turn off gun mask
+                                             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
+        }
 	}
 
 	public Animator getAnimatorController() {
@@ -317,5 +321,4 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void ProcessAttack() {
 		inventory.getCurrentWeapon().GetComponent<WeaponData>().Attack();
 	}
-
 }

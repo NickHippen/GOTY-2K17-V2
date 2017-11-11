@@ -68,11 +68,11 @@ public class AbilityController : MonoBehaviour {
     {
         if (classType.ToLower().Equals("berserker"))
         {
-            anim.SetLayerWeight(3, 1);
+            anim.SetLayerWeight(4, 1);
         }
         else
         {
-            anim.SetLayerWeight(4, 1);
+            anim.SetLayerWeight(5, 1);
         }
     }
 
