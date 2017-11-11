@@ -6,7 +6,6 @@ public abstract class AbilityData : MonoBehaviour {
 
 	public float damage;
 	public ParticleSystem effect;
-	public string abilityName;
 	public Vector3 effectPos;
 
 	// Use this for initialization

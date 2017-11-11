@@ -5,40 +5,31 @@ using UnityEngine.UI;
 
 public class AbilityController : MonoBehaviour {
 
-    public List<AbilityData> abilities;
-
+    public AbilityPrefabList abilityList;
     public string classType;
-
     public Text txt;
-
     string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
+
+    private List<AbilityData> abilities;
 
     // Use this for initialization
     void Start() {
 		if (txt != null) {
 			txt = GameObject.Find ("UIText").GetComponent<Text> ();
 
-			string uitext = string.Format (abiltyText, abilities [0].abilityName, abilities [1].abilityName, "", "");
+			string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, "", "");
 			txt.text = uitext;
 		}
+        if (classType.ToLower().Equals("berserker"))
+        {
+            abilities = abilityList.getBerserkerAbilities();
+        }
+        else abilities = abilityList.getGunslingerAbilities();
 
-		for (int x = 0; x < abilities.Count; x++) {
+        for (int x = 0; x < abilities.Count; x++) {
 			abilities [x] = Instantiate (abilities [x]);
 			abilities [x].transform.SetParent (gameObject.transform);
 		}
-
-        //print(abilities[0].effect);
-
-        //if (classType.ToLower().Equals("berserker"))
-        //{
-        //    setBerserkerData();
-        //}
-        //else
-        //{
-        //    setGunslingerData();
-        //}
-
-        //abilities [0].transform.position = gameObject.transform.position;
     }
 
     public void useAbility(bool a1, bool a2, bool a3, bool a4) {
@@ -75,20 +66,4 @@ public class AbilityController : MonoBehaviour {
             anim.SetLayerWeight(5, 1);
         }
     }
-
-    //private void setBerserkerData()
-    //{
-    //    abilities.Add(new Cyclone());
-    //    abilities.Add(new HardKick());
-    //    abilities.Add(new TankUp());
-    //    abilities.Add(new Adrenaline());
-    //}
-
-    //private void setGunslingerData()
-    //{
-    //    abilities.Add(new Grenade());
-    //    abilities.Add(new Grenade());
-    //    abilities.Add(new Grenade());
-    //    abilities.Add(new Grenade());
-    //}
 }
