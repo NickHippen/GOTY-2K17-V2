@@ -81,7 +81,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Character.gameObject.GetComponent<PlayerInventory> ().scrollWeapon (scrolled);
 
 			if (selection != -1 || scrolled != 0) {
-				m_Character.setAnimatorController ();
+				m_Character.setWeaponAnimations();
 			}
 		}
 
@@ -96,7 +96,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 //			m_Character.attack (Input.GetMouseButton(0));
 
 			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
-			m_Character.drop (Input.GetKeyDown (KeyCode.Q));
+			m_Character.drop (Input.GetKeyDown(KeyCode.Q));
 
             // calculate move direction to pass to character
             if (m_Cam != null)

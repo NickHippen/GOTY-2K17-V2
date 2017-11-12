@@ -13,6 +13,6 @@ public class PointTowardsCamera : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-		transform.rotation = Quaternion.RotateTowards(transform.rotation, camera.transform.rotation, float.MaxValue);
+		transform.LookAt(camera.transform);
 	}
 }

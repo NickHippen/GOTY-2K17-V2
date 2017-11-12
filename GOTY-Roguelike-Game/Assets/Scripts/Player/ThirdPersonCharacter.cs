@@ -26,16 +26,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	Vector3 m_CapsuleCenter;
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
-
-	//Public objects for the types of controllers available
-	public RuntimeAnimatorController gunController;
-	public RuntimeAnimatorController swordController;
-
-    public AnimatorOverrideController gunslingerOverride;
-    public AnimatorOverrideController berserkerOverride;
-
-    // Class type temporarily using a string
-    public string classType;
+	AbilityController abilities;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -47,10 +38,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public GameObject leftHand;
 	public float grabRadius = 1f;
 
-
 	void Start()
 	{
 		inventory = GetComponent<PlayerInventory>();
+		abilities = GetComponent<AbilityController>();
 		m_Animator = GetComponent<Animator>();
 		m_Rigidbody = GetComponent<Rigidbody>();
 		m_Capsule = GetComponent<CapsuleCollider>();
@@ -64,29 +55,34 @@ public class ThirdPersonCharacter : MonoBehaviour
 		//Initialize the weapon held at the start of the game
 		initializeEquip(inventory.getCurrentWeapon());
 		inventory.getCurrentWeapon ().SetActive (true);
-		setAnimatorController();
+		setWeaponAnimations();
+        abilities.setClassAbilities(m_Animator); // set proper layer for abilities
 	}
 			
 	public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
-	{
-		// lock movement and point character with camera if in mid-action
-		if(!isPerformingAction(atk)) {
-			// convert the world relative moveInput vector into a local-relative
-			// turn amount and forward amount required to head in the desired
-			// direction.
-			if (move.magnitude > 1f)
-				move.Normalize ();
-			move = transform.InverseTransformDirection (move);
-			CheckGroundStatus ();
-			move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-			m_TurnAmount = Mathf.Atan2 (move.x, move.z);
-			m_ForwardAmount = move.z;
+	{   
+		// convert the world relative moveInput vector into a local-relative
+		// turn amount and forward amount required to head in the desired direction.
+		if (move.magnitude > 1f)
+			move.Normalize ();
+		move = transform.InverseTransformDirection (move);
+		CheckGroundStatus ();
+		move = Vector3.ProjectOnPlane (move, m_GroundNormal);
+		m_ForwardAmount = move.z;
 
-			ApplyExtraTurnRotation ();
-		}
+        // if using a ranged weapon, have camera over shoulder
+        if (isRangedAttacking(atk))
+        {   // no apply turn amount relative to direction controls rather than cartesian
+            m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
+        }
+        else
+        {   // camera is independent of player rotation, use cartesian controls
+            m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            ApplyExtraTurnRotation();
+        }
 
-		// control and velocity handling is different when grounded and airborne:
-		if (m_IsGrounded) {
+        // control and velocity handling is different when grounded and airborne:
+        if (m_IsGrounded) {
 			HandleGroundedMovement (jump);
 		} else {
 			HandleAirborneMovement ();
@@ -97,8 +93,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 	}
 
 	// if player is in the middle of an attack/ability animation
-	private bool isPerformingAction(bool attack){
-		if (attack || m_Animator.IsInTransition(0) || !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded") && !this.m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Airborne")) {
+	private bool isRangedAttacking(bool attack){
+            if (inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData && attack) {
 			transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
 			return true;
 		}
@@ -117,7 +113,14 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_Animator.SetBool("Ability3", a3);
         m_Animator.SetBool("Ability4", a4);
 		m_Animator.SetBool ("Dead", m_isDead);
-		if (!m_IsGrounded)
+
+        //If any abilities are true, activate use ability
+        if (a1 || a2 || a3 || a4)
+        {
+            abilities.useAbility(a1, a2, a3, a4);
+        }
+
+        if (!m_IsGrounded)
 		{
 			m_Animator.SetFloat("Jump", m_Rigidbody.velocity.y);
 		}
@@ -229,7 +232,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 				temp.gameObject.SetActive (false);
 				//Move into Weapon class later
 				inventory.getCurrentWeapon ().SetActive (true);
-				setAnimatorController ();
+				setWeaponAnimations();
 				break;
 			}
 			i++;
@@ -269,33 +272,25 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void drop(bool dropPress){
 		if(dropPress && !inventory.lastItem()){
 			inventory.dropCurrentWeapon ();
-			setAnimatorController ();
+			setWeaponAnimations();
 		}
 	}
 
 	/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
-	public void setAnimatorController(){
+	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
-			m_Animator.runtimeAnimatorController = getClassOverrideController(gunController);
+            m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
+            m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
+            m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
+            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
-            m_Animator.runtimeAnimatorController = getClassOverrideController(swordController);
-		}
+            m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
+            m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
+            m_Animator.SetLayerWeight(1, 0); // turn off gun mask
+                                             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
+        }
 	}
 
-    // applies the override controller of the current class type to weapon animations
-    private AnimatorOverrideController getClassOverrideController(RuntimeAnimatorController anim)
-    {
-        if (classType.ToLower().Equals("berserker"))
-        {
-            berserkerOverride.runtimeAnimatorController = anim;
-            return berserkerOverride;
-        }
-        else
-        {
-            gunslingerOverride.runtimeAnimatorController = anim;
-            return gunslingerOverride;
-        }
-    }
 	public Animator getAnimatorController() {
 		return m_Animator;
 	}
@@ -326,5 +321,4 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void ProcessAttack() {
 		inventory.getCurrentWeapon().GetComponent<WeaponData>().Attack();
 	}
-
 }

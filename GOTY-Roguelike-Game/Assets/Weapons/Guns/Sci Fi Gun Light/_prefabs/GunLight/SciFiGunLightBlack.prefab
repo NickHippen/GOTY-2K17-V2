@@ -10,6 +10,7 @@ GameObject:
   - component: {fileID: 453068}
   - component: {fileID: 3316574}
   - component: {fileID: 2346984}
+  - component: {fileID: 114735652507934824}
   - component: {fileID: 54474092867204526}
   - component: {fileID: 136978280128364132}
   - component: {fileID: 82619847828676078}
@@ -45,7 +46,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -61,7 +61,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -198,7 +197,7 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
-    m_RotationOrder: 4
+    m_RotationOrder: 0
   reverbZoneMixCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -222,16 +221,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cc5a60bd609c35428899ae9daab3477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  name: GUN
+  baseName: Gun
   desc: 
-  damage: 10
+  damage: 5
   rotation: {x: 8, y: 83.5, z: 89}
   model: {fileID: 118234}
-  icon: {fileID: 21300000, guid: 7cc32186b2a76de4aa757eb3ce1f0793, type: 3}
+  icon: {fileID: 21300000, guid: 376c8589e8c379543aec7b430e3c39ee, type: 3}
+  modifier: 0
+  emotion: 0
+  effect: {fileID: 0}
   shootPoint: {fileID: 4959815475252926}
   range: 100
   bulletsPerSecond: 10
+--- !u!114 &114735652507934824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c530615d7795b1a4ab57655da98047b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 1.5
 --- !u!120 &120740972109151914
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -241,7 +254,6 @@ LineRenderer:
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -257,7 +269,6 @@ LineRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

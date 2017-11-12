@@ -22,8 +22,11 @@ public abstract class Unit : MonoBehaviour {
 
 	public Animator UnitAnimator { get; set; }
 
+	public float DefaultSpeed { get; set; }
+
 	protected virtual void Start() {
 		UnitAnimator = GetComponent<Animator>();
+		DefaultSpeed = speed;
 
 		if (target != null) {
 			BeginPathing();
