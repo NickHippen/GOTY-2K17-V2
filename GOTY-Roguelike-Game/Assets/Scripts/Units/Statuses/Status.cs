@@ -24,6 +24,11 @@ public abstract class Status {
 
 	protected abstract void UpdateAfter();
 
+	/** Called once when the status changes to inactive
+	 */
+	public virtual void OnExpire() {
+	}
+
 	public abstract int IconIndex();
 
 }
