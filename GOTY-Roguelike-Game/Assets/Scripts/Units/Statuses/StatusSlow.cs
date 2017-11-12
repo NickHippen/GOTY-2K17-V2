@@ -8,8 +8,6 @@ public class StatusSlow : Status {
 
 	public float SlowPercent { get; set; }
 
-	private float timeSinceTick;
-
 	public StatusSlow(LivingUnit target, float duration, float slowPercent) : base(target, duration) {
 		this.SlowPercent = slowPercent;
 	}
