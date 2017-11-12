@@ -38,11 +38,12 @@ public class GunData : WeaponData {
 		if (Physics.Raycast(shootPoint.position, Camera.main.transform.forward, out hit, range)) {
 			this.line.SetPosition(1, hit.point);
 			//Debug.Log(hit);
-			LivingUnit livingUnit = hit.transform.GetComponent<LivingUnit>();
-			if (livingUnit != null) {
+			AggressiveUnit monster = hit.transform.GetComponent<AggressiveUnit>();
+			if (monster != null) {
 				float damage = this.damage;
-				damage = WeaponEmotionActionHandler.GetAction(Emotion)(this, livingUnit, damage);
-				livingUnit.Damage(damage);
+				damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
+				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
+				monster.Damage(damage);
 			}
 			//if (hit.rigidbody != null) {
 			//	hit.rigidbody.AddForce(-hit.normal * hitForce);

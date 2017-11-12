@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class WeaponData : MonoBehaviour {
 
-	public int id = -1;
-	public string name;
+	public string baseName;
 	public string desc;
 	public float damage = 10f;
 	public Vector3 rotation;
 	public GameObject model;
 	public Sprite icon;
 
-	public WeaponEmotion Emotion { get; set; }
+	public WeaponModifier modifier;
+	public WeaponEmotion emotion;
 
 	public ParticleSystem effect;
 
@@ -22,6 +22,20 @@ public class WeaponData : MonoBehaviour {
 		audioSource = GetComponent<AudioSource>();
 		//effect.transform.parent = transform.parent;
 		//effect.transform.position = transform.position;
+	}
+
+	public string FullName {
+		get {
+			string fullName = "";
+			if (modifier != 0) {
+				fullName += modifier.ToString() + " ";
+			}
+			fullName += baseName;
+			if (emotion != 0) {
+				fullName += " of " + emotion.ToString();
+			}
+			return fullName;
+		}
 	}
 
 	public virtual void Attack() {
