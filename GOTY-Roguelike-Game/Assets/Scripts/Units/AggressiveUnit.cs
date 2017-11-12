@@ -39,7 +39,7 @@ public abstract class AggressiveUnit : LivingUnit {
 	private void UpdateAttacks() {
 		foreach (Attack attack in attacks) {
 			if ((!atGoal && attack.Controller.RequireGoal) // Does the controller require a goal?
-					|| (Living && !(attack.Controller is DeathAttackController))) { // Is the monster dead?
+					|| (!Living && !(attack.Controller is DeathAttackController))) { // Is the monster dead?
 				continue;
 			}
 			if (attack.Controller.Check()) {
