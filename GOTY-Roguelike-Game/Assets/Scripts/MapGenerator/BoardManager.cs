@@ -17,7 +17,6 @@ public class BoardManager : MonoBehaviour
 	public GameObject exitPortal;
 	public Texture texture;
 
-	public GameObject player;
 	public DrawMiniMap miniMap;
 
 	static int mapw = 60;
@@ -120,10 +119,11 @@ public class BoardManager : MonoBehaviour
 		//Spawn player
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
-		Spawn((roomList[playerSpawn].startx + roomList[playerSpawn].width/2 + 1), (roomList[playerSpawn].starty + roomList[playerSpawn].height/2), items[0]);
+		GameObject player = GameObject.Find ("remy");
+		player.transform.position = new Vector3((roomList[playerSpawn].startx + roomList[playerSpawn].width/2) * tilesize, .6f, (roomList[playerSpawn].starty + roomList[playerSpawn].height/2) * tilesize);
 
-		Spawn ((roomList[playerSpawn].startx + roomList[playerSpawn].width/2), (roomList[playerSpawn].starty + roomList[playerSpawn].height/2), player);
-
+		GameObject mycam = GameObject.Find ("Main Camera");
+		mycam.GetComponent<CameraController> ().lookAt = player.transform;
 		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 		playerRoom = roomList [playerSpawn];
 		roomList.Remove (playerRoom);
@@ -165,10 +165,9 @@ public class BoardManager : MonoBehaviour
 		}
 	}
 
-	void Spawn(int x, int z, GameObject tospawn){
+	GameObject Spawn(int x, int z, GameObject tospawn){
 		GameObject instance = Instantiate (tospawn, new Vector3 (x * tilesize, .6f, z * tilesize), Quaternion.identity) as GameObject;
-		GameObject mycam = GameObject.Find ("Main Camera");
-		mycam.GetComponent<CameraController> ().lookAt = instance.transform;
+		return instance;
 	}
 
 	//Creates a new map and builds the scene with our objects
@@ -180,7 +179,7 @@ public class BoardManager : MonoBehaviour
 
 	public void Update()
 	{
-		Vector3 remyPos = GameObject.Find ("remy(Clone)").transform.localPosition;
+		Vector3 remyPos = GameObject.Find ("remy").transform.localPosition;
 		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
 
 		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)) < 1);

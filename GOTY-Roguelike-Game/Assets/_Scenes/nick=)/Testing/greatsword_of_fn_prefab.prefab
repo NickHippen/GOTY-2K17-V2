@@ -9,20 +9,21 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1533085259526468}
+  m_RootGameObject: {fileID: 1656156969245552}
   m_IsPrefabParent: 1
---- !u!1 &1533085259526468
+--- !u!1 &1656156969245552
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4488184648853306}
-  - component: {fileID: 33641997226782286}
-  - component: {fileID: 23544179236251934}
-  - component: {fileID: 65095329018295324}
-  - component: {fileID: 114647584896563860}
+  - component: {fileID: 4425173285709256}
+  - component: {fileID: 33581834266804382}
+  - component: {fileID: 23053264562808272}
+  - component: {fileID: 65000292319233086}
+  - component: {fileID: 114118267129570194}
+  - component: {fileID: 114547201698607646}
   m_Layer: 0
   m_Name: greatsword_of_fn_prefab
   m_TagString: Equipped
@@ -30,12 +31,12 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4488184648853306
+--- !u!4 &4425173285709256
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533085259526468}
+  m_GameObject: {fileID: 1656156969245552}
   m_LocalRotation: {x: 0.58828914, y: -0.0879204, z: 0.118817605, w: 0.79502726}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -43,12 +44,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23544179236251934
+--- !u!23 &23053264562808272
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533085259526468}
+  m_GameObject: {fileID: 1656156969245552}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -75,42 +76,54 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!33 &33641997226782286
+--- !u!33 &33581834266804382
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533085259526468}
+  m_GameObject: {fileID: 1656156969245552}
   m_Mesh: {fileID: 4300000, guid: 29fbdd5c415a9eb4ba2b52d82337ab2f, type: 3}
---- !u!65 &65095329018295324
+--- !u!65 &65000292319233086
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533085259526468}
+  m_GameObject: {fileID: 1656156969245552}
   m_Material: {fileID: 13400000, guid: 01571ba68fb2dad46aa03094ab219579, type: 2}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.122332, y: 2.357289, z: 0.597947}
   m_Center: {x: 0.0017899983, y: 0.83684146, z: 0.0012505054}
---- !u!114 &114647584896563860
+--- !u!114 &114118267129570194
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1533085259526468}
-  m_Enabled: 1
+  m_GameObject: {fileID: 1656156969245552}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
+  m_Script: {fileID: 11500000, guid: c530615d7795b1a4ab57655da98047b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseName: 
+  maxSpeed: 1.5
+--- !u!114 &114547201698607646
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1656156969245552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b373b9d6f63005488a5b53b0cc5a1b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseName: Sword
   desc: 
-  damage: 200
+  damage: 10
   rotation: {x: 73, y: 0, z: 17}
-  model: {fileID: 1533085259526468}
-  icon: {fileID: 21300000, guid: ac394e6e5080d754e8b437e5936fca3b, type: 3}
+  model: {fileID: 1656156969245552}
+  icon: {fileID: 21300000, guid: aa73522d973f4dd42b73556d966db2df, type: 3}
   modifier: 0
   emotion: 0
   effect: {fileID: 0}

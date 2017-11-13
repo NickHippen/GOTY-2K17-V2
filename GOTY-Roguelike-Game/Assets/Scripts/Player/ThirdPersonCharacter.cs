@@ -321,4 +321,13 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void ProcessAttack() {
 		inventory.getCurrentWeapon().GetComponent<WeaponData>().Attack();
 	}
+
+	void OnTriggerEnter(Collider other) 
+	{
+		if (other.gameObject.CompareTag ( "Potion"))
+		{
+			Destroy (other.gameObject);
+			GameObject.Find ("remy").GetComponent<HealthManager> ().Heal (20);
+		}
+	}
 }

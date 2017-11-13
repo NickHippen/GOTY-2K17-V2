@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthManager : MonoBehaviour {
 
@@ -34,10 +35,14 @@ public class HealthManager : MonoBehaviour {
 	
 	public void Damage(float amount) {
 		Health -= amount;
+		GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
 	}
 
 	public void Heal(float amount) {
 		Health += amount;
+		if (Health > 100)
+			Health = 100;
+		GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
 	}
 
 }

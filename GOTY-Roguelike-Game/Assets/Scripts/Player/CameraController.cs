@@ -55,6 +55,9 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void LateUpdate () {
+		if (lookAt == null) {
+			return;
+		}
 		Vector3 dir = new Vector3(0, cameraHeight, -currentZoom);
 		Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
 		camTransform.position = lookAt.position + rotation * dir;
@@ -64,6 +67,9 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void OnDrawGizmos() {
+		if (lookAt == null) {
+			return;
+		}
 		Gizmos.DrawCube(lookAt.position + relativePos, Vector3.one / 10);
 	}
 

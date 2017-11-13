@@ -64,7 +64,7 @@ public class DrawMiniMap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Vector3 remyPos = GameObject.Find ("remy(Clone)").transform.localPosition;
+		Vector3 remyPos = GameObject.Find ("remy").transform.localPosition;
 		GameObject instance;
 		if (GameObject.Find ("playerIcon(Clone)") != null) {
 			instance = GameObject.Find ("playerIcon(Clone)");
