@@ -172,7 +172,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958042302294484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.08928, y: 14.879365, z: -52.72059}
+  m_LocalPosition: {x: -55.240005, y: 15.11, z: -1.7799988}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4058047162036160}
@@ -283,7 +283,7 @@ Animator:
   m_GameObject: {fileID: 1958042302294484}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 1db38da97b6ad094dbca967f13dd370f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 4067439dacb429d44a344ec16234867e, type: 2}
+  m_Controller: {fileID: 22100000, guid: d9fe5194898fd104f9f55533c492f53b, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -310,6 +310,9 @@ MonoBehaviour:
   turnDist: 1
   destinationRadius: 1.33
   atGoal: 0
+  health: 100
+  maxHealth: 100
+  canvasHeight: 0.03
   targetTag: Player
   aggroRadius: 20
   attackPower: 5

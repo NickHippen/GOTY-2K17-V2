@@ -26,6 +26,7 @@ public class WeaponEmotionActionHandler {
 
 	public static float ApplySorrow(WeaponData weaponData, LivingUnit target, float damage) {
 		// TODO Need slow effect
+		target.ApplyStatus(new StatusSlow(target, 2f, 0.2f));
 		return damage;
 	}
 
@@ -41,12 +42,20 @@ public class WeaponEmotionActionHandler {
 	}
 
 	public static float ApplyAnxiety(WeaponData weaponData, LivingUnit target, float damage) {
-		target.ApplyStatus(new StatusPoison(target, 2f, 3f, 1));
+		target.ApplyStatus(new StatusPoison(target, 2f, 3f, 1), false);
 		return damage;
 	}
 
 	public static float ApplyEnvy(WeaponData weaponData, LivingUnit target, float damage) {
-		// TODO Need stun effect
+		float chance;
+		if (weaponData is GunData) {
+			chance = 0.015f;
+		} else {
+			chance = 0.05f;
+		}
+		if (UnityEngine.Random.Range(0f, 1f) < chance) {
+			target.ApplyStatus(new StatusStun(target, 1f), false);
+		}
 		return damage;
 	}
 

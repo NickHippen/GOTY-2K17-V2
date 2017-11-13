@@ -66,7 +66,6 @@ public abstract class LivingUnit : Unit {
 		monsterCanvas.transform.SetParent(this.transform);
 		monsterCanvas.transform.position = this.transform.position;
 		healthBar = monsterCanvas.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-		ApplyStatus(new StatusStun(this, 20f));
 	}
 
 	protected override void Update() {
@@ -77,15 +76,23 @@ public abstract class LivingUnit : Unit {
 		UpdateStatuses();
 	}
 
-	public void ApplyStatus(Status status) {
+	public void ApplyStatus(Status status, bool overrideExisting) {
 		for (int i = statuses.Count - 1; i >= 0; i--) {
 			Status existingStatus = statuses[i];
 			if (existingStatus.GetType().Equals(status.GetType())) {
-				statuses.RemoveAt(i);
-				break;
+				if (overrideExisting) {
+					statuses.RemoveAt(i);
+					break;
+				} else {
+					return;
+				}
 			}
 		}
 		statuses.Add(status);
+	}
+
+	public void ApplyStatus(Status status) {
+		ApplyStatus(status, true);
 	}
 
 	void UpdateStatuses() {
@@ -102,6 +109,15 @@ public abstract class LivingUnit : Unit {
 				statuses.RemoveAt(i);
 			}
 		}
+	}
+
+	public bool IsStunned() {
+		foreach (Status status in statuses) {
+			if (status is StatusStun) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void Damage(float amount) {
