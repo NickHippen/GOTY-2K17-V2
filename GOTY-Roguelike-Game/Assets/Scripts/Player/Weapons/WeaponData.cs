@@ -10,6 +10,7 @@ public class WeaponData : MonoBehaviour {
 	public Vector3 rotation;
 	public GameObject model;
 	public Sprite icon;
+	public float cost;
 
 	public WeaponModifier modifier;
 	public WeaponEmotion emotion;

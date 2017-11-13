@@ -18,7 +18,7 @@ public class Floating : MonoBehaviour {
 	}
 
 	void MoveVertical(){
-		transform.position = new Vector3(transform.position.x, Mathf.Abs(Mathf.Sin(Time.time * maxSpeed))/2 +.25f, transform.position.z);
+		transform.position = new Vector3(transform.position.x, Mathf.Abs(Mathf.Sin(Time.time * maxSpeed))/2 + startPos.y, transform.position.z);
 		transform.Rotate (0, 50 * Time.deltaTime, 0);
 	}
 }

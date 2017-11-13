@@ -223,7 +223,14 @@ public class ThirdPersonCharacter : MonoBehaviour
 		while (i < hitColliders.Length) {
 			GameObject temp = hitColliders [i].gameObject;
 			if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
-					
+
+				if (temp.GetComponent<WeaponData> ().cost > GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold) {
+					break;
+				} else {
+					GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold -= (int) temp.GetComponent<WeaponData> ().cost;
+					GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
+				}
+
 				if (temp.GetComponent<Floating> () != null) {
 					temp.GetComponent<Floating> ().enabled = false;
 				}
@@ -335,6 +342,18 @@ public class ThirdPersonCharacter : MonoBehaviour
 			Destroy (other.gameObject);
 			GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold += 1;
 			GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
+		}
+
+		if (other.gameObject.CompareTag ("Pickup")) {
+			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.name;
+		}
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.CompareTag ("Pickup")) {
+			Debug.Log ("YO?");
+			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
 		}
 	}
 }
