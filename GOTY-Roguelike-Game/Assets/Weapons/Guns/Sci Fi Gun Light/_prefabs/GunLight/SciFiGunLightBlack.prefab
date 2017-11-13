@@ -227,6 +227,7 @@ MonoBehaviour:
   rotation: {x: 8, y: 83.5, z: 89}
   model: {fileID: 118234}
   icon: {fileID: 21300000, guid: 376c8589e8c379543aec7b430e3c39ee, type: 3}
+  cost: 1
   modifier: 0
   emotion: 0
   effect: {fileID: 0}
@@ -338,9 +339,9 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118234}
   m_Material: {fileID: 13400000, guid: 01571ba68fb2dad46aa03094ab219579, type: 2}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.15
-  m_Height: 0.81
+  m_Radius: 2
+  m_Height: 1
   m_Direction: 2
   m_Center: {x: 0.000000044703484, y: 0.02280002, z: 0.27416432}

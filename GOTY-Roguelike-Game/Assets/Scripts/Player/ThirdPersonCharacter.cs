@@ -224,11 +224,13 @@ public class ThirdPersonCharacter : MonoBehaviour
 			GameObject temp = hitColliders [i].gameObject;
 			if (/*hitColliders != null &&*/ temp.CompareTag ("Pickup") && !inventory.isFull ()) {
 
+				// If statements for actual weapon purchase
 				if (temp.GetComponent<WeaponData> ().cost > GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold) {
 					break;
 				} else {
 					GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold -= (int) temp.GetComponent<WeaponData> ().cost;
 					GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
+					GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
 				}
 
 				if (temp.GetComponent<Floating> () != null) {
@@ -346,13 +348,15 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 		if (other.gameObject.CompareTag ("Pickup")) {
 			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.name;
+			if (other.gameObject.GetComponent<WeaponData> ().cost > 0) {
+				GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.name + "\nCosts " + other.gameObject.GetComponent<WeaponData> ().cost + " gems.";
+			}
 		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag ("Pickup")) {
-			Debug.Log ("YO?");
 			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
 		}
 	}

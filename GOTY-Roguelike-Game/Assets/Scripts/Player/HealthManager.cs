@@ -18,7 +18,7 @@ public class HealthManager : MonoBehaviour {
 		}
 		set {
 			if (value > maxHealth) {
-				health = value;
+				health = maxHealth;
 			} else if (value >= 0) {
 				health = value;
 			} else {
@@ -40,8 +40,6 @@ public class HealthManager : MonoBehaviour {
 
 	public void Heal(float amount) {
 		Health += amount;
-		if (Health > 100)
-			Health = 100;
 		GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
 	}
 
