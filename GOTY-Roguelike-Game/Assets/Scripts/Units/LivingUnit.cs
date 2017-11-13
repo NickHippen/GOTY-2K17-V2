@@ -112,6 +112,15 @@ public abstract class LivingUnit : Unit {
 		}
 	}
 
+	public bool IsStunned() {
+		foreach (Status status in statuses) {
+			if (status is StatusStun) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public void Damage(float amount) {
 		Health -= amount;
 	}
