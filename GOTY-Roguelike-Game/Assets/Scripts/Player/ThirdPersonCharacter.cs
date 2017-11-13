@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -328,6 +329,12 @@ public class ThirdPersonCharacter : MonoBehaviour
 		{
 			Destroy (other.gameObject);
 			GameObject.Find ("remy").GetComponent<HealthManager> ().Heal (20);
+		}
+
+		if (other.gameObject.CompareTag ("Currency")) {
+			Destroy (other.gameObject);
+			GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold += 1;
+			GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
 		}
 	}
 }

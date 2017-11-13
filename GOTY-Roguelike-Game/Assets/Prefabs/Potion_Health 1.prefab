@@ -21,9 +21,11 @@ GameObject:
   - component: {fileID: 4188263082469766}
   - component: {fileID: 33927070672480594}
   - component: {fileID: 23029730665659624}
+  - component: {fileID: 65559501956849342}
+  - component: {fileID: 114217375950616590}
   m_Layer: 0
   m_Name: Potion_Health 1
-  m_TagString: Untagged
+  m_TagString: Potion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -80,3 +82,26 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1501697415902056}
   m_Mesh: {fileID: 4300000, guid: 2a7aeccaf51cb44258e96e4127ac8d7e, type: 3}
+--- !u!65 &65559501956849342
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501697415902056}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0.000000007450582, z: 0.05111661}
+--- !u!114 &114217375950616590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501697415902056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94c9eb3efcb83341ae01eeb59383597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -16,6 +16,8 @@ public class PlayerInventory : MonoBehaviour {
 	public float defautIconSize = 40f;
 	public float selectedIconSize = 50f;
 
+	public int gold;
+
 	void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
