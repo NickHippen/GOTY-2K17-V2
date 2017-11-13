@@ -66,7 +66,6 @@ public abstract class LivingUnit : Unit {
 		monsterCanvas.transform.SetParent(this.transform);
 		monsterCanvas.transform.position = this.transform.position;
 		healthBar = monsterCanvas.transform.GetChild(0).GetChild(0).GetComponent<Image>();
-		ApplyStatus(new StatusStun(this, 20f));
 	}
 
 	protected override void Update() {
