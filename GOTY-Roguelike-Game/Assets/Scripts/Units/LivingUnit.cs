@@ -77,15 +77,23 @@ public abstract class LivingUnit : Unit {
 		UpdateStatuses();
 	}
 
-	public void ApplyStatus(Status status) {
+	public void ApplyStatus(Status status, bool overrideExisting) {
 		for (int i = statuses.Count - 1; i >= 0; i--) {
 			Status existingStatus = statuses[i];
 			if (existingStatus.GetType().Equals(status.GetType())) {
-				statuses.RemoveAt(i);
-				break;
+				if (overrideExisting) {
+					statuses.RemoveAt(i);
+					break;
+				} else {
+					return;
+				}
 			}
 		}
 		statuses.Add(status);
+	}
+
+	public void ApplyStatus(Status status) {
+		ApplyStatus(status, true);
 	}
 
 	void UpdateStatuses() {
