@@ -28,20 +28,20 @@ public class AbilityController : MonoBehaviour {
 }
 
     public void useAbility(bool a1, bool a2, bool a3, bool a4) {
-		Debug.Log (a1);
-		Debug.Log (abilities[0].effect);
+		/*Debug.Log (a1);
+		Debug.Log (abilities[0].effect);*/
         if (a1 && abilities[0].effect != null) {
             Debug.Log("Entered");
             abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
             abilities[0].effect.Emit(10);
         }
 
-		if (a2 && abilities[1].effect != null) {
+		/*if (a2 && abilities[1].effect != null) {
 			Debug.Log("Entered");
             abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
 			//StartCoroutine ("effect");
 			abilities[1].effect.Emit(100);
-		}
+		}*/
 
 		if (a1 && abilities[2].effect != null) {
 			Debug.Log("Entered");
@@ -58,8 +58,8 @@ public class AbilityController : MonoBehaviour {
     }
 
 	public void HardKick(){
-		/*abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-		abilities[1].effect.Emit(100);*/
+		abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
+		abilities[1].effect.Emit(100);
 	}
 
 	/*IEnumerator effect(){
