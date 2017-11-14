@@ -6,13 +6,13 @@ public abstract class AbilityData : MonoBehaviour {
 
 	public float damage;
 	public ParticleSystem effect;
-	public Vector3 effectPos;
+	public float effectDistance;
 
 	// Use this for initialization
 	void Start () {
 		//effect = Instantiate (effect);
 		//effect.transform.SetParent (gameObject.transform);
-		effect.transform.position = effectPos;
+		//effect.transform.position = effectPos;
 		//effect.Play();
 	}
 	
