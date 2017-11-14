@@ -15,17 +15,17 @@ public class AbilityController : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-		if (txt != null) {
+		/*if (txt != null) {
 			txt = GameObject.Find ("UIText").GetComponent<Text> ();
 
 			string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, "", "");
 			txt.text = uitext;
-		}
+		}*/
         if (classType.ToLower().Equals("berserker"))
         {
-            abilities = abilityList.getBerserkerAbilities();
+			abilities = new List<AbilityData>(abilityList.getBerserkerAbilities());
         }
-        else abilities = abilityList.getGunslingerAbilities();
+		else abilities = new List<AbilityData>(abilityList.getGunslingerAbilities());
 
     //    for (int x = 0; x < abilities.Count; x++)
     //    {

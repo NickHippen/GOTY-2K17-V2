@@ -2335,13 +2335,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  name: GUN
+  baseName: 
   desc: 
   damage: 100
   rotation: {x: 8, y: 83.5, z: 89}
   model: {fileID: 1965549580411552}
   icon: {fileID: 21300000, guid: 49833c8300bf97349b5d27d51207a34e, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!114 &114489036251763970
 MonoBehaviour:
@@ -2362,8 +2364,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  gunController: {fileID: 9100000, guid: 0362d7ec76cdf5c4b9df5c21446bbacd, type: 2}
-  swordController: {fileID: 9100000, guid: 6c523a82ebb5fc648a025c82727d4b14, type: 2}
   rightHand: {fileID: 1277444977101748}
   leftHand: {fileID: 1123764398520138}
   grabRadius: 5
@@ -2378,14 +2378,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17c9d702a7164ac4699881bc66f4310c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilities:
-  - {fileID: 114238564871700064, guid: 99de7e79054a22c40ba66f9ff693c1c6, type: 2}
-  - {fileID: 114427042839733394, guid: e6e8f1616c2e1d64a973da31595117c7, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
+  abilityList: {fileID: 114088291668391410, guid: 065f8270c821be54ba6c1ed8d23a7f94,
+    type: 2}
   classType: 
-  gunslingerOverride: {fileID: 22100000, guid: 95333a0119a25604cadacc0a98542a64, type: 2}
-  berserkerOverride: {fileID: 22100000, guid: 1a95f4ea5a8a2984aad73db40fbda7bd, type: 2}
   txt: {fileID: 0}
 --- !u!114 &114807029528659942
 MonoBehaviour:
@@ -2406,6 +2401,7 @@ MonoBehaviour:
   empty: {fileID: 21300000, guid: edf518230b7932c44aba76b742a1cd8c, type: 3}
   defautIconSize: 30
   selectedIconSize: 50
+  gold: 0
 --- !u!114 &114874731516769152
 MonoBehaviour:
   m_ObjectHideFlags: 1

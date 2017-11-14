@@ -511,7 +511,7 @@ Transform:
   m_PrefabParentObject: {fileID: 496262, guid: 7737647c22c1fc64a88d5cd030c352ce, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 227563996}
-  m_LocalRotation: {x: 0.5326752, y: 0.070340455, z: 0.83613276, w: -0.110415146}
+  m_LocalRotation: {x: 0.53267515, y: 0.07034045, z: 0.83613265, w: -0.11041513}
   m_LocalPosition: {x: 0.000022271464, y: -0.00006150465, z: 0.026027026}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1036,13 +1036,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
-  name: 
+  baseName: 
   desc: 
   damage: 0
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 21300000, guid: 8bf4f5175d8f0dd4890b7dbc3c2da2a2, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!54 &588992092
 Rigidbody:
@@ -1221,6 +1223,11 @@ Prefab:
       propertyPath: txt
       value: 
       objectReference: {fileID: 1482699996}
+    - target: {fileID: 114537022767773998, guid: 9ef0a04e1e6520a488d2a02b44d2a44e,
+        type: 2}
+      propertyPath: classType
+      value: berserker
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9ef0a04e1e6520a488d2a02b44d2a44e, type: 2}
   m_IsPrefabParent: 0
@@ -1642,6 +1649,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockMouse: 1
   lookAt: {fileID: 1005892159}
+  relativePos: {x: 0, y: 0, z: 0}
+  cameraHeight: 5
+  currentZoom: 3
 --- !u!1 &821460536
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,13 +1684,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
-  name: 
+  baseName: 
   desc: 
   damage: 0
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 21300000, guid: 8bf4f5175d8f0dd4890b7dbc3c2da2a2, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!54 &821460538
 Rigidbody:
@@ -2456,13 +2468,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
-  name: 
+  baseName: 
   desc: 
   damage: 0
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 21300000, guid: 8bf4f5175d8f0dd4890b7dbc3c2da2a2, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!54 &1095482369
 Rigidbody:
@@ -3226,13 +3240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
-  name: 
+  baseName: 
   desc: 
   damage: 0
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 21300000, guid: 8bf4f5175d8f0dd4890b7dbc3c2da2a2, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!1 &1333512499
 GameObject:
@@ -3790,13 +3806,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: -1
-  name: 
+  baseName: 
   desc: 
   damage: 0
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 21300000, guid: 8bf4f5175d8f0dd4890b7dbc3c2da2a2, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!54 &1598820919
 Rigidbody:
@@ -4809,13 +4827,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b373b9d6f63005488a5b53b0cc5a1b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 1
-  name: 
+  baseName: 
   desc: 
   damage: 10
   rotation: {x: 0, y: 0, z: 0}
   model: {fileID: 0}
   icon: {fileID: 0}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 0}
 --- !u!114 &1972091243
 MonoBehaviour:
@@ -4829,13 +4849,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae455c2bd7e4dc459fdf2fe643a0da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 2
-  name: SWORD
+  baseName: 
   desc: 
   damage: 200
   rotation: {x: 73, y: 0, z: 17}
   model: {fileID: 1972091241}
   icon: {fileID: 21300000, guid: aa73522d973f4dd42b73556d966db2df, type: 3}
+  cost: 0
+  modifier: 0
+  emotion: 0
   effect: {fileID: 972635376}
 --- !u!114 &1972091244
 MonoBehaviour:
@@ -5303,8 +5325,6 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 1
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
-  gunController: {fileID: 0}
-  swordController: {fileID: 0}
   rightHand: {fileID: 0}
   leftHand: {fileID: 0}
   grabRadius: 1
@@ -5386,3 +5406,4 @@ MonoBehaviour:
   empty: {fileID: 0}
   defautIconSize: 30
   selectedIconSize: 35
+  gold: 0
