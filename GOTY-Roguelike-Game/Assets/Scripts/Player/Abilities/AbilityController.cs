@@ -10,31 +10,26 @@ public class AbilityController : MonoBehaviour {
     public Text txt;
     string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
 
-    private List<AbilityData> abilities;
+    public List<AbilityData> abilities;
     private Transform playerTransform;
 
     // Use this for initialization
     void Start() {
-		/*if (txt != null) {
-			txt = GameObject.Find ("UIText").GetComponent<Text> ();
 
-			string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, "", "");
-			txt.text = uitext;
-		}*/
         if (classType.ToLower().Equals("berserker"))
         {
-			abilities = new List<AbilityData>(abilityList.getBerserkerAbilities());
-        }
-		else abilities = new List<AbilityData>(abilityList.getGunslingerAbilities());
+			abilities = abilityList.getBerserkerAbilities();
 
-    //    for (int x = 0; x < abilities.Count; x++)
-    //    {
-    //        //    abilities[x] = Instantiate(abilities[x]);
-    //        abilities[x].transform.SetParent(gameObject.transform);
-    //}
+        }
+		else abilities = abilityList.getGunslingerAbilities();
+
+		string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
+		txt.text = uitext;
 }
 
     public void useAbility(bool a1, bool a2, bool a3, bool a4) {
+		Debug.Log (a1);
+		Debug.Log (abilities[0].effect);
         if (a1 && abilities[0].effect != null) {
             Debug.Log("Entered");
             abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
@@ -44,7 +39,8 @@ public class AbilityController : MonoBehaviour {
 		if (a2 && abilities[1].effect != null) {
 			Debug.Log("Entered");
             abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-            abilities[1].effect.Emit(100);
+			//StartCoroutine ("effect");
+			abilities[1].effect.Emit(100);
 		}
 
 		if (a1 && abilities[2].effect != null) {
@@ -61,6 +57,16 @@ public class AbilityController : MonoBehaviour {
 		}
     }
 
+	public void HardKick(){
+		/*abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
+		abilities[1].effect.Emit(100);*/
+	}
+
+	/*IEnumerator effect(){
+		yield return new WaitForSeconds(1f);
+		abilities[1].effect.Emit(100);
+	}*/
+
     // applies the proper layer of ability animations in animator
     public void setClassAbilities(Animator anim)
     {
@@ -70,7 +76,7 @@ public class AbilityController : MonoBehaviour {
         }
         else
         {
-            anim.SetLayerWeight(5, 1);
+            anim.SetLayerWeight(3, 1);
         }
     }
 }
