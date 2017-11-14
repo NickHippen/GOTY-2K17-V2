@@ -26,31 +26,38 @@ public class AbilityController : MonoBehaviour {
         }
         else abilities = abilityList.getGunslingerAbilities();
 
-        for (int x = 0; x < abilities.Count; x++) {
-			abilities [x] = Instantiate (abilities [x]);
-			abilities [x].transform.SetParent (gameObject.transform);
-		}
+        //for (int x = 0; x < abilities.Count; x++)
+        //{
+        //    abilities[x] = Instantiate(abilities[x]);
+        //    abilities[x].transform.SetParent(gameObject.transform);
+        //}
     }
 
     public void useAbility(bool a1, bool a2, bool a3, bool a4) {
         if (a1 && abilities[0].effect != null) {
             Debug.Log("Entered");
+            // make it world transform, will change it to in front of character direction ~ Kevin
+            abilities[0].transform.position = gameObject.transform.position + abilities[0].effectPos;
             abilities[0].effect.Emit(10);
         }
 
 		if (a2 && abilities[1].effect != null) {
 			Debug.Log("Entered");
-			abilities[1].effect.Emit(100);
+            abilities[1].transform.position = gameObject.transform.position + abilities[0].effectPos;
+            abilities[1].effect.Emit(100);
 		}
 
 		if (a1 && abilities[2].effect != null) {
 			Debug.Log("Entered");
-			abilities[0].effect.Emit(10);
+            abilities[0].transform.position = gameObject.transform.position + abilities[0].effectPos;
+            abilities[0].effect.Emit(10);
 		}
 
 		if (a2 && abilities[3].effect != null) {
 			Debug.Log("Entered");
-			abilities[1].effect.Emit(100);
+
+            abilities[1].transform.position = gameObject.transform.position + abilities[0].effectPos;
+            abilities[1].effect.Emit(100);
 		}
     }
 
