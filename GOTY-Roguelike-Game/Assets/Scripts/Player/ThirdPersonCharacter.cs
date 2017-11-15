@@ -15,6 +15,17 @@ public class ThirdPersonCharacter : MonoBehaviour
 	[SerializeField] float m_AnimSpeedMultiplier = 1f;
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 
+	public float speedBonusFromWeapon = 1;
+	public float Speed {
+		get {
+			float multiplier = 1f;
+			if (inventory.getCurrentWeapon().GetComponent<WeaponData>().modifier == WeaponModifier.Light) {
+				multiplier = 1.3f;
+			}
+			return m_MoveSpeedMultiplier * multiplier;
+		}
+	}
+
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -194,7 +205,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		// this allows us to modify the positional speed before it's applied.
 		if (m_IsGrounded && Time.deltaTime > 0)
 		{
-			Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
+			Vector3 v = (m_Animator.deltaPosition * Speed) / Time.deltaTime;
 
 			// we preserve the existing y part of the current velocity.
 			v.y = m_Rigidbody.velocity.y;

@@ -34,6 +34,14 @@ public class HealthManager : MonoBehaviour {
 	}
 	
 	public void Damage(float amount) {
+		WeaponEmotion emotion = GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>().emotion;
+		if (emotion == WeaponEmotion.Confidence) {
+			amount *= 0.8f;
+		} else if (emotion == WeaponEmotion.Shame) {
+			if (Random.Range(0f, 1f) < 0.15f) {
+				return; // Dodge
+			}
+		}
 		Health -= amount;
 		GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
 	}

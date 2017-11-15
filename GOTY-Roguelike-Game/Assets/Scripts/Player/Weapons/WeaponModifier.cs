@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum WeaponModifier {
 
-	None=0, Weak, Strong, Siphon, Light, Heavy, Karma, Focused
+	None=0, Weak, Strong, Siphon, Light/*, Heavy*/, Karma, Focused
 
 }
 
