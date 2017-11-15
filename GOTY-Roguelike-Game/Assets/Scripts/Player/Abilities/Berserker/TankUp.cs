@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankUp : AbilityData {
+public class TankUp : Ability {
 
     public override void applyEffect()
     {

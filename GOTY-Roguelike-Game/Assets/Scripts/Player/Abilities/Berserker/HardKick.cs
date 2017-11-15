@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HardKick : AbilityData {
+public class HardKick : Ability {
 
     public override void applyEffect()
     {

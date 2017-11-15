@@ -303,7 +303,7 @@ Prefab:
         type: 2}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 1967260855}
+      objectReference: {fileID: 1776782646}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0011227d0401312408ea4f37c209045e, type: 2}
   m_IsPrefabParent: 0
@@ -2744,6 +2744,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1744972777}
+--- !u!1 &1776782646 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1534932496154960, guid: 53925465321384d47bc4d854b2197d57,
+    type: 2}
+  m_PrefabInternal: {fileID: 4046736}
 --- !u!1 &1782036139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,10 +3178,6 @@ Transform:
   m_Father: {fileID: 1972430417}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1967260855 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 118234, guid: a4e476a037022df448ead5d0ceea7d06, type: 2}
-  m_PrefabInternal: {fileID: 635317665}
 --- !u!1 &1972430416
 GameObject:
   m_ObjectHideFlags: 0

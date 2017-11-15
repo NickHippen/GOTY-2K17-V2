@@ -10,7 +10,7 @@ public class AbilityController : MonoBehaviour {
     public Text txt;
     string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
 
-    private List<AbilityData> abilities;
+    private List<Ability> abilities;
 
     // Use this for initialization
     void Start() {

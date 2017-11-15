@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : AbilityData
+public class Grenade : Ability
 {
     public override void applyEffect()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cyclone : AbilityData {
+public class Cyclone : Ability {
 
     public override void applyEffect()
     {

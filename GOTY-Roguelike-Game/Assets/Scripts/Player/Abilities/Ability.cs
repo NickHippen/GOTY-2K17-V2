@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AbilityData : MonoBehaviour {
+public abstract class Ability : MonoBehaviour {
 
 	public float damage;
+    public float cooldownTime;
 	public ParticleSystem effect;
 	public float effectDistance;
+
+    private float cooldownTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +23,12 @@ public abstract class AbilityData : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public float CooldownTimer
+    {
+        get { return cooldownTimer; }
+        set { cooldownTimer = value; }
+    }
 
     public abstract void applyEffect();
 
