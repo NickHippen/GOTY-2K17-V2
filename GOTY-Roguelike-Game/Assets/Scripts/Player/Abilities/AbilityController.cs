@@ -10,8 +10,7 @@ public class AbilityController : MonoBehaviour {
     public Text txt;
     string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
 
-    public List<AbilityData> abilities;
-    private Transform playerTransform;
+    private List<AbilityData> abilities;
 
     // Use this for initialization
     void Start() {
@@ -61,11 +60,6 @@ public class AbilityController : MonoBehaviour {
 		abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
 		abilities[1].effect.Emit(100);
 	}
-
-	/*IEnumerator effect(){
-		yield return new WaitForSeconds(1f);
-		abilities[1].effect.Emit(100);
-	}*/
 
     // applies the proper layer of ability animations in animator
     public void setClassAbilities(Animator anim)
