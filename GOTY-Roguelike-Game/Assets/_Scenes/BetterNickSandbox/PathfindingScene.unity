@@ -1256,7 +1256,6 @@ MonoBehaviour:
     type: 2}
   classType: berserker
   txt: {fileID: 0}
-  abilities: []
 --- !u!114 &282933527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,6 +1290,7 @@ MonoBehaviour:
   m_MoveSpeedMultiplier: 3
   m_AnimSpeedMultiplier: 1
   m_GroundCheckDistance: 0.3
+  speedBonusFromWeapon: 1
   rightHand: {fileID: 720431892}
   leftHand: {fileID: 744670447}
   grabRadius: 5
