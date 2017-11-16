@@ -30,8 +30,11 @@ public class AbilityController : MonoBehaviour {
 
     private void Update()
     {
-        string cdtext = string.Format(cooldownText, abilities[0].CooldownTimer, abilities[1].CooldownTimer, abilities[2].CooldownTimer, abilities[3].CooldownTimer);
-        cdText.text = cdtext;
+        if (cdText != null)
+        {
+            string cdtext = string.Format(cooldownText, abilities[0].CooldownTimer, abilities[1].CooldownTimer, abilities[2].CooldownTimer, abilities[3].CooldownTimer);
+            cdText.text = cdtext;
+        }
     }
 
     // returns whether or not the ability is used

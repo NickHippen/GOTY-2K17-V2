@@ -12,15 +12,15 @@ public class Grenade : Ability
     public override void applyEffect(GameObject player)
     {
         
-        if(!applyOnFrame)
-        {   // ability press, instantiate grenade
-            applyOnFrame = true;
-            grenade = Instantiate(grenadeObject);
-        }
-        else
-        {   // on frame, throw grenade
-            applyOnFrame = false;
-            grenade.Release();
-        }
+        //if(!applyOnFrame)
+        //{   // ability press, instantiate grenade
+        //    applyOnFrame = true;
+        //    grenade = Instantiate(grenadeObject);
+        //}
+        //else
+        //{   // on frame, throw grenade
+        //    applyOnFrame = false;
+        //    grenade.Release();
+        //}
     }
 }
