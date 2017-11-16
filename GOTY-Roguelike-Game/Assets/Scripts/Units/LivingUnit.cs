@@ -121,6 +121,12 @@ public abstract class LivingUnit : Unit {
 	}
 
 	public void Damage(float amount) {
+		foreach (Status status in statuses) {
+			if (status is StatusVulnerable) {
+				amount *= ((StatusVulnerable)status).Multiplier;
+				break;
+			}
+		}
 		Health -= amount;
 	}
 

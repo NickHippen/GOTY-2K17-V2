@@ -4,16 +4,27 @@ using UnityEngine;
 
 public class AbilityPrefabList : MonoBehaviour {
     
-    public List<AbilityData> gunslingerList;
-    public List<AbilityData> berserkerList;
+    public List<Ability> gunslingerList;
+    public List<Ability> berserkerList;
 
-	public List<AbilityData> getGunslingerAbilities()
+	public List<Ability> getGunslingerAbilities()
     {
-        return gunslingerList;
+        List<Ability> list = new List<Ability>();
+        foreach(Ability item in gunslingerList)
+        {
+            list.Add(Instantiate(item));
+        }
+        return list;
     }
 
-    public List<AbilityData> getBerserkerAbilities()
+    public List<Ability> getBerserkerAbilities()
     {
-        return berserkerList;
+        // return an instantated list
+        List<Ability> list = new List<Ability>();
+        foreach (Ability item in berserkerList)
+        {
+            list.Add(Instantiate(item));
+        }
+        return list;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Adrenaline : AbilityData {
+public class Adrenaline : Ability {
     
     public override void applyEffect()
     {

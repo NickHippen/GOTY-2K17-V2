@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cyclone : AbilityData {
+public class Cyclone : Ability {
 
     public override void applyEffect()
     {
-        Collider[] colliders = Physics.OverlapSphere(effectPos, 1f);
+        Collider[] colliders = Physics.OverlapSphere(effect.transform.position, 1f);
         foreach(Collider collider in colliders)
         {
             if(collider.tag == "Monster")
             {
                 AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
-                unit.health -= damage;
+                //unit.health -= damage;
+				unit.Damage(damage);
             }
         }
     }
