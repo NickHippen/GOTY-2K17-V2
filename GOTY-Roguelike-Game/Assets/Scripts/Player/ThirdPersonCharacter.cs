@@ -120,17 +120,23 @@ public class ThirdPersonCharacter : MonoBehaviour
 		m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetBool("OnGround", m_IsGrounded);
 		m_Animator.SetBool("Attack", atk);
-		m_Animator.SetBool("Ability1", a1);
-		m_Animator.SetBool("Ability2", a2);
-        m_Animator.SetBool("Ability3", a3);
-        m_Animator.SetBool("Ability4", a4);
-		m_Animator.SetBool ("Dead", m_isDead);
-
-        //If any abilities are true, activate use ability
-        if (a1 || a2 || a3 || a4)
+        if (!a1 || abilities.useAbility(0))
         {
-            abilities.useAbility(a1, a2, a3, a4);
+            m_Animator.SetBool("Ability1", a1);
         }
+        if (!a2 || abilities.useAbility(1))
+        {
+            m_Animator.SetBool("Ability2", a2);
+        }
+        if (!a3 || abilities.useAbility(2))
+        {
+            m_Animator.SetBool("Ability3", a3);
+        }
+        if (!a4 || abilities.useAbility(3))
+        {
+            m_Animator.SetBool("Ability4", a4);
+        }
+		m_Animator.SetBool ("Dead", m_isDead);
 
         if (!m_IsGrounded)
 		{
@@ -241,7 +247,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 				} else {
 					GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold -= (int) temp.GetComponent<WeaponData> ().cost;
 					GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
-					GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
 				}
 
 				if (temp.GetComponent<Floating> () != null) {
@@ -357,18 +362,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 			GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
 		}
 
-		if (other.gameObject.CompareTag ("Pickup")) {
-			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.name;
-			if (other.gameObject.GetComponent<WeaponData> ().cost > 0) {
-				GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.name + "\nCosts " + other.gameObject.GetComponent<WeaponData> ().cost + " gems.";
-			}
-		}
+
 	}
 
 	void OnTriggerExit(Collider other)
 	{
-		if (other.gameObject.CompareTag ("Pickup")) {
-			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
-		}
 	}
 }

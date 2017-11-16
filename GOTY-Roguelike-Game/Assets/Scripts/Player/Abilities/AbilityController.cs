@@ -7,8 +7,10 @@ public class AbilityController : MonoBehaviour {
 
     public AbilityPrefabList abilityList;
     public string classType;
-    public Text txt;
+    public Text uiText;
+    public Text cdText;
     string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
+    string cooldownText = "Z: {0:0.00} X: {1:0.00} C: {2:0.00} V: {3:0.00}";
 
     private List<Ability> abilities;
 
@@ -17,49 +19,46 @@ public class AbilityController : MonoBehaviour {
 
         if (classType.ToLower().Equals("berserker"))
         {
-			abilities = abilityList.getBerserkerAbilities();
+			abilities = abilityList.getBerserkerAbilities(gameObject.transform.parent);
 
         }
-		else abilities = abilityList.getGunslingerAbilities();
+		else abilities = abilityList.getGunslingerAbilities(gameObject.transform.parent);
 
-		string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
-		txt.text = uitext;
-}
-
-    public void useAbility(bool a1, bool a2, bool a3, bool a4) {
-		/*Debug.Log (a1);
-		Debug.Log (abilities[0].effect);*/
-        if (a1 && abilities[0].effect != null) {
-            Debug.Log("Entered");
-            abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
-            abilities[0].effect.Emit(10);
+        if (uiText != null)
+        {
+            string uitext = string.Format(abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
+            uiText.text = uitext;
         }
-
-		/*if (a2 && abilities[1].effect != null) {
-			Debug.Log("Entered");
-            abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-			//StartCoroutine ("effect");
-			abilities[1].effect.Emit(100);
-		}*/
-
-		if (a1 && abilities[2].effect != null) {
-			Debug.Log("Entered");
-            abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
-            abilities[0].effect.Emit(10);
-		}
-
-		if (a2 && abilities[3].effect != null) {
-			Debug.Log("Entered");
-
-            abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-            abilities[1].effect.Emit(100);
-		}
     }
 
-	public void HardKick(){
-		abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-		abilities[1].effect.Emit(100);
-	}
+    private void Update()
+    {
+        if (cdText != null)
+        {
+            string cdtext = string.Format(cooldownText, abilities[0].CooldownTimer, abilities[1].CooldownTimer, abilities[2].CooldownTimer, abilities[3].CooldownTimer);
+            cdText.text = cdtext;
+        }
+    }
+
+    // returns whether or not the ability is used
+    public bool useAbility(int abilityIndex) {
+        // ability is not availible
+        if (!abilities[abilityIndex].IsAvailible)
+            return false;
+        // else use the ability
+        abilities[abilityIndex].IsAvailible = false;
+
+        // if the animation will by applied during animation, then skip
+        if (!abilities[abilityIndex].ApplyOnFrame)
+        {
+            abilities[abilityIndex].applyEffect(gameObject);
+        }
+        return true;
+    }
+
+	public void applyEffectOnFrame(int abilityIndex){
+        abilities[abilityIndex].applyEffect(gameObject);
+    }
 
     // applies the proper layer of ability animations in animator
     public void setClassAbilities(Animator anim)

@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Cyclone : Ability {
 
-    public override void applyEffect()
+    public float damage;
+    public ParticleSystem effect;
+    public float effectDistance;
+
+    public override void applyEffect(GameObject player)
     {
-        Collider[] colliders = Physics.OverlapSphere(effect.transform.position, 1f);
+        this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, 1f);
         foreach(Collider collider in colliders)
         {
             if(collider.tag == "Monster")
             {
                 AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
-                unit.health -= damage;
+                //unit.health -= damage;
+				unit.Damage(damage);
             }
         }
+        effect.Emit(10);
     }
 }

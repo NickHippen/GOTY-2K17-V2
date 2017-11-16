@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class TankUp : Ability {
 
-    public override void applyEffect()
+    public override void applyEffect(GameObject player)
     {
-        // need external method
+		Debug.Log ("TANK UP");
+		player.GetComponent<HealthManager> ().invincible = !player.GetComponent<HealthManager> ().invincible;
     }
 }
