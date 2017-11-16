@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Grenade : Ability
 {
-    public override void applyEffect()
+    public float damage;
+    public GrenadeObject grenadeObject;
+
+    private GrenadeObject grenade;
+
+    public override void applyEffect(GameObject player)
     {
-        Collider[] colliders = Physics.OverlapSphere(effect.transform.position, 1f);
-        foreach (Collider collider in colliders)
-        {
-            if (collider.tag == "Monster")
-            {
-                AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
-                unit.health -= damage;
-            }
+        
+        if(!applyOnFrame)
+        {   // ability press, instantiate grenade
+            applyOnFrame = true;
+            grenade = Instantiate(grenadeObject);
+        }
+        else
+        {   // on frame, throw grenade
+            applyOnFrame = false;
+            grenade.Release();
         }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Adrenaline : Ability {
     
-    public override void applyEffect()
+    public override void applyEffect(GameObject player)
     {
         // need external method
     }

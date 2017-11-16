@@ -51,6 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d4a45b4e054fb41acd484ee5a3d58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownTime: 3
+  applyOnFrame: 0
   damage: 0
-  effect: {fileID: 0}
-  effectDistance: 8
+  grenadeObject: {fileID: 114892718769738106, guid: bd9994d91042c64409cbc2d0fce27da0,
+    type: 2}
