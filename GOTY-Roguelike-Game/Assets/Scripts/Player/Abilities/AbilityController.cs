@@ -24,8 +24,11 @@ public class AbilityController : MonoBehaviour {
         }
 		else abilities = abilityList.getGunslingerAbilities(gameObject.transform.parent);
 
-		string uitext = string.Format (abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
-		uiText.text = uitext;
+        if (uiText != null)
+        {
+            string uitext = string.Format(abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
+            uiText.text = uitext;
+        }
     }
 
     private void Update()
