@@ -12,7 +12,8 @@ public class Cyclone : Ability {
             if(collider.tag == "Monster")
             {
                 AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
-                unit.health -= damage;
+                //unit.health -= damage;
+				unit.Damage(damage);
             }
         }
     }

@@ -33,6 +33,7 @@ public class AbilityController : MonoBehaviour {
             Debug.Log("Entered");
             abilities[0].IsAvailible = false;
             abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
+			abilities [0].applyEffect ();
             if (abilities[0].effect != null)
                 abilities[0].effect.Emit(10);
         }
@@ -42,24 +43,27 @@ public class AbilityController : MonoBehaviour {
             Debug.Log("Entered");
             abilities[1].IsAvailible = false;
             abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
+			abilities [1].applyEffect ();
             if (abilities[1].effect != null)
                 abilities[1].effect.Emit(100);
         }
 
-        if (a3 && abilities[0].IsAvailible) {
+        if (a3 && abilities[2].IsAvailible) {
 			Debug.Log("Entered");
-            abilities[0].IsAvailible = false;
-            abilities[0].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[0].effectDistance;
-            if(abilities[0].effect != null)
-                abilities[0].effect.Emit(10);
+            abilities[2].IsAvailible = false;
+            abilities[2].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[2].effectDistance;
+			abilities [2].applyEffect ();
+            if(abilities[2].effect != null)
+                abilities[2].effect.Emit(10);
 		}
 
-		if (a4 && abilities[1].IsAvailible) {
+		if (a4 && abilities[3].IsAvailible) {
 			Debug.Log("Entered");
-            abilities[1].IsAvailible = false;
-            abilities[1].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[1].effectDistance;
-            if(abilities[1].effect != null)
-                abilities[1].effect.Emit(100);
+            abilities[3].IsAvailible = false;
+            abilities[3].transform.position = gameObject.transform.position + gameObject.transform.forward * abilities[3].effectDistance;
+			abilities [3].applyEffect ();
+            if(abilities[3].effect != null)
+                abilities[3].effect.Emit(100);
 		}
     }
 
