@@ -10,7 +10,7 @@ public class TestAttack : Attack {
 		this.text = text;
 	}
 
-	public override void Use() {
+	public override void Use(Transform target) {
 		MonoBehaviour.print(text);
 		Attacker.UnitAnimator.SetBool("Attack", true);
 	}

@@ -45,7 +45,7 @@ public abstract class AggressiveUnit : LivingUnit {
 					continue;
 				}
 				if (attack.Controller.Check()) {
-					attack.Use();
+					attack.Use(target);
 				}
 			}
 		}

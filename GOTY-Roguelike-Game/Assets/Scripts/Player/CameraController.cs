@@ -66,11 +66,11 @@ public class CameraController : MonoBehaviour {
 		camTransform.LookAt(lookAt.position + relativePos);
 	}
 
-	void OnDrawGizmos() {
-		if (lookAt == null) {
-			return;
-		}
-		Gizmos.DrawCube(lookAt.position + relativePos, Vector3.one / 10);
-	}
+	//void OnDrawGizmos() {
+	//	if (lookAt == null) {
+	//		return;
+	//	}
+	//	Gizmos.DrawCube(lookAt.position + relativePos, Vector3.one / 10);
+	//}
 
 }

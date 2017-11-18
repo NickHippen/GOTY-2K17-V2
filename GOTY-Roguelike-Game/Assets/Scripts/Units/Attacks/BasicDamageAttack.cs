@@ -7,7 +7,7 @@ public class BasicDamageAttack : Attack {
 	public BasicDamageAttack(AttackController controller) : base(controller) {
 	}
 
-	public override void Use() {
+	public override void Use(Transform target) {
 		HealthManager healthManager = Attacker.target.GetComponent<HealthManager>();
 		if (healthManager != null) {
 			//healthManager.Damage(Attacker.CalculateAttackPower());
