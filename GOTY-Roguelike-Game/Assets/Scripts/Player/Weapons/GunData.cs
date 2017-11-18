@@ -37,9 +37,13 @@ public class GunData : WeaponData {
 		this.line.SetPosition(0, shootPoint.position);
 		if (Physics.Raycast(shootPoint.position, Camera.main.transform.forward, out hit, range)) {
 			this.line.SetPosition(1, hit.point);
-			//Debug.Log(hit);
-			AggressiveUnit monster = hit.transform.GetComponent<AggressiveUnit>();
-			if (monster != null) {
+			RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
+			if (rigCollider == null) {
+				return;
+			}
+			Unit unit = rigCollider.RootUnit;
+			if (unit is AggressiveUnit) {
+				AggressiveUnit monster = (AggressiveUnit)unit;
 				float damage = this.damage;
 				damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
 				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
