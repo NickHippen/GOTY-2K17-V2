@@ -22,7 +22,7 @@ public class SpawnAttack : Attack {
 		this.radius = radius;
 	}
 
-	public override void Use() {
+	public override void Use(Transform target) {
 		Debug.Log("Spawn Attack");
 		Vector3 spawnMidPoint = Attacker.transform.position;
 		float pi2 = 2 * Mathf.PI;

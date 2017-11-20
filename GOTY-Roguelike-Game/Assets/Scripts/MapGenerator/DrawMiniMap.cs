@@ -17,8 +17,8 @@ public class DrawMiniMap : MonoBehaviour {
 		GameObject toInstantiate = null;
 		GameObject instance = null;
 		Vector3 v3;
-		for (int i = 0; i < 60; i++) {
-			for (int j = 0; j < 40; j++) {
+		for (int i = 0; i < maparr.GetLength(0); i++) {
+			for (int j = 0; j < maparr.GetLength(1); j++) {
 				switch (maparr [i, j]) {
 				case "wall":
 					toInstantiate = wallIcon;

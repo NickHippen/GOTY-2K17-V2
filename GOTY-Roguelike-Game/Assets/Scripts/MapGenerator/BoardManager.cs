@@ -12,6 +12,8 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] items;
 	public GameObject tile;
 	public GameObject wall;
+	public GameObject door;
+	public GameObject shop;
 	public GameObject torch;
 
 	public GameObject exitPortal;
@@ -19,8 +21,8 @@ public class BoardManager : MonoBehaviour
 
 	public DrawMiniMap miniMap;
 
-	static int mapw = 60;
-	static int maph = 40;
+	public int mapw = 60;
+	public int maph = 40;
 	public GenerateMap mapGenerator;
 
 	private Map mymap;
@@ -37,17 +39,20 @@ public class BoardManager : MonoBehaviour
 	private float walloffset = 3.72f;
 	private float torchoffset = 3.44f;
 	void Start(){
-
+		Random.seed = (int)System.DateTime.Now.Ticks;
 	}
 
 	//Creates a board object. Places cubes as children of that board object based on our map array
 	void BoardSetup ()
 	{
-		mymap = mapGenerator.generate (mapw, maph);
-		maparr = mymap.maparr;
-		roomList = mymap.roomList;
-		GameObject instance;
+		BuildMap:
+			mymap = mapGenerator.generate (mapw, maph);
+			maparr = mymap.maparr;
+			roomList = mymap.roomList;
+		if (roomList.Count <= 6)
+			goto BuildMap;
 
+		GameObject instance;
 		boardHolder = new GameObject ("Board").transform;
 		monsterHolder = new GameObject ("Monsters").transform;
 		exitHolder = new GameObject ("Exit Portal").transform;
@@ -63,14 +68,12 @@ public class BoardManager : MonoBehaviour
 				foreach (Renderer child in instance.GetComponentsInChildren<Renderer>()) {
 					child.material.mainTexture = texture;
 				}
-				Debug.Log ((i + j) % 2 == 0);
 
 				//East wall
 				if ((i < mapw - 1 && maparr[i + 1, j] == "wall") || (i < mapw - 1 && maparr[i,j] == "room" && maparr[i+1,j] == "hall")) {
 					instance = Instantiate (wall, new Vector3 (i * tilesize + walloffset, -0.2f, j * tilesize), Quaternion.Euler(0,0,0)) as GameObject;
-					instance.GetComponent<Renderer>().material.mainTexture = texture;
-
 					instance.transform.SetParent(boardHolder);
+					instance.GetComponent<Renderer>().material.mainTexture = texture;
 					if ((i + j) % 2 == 0) {
 						instance = Instantiate(torch, new Vector3 (i * tilesize + torchoffset, 3f, j * tilesize), Quaternion.Euler(0,0,0)) as GameObject;
 						instance.transform.SetParent(boardHolder);
@@ -111,6 +114,35 @@ public class BoardManager : MonoBehaviour
 						instance.transform.SetParent(boardHolder);
 					}
 				}
+
+				//South door
+				if (j > 0 && maparr [i, j - 1] == "door" && maparr[i,j] == "hall") {
+					instance = Instantiate (door, new Vector3 (i * tilesize, -0.2f, j * tilesize - walloffset), Quaternion.Euler(0,90,0)) as GameObject;
+					instance.transform.SetParent(boardHolder);
+					instance.GetComponent<Renderer>().material.mainTexture = texture;
+				}
+
+				//West door
+				if (i > 0 && maparr [i-1, j ] == "door" && maparr[i,j] == "hall") {
+					instance = Instantiate (door, new Vector3 (i * tilesize - walloffset, -0.2f, j * tilesize), Quaternion.Euler(0,180,0)) as GameObject;
+					instance.transform.SetParent(boardHolder);
+					instance.GetComponent<Renderer>().material.mainTexture = texture;
+				}
+
+				//East door
+				if (i < mapw-1 && maparr [i+1, j ] == "door" && maparr[i,j] == "hall") {
+					instance = Instantiate (door, new Vector3 (i * tilesize + walloffset, -0.2f, j * tilesize), Quaternion.Euler(0,0,0)) as GameObject;
+					instance.transform.SetParent(boardHolder);
+					instance.GetComponent<Renderer>().material.mainTexture = texture;
+				}
+
+				//North door
+				if (j < maph-1 && maparr [i, j + 1] == "door" && maparr[i,j] == "hall") {
+					instance = Instantiate (door, new Vector3 (i * tilesize, -0.2f, j * tilesize + walloffset), Quaternion.Euler(0,-90,0)) as GameObject;
+					instance.transform.SetParent(boardHolder);
+					instance.GetComponent<Renderer>().material.mainTexture = texture;
+				}
+
 				//Vector3 position = new Vector3 (j, 0, i);
 				//Instantiate (walls[0], position, Quaternion.identity);
 			}
@@ -120,13 +152,22 @@ public class BoardManager : MonoBehaviour
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
 		GameObject player = GameObject.Find ("remy");
-		player.transform.position = new Vector3((roomList[playerSpawn].startx + roomList[playerSpawn].width/2) * tilesize, .6f, (roomList[playerSpawn].starty + roomList[playerSpawn].height/2) * tilesize);
+		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
 
 		GameObject mycam = GameObject.Find ("Main Camera");
 		mycam.GetComponent<CameraController> ().lookAt = player.transform;
 		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 		playerRoom = roomList [playerSpawn];
 		roomList.Remove (playerRoom);
+
+		//Spawn shops
+		int numShops = roomList.Count / 4;
+		for (int i = 0; i < numShops; i++) {
+			int shopSpawn = Random.Range (0, roomList.Count);
+			Room shoproom = roomList [shopSpawn];
+			instance = Instantiate(shop, new Vector3((shoproom.startx + shoproom.width / 2) * tilesize, 1f, (shoproom.starty + shoproom.height / 2) * tilesize), Quaternion.Euler(0,0,0));
+			roomList.Remove (shoproom);
+		}
 
 		//Spawn exit portal
 		Room farthestRoom = roomList [0];
@@ -181,9 +222,6 @@ public class BoardManager : MonoBehaviour
 	{
 		Vector3 remyPos = GameObject.Find ("remy").transform.localPosition;
 		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
-
-		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)) < 1);
-		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)));
 		if (Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z) < 1){
 			levelmanager.LoadNextLevel ();
 		}

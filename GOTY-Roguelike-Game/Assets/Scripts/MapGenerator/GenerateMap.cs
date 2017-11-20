@@ -5,6 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 //Object used to store directionally preferenced nodes in backtracker
+
 public class MapNode
 {
 	public int x { get; set; }
@@ -60,6 +61,10 @@ public class Map
 
 public class GenerateMap : MonoBehaviour
 {
+	void Start(){
+		Random.seed = (int)System.DateTime.Now.Ticks;
+	}
+
 	//Receives a node and checks if the nodes around it are available to create a wall. Puts this node into the stack.
 	MapNode CheckFree (MapNode currentnode, int mapw, int maph, string[,] maparr)
 	{
@@ -163,7 +168,7 @@ public class GenerateMap : MonoBehaviour
 		}
 
 		//Generate the rooms of the dungeon
-		var room_place_attempts = 1000;
+		var room_place_attempts = 3000;
 		for (var i = 1; i < room_place_attempts; i++) {
 			int[] roomsize = { 5, 7, 9 };
 			var width = roomsize [Random.Range (0, roomsize.Length - 1)];

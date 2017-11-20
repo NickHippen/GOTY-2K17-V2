@@ -15,8 +15,9 @@ public class WeaponFactory {
 	//	}
 	//}
 
-	public static SwordData CreateRandomSword(GameObject swordBase, Vector3 position, int level, float quality) {
+	public static SwordData CreateRandomSword(GameObject swordBase, Vector3 position, int level, float quality, Transform spawner) {
 		GameObject swordObj = GameObject.Instantiate(swordBase, position, Quaternion.identity);
+		swordObj.transform.SetParent (spawner);
 		SwordData swordData = swordObj.GetComponent<SwordData>();
 
 		// Generate stats
@@ -40,8 +41,9 @@ public class WeaponFactory {
 		return swordData;
 	}
 
-	public static GunData CreateRandomGun(GameObject gunBase, Vector3 position, int level, float quality) {
+	public static GunData CreateRandomGun(GameObject gunBase, Vector3 position, int level, float quality, Transform spawner) {
 		GameObject gunObj = GameObject.Instantiate(gunBase, position, Quaternion.identity);
+		gunObj.transform.SetParent (spawner);
 		GunData gunData = gunObj.GetComponent<GunData>();
 
 		// Generate stats
