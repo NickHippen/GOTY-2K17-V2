@@ -12,6 +12,8 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public float attackPower = 5f;
 
+	public bool HasWeapon { get; set; }
+
 	protected new void Start() {
 		base.Start();
 		ApplyAttackBehavior();
@@ -67,13 +69,24 @@ public abstract class AggressiveUnit : LivingUnit {
 		return attackPower;
 	}
 
-	public override void OnRigCollisionEnter(Collision collision) {
-		if (this.UnitAnimator.GetBool("Attack") && collision.gameObject.tag == "Player") {
-			HealthManager healthManager = collision.gameObject.GetComponent<HealthManager>();
+	public override void OnRigTriggerEnter(Collider collider) {
+		if (HasWeapon) { // Damage is done by weapon collider if it exists
+			return;
+		}
+		AttackCollision(collider);
+	}
+
+	public void OnWeaponTriggerEnter(Collider collider) {
+		AttackCollision(collider);
+	}
+
+	private void AttackCollision(Collider collider) {
+		if (this.UnitAnimator.GetBool("Attack") && collider.gameObject.tag == "Player") {
+			HealthManager healthManager = collider.gameObject.GetComponent<HealthManager>();
 			if (healthManager == null) {
 				return;
 			}
-			Debug.Log("Damage");
+			Debug.Log("Weapon collide");
 			healthManager.Damage(CalculateAttackPower());
 		}
 	}

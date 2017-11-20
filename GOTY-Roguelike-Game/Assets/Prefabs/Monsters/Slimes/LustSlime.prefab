@@ -19,6 +19,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4365253144279726}
+  - component: {fileID: 64093180190986242}
+  - component: {fileID: 114174688415589330}
   m_Layer: 0
   m_Name: SlimeControl
   m_TagString: Untagged
@@ -376,7 +378,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953699167637816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -54, y: 14.169365, z: -51.523956}
+  m_LocalPosition: {x: -238.24, y: 9.1002705e-17, z: 117.59}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 4946320027537258}
@@ -506,6 +508,20 @@ Transform:
   m_Father: {fileID: 4499720785669444}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &64093180190986242
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1042566864174780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Convex: 1
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 42876b34bb70dd642a6a00df923eda90, type: 3}
 --- !u!95 &95547871820541786
 Animator:
   serializedVersion: 3
@@ -515,7 +531,7 @@ Animator:
   m_GameObject: {fileID: 1953699167637816}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 42876b34bb70dd642a6a00df923eda90, type: 3}
-  m_Controller: {fileID: 9100000, guid: b81a0bed4d40ef34a9330bd284a3b4bb, type: 2}
+  m_Controller: {fileID: 22100000, guid: 2cfad0573f0654643b9a4e1c7c316df3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -523,6 +539,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114174688415589330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1042566864174780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa74097d8ad314e91982172940220a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114782593983377036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,8 +567,11 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 4
   turnDist: 1
-  destinationRadius: 1.5
+  destinationRadius: 2
   atGoal: 0
+  health: 100
+  maxHealth: 100
+  canvasHeight: 0.03
   targetTag: Player
   aggroRadius: 20
   attackPower: 5

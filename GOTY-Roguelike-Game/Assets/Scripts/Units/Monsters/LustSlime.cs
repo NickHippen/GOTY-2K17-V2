@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : AggressiveUnit {
+public class LustSlime : AggressiveUnit {
 
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new BasicDamageAttack(

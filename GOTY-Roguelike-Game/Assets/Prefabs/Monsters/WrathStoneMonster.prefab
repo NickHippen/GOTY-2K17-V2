@@ -80,6 +80,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4058047162036160}
+  - component: {fileID: 135360536102608886}
+  - component: {fileID: 114596307596604902}
   m_Layer: 0
   m_Name: Bone001
   m_TagString: Untagged
@@ -172,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958042302294484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.240005, y: 15.11, z: -1.7799988}
+  m_LocalPosition: {x: -55.240005, y: 15.11, z: -30.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4058047162036160}
@@ -312,10 +314,33 @@ MonoBehaviour:
   atGoal: 0
   health: 100
   maxHealth: 100
-  canvasHeight: 0.03
+  canvasHeight: 2
   targetTag: Player
   aggroRadius: 20
   attackPower: 5
+--- !u!114 &114596307596604902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622434245684780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa74097d8ad314e91982172940220a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &135360536102608886
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1622434245684780}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.75
+  m_Center: {x: -0.25, y: 0, z: 0}
 --- !u!137 &137917830162339440
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
