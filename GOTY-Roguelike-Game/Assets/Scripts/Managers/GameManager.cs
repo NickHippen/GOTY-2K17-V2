@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour {
 
 		DontDestroyOnLoad(gameObject);
 		boardScript = GetComponent<BoardManager>();
-
-		Debug.Log ("HEY");
 	}
 
 	//This is called each time a scene is loaded.

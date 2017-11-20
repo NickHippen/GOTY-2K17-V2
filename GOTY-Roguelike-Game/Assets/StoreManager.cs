@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class StoreManager : MonoBehaviour {
-	public int hello;
 	public GameObject weaponSpawner;
 
 	// Use this for initialization
@@ -14,8 +13,7 @@ public class StoreManager : MonoBehaviour {
 					continue;
 				GameObject instance = Instantiate (weaponSpawner);
 				instance.transform.SetParent (this.transform);
-				instance.transform.position = this.transform.position;
-				instance.transform.position = new Vector3 (8 * i, 22f, 8 * j);
+				instance.transform.localPosition = new Vector3 (8 * i, .5f, 8 * j);
 			}
 		}
 	}

@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour
 	public GameObject[] items;
 	public GameObject tile;
 	public GameObject wall;
+	public GameObject shop;
 	public GameObject torch;
 
 	public GameObject exitPortal;
@@ -37,7 +38,7 @@ public class BoardManager : MonoBehaviour
 	private float walloffset = 3.72f;
 	private float torchoffset = 3.44f;
 	void Start(){
-
+		Random.seed = (int)System.DateTime.Now.Ticks;
 	}
 
 	//Creates a board object. Places cubes as children of that board object based on our map array
@@ -66,7 +67,6 @@ public class BoardManager : MonoBehaviour
 				foreach (Renderer child in instance.GetComponentsInChildren<Renderer>()) {
 					child.material.mainTexture = texture;
 				}
-				Debug.Log ((i + j) % 2 == 0);
 
 				//East wall
 				if ((i < mapw - 1 && maparr[i + 1, j] == "wall") || (i < mapw - 1 && maparr[i,j] == "room" && maparr[i+1,j] == "hall")) {
@@ -123,13 +123,23 @@ public class BoardManager : MonoBehaviour
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
 		GameObject player = GameObject.Find ("remy");
-		player.transform.position = new Vector3((roomList[playerSpawn].startx + roomList[playerSpawn].width/2) * tilesize, .6f, (roomList[playerSpawn].starty + roomList[playerSpawn].height/2) * tilesize);
+		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
 
 		GameObject mycam = GameObject.Find ("Main Camera");
 		mycam.GetComponent<CameraController> ().lookAt = player.transform;
 		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
 		playerRoom = roomList [playerSpawn];
 		roomList.Remove (playerRoom);
+
+		//Spawn shops
+		int numShops = roomList.Count / 4;
+		Debug.Log (numShops);
+		for (int i = 0; i < numShops; i++) {
+			int shopSpawn = Random.Range (0, roomList.Count);
+			Room shoproom = roomList [shopSpawn];
+			instance = Instantiate(shop, new Vector3((shoproom.startx + shoproom.width / 2) * tilesize, 1f, (shoproom.starty + shoproom.height / 2) * tilesize), Quaternion.Euler(0,0,0));
+			roomList.Remove (shoproom);
+		}
 
 		//Spawn exit portal
 		Room farthestRoom = roomList [0];
@@ -184,9 +194,6 @@ public class BoardManager : MonoBehaviour
 	{
 		Vector3 remyPos = GameObject.Find ("remy").transform.localPosition;
 		Vector3 exitPos = GameObject.Find ("Exit Portal").transform.GetChild (0).transform.localPosition;
-
-		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)) < 1);
-		Debug.Log ((Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z)));
 		if (Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z) < 1){
 			levelmanager.LoadNextLevel ();
 		}
