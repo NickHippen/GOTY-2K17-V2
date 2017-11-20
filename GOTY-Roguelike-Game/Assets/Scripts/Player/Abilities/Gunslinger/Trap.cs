@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : Ability
+public class Trap : Ability
 {
     public float damage;
     public GrenadeObject grenadeObject;
