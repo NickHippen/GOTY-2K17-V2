@@ -7,7 +7,7 @@ public class RigCollider : MonoBehaviour {
 	public GameObject RootObject { get; set; }
 	public Unit RootUnit { get; set; }
 	
-	void Start () {
+	protected virtual void Start () {
 		GameObject currObject = transform.gameObject;
 		Unit unit = currObject.GetComponent<Unit>();
 		while (unit == null) {
@@ -18,8 +18,9 @@ public class RigCollider : MonoBehaviour {
 		RootUnit = unit;
 	}
 
-	void OnCollisionEnter(Collision collision) {
-		RootUnit.OnRigCollisionEnter(collision);
+	protected virtual void OnTriggerEnter(Collider collider) {
+		Debug.Log("Attack Trigger");
+		RootUnit.OnRigTriggerEnter(collider);
 	}
 
 }

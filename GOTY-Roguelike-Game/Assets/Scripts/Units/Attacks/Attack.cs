@@ -12,6 +12,6 @@ public abstract class Attack {
 		this.Attacker = controller.Attacker;
 	}
 
-	public abstract void Use();
+	public abstract void Use(Transform target);
 
 }

@@ -140,6 +140,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4987096159097460}
+  - component: {fileID: 135006131759457900}
+  - component: {fileID: 114499986299730686}
   m_Layer: 0
   m_Name: B_bip01
   m_TagString: Untagged
@@ -772,6 +774,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4539697780790354}
+  - component: {fileID: 136130475291014100}
+  - component: {fileID: 114083718653530810}
   m_Layer: 0
   m_Name: B_45
   m_TagString: Untagged
@@ -1548,6 +1552,17 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114083718653530810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971478529323616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a75b618ba414342b700f2cdfc8ce26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114413221376506716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1569,10 +1584,46 @@ MonoBehaviour:
   atGoal: 0
   health: 100
   maxHealth: 100
-  canvasHeight: 0.03
+  canvasHeight: 0.8
   targetTag: Player
   aggroRadius: 20
   attackPower: 5
+--- !u!114 &114499986299730686
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138010294768414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5daa74097d8ad314e91982172940220a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!135 &135006131759457900
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1138010294768414}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &136130475291014100
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1971478529323616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.05
+  m_Height: 0.4
+  m_Direction: 0
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!137 &137040942920344486
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
