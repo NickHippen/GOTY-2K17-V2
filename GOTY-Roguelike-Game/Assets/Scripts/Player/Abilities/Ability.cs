@@ -3,21 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Ability : MonoBehaviour {
-
-	public float damage;
+    
     public float cooldownTime;
-	public ParticleSystem effect;
-	public float effectDistance;
+    public bool applyOnFrame;
 
     private float cooldownTimer;
-    private bool isAvailible;
+    private bool isAvailible = true;
 
 	// Use this for initialization
-	void Start () {
-		//effect = Instantiate (effect);
-		//effect.transform.SetParent (gameObject.transform);
-		//effect.transform.position = effectPos;
-		//effect.Play();
+	public virtual void Start () {
+        cooldownTimer = cooldownTime;
 	}
 	
 	// Update is called once per frame
@@ -33,6 +28,11 @@ public abstract class Ability : MonoBehaviour {
         }
 	}
 
+    public bool ApplyOnFrame
+    {
+        get { return applyOnFrame; }
+    }
+
     public float CooldownTimer
     {
         get { return cooldownTimer; }
@@ -45,6 +45,6 @@ public abstract class Ability : MonoBehaviour {
         set { isAvailible = value; }
     }
 
-    public abstract void applyEffect();
+    public abstract void applyEffect(GameObject player);
 
 }
