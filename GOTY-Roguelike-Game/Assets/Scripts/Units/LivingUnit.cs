@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public abstract class LivingUnit : Unit {
 
@@ -16,6 +17,9 @@ public abstract class LivingUnit : Unit {
 	private Image healthBar;
 
 	private List<Status> statuses = new List<Status>();
+
+	public GameObject healthDrop;
+	public GameObject gemDrop;
 
 	public virtual float Health {
 		get {
@@ -140,6 +144,20 @@ public abstract class LivingUnit : Unit {
 		}
 		destroying = true;
 		Destroy(gameObject, 5f);
+
+		if (healthDrop != null) {
+			int dropped = Random.Range (0, 8);
+			if (dropped == 0) {
+				GameObject instance = Instantiate (healthDrop, new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity) as GameObject;
+			}
+		}
+
+		if (gemDrop != null) {
+			int maxamt = Random.Range (1, 5);
+			for (int i = 0; i < maxamt; i++) {
+				GameObject instance = Instantiate (gemDrop, new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity) as GameObject;
+			}
+		}
 	}
 
 	protected override IEnumerator FollowPath() {

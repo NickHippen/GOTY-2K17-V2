@@ -163,7 +163,7 @@ public class GenerateMap : MonoBehaviour
 		}
 
 		//Generate the rooms of the dungeon
-		var room_place_attempts = 1000;
+		var room_place_attempts = 3000;
 		for (var i = 1; i < room_place_attempts; i++) {
 			int[] roomsize = { 5, 7, 9 };
 			var width = roomsize [Random.Range (0, roomsize.Length - 1)];

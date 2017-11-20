@@ -186,7 +186,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 25, y: 136.1}
-  m_SizeDelta: {x: 25, y: 25}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &25291568
 MonoBehaviour:
@@ -917,6 +917,69 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &697545790
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 21.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -11.52
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501697415902056, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_Name
+      value: Potion_Health 1 (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1 &990658247 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1501697415902056, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63,
+    type: 2}
+  m_PrefabInternal: {fileID: 697545790}
+--- !u!114 &990658253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 990658247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b546da4a8a665084cb0ea7b4c538cea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &1018583767
 GameObject:
   m_ObjectHideFlags: 0
@@ -962,7 +1025,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -3.0010676
+      value: 8.55
       objectReference: {fileID: 0}
     - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
       propertyPath: m_LocalPosition.y
@@ -991,6 +1054,52 @@ Prefab:
     - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1200199284
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 8.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 21.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -5.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4188263082469766, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1501697415902056, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+      propertyPath: m_Name
+      value: Potion_Health 1 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
@@ -1177,7 +1286,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4138246777632120, guid: 8a9acfc9ee5c5cb4fb3388ccfe4576e3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -9.09
+      value: -13.88
       objectReference: {fileID: 0}
     - target: {fileID: 4138246777632120, guid: 8a9acfc9ee5c5cb4fb3388ccfe4576e3, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1316,8 +1425,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 6.94, y: 11.47}
+  m_AnchoredPosition: {x: 0.13699913, y: -0.22800064}
+  m_SizeDelta: {x: 31.32, y: 25.623}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1619315864
 MonoBehaviour:
@@ -1341,10 +1450,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 7
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 7
+    m_MinSize: 0
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -1528,7 +1637,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4138246777632120, guid: 8a9acfc9ee5c5cb4fb3388ccfe4576e3, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -5.79
+      value: -7.75
       objectReference: {fileID: 0}
     - target: {fileID: 4138246777632120, guid: 8a9acfc9ee5c5cb4fb3388ccfe4576e3, type: 2}
       propertyPath: m_LocalRotation.x

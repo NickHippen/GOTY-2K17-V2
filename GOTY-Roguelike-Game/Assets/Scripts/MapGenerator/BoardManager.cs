@@ -19,8 +19,8 @@ public class BoardManager : MonoBehaviour
 
 	public DrawMiniMap miniMap;
 
-	static int mapw = 60;
-	static int maph = 40;
+	public int mapw = 60;
+	public int maph = 40;
 	public GenerateMap mapGenerator;
 
 	private Map mymap;
