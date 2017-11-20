@@ -19,6 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4944096774288498}
+  - component: {fileID: 114904214201937630}
   m_Layer: 0
   m_Name: Trap
   m_TagString: Untagged
@@ -39,3 +40,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114904214201937630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1696987286867654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35e3402947829ca4898dcf0834ec17ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldownTime: 3
+  applyOnFrame: 0
+  damage: 0
+  grenadeObject: {fileID: 0}
