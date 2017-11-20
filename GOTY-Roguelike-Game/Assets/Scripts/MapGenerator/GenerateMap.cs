@@ -5,6 +5,7 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 //Object used to store directionally preferenced nodes in backtracker
+
 public class MapNode
 {
 	public int x { get; set; }
@@ -60,6 +61,10 @@ public class Map
 
 public class GenerateMap : MonoBehaviour
 {
+	void Start(){
+		Random.seed = (int)System.DateTime.Now.Ticks;
+	}
+
 	//Receives a node and checks if the nodes around it are available to create a wall. Puts this node into the stack.
 	MapNode CheckFree (MapNode currentnode, int mapw, int maph, string[,] maparr)
 	{
