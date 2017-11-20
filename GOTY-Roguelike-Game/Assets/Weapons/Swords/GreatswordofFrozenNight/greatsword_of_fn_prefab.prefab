@@ -53,6 +53,7 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -68,6 +69,7 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -108,7 +110,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseName: Sword
   desc: 
-  damage: 10
+  baseDamage: 15
+  damage: 15
   rotation: {x: 73, y: 0, z: 17}
   model: {fileID: 1534932496154960}
   icon: {fileID: 21300000, guid: aa73522d973f4dd42b73556d966db2df, type: 3}
