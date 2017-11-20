@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23029730665659624}
   - component: {fileID: 65559501956849342}
   - component: {fileID: 114217375950616590}
+  - component: {fileID: 114127363535234184}
   m_Layer: 0
   m_Name: Potion_Health 1
   m_TagString: Potion
@@ -94,6 +95,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.000000007450582, z: 0.05111661}
+--- !u!114 &114127363535234184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1501697415902056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b546da4a8a665084cb0ea7b4c538cea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0.05
 --- !u!114 &114217375950616590
 MonoBehaviour:
   m_ObjectHideFlags: 1

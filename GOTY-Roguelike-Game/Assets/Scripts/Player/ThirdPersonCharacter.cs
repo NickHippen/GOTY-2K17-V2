@@ -15,17 +15,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	[SerializeField] float m_AnimSpeedMultiplier = 1f;
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 
-	public float speedBonusFromWeapon = 1;
-	public float Speed {
-		get {
-			float multiplier = 1f;
-			if (inventory.getCurrentWeapon().GetComponent<WeaponData>().modifier == WeaponModifier.Light) {
-				multiplier = 1.3f;
-			}
-			return m_MoveSpeedMultiplier * multiplier;
-		}
-	}
-
 	Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
@@ -211,7 +200,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		// this allows us to modify the positional speed before it's applied.
 		if (m_IsGrounded && Time.deltaTime > 0)
 		{
-			Vector3 v = (m_Animator.deltaPosition * Speed) / Time.deltaTime;
+			Vector3 v = (m_Animator.deltaPosition * m_MoveSpeedMultiplier) / Time.deltaTime;
 
 			// we preserve the existing y part of the current velocity.
 			v.y = m_Rigidbody.velocity.y;
@@ -247,6 +236,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 				} else {
 					GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold -= (int) temp.GetComponent<WeaponData> ().cost;
 					GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
+					GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
 				}
 
 				if (temp.GetComponent<Floating> () != null) {
@@ -306,14 +296,14 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
             m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
-            //m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
+            m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
             m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
             m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
             m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
-            //m_Animator.SetLayerWeight(1, 0); // turn off gun mask
-            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
+            m_Animator.SetLayerWeight(1, 0); // turn off gun mask
+                                             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
         }
 	}
 
@@ -362,10 +352,18 @@ public class ThirdPersonCharacter : MonoBehaviour
 			GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
 		}
 
-
+		if (other.gameObject.CompareTag ("Pickup")) {
+			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName;
+			if (other.gameObject.GetComponent<WeaponData> ().cost > 0) {
+				GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName + "\nCosts " + other.gameObject.GetComponent<WeaponData> ().cost + " gems.";
+			}
+		}
 	}
 
 	void OnTriggerExit(Collider other)
 	{
+		if (other.gameObject.CompareTag ("Pickup")) {
+			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
+		}
 	}
 }
