@@ -43,11 +43,14 @@ public class BoardManager : MonoBehaviour
 	//Creates a board object. Places cubes as children of that board object based on our map array
 	void BoardSetup ()
 	{
-		mymap = mapGenerator.generate (mapw, maph);
-		maparr = mymap.maparr;
-		roomList = mymap.roomList;
-		GameObject instance;
+		BuildMap:
+			mymap = mapGenerator.generate (mapw, maph);
+			maparr = mymap.maparr;
+			roomList = mymap.roomList;
+		if (roomList.Count <= 6)
+			goto BuildMap;
 
+		GameObject instance;
 		boardHolder = new GameObject ("Board").transform;
 		monsterHolder = new GameObject ("Monsters").transform;
 		exitHolder = new GameObject ("Exit Portal").transform;
