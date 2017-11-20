@@ -11,7 +11,7 @@ public class BossDragon : AggressiveUnit {
 			new IntervalAttackController(this, 2, 2)
 		));
 		attacks.Add(new FlamethrowerAttack(
-			new IntervalAttackController(this, 4, 4)
+			new IntervalAttackController(this, 5, 5)
 				.AddConditional(CheckFlamethrower),
 			flameThrowerOriginPoint
 		));
@@ -27,6 +27,14 @@ public class BossDragon : AggressiveUnit {
 			return true;
 		}
 		return false;
+	}
+
+	protected override void AnimationComplete(AnimationEvent animationEvent) {
+		base.AnimationComplete(animationEvent);
+		if (animationEvent.stringParameter.Equals("reset_SpecialAttack")) {
+			flameThrowerOriginPoint.gameObject.SetActive(false);
+			this.speed = DefaultSpeed;
+		}
 	}
 
 }

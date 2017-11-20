@@ -16,7 +16,7 @@ public class FlamethrowerAttack : Attack {
 		Attacker.speed = 0;
 		Attacker.UnitAnimator.SetBool("SpecialAttack", true);
 		Attacker.StartCoroutine(StartFlame(target));
-		Attacker.StartCoroutine(DisableFlame(target));
+		//Attacker.StartCoroutine(DisableFlame(target));
 	}
 
 	private IEnumerator StartFlame(Transform target) {
@@ -25,11 +25,11 @@ public class FlamethrowerAttack : Attack {
 		yield return null;
 	}
 
-	private IEnumerator DisableFlame(Transform target) {
-		yield return new WaitForSeconds(2.5f);
-		OriginPoint.gameObject.SetActive(false);
-		Attacker.speed = Attacker.DefaultSpeed;
-		yield return null;
-	}
+	//private IEnumerator DisableFlame(Transform target) {
+	//	yield return new WaitForSeconds(2.5f);
+	//	OriginPoint.gameObject.SetActive(false);
+	//	Attacker.speed = Attacker.DefaultSpeed;
+	//	yield return null;
+	//}
 
 }

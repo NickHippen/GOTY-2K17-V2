@@ -81,13 +81,16 @@ public abstract class AggressiveUnit : LivingUnit {
 	}
 
 	private void AttackCollision(Collider collider) {
-		if (this.UnitAnimator.GetBool("Attack") && collider.gameObject.tag == "Player") {
+		if (collider.gameObject.tag == "Player") {
 			HealthManager healthManager = collider.gameObject.GetComponent<HealthManager>();
 			if (healthManager == null) {
 				return;
 			}
-			Debug.Log("Weapon collide");
-			healthManager.Damage(CalculateAttackPower());
+			if (this.UnitAnimator.GetBool("Attack")) {
+				healthManager.Damage(CalculateAttackPower());
+			} else if (this.UnitAnimator.GetBool("SpecialAttack")) {
+				healthManager.Damage(CalculateAttackPower()); // TODO Possibly add damage modifiers for special attacks
+			}
 		}
 	}
 
