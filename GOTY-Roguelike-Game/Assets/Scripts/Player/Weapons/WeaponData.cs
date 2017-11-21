@@ -18,6 +18,8 @@ public class WeaponData : MonoBehaviour {
 	public ParticleSystem effect;
 
 	private AudioSource audioSource;
+    protected bool bonusDamage;
+    protected float damageMultiplier;
 
 	protected virtual void Start() {
 		audioSource = GetComponent<AudioSource>();
@@ -47,10 +49,22 @@ public class WeaponData : MonoBehaviour {
 		}
 	}
 
-	protected virtual void PlayAttackAudio() {
+    public void ApplyBonusDamage(float duration, float damageMultiplier)
+    {
+        this.damageMultiplier = damageMultiplier;
+        bonusDamage = true;
+        StartCoroutine(ExtraDamage(duration));
+    }
+
+    private IEnumerator ExtraDamage(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        bonusDamage = false;
+    }
+
+    protected virtual void PlayAttackAudio() {
 		if (audioSource != null) {
 			audioSource.Play();
 		}
 	}
-
 }

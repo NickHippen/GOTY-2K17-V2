@@ -14,5 +14,4 @@ public class SwordData : WeaponData {
 			monster.Damage(damage);
 		}
 	}
-
 }
