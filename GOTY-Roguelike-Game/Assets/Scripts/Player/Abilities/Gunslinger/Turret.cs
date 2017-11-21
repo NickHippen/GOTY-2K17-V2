@@ -22,8 +22,7 @@ public class Turret : Ability
         character.StopMovement = true;
         StartCoroutine(CrouchEffect(anim, character));
 
-        WeaponData weaponData = player.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>();
-        weaponData.ApplyBonusDamage(duration, damageMultiplier);
+        player.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>().ApplyBonusDamage(duration, damageMultiplier);
     }
     
     private IEnumerator CrouchEffect(Animator anim, ThirdPersonCharacter character)
