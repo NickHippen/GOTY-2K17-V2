@@ -161,9 +161,10 @@ public abstract class LivingUnit : Unit {
 	}
 
 	protected override IEnumerator FollowPath() {
-		if (Living) {
+		if (Living && speed > 0) {
 			return base.FollowPath();
 		}
+		UnitAnimator.SetBool("Move", false);
 		return null;
 	}
 

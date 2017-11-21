@@ -29,6 +29,10 @@ public class BossDragon : AggressiveUnit {
 		return false;
 	}
 
+	protected void FlamethrowerStart() {
+		flameThrowerOriginPoint.gameObject.SetActive(true);
+	}
+
 	protected override void AnimationComplete(AnimationEvent animationEvent) {
 		base.AnimationComplete(animationEvent);
 		if (animationEvent.stringParameter.Equals("reset_SpecialAttack")) {
