@@ -12,14 +12,17 @@ public class HardKick : Ability {
     {
         this.transform.position = player.transform.position + player.transform.forward * effectDistance;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, effectDistance);
         foreach(Collider collider in colliders)
         {
-            if(collider.tag == "Monster")
-            {
-                AggressiveUnit unit = collider.GetComponent<AggressiveUnit>();
-                unit.health -= damage;
-            }
+			RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider> ();
+			Debug.Log (collider);
+			if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
+				AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+				float damage = this.damage;
+				monster.ApplyStatus (new StatusStun(monster, 5f));
+				monster.Damage(damage);
+			}
         }
         effect.Emit(100);
     }

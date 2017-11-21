@@ -10,6 +10,7 @@ public class PlayerInventory : MonoBehaviour {
 	public int test = 0;
 	public int current= 0;
 	int maxCapacity = 4;
+	public int multiplier = 1;
 	public List<GameObject> slots;
 	public Sprite empty;
 

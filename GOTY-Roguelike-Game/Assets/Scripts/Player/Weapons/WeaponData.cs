@@ -6,6 +6,7 @@ public class WeaponData : MonoBehaviour {
 
 	public string baseName;
 	public string desc;
+	public float baseDamage;
 	public float damage = 10f;
 	public Vector3 rotation;
 	public GameObject model;
@@ -47,6 +48,7 @@ public class WeaponData : MonoBehaviour {
 			//effect.transform.position = transform.position + transform.forward;
 			effect.Emit(10);
 		}
+
 	}
 
     public void ApplyBonusDamage(float duration, float damageMultiplier)
