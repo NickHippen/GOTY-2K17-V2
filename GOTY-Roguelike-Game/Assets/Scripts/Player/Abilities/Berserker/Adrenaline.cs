@@ -9,6 +9,9 @@ public class Adrenaline : Ability {
 
     public override void applyEffect(GameObject player)
     {
-        player.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>().ApplyBonusDamage(duration, damageMultiplier);
+        foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)
+        {
+            weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
+        }
     }
 }

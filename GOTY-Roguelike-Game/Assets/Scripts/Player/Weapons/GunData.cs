@@ -45,7 +45,7 @@ public class GunData : WeaponData {
 			if (unit is AggressiveUnit) {
 				AggressiveUnit monster = (AggressiveUnit)unit;
 				float damage = this.damage;
-                if (bonusDamage) damage = damage * damageMultiplier;
+                damage *= damageMultiplier;
                 damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
 				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
 				monster.Damage(damage);
