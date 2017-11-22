@@ -123,8 +123,10 @@ public abstract class Unit : MonoBehaviour {
 
 	public bool HasLineOfSight(Transform targetTransform) {
 		Vector3 rayDirection = targetTransform.position - transform.position;
+		int layerMask = LayerMask.GetMask("Unwalkable", "Player"); // Only collisions in layer Unwalkable and Player
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, rayDirection, out hit, destinationRadius)) { // Note: Currently will be blocked by ALL colldiers (not just unwalkable)
+		if (Physics.Raycast(transform.position, rayDirection, out hit, destinationRadius, layerMask)) {
+			Debug.Log(hit.transform.name);
 			return hit.transform == targetTransform;
 		}
 		return false;

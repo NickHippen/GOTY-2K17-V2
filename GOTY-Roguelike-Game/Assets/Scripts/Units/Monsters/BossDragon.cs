@@ -22,7 +22,6 @@ public class BossDragon : AggressiveUnit {
 			return false;
 		}
 		float dist = Vector3.Distance(this.transform.position, target.position);
-		Debug.Log(dist);
 		if (dist < 10f && dist > destinationRadius + 1) {
 			return true;
 		}

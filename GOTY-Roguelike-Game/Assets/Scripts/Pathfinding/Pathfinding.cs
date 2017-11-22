@@ -60,6 +60,7 @@ public class Pathfinding : MonoBehaviour {
 		if (pathSuccess) {
 			waypoints = RetracePath(startNode, targetNode);
 		}
+		//waypoints[waypoints.Length - 1] = request.pathEnd;
 		callback(new PathResult(waypoints, pathSuccess, request.callback));
 	}
 
@@ -88,6 +89,42 @@ public class Pathfinding : MonoBehaviour {
 			directionOld = directionNew;
 		}
 		return waypoints.ToArray();
+		//return SmoothConnections(waypoints);
+	}
+
+	Vector3[] SmoothConnections(List<Vector3> waypoints) {
+		if (waypoints.Count <= 2) {
+			return waypoints.ToArray();
+		}
+		List<Vector3> finalWaypoints = new List<Vector3> {
+			waypoints[0]
+		};
+
+		int inputIndex = 2;
+
+		while (inputIndex < waypoints.Count - 1) {
+			if (!IsDirectPathClear(finalWaypoints[finalWaypoints.Count - 1], waypoints[inputIndex])) {
+				UnityEngine.Debug.Log("Path not clear");
+				finalWaypoints.Add(waypoints[inputIndex]);
+			}
+			inputIndex++;
+		}
+		finalWaypoints.Add(waypoints[waypoints.Count - 1]);
+		return finalWaypoints.ToArray();
+	}
+
+	private bool IsDirectPathClear(Vector3 from, Vector3 to) {
+		float range = Vector3.Distance(from, to);
+		Vector3 direction = Vector3.RotateTowards(from, to, 99999, 99999);
+		int layerMask = LayerMask.GetMask("Unwalkable");
+		RaycastHit hit;
+		if (Physics.Raycast(from, direction, out hit, range, layerMask)) {
+			// Hit
+			return false;
+		} else {
+			// Miss
+			return true;
+		}
 	}
 
 	int GetDistance(Node nodeA, Node nodeB) {
