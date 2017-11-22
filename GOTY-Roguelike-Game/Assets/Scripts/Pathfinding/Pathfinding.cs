@@ -88,11 +88,13 @@ public class Pathfinding : MonoBehaviour {
 			}
 			directionOld = directionNew;
 		}
-		//return waypoints.ToArray();
-		return SmoothConnections(waypoints);
+		return waypoints.ToArray();
+		//return SmoothConnections(waypoints);
 	}
 
 	Vector3[] SmoothConnections(List<Vector3> waypoints) {
+		froms = new List<Vector3>();
+		fromDirs = new List<Vector3>();
 		if (waypoints.Count <= 2) {
 			return waypoints.ToArray();
 		}
@@ -113,11 +115,18 @@ public class Pathfinding : MonoBehaviour {
 		return finalWaypoints.ToArray();
 	}
 
+	private List<Vector3> froms = new List<Vector3>();
+	private List<Vector3> fromDirs = new List<Vector3>();
+
 	private bool IsDirectPathClear(Vector3 from, Vector3 to) {
 		float range = Vector3.Distance(from, to);
-		Vector3 direction = Vector3.RotateTowards(from, to, 99999, 99999);
+		//Vector3 direction = Vector3.RotateTowards(from, to, 99999, 99999);
+		Vector3 direction = to - from;
+		UnityEngine.Debug.Log(direction);
 		int layerMask = LayerMask.GetMask("Unwalkable"); // Only collisions in layer Unwalkable
 		RaycastHit hit;
+		froms.Add(from);
+		fromDirs.Add(from + direction);
 		if (Physics.Raycast(from, direction, out hit, range, layerMask)) {
 			// Hit
 			UnityEngine.Debug.Log("Hit " + hit.transform.name);
@@ -125,6 +134,15 @@ public class Pathfinding : MonoBehaviour {
 		} else {
 			// Miss
 			return true;
+		}
+	}
+
+	void OnDrawGizmos() {
+		for (int i = 0; i < froms.Count; i++) {
+			Gizmos.color = Color.cyan;
+			Gizmos.DrawSphere(froms[i], 1f);
+			Gizmos.color = Color.green;
+			Gizmos.DrawCube(fromDirs[i], Vector3.one * 1.5f);
 		}
 	}
 

@@ -64,16 +64,23 @@ public abstract class Unit : MonoBehaviour {
 		if (Time.timeSinceLevelLoad < 0.3f) {
 			yield return new WaitForSeconds(0.3f);
 		}
+		Debug.Log("Here");
 		pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
 
 		float sqrMoveThreshold = pathUpdateMoveThreshold * pathUpdateMoveThreshold;
 		Vector3 targetPosOld = target.position;
 
 		while (true) {
-			yield return new WaitForSeconds(minPathUpdateTime);
-			if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
-				pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
-				targetPosOld = target.position;
+			if (HasLineOfSight(target)) {
+				OnPathFound(new Vector3[] { target.position }, true);
+				yield return null;
+			} else {
+				Debug.Log("No LoS");
+				yield return new WaitForSeconds(minPathUpdateTime);
+				if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
+					pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+					targetPosOld = target.position;
+				}
 			}
 		}
 	}
@@ -98,7 +105,7 @@ public abstract class Unit : MonoBehaviour {
 
 				Collider[] hitColliders = Physics.OverlapSphere(transform.position, destinationRadius);
 				foreach (Collider collider in hitColliders) {
-					if (collider.Equals(target.GetComponent<Collider>()) && HasLineOfSight(target.transform)) { // Within range & has LoS
+					if (collider.Equals(target.GetComponent<Collider>()) && HasLineOfSight(target.transform, destinationRadius)) { // Within range & has LoS
 						followingPath = false;
 						break;
 					}
@@ -122,11 +129,14 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	public bool HasLineOfSight(Transform targetTransform) {
+		return HasLineOfSight(targetTransform, (target.position - transform.position).magnitude);
+	}
+
+	public bool HasLineOfSight(Transform targetTransform, float distance) {
 		Vector3 rayDirection = targetTransform.position - transform.position;
 		int layerMask = LayerMask.GetMask("Unwalkable", "Player"); // Only collisions in layer Unwalkable and Player
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, rayDirection, out hit, destinationRadius, layerMask)) {
-			Debug.Log(hit.transform.name);
+		if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), rayDirection, out hit, distance, layerMask)) {
 			return hit.transform == targetTransform;
 		}
 		return false;
