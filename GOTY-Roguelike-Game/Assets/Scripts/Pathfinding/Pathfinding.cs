@@ -88,8 +88,8 @@ public class Pathfinding : MonoBehaviour {
 			}
 			directionOld = directionNew;
 		}
-		return waypoints.ToArray();
-		//return SmoothConnections(waypoints);
+		//return waypoints.ToArray();
+		return SmoothConnections(waypoints);
 	}
 
 	Vector3[] SmoothConnections(List<Vector3> waypoints) {
@@ -116,10 +116,11 @@ public class Pathfinding : MonoBehaviour {
 	private bool IsDirectPathClear(Vector3 from, Vector3 to) {
 		float range = Vector3.Distance(from, to);
 		Vector3 direction = Vector3.RotateTowards(from, to, 99999, 99999);
-		int layerMask = LayerMask.GetMask("Unwalkable");
+		int layerMask = LayerMask.GetMask("Unwalkable"); // Only collisions in layer Unwalkable
 		RaycastHit hit;
 		if (Physics.Raycast(from, direction, out hit, range, layerMask)) {
 			// Hit
+			UnityEngine.Debug.Log("Hit " + hit.transform.name);
 			return false;
 		} else {
 			// Miss

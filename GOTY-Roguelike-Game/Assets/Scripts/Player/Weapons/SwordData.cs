@@ -6,7 +6,7 @@ public class SwordData : WeaponData {
 
 	void OnTriggerEnter(Collider collision) {
 		RigCollider rigCollider = collision.gameObject.GetComponent<RigCollider>();
-		if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
+		if (rigCollider != null && !(rigCollider is AttackCollider) && rigCollider.RootUnit is AggressiveUnit) {
 			AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
 			float damage = this.damage;
             damage *= damageMultiplier;
