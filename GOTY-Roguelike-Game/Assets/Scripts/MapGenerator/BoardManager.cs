@@ -223,17 +223,17 @@ public class BoardManager : MonoBehaviour
 
 	public void Update()
 	{
-		//if (remy == null) {
-		//	remy = GameObject.Find("remy");
-		//}
-		//if (generatedExitPortal == null) {
-		//	generatedExitPortal = GameObject.Find("Exit Portal");
-		//}
-		//Vector3 remyPos = remy.transform.localPosition;
-		//Vector3 exitPos = generatedExitPortal.transform.GetChild (0).transform.localPosition;
-		//if (Math.Abs (remyPos.x - exitPos.x) + Math.Abs (remyPos.z - exitPos.z) < 1){
-		//	levelmanager.LoadNextLevel ();
-		//}
+		if (remy == null) {
+			remy = GameObject.Find("remy");
+		}
+		if (generatedExitPortal == null) {
+			generatedExitPortal = GameObject.Find("Exit Portal");
+		}
+		Vector3 remyPos = remy.transform.localPosition;
+		Vector3 exitPos = generatedExitPortal.transform.GetChild(0).transform.localPosition;
+		if (Math.Abs(remyPos.x - exitPos.x) + Math.Abs(remyPos.z - exitPos.z) < 1) {
+			levelmanager.LoadNextLevel();
+		}
 	}
 }
 	
