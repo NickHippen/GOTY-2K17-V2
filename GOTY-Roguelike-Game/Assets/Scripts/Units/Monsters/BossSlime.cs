@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BossSlime : AggressiveUnit {
 
-	public BossSlime slimeUnit;
+	public BossSlimeSpawn slimeUnit;
 
 	private Vector3 baseScale;
 
@@ -17,26 +17,32 @@ public class BossSlime : AggressiveUnit {
 		attacks.Add(new BasicDamageAttack(
 			new IntervalAttackController(this, 2, 2)
 		));
-		if (slimeUnit != null) { // Null if final slimes
+		for (float x = 0.9f; x > 0f; x -= 0.1f) {
 			attacks.Add(new SpawnAttack(
-				new DeathAttackController(this),
-				slimeUnit,
-				2
+				new HealthAttackController(this, x),
+				slimeUnit
 			));
 		}
+		//if (slimeUnit != null) { // Null if final slimes
+		//	attacks.Add(new SpawnAttack(
+		//		new DeathAttackController(this),
+		//		slimeUnit,
+		//		2
+		//	));
+		//}
 	}
 
-	public override void OnDeath() {
-		if (slimeUnit != null) {
-			Destroy(gameObject, 1f);
-		} else {
-			base.OnDeath();
-		}
-	}
+	//public override void OnDeath() {
+	//	if (slimeUnit != null) {
+	//		Destroy(gameObject, 1f);
+	//	} else {
+	//		base.OnDeath();
+	//	}
+	//}
 
 	public override void Damage(float amount) {
 		base.Damage(amount);
-		transform.localScale = baseScale * (0.5f + (HealthPercentage / 2f));
+		transform.localScale = baseScale * (0.25f + (HealthPercentage / 1.33333f));
 	}
 
 }
