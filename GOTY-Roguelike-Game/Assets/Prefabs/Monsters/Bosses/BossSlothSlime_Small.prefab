@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4687895428442490}
   - component: {fileID: 64456870928608664}
   - component: {fileID: 114509430217327112}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4185164712618570}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeHeadJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4211331275297630}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4551659169681052}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4783744967474794}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4024831918862634}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeControl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4664793655727110}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4110421123120418}
   - component: {fileID: 137885881463674256}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeLevel1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4271195856896368}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeNeckJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 4527457008865536}
   - component: {fileID: 95926835044153258}
   - component: {fileID: 114961925804887120}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BossSlothSlime_Small
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4772670309956174}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MESH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4879755107362052}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeRightJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4410735500309176}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeFrontTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -219,7 +219,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4506498772321138}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RIG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,7 +234,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4098245026798936}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeBackTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4333179342652946}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeRootJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4826095115639534}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeLeftTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,10 +568,13 @@ MonoBehaviour:
   turnSpeed: 4
   turnDist: 1
   destinationRadius: 6.75
+  forceDestinationRadius: 0
   atGoal: 0
   health: 100
   maxHealth: 100
   canvasHeight: 0.022
+  healthDrop: {fileID: 0}
+  gemDrop: {fileID: 0}
   targetTag: Player
   aggroRadius: 20
   attackPower: 5

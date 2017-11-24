@@ -14,7 +14,7 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public bool HasWeapon { get; set; }
 
-	protected new void Start() {
+	protected override void Start() {
 		base.Start();
 		ApplyAttackBehavior();
 	}

@@ -6,6 +6,13 @@ public class BossSlime : AggressiveUnit {
 
 	public BossSlime slimeUnit;
 
+	private Vector3 baseScale;
+
+	protected override void Start() {
+		base.Start();
+		baseScale = transform.localScale;
+	}
+
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new BasicDamageAttack(
 			new IntervalAttackController(this, 2, 2)
@@ -25,6 +32,11 @@ public class BossSlime : AggressiveUnit {
 		} else {
 			base.OnDeath();
 		}
+	}
+
+	public override void Damage(float amount) {
+		base.Damage(amount);
+		transform.localScale = baseScale * (0.5f + (HealthPercentage / 2f));
 	}
 
 }

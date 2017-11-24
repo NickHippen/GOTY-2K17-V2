@@ -2412,6 +2412,7 @@ MonoBehaviour:
   turnSpeed: 4
   turnDist: 1
   destinationRadius: 100
+  forceDestinationRadius: 0
   atGoal: 0
   health: 100
   maxHealth: 100
@@ -2423,6 +2424,9 @@ MonoBehaviour:
   attackPower: 20
   projectile: {fileID: 114843988006595266, guid: 887c2db628847b340b127f580898373b,
     type: 2}
+  cloudSummon: {fileID: 114722032733101154, guid: 2b8adcc1502935d4da3378720eef7a78,
+    type: 2}
+  mask: {fileID: 1424985202093910}
 --- !u!114 &114788435937712586
 MonoBehaviour:
   m_ObjectHideFlags: 1

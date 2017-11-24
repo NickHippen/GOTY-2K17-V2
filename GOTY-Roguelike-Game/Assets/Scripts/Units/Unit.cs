@@ -15,6 +15,7 @@ public abstract class Unit : MonoBehaviour {
 	public float turnSpeed = 4f;
 	public float turnDist = 1f;
 	public float destinationRadius = 1f;
+	public bool forceDestinationRadius = false;
 
 	public bool atGoal;
 
@@ -94,7 +95,9 @@ public abstract class Unit : MonoBehaviour {
 				Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
 				while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D)) {
 					if (pathIndex == path.finishLineIndex) {
-						followingPath = false;
+						if (!forceDestinationRadius) {
+							followingPath = false;
+						}
 						break;
 					} else {
 						pathIndex++;
@@ -110,20 +113,28 @@ public abstract class Unit : MonoBehaviour {
 				}
 
 				if (followingPath) {
-					Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
-					//targetRotation.y = 0;
-					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
-					transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+					//Quaternion targetRotation = Quaternion.LookRotation((path.lookPoints[pathIndex]) - transform.position);
+					////targetRotation.y = 0;
+					//transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+					//transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+					MoveTowards(path.lookPoints[pathIndex]);
 					atGoal = false;
 				} else {
 					atGoal = true;
 				}
-
-				UnitAnimator.SetBool("Move", followingPath);
+				if (UnitAnimator != null) {
+					UnitAnimator.SetBool("Move", followingPath);
+				}
 
 				yield return null;
 			}
 		}
+	}
+
+	protected virtual void MoveTowards(Vector3 location) {
+		Quaternion targetRotation = Quaternion.LookRotation(location - transform.position);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+		transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
 	}
 
 	public bool HasLineOfSight(Transform targetTransform) {
@@ -146,7 +157,9 @@ public abstract class Unit : MonoBehaviour {
 	protected virtual void AnimationComplete(AnimationEvent animationEvent) {
 		if (animationEvent.stringParameter.StartsWith("reset_")) {
 			string animationName = animationEvent.stringParameter.Substring(6);
-			UnitAnimator.SetBool(animationName, false);
+			if (UnitAnimator != null) {
+				UnitAnimator.SetBool(animationName, false);
+			}
 		}
 	}
 
