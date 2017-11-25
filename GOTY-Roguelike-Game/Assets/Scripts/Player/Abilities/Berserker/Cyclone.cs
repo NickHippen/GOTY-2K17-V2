@@ -6,14 +6,18 @@ public class Cyclone : Ability {
 
     public float damage;
     public ParticleSystem effect;
+	//Distance of particle effect from player
     public float effectDistance;
+	//Radius of damage the effect has
+	public float damageRadius;
+
 
     public override void applyEffect(GameObject player)
     {
 		Debug.Log ("Cyclone");
         this.transform.position = player.transform.position + player.transform.forward * effectDistance;
 
-		Collider[] colliders = Physics.OverlapSphere(this.transform.position, effectDistance);
+		Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
         foreach(Collider collider in colliders)
         {
 			RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider> ();

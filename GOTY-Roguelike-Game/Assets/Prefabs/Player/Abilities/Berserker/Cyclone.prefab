@@ -207,10 +207,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 3
-  applyOnFrame: 0
+  applyOnFrame: 1
   damage: 50
   effect: {fileID: 198355472905227756}
-  effectDistance: 10
+  effectDistance: 2
+  damageRadius: 10
 --- !u!198 &198355472905227756
 ParticleSystem:
   m_ObjectHideFlags: 1

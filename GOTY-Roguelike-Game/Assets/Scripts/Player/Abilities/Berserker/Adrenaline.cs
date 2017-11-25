@@ -7,6 +7,10 @@ public class Adrenaline : Ability {
     public float damageMultiplier = 2f;
     public float duration = 5f;
 
+	void Start(){
+		//ApplyOnFrame = true;
+	}
+
     public override void applyEffect(GameObject player)
     {
         foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)

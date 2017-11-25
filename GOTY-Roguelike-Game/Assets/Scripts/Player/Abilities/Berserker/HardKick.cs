@@ -7,12 +7,13 @@ public class HardKick : Ability {
     public float damage;
     public ParticleSystem effect;
     public float effectDistance;
+	public float damageRadius;
 
     public override void applyEffect(GameObject player)
     {
         this.transform.position = player.transform.position + player.transform.forward * effectDistance;
 
-        Collider[] colliders = Physics.OverlapSphere(transform.position, effectDistance);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach(Collider collider in colliders)
         {
 			RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider> ();
