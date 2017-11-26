@@ -12,7 +12,7 @@ public abstract class LivingUnit : Unit {
 
 	public float canvasHeight = 0.03f;
 
-	private bool destroying;
+	protected bool destroying;
 	private GameObject monsterCanvas;
 	private Image healthBar;
 
@@ -124,7 +124,7 @@ public abstract class LivingUnit : Unit {
 		return false;
 	}
 
-	public void Damage(float amount) {
+	public virtual void Damage(float amount) {
 		foreach (Status status in statuses) {
 			if (status is StatusVulnerable) {
 				amount *= ((StatusVulnerable)status).Multiplier;
@@ -161,9 +161,10 @@ public abstract class LivingUnit : Unit {
 	}
 
 	protected override IEnumerator FollowPath() {
-		if (Living) {
+		if (Living && speed > 0) {
 			return base.FollowPath();
 		}
+		UnitAnimator.SetBool("Move", false);
 		return null;
 	}
 

@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4948312567888408}
   - component: {fileID: 137917830162339440}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: StoneMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4192366734455644}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,7 +50,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4980959966157076}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4849596584491250}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ GameObject:
   - component: {fileID: 4058047162036160}
   - component: {fileID: 135360536102608886}
   - component: {fileID: 114596307596604902}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4848255134829280}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4628410139911864}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4256802953601002}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bone005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 4066723796360552}
   - component: {fileID: 95887623500498148}
   - component: {fileID: 114476775519535602}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WrathStoneMonster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1958042302294484}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -55.240005, y: 15.11, z: -30.8}
+  m_LocalPosition: {x: -26.33, y: 15.11, z: -41}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4058047162036160}
@@ -310,14 +310,18 @@ MonoBehaviour:
   speed: 5
   turnSpeed: 4
   turnDist: 1
-  destinationRadius: 1.33
+  destinationRadius: 11.55
   atGoal: 0
   health: 100
   maxHealth: 100
   canvasHeight: 2
+  healthDrop: {fileID: 0}
+  gemDrop: {fileID: 0}
   targetTag: Player
   aggroRadius: 20
   attackPower: 5
+  projectile: {fileID: 114682057356722626, guid: b78b8ede603acc7499e5856208fe9fb1,
+    type: 2}
 --- !u!114 &114596307596604902
 MonoBehaviour:
   m_ObjectHideFlags: 1

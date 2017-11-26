@@ -6,6 +6,7 @@ public class WeaponData : MonoBehaviour {
 
 	public string baseName;
 	public string desc;
+	public float baseDamage;
 	public float damage = 10f;
 	public Vector3 rotation;
 	public GameObject model;
@@ -18,6 +19,7 @@ public class WeaponData : MonoBehaviour {
 	public ParticleSystem effect;
 
 	private AudioSource audioSource;
+    protected float damageMultiplier = 1f;
 
 	protected virtual void Start() {
 		audioSource = GetComponent<AudioSource>();
@@ -45,12 +47,24 @@ public class WeaponData : MonoBehaviour {
 			//effect.transform.position = transform.position + transform.forward;
 			effect.Emit(10);
 		}
+
 	}
 
-	protected virtual void PlayAttackAudio() {
+    public void ApplyDamageMultiplier(float duration, float damageMultiplier)
+    {
+        this.damageMultiplier = damageMultiplier;
+        StartCoroutine(ExtraDamage(duration));
+    }
+
+    private IEnumerator ExtraDamage(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        damageMultiplier = 1f;
+    }
+
+    protected virtual void PlayAttackAudio() {
 		if (audioSource != null) {
 			audioSource.Play();
 		}
 	}
-
 }

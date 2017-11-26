@@ -35,7 +35,8 @@ public class GunData : WeaponData {
 
 		RaycastHit hit;
 		this.line.SetPosition(0, shootPoint.position);
-		if (Physics.Raycast(shootPoint.position, Camera.main.transform.forward, out hit, range)) {
+		int layerMask = LayerMask.GetMask("Unwalkable", "Monster"); // Only collisions in layer Unwalkable and Monster
+		if (Physics.Raycast(shootPoint.position, Camera.main.transform.forward, out hit, range, layerMask)) {
 			this.line.SetPosition(1, hit.point);
 			RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
 			if (rigCollider == null) {
@@ -45,7 +46,8 @@ public class GunData : WeaponData {
 			if (unit is AggressiveUnit) {
 				AggressiveUnit monster = (AggressiveUnit)unit;
 				float damage = this.damage;
-				damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
+                damage *= damageMultiplier;
+                damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
 				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
 				monster.Damage(damage);
 			}

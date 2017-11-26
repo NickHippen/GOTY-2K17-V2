@@ -15,6 +15,7 @@ public abstract class Unit : MonoBehaviour {
 	public float turnSpeed = 4f;
 	public float turnDist = 1f;
 	public float destinationRadius = 1f;
+	public bool forceDestinationRadius = false;
 
 	public bool atGoal;
 
@@ -61,7 +62,6 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	IEnumerator UpdatePath() {
-
 		if (Time.timeSinceLevelLoad < 0.3f) {
 			yield return new WaitForSeconds(0.3f);
 		}
@@ -71,10 +71,15 @@ public abstract class Unit : MonoBehaviour {
 		Vector3 targetPosOld = target.position;
 
 		while (true) {
-			yield return new WaitForSeconds(minPathUpdateTime);
-			if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
-				pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
-				targetPosOld = target.position;
+			if (HasLineOfSight(target)) {
+				OnPathFound(new Vector3[] { target.position }, true);
+				yield return new WaitForSeconds(minPathUpdateTime / 2); // Allow updating here twice as fast
+			} else {
+				yield return new WaitForSeconds(minPathUpdateTime);
+				if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
+					pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
+					targetPosOld = target.position;
+				}
 			}
 		}
 	}
@@ -90,7 +95,9 @@ public abstract class Unit : MonoBehaviour {
 				Vector2 pos2D = new Vector2(transform.position.x, transform.position.z);
 				while (path.turnBoundaries[pathIndex].HasCrossedLine(pos2D)) {
 					if (pathIndex == path.finishLineIndex) {
-						followingPath = false;
+						if (!forceDestinationRadius) {
+							followingPath = false;
+						}
 						break;
 					} else {
 						pathIndex++;
@@ -99,33 +106,46 @@ public abstract class Unit : MonoBehaviour {
 
 				Collider[] hitColliders = Physics.OverlapSphere(transform.position, destinationRadius);
 				foreach (Collider collider in hitColliders) {
-					if (collider.Equals(target.GetComponent<Collider>()) && HasLineOfSight(target.transform)) { // Within range & has LoS
+					if (collider.Equals(target.GetComponent<Collider>()) && HasLineOfSight(target.transform, destinationRadius)) { // Within range & has LoS
 						followingPath = false;
 						break;
 					}
 				}
 
 				if (followingPath) {
-					Quaternion targetRotation = Quaternion.LookRotation(path.lookPoints[pathIndex] - transform.position);
-					//targetRotation.y = 0;
-					transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
-					transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+					//Quaternion targetRotation = Quaternion.LookRotation((path.lookPoints[pathIndex]) - transform.position);
+					////targetRotation.y = 0;
+					//transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+					//transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+					MoveTowards(path.lookPoints[pathIndex]);
 					atGoal = false;
 				} else {
 					atGoal = true;
 				}
-
-				UnitAnimator.SetBool("Move", followingPath);
+				if (UnitAnimator != null) {
+					UnitAnimator.SetBool("Move", followingPath);
+				}
 
 				yield return null;
 			}
 		}
 	}
 
+	protected virtual void MoveTowards(Vector3 location) {
+		Quaternion targetRotation = Quaternion.LookRotation(location - transform.position);
+		transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * turnSpeed);
+		transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.Self);
+	}
+
 	public bool HasLineOfSight(Transform targetTransform) {
+		return HasLineOfSight(targetTransform, (target.position - transform.position).magnitude);
+	}
+
+	public bool HasLineOfSight(Transform targetTransform, float distance) {
 		Vector3 rayDirection = targetTransform.position - transform.position;
+		int layerMask = LayerMask.GetMask("Unwalkable", "Player"); // Only collisions in layer Unwalkable and Player
 		RaycastHit hit;
-		if (Physics.Raycast(transform.position, rayDirection, out hit, destinationRadius)) { // Note: Currently will be blocked by ALL colldiers (not just unwalkable)
+		if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), rayDirection, out hit, distance, layerMask)) {
 			return hit.transform == targetTransform;
 		}
 		return false;
@@ -137,7 +157,9 @@ public abstract class Unit : MonoBehaviour {
 	protected virtual void AnimationComplete(AnimationEvent animationEvent) {
 		if (animationEvent.stringParameter.StartsWith("reset_")) {
 			string animationName = animationEvent.stringParameter.Substring(6);
-			UnitAnimator.SetBool(animationName, false);
+			if (UnitAnimator != null) {
+				UnitAnimator.SetBool(animationName, false);
+			}
 		}
 	}
 

@@ -15,7 +15,13 @@ public class ThirdPersonCharacter : MonoBehaviour
 	[SerializeField] float m_AnimSpeedMultiplier = 1f;
 	[SerializeField] float m_GroundCheckDistance = 0.1f;
 
-	Rigidbody m_Rigidbody;
+    //Game Object for players hand, used for equipping and the radius that a player can be
+    //from an object and still pick it up
+    public GameObject rightHand;
+    public GameObject leftHand;
+    public float grabRadius = 1f;
+
+    Rigidbody m_Rigidbody;
 	Animator m_Animator;
 	bool m_IsGrounded;
 	float m_OrigGroundCheckDistance;
@@ -28,16 +34,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
 	AbilityController abilities;
+    bool stopMovement;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
 	PlayerInventory inventory;
-
-	//Game Object for players hand, used for equipping and the radius that a player can be
-	//from an object and still pick it up
-	public GameObject rightHand;
-	public GameObject leftHand;
-	public float grabRadius = 1f;
 
 	void Start()
 	{
@@ -60,21 +61,34 @@ public class ThirdPersonCharacter : MonoBehaviour
         abilities.setClassAbilities(m_Animator); // set proper layer for abilities
 	}
 			
-	public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
-	{   
-		// convert the world relative moveInput vector into a local-relative
-		// turn amount and forward amount required to head in the desired direction.
-		if (move.magnitude > 1f)
-			move.Normalize ();
-		move = transform.InverseTransformDirection (move);
-		CheckGroundStatus ();
-		move = Vector3.ProjectOnPlane (move, m_GroundNormal);
-		m_ForwardAmount = move.z;
+    public bool StopMovement
+    {
+        get { return stopMovement; }
+        set { stopMovement = value; }
+    }
+
+    public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
+    {
+        // convert the world relative moveInput vector into a local-relative
+        // turn amount and forward amount required to head in the desired direction.
+        if (move.magnitude > 1f)
+            move.Normalize();
+        move = transform.InverseTransformDirection(move);
+        CheckGroundStatus();
+        move = Vector3.ProjectOnPlane(move, m_GroundNormal);
+        m_ForwardAmount = stopMovement ? 0f : move.z;
 
         // if using a ranged weapon, have camera over shoulder
         if (isRangedAttacking(atk))
-        {   // no apply turn amount relative to direction controls rather than cartesian
-            m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
+        {
+            if (StopMovement)
+            {   // will move left and right if turn amount is applied
+                m_TurnAmount = 0f;
+            }
+            else
+            {   // apply turn amount relative to direction controls rather than cartesian
+                m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
+            }
         }
         else
         {   // camera is independent of player rotation, use cartesian controls

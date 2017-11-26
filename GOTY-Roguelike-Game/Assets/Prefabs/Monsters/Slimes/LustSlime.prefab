@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4365253144279726}
   - component: {fileID: 64093180190986242}
   - component: {fileID: 114174688415589330}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4178427754206564}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LeftArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4553081511072014}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RightArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -66,7 +66,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4126697659139262}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeLeftTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -81,7 +81,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4432551346723092}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeRightJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4367372919371158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeRootJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4862119212783720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeBackTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4146940684627952}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: RIG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4946320027537258}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: MESH
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4590622622694406}
   - component: {fileID: 137508754958960100}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeLevel1 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4919036010963990}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeControl1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4780411289697330}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FrontArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4814994822359816}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackArrowControl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -217,7 +217,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4180024622179194}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeFrontTailJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4896581761665056}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeNeckJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 4499720785669444}
   - component: {fileID: 95547871820541786}
   - component: {fileID: 114782593983377036}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: LustSlime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4876490716229652}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SlimeHeadJoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -378,7 +378,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1953699167637816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -238.24, y: 9.1002705e-17, z: 117.59}
+  m_LocalPosition: {x: -268.9, y: 9.1002705e-17, z: 131.9}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children:
   - {fileID: 4946320027537258}
@@ -572,6 +572,8 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   canvasHeight: 0.03
+  healthDrop: {fileID: 0}
+  gemDrop: {fileID: 0}
   targetTag: Player
   aggroRadius: 20
   attackPower: 5

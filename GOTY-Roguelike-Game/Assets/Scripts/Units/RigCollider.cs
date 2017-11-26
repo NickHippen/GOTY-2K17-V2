@@ -19,7 +19,6 @@ public class RigCollider : MonoBehaviour {
 	}
 
 	protected virtual void OnTriggerEnter(Collider collider) {
-		Debug.Log("Attack Trigger");
 		RootUnit.OnRigTriggerEnter(collider);
 	}
 
