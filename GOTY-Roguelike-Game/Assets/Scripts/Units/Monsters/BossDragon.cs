@@ -5,6 +5,7 @@ using UnityEngine;
 public class BossDragon : AggressiveUnit {
 
 	public Transform flameThrowerOriginPoint;
+	public GameObject explosionPillar;
 
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new BasicDamageAttack(
@@ -14,6 +15,11 @@ public class BossDragon : AggressiveUnit {
 			new IntervalAttackController(this, 5, 5)
 				.AddConditional(CheckFlamethrower),
 			flameThrowerOriginPoint
+		));
+		attacks.Add(new SpawnObjectAttack(
+			new IntervalAttackController(this, 8, 8),
+			explosionPillar,
+			true
 		));
 	}
 
