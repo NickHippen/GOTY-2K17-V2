@@ -9,6 +9,10 @@ public class HardKick : Ability {
     public float effectDistance;
 	public float damageRadius;
 
+	void Start(){
+		effect.transform.localScale = new Vector3 (damageRadius, damageRadius, .25f);
+	}
+
     public override void applyEffect(GameObject player)
     {
         this.transform.position = player.transform.position + player.transform.forward * effectDistance;
