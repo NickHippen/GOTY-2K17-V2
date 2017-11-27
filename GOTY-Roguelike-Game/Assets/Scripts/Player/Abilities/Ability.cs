@@ -11,7 +11,7 @@ public abstract class Ability : MonoBehaviour {
     private bool isAvailible = true;
 
 	// Use this for initialization
-	public virtual void Start () {
+	protected virtual void Start () {
         cooldownTimer = cooldownTime;
 	}
 	

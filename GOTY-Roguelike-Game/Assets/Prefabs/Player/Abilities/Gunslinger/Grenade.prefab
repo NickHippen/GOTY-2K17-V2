@@ -299,10 +299,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22d4a45b4e054fb41acd484ee5a3d58a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cooldownTime: 1
+  applyOnFrame: 1
+  grenadeObject: {fileID: 114774945574455578, guid: 679d61935c70e93428fed7ec8fc7d209,
+    type: 2}
   damage: 20
-  cooldownTime: 30
-  effect: {fileID: 198675701172477916}
-  effectDistance: 8
+  damageRadius: 1
+  explosionTimer: 3
+  throwForce: 2000
 --- !u!198 &198138088254903240
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -26323,8 +26327,3 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
-  cooldownTime: 3
-  applyOnFrame: 0
-  damage: 0
-  grenadeObject: {fileID: 114892718769738106, guid: bd9994d91042c64409cbc2d0fce27da0,
-    type: 2}

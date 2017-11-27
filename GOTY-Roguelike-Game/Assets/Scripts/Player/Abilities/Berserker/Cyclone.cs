@@ -11,7 +11,8 @@ public class Cyclone : Ability {
 	//Radius of damage the effect has
 	public float damageRadius;
 
-	void Start(){
+	protected override void Start(){
+        base.Start();
 		effect.transform.localScale = new Vector3 (damageRadius, damageRadius, 1);
 	}
 

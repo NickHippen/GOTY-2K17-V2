@@ -9,7 +9,8 @@ public class HardKick : Ability {
     public float effectDistance;
 	public float damageRadius;
 
-	void Start(){
+	protected override void Start(){
+        base.Start();
 		effect.transform.localScale = new Vector3 (damageRadius, damageRadius, .25f);
 	}
 

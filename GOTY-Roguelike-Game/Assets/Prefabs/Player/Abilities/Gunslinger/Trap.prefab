@@ -52,6 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 3
-  applyOnFrame: 0
-  damage: 0
-  grenadeObject: {fileID: 0}
+  applyOnFrame: 1
+  trapObject: {fileID: 114552568952513184, guid: ac444a1097f66de409c65c84e96e3e5c,
+    type: 2}
+  trapDuration: 500
+  trapDiameter: 1.5
+  slowDuration: 5
+  slowPercent: 0.7
+  durability: 500

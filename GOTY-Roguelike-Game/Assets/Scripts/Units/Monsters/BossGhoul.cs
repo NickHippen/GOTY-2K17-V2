@@ -7,6 +7,7 @@ public class BossGhoul : AggressiveUnit {
 	public KinematicProjectile projectile;
 	public CloudSpawn cloudSummon;
 	public GameObject mask;
+	public GameObject maskExplosionEffect;
 
 	private CloudSpawn spawnedCloud;
 	private bool maskDestroyed = false;
@@ -34,9 +35,15 @@ public class BossGhoul : AggressiveUnit {
 	public override void Damage(float amount) {
 		base.Damage(amount);
 		if (!maskDestroyed && HealthPercentage <= 0.5f) {
-			Destroy(mask);
-			maskDestroyed = true;
+			DestroyMask();
 		}
+	}
+
+	public void DestroyMask() {
+		maskExplosionEffect.SetActive(true);
+		//Destroy(mask);
+		mask.SetActive(false);
+		maskDestroyed = true;
 	}
 
 	public override void OnDeath() {

@@ -35,6 +35,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	bool m_isDead;
 	AbilityController abilities;
     bool stopMovement;
+    bool turretMode;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -310,14 +311,12 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
             m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
-            m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
+            //m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
             m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
-            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
 		} else {
             m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
             m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
-            m_Animator.SetLayerWeight(1, 0); // turn off gun mask
-                                             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
+           // m_Animator.SetLayerWeight(1, 0); // turn off gun mask
         }
 	}
 

@@ -7,7 +7,7 @@ public class Turret : Ability
     public float damageMultiplier = 2f;
     public float duration = 5f;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
     }
