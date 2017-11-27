@@ -4,41 +4,64 @@ using UnityEngine;
 
 public class GrenadeObject : MonoBehaviour
 {
-    public GameObject Parent;
-    public Rigidbody RBody;
-    public float Force;
+    public ParticleSystem effect;
 
-    private bool isThrown;
+    private float timer;
+    private float damage;
+    private float damageRadius;
+    private bool exploded;
 
-    // Use this for initialization
-    void Start()
+    public float Damage
     {
-        transform.position = Parent.transform.position;
-        RBody.useGravity = false;
-        isThrown = false;
+        get { return damage; }
+        set { damage = value; }
+    }
+
+    public float DamageRadius
+    {
+        get { return damageRadius; }
+        set { damageRadius = value; }
+    }
+
+    public float Timer
+    {
+        get { return timer; }
+        set { timer = value; }
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (!isThrown)
+        if(timer < 0 && !exploded)
         {
-            transform.position = Parent.transform.position;
+            exploded = true;
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Rigidbody>().velocity = new Vector3();
+            
+            effect.transform.position = this.transform.position;
+            effect.transform.localScale = new Vector3(damageRadius, damageRadius, damageRadius);
+            effect.Emit(10);
+
+            Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
+            foreach (Collider collider in colliders)
+            {
+                RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
+                Debug.Log(collider);
+                if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
+                {
+                    AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+                    float damage = this.damage;
+                    monster.Damage(damage);
+                }
+            }
+            StartCoroutine(removeGrenade());
         }
+        else timer -= Time.deltaTime;
     }
 
-    public void Release()
+    IEnumerator removeGrenade()
     {
-        transform.parent = null;
-        RBody.useGravity = true;
-        transform.rotation = Parent.transform.rotation;
-        RBody.AddForce(transform.forward * Force);
-        isThrown = true;
-    }
-
-    public void OnTriggerEnter(Collider other)
-    {
-        
+        yield return new WaitForSeconds(effect.main.duration);
+        Destroy(this.gameObject);
     }
 }

@@ -12,7 +12,7 @@ public class MarkForDeath : Ability
     private LineRenderer line;
     private Vector3 shootPoint;
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         this.line = GetComponent<LineRenderer>();

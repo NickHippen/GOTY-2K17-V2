@@ -9,7 +9,8 @@ public class Adrenaline : Ability {
 	public ParticleSystem effect;
 	public float effectDistance;
 
-	void Start(){
+	protected override void Start(){
+        base.Start();
 		//ApplyOnFrame = true;
 	}
 
