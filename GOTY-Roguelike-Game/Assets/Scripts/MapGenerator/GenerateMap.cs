@@ -160,7 +160,7 @@ public class GenerateMap : MonoBehaviour
 		List<Room> roomList = new List<Room> ();
 
 		Random.seed = System.DateTime.Now.Millisecond;
-
+		Random.seed = 0;
 		for (var i = 0; i < mapw; i++) {
 			for (var j = 0; j < maph; j++) {
 				maparr [i, j] = "wall";
