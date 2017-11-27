@@ -80,7 +80,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			m_Character.gameObject.GetComponent<PlayerInventory> ().scrollWeapon (scrolled);
 
-			if (selection != -1 || scrolled != 0) {
+			if (scrolled != 0 || selection != -1) {
 				m_Character.setWeaponAnimations();
 			}
 		}

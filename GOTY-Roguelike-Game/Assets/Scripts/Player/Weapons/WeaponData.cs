@@ -47,7 +47,6 @@ public class WeaponData : MonoBehaviour {
 			//effect.transform.position = transform.position + transform.forward;
 			effect.Emit(10);
 		}
-
 	}
 
     public void ApplyDamageMultiplier(float duration, float damageMultiplier)

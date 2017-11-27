@@ -16,7 +16,7 @@ public abstract class Ability : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	protected virtual void Update () {
 		if(!isAvailible)
         {
             cooldownTimer -= Time.deltaTime;

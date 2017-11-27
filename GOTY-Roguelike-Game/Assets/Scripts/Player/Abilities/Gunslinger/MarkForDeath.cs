@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MarkForDeath : Ability
 {
+    public ParticleSystem effect;
     public float duration = 20f;
     public float damageMultiplier = 2f;
     public float range = 40f;
@@ -28,22 +29,23 @@ public class MarkForDeath : Ability
         this.line.SetPosition(0, shootPoint);
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range))
         {
-            print("HIT");
+            // show point of hit with particle effect
+            effect.transform.position = hit.point;
+            effect.Emit(10);
+
             this.line.SetPosition(1, hit.point);
             RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
             if (rigCollider == null)
             {
                 return;
             }
+
             Unit unit = rigCollider.RootUnit;
             if (unit is AggressiveUnit)
             {
                 AggressiveUnit monster = (AggressiveUnit)unit;
                 monster.ApplyStatus(new StatusVulnerable(monster, duration, damageMultiplier));
             }
-            //if (hit.rigidbody != null) {
-            //	hit.rigidbody.AddForce(-hit.normal * hitForce);
-            //}
         }
         else
         {

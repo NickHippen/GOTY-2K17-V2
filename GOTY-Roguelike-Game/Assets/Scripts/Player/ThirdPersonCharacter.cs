@@ -34,8 +34,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
 	AbilityController abilities;
-    bool stopMovement;
-    bool turretMode;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -61,12 +59,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 		setWeaponAnimations();
         abilities.setClassAbilities(m_Animator); // set proper layer for abilities
 	}
-			
-    public bool StopMovement
-    {
-        get { return stopMovement; }
-        set { stopMovement = value; }
-    }
 
     public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
     {
@@ -77,19 +69,13 @@ public class ThirdPersonCharacter : MonoBehaviour
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-        m_ForwardAmount = stopMovement ? 0f : move.z;
+        m_ForwardAmount = move.z;
 
         // if using a ranged weapon, have camera over shoulder
         if (isRangedAttacking(atk))
         {
-            if (StopMovement)
-            {   // will move left and right if turn amount is applied
-                m_TurnAmount = 0f;
-            }
-            else
-            {   // apply turn amount relative to direction controls rather than cartesian
-                m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
-            }
+            // apply turn amount relative to direction controls rather than cartesian
+            m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
         }
         else
         {   // camera is independent of player rotation, use cartesian controls
@@ -346,8 +332,15 @@ public class ThirdPersonCharacter : MonoBehaviour
 			m_Animator.applyRootMotion = false;
 		}
 	}
+    
+    // frames of sword attacks call this function
+    public void SwordHitOnFrame()
+    {
+        ProcessAttack();
+    }
 
-	public void ProcessAttack() {
+
+    public void ProcessAttack() {
 		inventory.getCurrentWeapon().GetComponent<WeaponData>().Attack();
 	}
 
