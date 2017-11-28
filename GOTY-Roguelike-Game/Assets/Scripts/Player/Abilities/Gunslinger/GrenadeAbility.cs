@@ -9,6 +9,7 @@ public class GrenadeAbility : Ability
     public float damageRadius = 1f;
     public float explosionTimer = 3f;
     public float throwForce = 3000f;
+    public Vector2 throwAngle = new Vector2(2f, 1f);
 
     protected override void Start()
     {
@@ -24,6 +25,6 @@ public class GrenadeAbility : Ability
         grenade.Damage = damage;
         grenade.DamageRadius = damage;
         grenade.transform.position = player.transform.position + player.transform.up * 2;
-        grenade.GetComponent<Rigidbody>().AddForce(Camera.main.transform.forward * throwForce);
+        grenade.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward*throwAngle.x + player.transform.up*throwAngle.y) * throwForce);
     }
 }

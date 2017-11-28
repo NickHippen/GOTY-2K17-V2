@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class SwordData : WeaponData
 {
-    // commented code was not working properly
-    //public float hitDuration = 0.1f;
-    //private bool hit;
+    public float swordRange = 1f;
+    public float swordBoxRadius = 1f;
+    
+    public override void Attack()
+    {
+        ThirdPersonCharacter player = this.GetComponentInParent<ThirdPersonCharacter>();
+        Collider[] colliders = Physics.OverlapBox(player.transform.position + player.transform.up + player.transform.forward*swordRange,
+            new Vector3(swordBoxRadius,swordBoxRadius,swordBoxRadius), player.transform.rotation);
 
-    //public override void Attack()
-    //{
-    //    hit = true;
-    //    StartCoroutine(HitDuration());
-    //}
-
-    void OnTriggerEnter(Collider collision) {
-        //if (hit) {
-            RigCollider rigCollider = collision.gameObject.GetComponent<RigCollider>();
-            if (rigCollider != null && !(rigCollider is AttackCollider) && rigCollider.RootUnit is AggressiveUnit) {
+        foreach (Collider collider in colliders)
+        {
+            RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
+            if (rigCollider != null && !(rigCollider is AttackCollider) && rigCollider.RootUnit is AggressiveUnit)
+            {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
                 damage *= damageMultiplier;
@@ -25,12 +25,18 @@ public class SwordData : WeaponData
                 damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
                 monster.Damage(damage);
             }
-        //}
-	}
+        }
+    }
 
-    //IEnumerator HitDuration()
-    //{
-    //    yield return new WaitForSeconds(hitDuration);
-    //    hit = false;
-    //}
+ //   void OnTriggerEnter(Collider collision) {
+ //       RigCollider rigCollider = collision.gameObject.GetComponent<RigCollider>();
+ //       if (rigCollider != null && !(rigCollider is AttackCollider) && rigCollider.RootUnit is AggressiveUnit) {
+ //           AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+ //           float damage = this.damage;
+ //           damage *= damageMultiplier;
+ //           damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
+ //           damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
+ //           monster.Damage(damage);
+ //       }
+	//}
 }
