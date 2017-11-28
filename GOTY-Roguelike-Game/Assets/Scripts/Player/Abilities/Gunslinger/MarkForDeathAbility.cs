@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MarkForDeath : Ability
+public class MarkForDeathAbility : Ability
 {
     public ParticleSystem effect;
     public float duration = 20f;
@@ -16,13 +16,16 @@ public class MarkForDeath : Ability
     protected override void Start()
     {
         base.Start();
+        applyOnFrame = true;
         this.line = GetComponent<LineRenderer>();
     }
 
     public override void applyEffect(GameObject player)
     {
-        StartCoroutine(ShotEffect());
+        base.applyEffect(player);
 
+        player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        StartCoroutine(ShotEffect());
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 
         RaycastHit hit;

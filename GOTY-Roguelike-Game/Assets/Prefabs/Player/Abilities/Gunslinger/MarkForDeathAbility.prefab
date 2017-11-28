@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 114566496926193364}
   - component: {fileID: 120883274745406186}
   m_Layer: 0
-  m_Name: MarkForDeath
+  m_Name: MarkForDeathAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 3
-  applyOnFrame: 0
+  faceCameraDirection: 1
   effect: {fileID: 198551552429452234}
   duration: 20
   damageMultiplier: 2

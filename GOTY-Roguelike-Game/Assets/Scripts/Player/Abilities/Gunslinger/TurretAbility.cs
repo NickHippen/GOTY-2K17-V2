@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Turret : Ability
+public class TurretAbility : Ability
 {
     public float damageMultiplier = 2f;
     public float duration = 5f;
@@ -22,19 +22,21 @@ public class Turret : Ability
         if (isActive) {
             if (playerInv.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
             {
-                anim.SetLayerWeight(5, 1);  // turn on gun turret
-                anim.SetLayerWeight(6, 0);
+                anim.SetLayerWeight(4, 1);  // turn on gun turret
+                anim.SetLayerWeight(5, 0);
             }
             else
             {
-                anim.SetLayerWeight(6, 1); // turn on sword turret
-                anim.SetLayerWeight(5, 0);
+                anim.SetLayerWeight(5, 1); // turn on sword turret
+                anim.SetLayerWeight(4, 0);
             }
         }
     }
 
     public override void applyEffect(GameObject player)
     {
+        base.applyEffect(player);
+
         anim = player.GetComponent<Animator>();
         playerInv = player.GetComponent<PlayerInventory>();
 
@@ -43,7 +45,6 @@ public class Turret : Ability
         {
             weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
         }
-
         StartCoroutine(CrouchEffect());
     }
     
@@ -51,7 +52,7 @@ public class Turret : Ability
     {
         yield return new WaitForSeconds(duration);
         isActive = false;
-        anim.SetLayerWeight(6, 0); // turn on sword turret
+        anim.SetLayerWeight(4, 0); // turn off turret
         anim.SetLayerWeight(5, 0);
     }
 }

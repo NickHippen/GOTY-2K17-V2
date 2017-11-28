@@ -19,9 +19,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4944096774288498}
-  - component: {fileID: 114904214201937630}
+  - component: {fileID: 114661783537938678}
   m_Layer: 0
-  m_Name: Trap
+  m_Name: TurretAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114904214201937630
+--- !u!114 &114661783537938678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -48,15 +48,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1696987286867654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35e3402947829ca4898dcf0834ec17ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 05c47993d81f8ef4c91e594b77a49e90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cooldownTime: 3
-  applyOnFrame: 1
-  trapObject: {fileID: 114552568952513184, guid: ac444a1097f66de409c65c84e96e3e5c,
-    type: 2}
-  trapDuration: 500
-  trapDiameter: 1.5
-  slowDuration: 5
-  slowPercent: 0.7
-  durability: 500
+  faceCameraDirection: 0
+  damageMultiplier: 2
+  duration: 5

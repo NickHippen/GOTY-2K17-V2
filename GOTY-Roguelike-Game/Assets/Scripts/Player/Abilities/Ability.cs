@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Ability : MonoBehaviour {
+public class Ability : MonoBehaviour {
     
     public float cooldownTime;
-    public bool applyOnFrame;
-
+    public bool faceCameraDirection;
+    protected bool applyOnFrame;
     private float cooldownTimer;
     private bool isAvailible = true;
 
@@ -45,6 +45,8 @@ public abstract class Ability : MonoBehaviour {
         set { isAvailible = value; }
     }
 
-    public abstract void applyEffect(GameObject player);
-
+    public virtual void applyEffect(GameObject player)
+    {
+        if(faceCameraDirection) player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+    }
 }
