@@ -26,8 +26,8 @@ public class Grenade : MonoBehaviour
 
     public float ParticleRadius
     {
-        get { return ParticleRadius; }
-        set { damageRadius = value; }
+        get { return particleRadius; }
+        set { particleRadius = value; }
     }
 
     public float Timer
@@ -52,7 +52,6 @@ public class Grenade : MonoBehaviour
             foreach (Collider collider in colliders)
             {
                 RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
-                Debug.Log(collider);
                 if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
                 {
                     AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
