@@ -5,7 +5,7 @@ using UnityEngine;
 public class Adrenaline : Ability {
     
     public float damageMultiplier = 2f;
-    public float duration = 5f;
+    public float duration;
 	public ParticleSystem effect;
 	public float effectDistance;
 
@@ -17,12 +17,20 @@ public class Adrenaline : Ability {
     public override void applyEffect(GameObject player)
     {
 		this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+		this.transform.parent = player.transform;
 
         foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)
         {
             weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
         }
 
-		effect.Emit (50);
+		StartCoroutine (effectTimer ());
+		//effect.Emit (50);
     }
+
+	private IEnumerator effectTimer(){
+		effect.Play ();
+		yield return new WaitForSeconds (duration);
+		effect.Stop ();
+	}
 }
