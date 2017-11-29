@@ -40,18 +40,17 @@ public class Trap : MonoBehaviour
     void Update()
     {
         duration -= Time.deltaTime;
-
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, diameter/2f);
-        foreach (Collider collider in colliders)
-        {
-            RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
-            if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
-            {
-                AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                monster.ApplyStatus(new StatusSlow(monster, slowDuration, slowPercent));
-                durability--;
-            }
-        }
         if (duration < 0 || durability <= 0) Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        RigCollider rigCollider = other.gameObject.GetComponent<RigCollider>();
+        if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
+        {
+            AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+            monster.ApplyStatus(new StatusSlow(monster, slowDuration, slowPercent));
+            durability--;
+        }
     }
 }

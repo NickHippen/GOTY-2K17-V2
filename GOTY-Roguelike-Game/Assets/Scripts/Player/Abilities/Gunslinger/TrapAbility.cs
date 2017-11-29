@@ -9,7 +9,7 @@ public class TrapAbility : Ability
     public float trapDiameter = 1f;
     public float slowDuration = 5f;
     public float slowPercent = .7f;
-    public int durability = 10;
+    public int durability = 5;
 
     protected override void Start()
     {

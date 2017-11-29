@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Ability : MonoBehaviour {
-    
+
+    public Sprite icon;
     public float cooldownTime;
     public bool faceCameraDirection;
     protected bool applyOnFrame;
