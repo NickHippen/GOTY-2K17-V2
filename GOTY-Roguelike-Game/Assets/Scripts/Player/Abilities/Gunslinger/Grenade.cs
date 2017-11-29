@@ -9,6 +9,7 @@ public class Grenade : MonoBehaviour
     private float timer;
     private float damage;
     private float damageRadius;
+    private float particleRadius;
     private bool exploded;
 
     public float Damage
@@ -23,14 +24,19 @@ public class Grenade : MonoBehaviour
         set { damageRadius = value; }
     }
 
+    public float ParticleRadius
+    {
+        get { return particleRadius; }
+        set { particleRadius = value; }
+    }
+
     public float Timer
     {
         get { return timer; }
         set { timer = value; }
     }
-
-    // Update is called once per frame
-    void Update()
+    
+    void FixedUpdate()
     {
         if(timer < 0 && !exploded)
         {
@@ -39,14 +45,13 @@ public class Grenade : MonoBehaviour
             GetComponent<Rigidbody>().velocity = new Vector3();
             
             effect.transform.position = this.transform.position;
-            effect.transform.localScale = new Vector3(damageRadius, damageRadius, damageRadius);
+            effect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
             effect.Emit(10);
 
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
             foreach (Collider collider in colliders)
             {
                 RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
-                Debug.Log(collider);
                 if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
                 {
                     AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);

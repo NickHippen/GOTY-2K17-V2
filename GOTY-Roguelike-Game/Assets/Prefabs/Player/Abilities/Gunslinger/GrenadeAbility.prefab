@@ -304,8 +304,9 @@ MonoBehaviour:
   faceCameraDirection: 1
   grenadeObject: {fileID: 114774945574455578, guid: 679d61935c70e93428fed7ec8fc7d209,
     type: 2}
-  damage: 20
-  damageRadius: 1
+  damage: 10
+  damageRadius: 5
+  particleScale: 5
   explosionTimer: 3
   throwForce: 2000
   throwAngle: {x: 2, y: 1}
