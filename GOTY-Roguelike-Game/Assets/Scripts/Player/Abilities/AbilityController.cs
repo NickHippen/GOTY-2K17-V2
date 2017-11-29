@@ -32,7 +32,7 @@ public class AbilityController : MonoBehaviour {
             GameObject abilityFrame = GameObject.Find("Ability " + i);
             abilityFrame.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(iconSize, iconSize);
 
-            // duplicate frame and replace with proper ability image and name
+            // duplicate frame and add ability icon
             GameObject abilityIcon = Instantiate(abilityFrame, abilityFrame.transform.parent, false);
             abilityIcon.transform.SetSiblingIndex(1); // place behind frame
             
@@ -41,6 +41,13 @@ public class AbilityController : MonoBehaviour {
                 Regex.Replace(abilities[i].name.Substring(0, abilities[i].name.Length - "Ability".Length), "([a-z])_?([A-Z])", "$1 $2");
             cooldownTimers.Add(Instantiate(cooldownText, abilityFrame.transform, false));
             cooldownTimers[i].enabled = false;
+            Text inputButton = Instantiate(abilityText, abilityFrame.transform, false);
+            inputButton.alignment = TextAnchor.LowerCenter;
+            inputButton.fontSize += 2;
+            if (i == 0) inputButton.text = "Z";
+            else if (i == 1) inputButton.text = "X";
+            else if (i == 2) inputButton.text = "C";
+            else inputButton.text = "V";
 
             abilityIcon.GetComponent<Image>().sprite = abilities[i].icon;
             abilityIcons.Add(abilityIcon.GetComponent<Image>());
