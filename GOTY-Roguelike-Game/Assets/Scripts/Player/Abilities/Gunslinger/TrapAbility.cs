@@ -28,6 +28,10 @@ public class TrapAbility : Ability
         trap.SlowPercent = slowPercent;
         trap.Durability = durability;
         trap.transform.position = player.transform.position;
-        trap.transform.localScale = new Vector3(trapDiameter, .1f, trapDiameter);
+        trap.transform.localScale = new Vector3(trapDiameter, 1, trapDiameter);
+        GameObject particleSys = trap.transform.GetChild(0).gameObject;
+        ParticleSystem.MainModule particleMain = particleSys.GetComponent<ParticleSystem>().main;
+        particleMain.startSize = particleMain.startSize.constant * trapDiameter;
+        particleSys.SetActive(true);
     }
 }

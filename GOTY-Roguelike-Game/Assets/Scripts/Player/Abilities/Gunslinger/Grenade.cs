@@ -10,7 +10,6 @@ public class Grenade : MonoBehaviour
     private float damage;
     private float damageRadius;
     private float particleRadius;
-    private bool exploded;
 
     public float Damage
     {
@@ -35,33 +34,34 @@ public class Grenade : MonoBehaviour
         get { return timer; }
         set { timer = value; }
     }
-    
-    void FixedUpdate()
-    {
-        if(timer < 0 && !exploded)
-        {
-            exploded = true;
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<Rigidbody>().velocity = new Vector3();
-            
-            particleEffect.transform.position = this.transform.position;
-            particleEffect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
-            particleEffect.Play();
 
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
-            foreach (Collider collider in colliders)
+    private void Start()
+    {
+        StartCoroutine(PullPin());
+    }
+
+    IEnumerator PullPin()
+    {
+        yield return new WaitForSeconds(timer);
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Rigidbody>().velocity = new Vector3();
+            
+        particleEffect.transform.position = this.transform.position;
+        particleEffect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
+        particleEffect.gameObject.SetActive(true);
+
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
+        foreach (Collider collider in colliders)
+        {
+            RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
+            if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
             {
-                RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
-                if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
-                {
-                    AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                    float damage = this.damage;
-                    monster.Damage(damage);
-                }
+                AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+                float damage = this.damage;
+                monster.Damage(damage);
             }
-            StartCoroutine(removeGrenade());
         }
-        else timer -= Time.deltaTime;
+        StartCoroutine(removeGrenade());
     }
 
     IEnumerator removeGrenade()

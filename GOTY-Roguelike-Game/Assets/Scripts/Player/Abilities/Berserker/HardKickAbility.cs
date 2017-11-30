@@ -8,7 +8,6 @@ public class HardKickAbility : Ability {
     public ParticleSystem particleEffect;
     public Vector2 effectPosition;
 	public float damageRadius;
-    public float particleRadiusMuliplier = 2f;
 
     protected override void Start(){
         base.Start();
