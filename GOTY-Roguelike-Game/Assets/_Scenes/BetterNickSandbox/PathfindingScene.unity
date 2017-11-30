@@ -1393,6 +1393,7 @@ MonoBehaviour:
   iconSize: 50
   abilityText: {fileID: 0}
   cooldownText: {fileID: 0}
+  feedbackTimer: 0.8
 --- !u!114 &282933527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3164,7 +3165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseName: 
   desc: 
-  baseDamage: 0
   damage: 100
   rotation: {x: 8, y: 83.5, z: 89}
   model: {fileID: 837591038}
@@ -3974,7 +3974,7 @@ Prefab:
     - target: {fileID: 224801273051487722, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -129.00436
+      value: -298
       objectReference: {fileID: 0}
     - target: {fileID: 224667050147105018, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
@@ -4009,17 +4009,17 @@ Prefab:
     - target: {fileID: 224128767890348466, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 5.095642
+      value: -163.9
       objectReference: {fileID: 0}
     - target: {fileID: 224749508598514364, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -129.00436
+      value: -298
       objectReference: {fileID: 0}
     - target: {fileID: 224801965724186060, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -129.00436
+      value: -298
       objectReference: {fileID: 0}
     - target: {fileID: 224848117895101282, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
@@ -4029,7 +4029,7 @@ Prefab:
     - target: {fileID: 224848117895101282, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -131.00436
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 1584899959914548, guid: 49bc4725faee429428a30e375b3a3ea4, type: 2}
       propertyPath: m_Name
@@ -4038,17 +4038,17 @@ Prefab:
     - target: {fileID: 224990891610408562, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -129.00436
+      value: -298
       objectReference: {fileID: 0}
     - target: {fileID: 224994196947466532, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 458
+      value: 320
       objectReference: {fileID: 0}
     - target: {fileID: 224994196947466532, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: 150
+      value: 240
       objectReference: {fileID: 0}
     - target: {fileID: 114370532006251122, guid: 49bc4725faee429428a30e375b3a3ea4,
         type: 2}
