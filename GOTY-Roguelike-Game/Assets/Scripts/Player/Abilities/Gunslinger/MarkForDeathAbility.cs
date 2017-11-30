@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MarkForDeathAbility : Ability
 {
-    public ParticleSystem effect;
+    public ParticleSystem particleEffect;
     public float duration = 20f;
     public float damageMultiplier = 2f;
     public float range = 40f;
@@ -33,8 +33,8 @@ public class MarkForDeathAbility : Ability
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range))
         {
             // show point of hit with particle effect
-            effect.transform.position = hit.point;
-            effect.Emit(10);
+            particleEffect.transform.position = hit.point;
+            particleEffect.Play();
 
             this.line.SetPosition(1, hit.point);
             RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();

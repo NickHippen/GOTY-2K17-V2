@@ -5,23 +5,24 @@ using UnityEngine;
 public class CycloneAbility : Ability {
 
     public float damage;
-    public ParticleSystem effect;
+    public ParticleSystem particleEffect;
 	//Distance of particle effect from player
-    public float effectDistance;
+    public Vector2 effectPosition;
 	//Radius of damage the effect has
 	public float damageRadius;
 
 	protected override void Start(){
         base.Start();
         applyOnFrame = true;
-		effect.transform.localScale = new Vector3 (damageRadius, damageRadius, 1);
+        ParticleSystem.MainModule mainEffect = particleEffect.main;
+        mainEffect.startSize = damageRadius;
 	}
 
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
 
-        this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+        this.transform.position = player.transform.position + player.transform.forward*effectPosition.x + player.transform.up*effectPosition.y;
 
 		Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
         foreach(Collider collider in colliders)
@@ -34,6 +35,6 @@ public class CycloneAbility : Ability {
 				monster.Damage(damage);
 			}
         }
-        effect.Emit(10);
+        particleEffect.Play();
     }
 }

@@ -5,21 +5,30 @@ using UnityEngine;
 public class HardKickAbility : Ability {
 
     public float damage;
-    public ParticleSystem effect;
-    public float effectDistance;
+    public ParticleSystem particleEffect;
+    public Vector2 effectPosition;
 	public float damageRadius;
+    public float particleRadiusMuliplier = 2f;
 
-	protected override void Start(){
+    protected override void Start(){
         base.Start();
         applyOnFrame = true;
-		effect.transform.localScale = new Vector3 (damageRadius, damageRadius, .25f);
-	}
+
+        // change particleEffect size for to match damage radius
+        ParticleSystem[] pSystems = particleEffect.GetComponentsInChildren<ParticleSystem>();
+        
+        // took the time to adjust the values in particle effect to scale with damage
+        ParticleSystem.MainModule mainEffect = pSystems[0].main;
+        mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
+        mainEffect = pSystems[1].main;
+        mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
+    }
 
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
 
-        this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+        this.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up*effectPosition.y;
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach(Collider collider in colliders)
@@ -33,6 +42,6 @@ public class HardKickAbility : Ability {
 				monster.Damage(damage);
 			}
         }
-        effect.Emit(100);
+        particleEffect.Play();
     }
 }

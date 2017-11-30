@@ -6,7 +6,7 @@ public class AdrenalineAbility : Ability {
     
     public float damageMultiplier = 2f;
     public float duration;
-	public ParticleSystem effect;
+	public ParticleSystem particleEffect;
 	public float effectDistance;
 
     public override void applyEffect(GameObject player)
@@ -26,8 +26,8 @@ public class AdrenalineAbility : Ability {
     }
 
 	private IEnumerator effectTimer(){
-		effect.Play ();
+		particleEffect.Play ();
 		yield return new WaitForSeconds (duration);
-		effect.Stop ();
+		particleEffect.Stop ();
 	}
 }

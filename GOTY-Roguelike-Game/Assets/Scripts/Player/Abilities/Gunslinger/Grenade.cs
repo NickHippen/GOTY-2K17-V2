@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    public ParticleSystem effect;
+    public ParticleSystem particleEffect;
 
     private float timer;
     private float damage;
@@ -44,9 +44,9 @@ public class Grenade : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             GetComponent<Rigidbody>().velocity = new Vector3();
             
-            effect.transform.position = this.transform.position;
-            effect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
-            effect.Emit(10);
+            particleEffect.transform.position = this.transform.position;
+            particleEffect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
+            particleEffect.Play();
 
             Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
             foreach (Collider collider in colliders)
@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
 
     IEnumerator removeGrenade()
     {
-        yield return new WaitForSeconds(effect.main.duration);
+        yield return new WaitForSeconds(particleEffect.main.duration);
         Destroy(this.gameObject);
     }
 }

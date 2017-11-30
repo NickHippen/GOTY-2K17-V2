@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TankUpAbility : Ability {
 
-	public ParticleSystem effect;
+	public ParticleSystem particleEffect;
 	public float effectDistance;
 	public float effectDuration;
 
@@ -20,17 +20,15 @@ public class TankUpAbility : Ability {
 
 		this.transform.position = player.transform.position + player.transform.forward * effectDistance;
 		this.transform.parent = player.transform;
-		Debug.Log ("TANK UP");
-		//player.GetComponent<HealthManager> ().invincible = !player.GetComponent<HealthManager> ().invincible;
 		StartCoroutine(TankTimer(player));
 	}
 
 	private IEnumerator TankTimer(GameObject player){
-		effect.Play ();
-		player.GetComponent<HealthManager> ().invincible = !player.GetComponent<HealthManager> ().invincible;
+		particleEffect.Play ();
+        player.GetComponent<HealthManager>().invincible = true;
 		yield return new WaitForSeconds (effectDuration);
-		player.GetComponent<HealthManager> ().invincible = !player.GetComponent<HealthManager> ().invincible;
-		effect.Stop ();
+        player.GetComponent<HealthManager>().invincible = false;
+		particleEffect.Stop ();
 	}
 		
 }
