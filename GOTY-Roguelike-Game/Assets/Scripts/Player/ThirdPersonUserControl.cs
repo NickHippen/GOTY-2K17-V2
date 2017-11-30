@@ -13,7 +13,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private Vector3 m_Move;					  // the world-relative desired move direction, calculated from the camForward and user input.
 		private bool m_Jump;
 		private bool m_Attacking;
-		private bool m_Ability1, m_Ability2, m_Ability3, m_Ability4;
+		private bool[] m_Abilities = new bool[4];
         
         private void Start()
         {
@@ -42,27 +42,35 @@ namespace UnityStandardAssets.Characters.ThirdPerson
             }
 
 			m_Attacking = Input.GetMouseButton (0);
-			m_Ability1 = Input.GetKeyDown (KeyCode.Z);
-			m_Ability2 = Input.GetKeyDown (KeyCode.X);
-			m_Ability3 = Input.GetKeyDown (KeyCode.C);
-			m_Ability4 = Input.GetKeyDown (KeyCode.V);
+			m_Abilities[0] = Input.GetKeyDown (KeyCode.Z);
+			m_Abilities[1] = Input.GetKeyDown (KeyCode.X);
+			m_Abilities[2] = Input.GetKeyDown (KeyCode.C);
+			m_Abilities[3] = Input.GetKeyDown (KeyCode.V);
 
-			if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty ()) {
-				m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon ().transform.localPosition = new Vector3 (0, 0, 0);
-			}
-			float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty())
+            {
+                m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().transform.localPosition = new Vector3(0, 0, 0);
+            }
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
 			//Debug.Log (scroll);
 			if (Input.anyKeyDown || scroll != 0) {
 				//Debug.Log ("Pressed");
 				WeaponSelect (scroll);
 			}
-			if (m_Attacking) {
+            
+			if (m_Attacking && m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
 				m_Character.ProcessAttack();
 			}
         }
 
-		//Changes selected weapon based on key input or from scrolled wheel
-		private void WeaponSelect(float scrolled){
+        // frames of sword attacks call this function
+        public void SwordHitOnFrame()
+        {
+            m_Character.ProcessAttack();
+        }
+
+        //Changes selected weapon based on key input or from scrolled wheel
+        private void WeaponSelect(float scrolled){
 			int selection = -1;
 			if(Input.GetKeyDown(KeyCode.Alpha1)){
 				selection = 0;
@@ -117,7 +125,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 #endif
 
             // pass all parameters to the character control script
-			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Ability1, m_Ability2, m_Ability3, m_Ability4);
+			m_Character.Move(m_Move, m_Jump, m_Attacking, m_Abilities);
             m_Jump = false;
         }
 

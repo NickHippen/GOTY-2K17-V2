@@ -5,19 +5,23 @@ using UnityEngine;
 public class MarkForDeathAbility : Ability
 {
     public ParticleSystem particleEffect;
-    public float duration = 20f;
+    public float particleSize = 1f;
+    public float missDuration = 1f;
+    public float markDuration = 20f;
     public float damageMultiplier = 2f;
     public float range = 40f;
     public float playerHeight = 2f;
-
-    private LineRenderer line;
-    private Vector3 shootPoint;
+    
+     Vector3 shootPoint;
 
     protected override void Start()
     {
         base.Start();
         applyOnFrame = true;
-        this.line = GetComponent<LineRenderer>();
+        // instantiates a camera attached to particle affect and puts it on Main Camera so it will always render the particle effect
+        Instantiate(this.transform.GetChild(1), Camera.main.transform, false).gameObject.SetActive(true);
+        ParticleSystem.MainModule mainSystem = particleEffect.main;
+        mainSystem.startSize = particleSize;
     }
 
     public override void applyEffect(GameObject player)
@@ -25,21 +29,20 @@ public class MarkForDeathAbility : Ability
         base.applyEffect(player);
 
         player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-        StartCoroutine(ShotEffect());
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 
         RaycastHit hit;
-        this.line.SetPosition(0, shootPoint);
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range))
         {
-            // show point of hit with particle effect
             particleEffect.transform.position = hit.point;
-            particleEffect.Play();
+            
+            GameObject mark = Instantiate(particleEffect.transform.gameObject, hit.transform, true);
+            mark.gameObject.SetActive(true);
 
-            this.line.SetPosition(1, hit.point);
             RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
             if (rigCollider == null)
             {
+                StartCoroutine(RemoveParticle(missDuration, mark));
                 return;
             }
 
@@ -47,19 +50,19 @@ public class MarkForDeathAbility : Ability
             if (unit is AggressiveUnit)
             {
                 AggressiveUnit monster = (AggressiveUnit)unit;
-                monster.ApplyStatus(new StatusVulnerable(monster, duration, damageMultiplier));
+                monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
+                StartCoroutine(RemoveParticle(markDuration, mark));
             }
-        }
-        else
-        {
-            this.line.SetPosition(1, shootPoint + (Camera.main.transform.forward * range));
+            else
+            {
+                StartCoroutine(RemoveParticle(missDuration, mark));
+            }
         }
     }
 
-    private IEnumerator ShotEffect()
+    private IEnumerator RemoveParticle(float timer, GameObject mark)
     {
-        line.enabled = true;
-        yield return new WaitForSeconds(.5f);
-        line.enabled = false;
+        yield return new WaitForSeconds(timer);
+        Destroy(mark);
     }
 }

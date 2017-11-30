@@ -6,6 +6,8 @@ public class TurretAbility : Ability
 {
     public float damageMultiplier = 2f;
     public float duration = 5f;
+    public ParticleSystem particleEffect;
+    public float particleEffectSize = 5f;
 
     Animator anim;
     PlayerInventory playerInv;
@@ -14,6 +16,10 @@ public class TurretAbility : Ability
     protected override void Start()
     {
         base.Start();
+        ParticleSystem.MainModule pMain = particleEffect.main;
+        pMain.startSize = particleEffectSize;
+
+        
     }
 
     protected override void Update()
@@ -45,6 +51,8 @@ public class TurretAbility : Ability
         {
             weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
         }
+        particleEffect.transform.position = player.transform.position;
+        particleEffect.Play();
         StartCoroutine(CrouchEffect());
     }
     
@@ -54,5 +62,6 @@ public class TurretAbility : Ability
         isActive = false;
         anim.SetLayerWeight(4, 0); // turn off turret
         anim.SetLayerWeight(5, 0);
+        particleEffect.Stop();
     }
 }
