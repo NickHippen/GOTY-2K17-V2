@@ -30,6 +30,12 @@ public class AbilityController : MonoBehaviour {
             anim.SetLayerWeight(layerNum, 1);
             abilities = abilityList.getBerserkerAbilities(gameObject.transform.parent);
         }
+        else if (classType.ToLower().Equals("wizard"))
+        {
+            layerNum = 4;
+            anim.SetLayerWeight(layerNum, 1);
+            abilities = abilityList.getWizardAbilities(gameObject.transform.parent);
+        }
         else
         {
             layerNum = 2;

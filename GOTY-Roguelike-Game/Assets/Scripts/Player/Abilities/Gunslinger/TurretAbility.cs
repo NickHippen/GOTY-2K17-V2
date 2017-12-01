@@ -28,13 +28,13 @@ public class TurretAbility : Ability
         if (isActive) {
             if (playerInv.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
             {
-                anim.SetLayerWeight(4, 1);  // turn on gun turret
-                anim.SetLayerWeight(5, 0);
+                anim.SetLayerWeight(5, 1);  // turn on gun turret
+                anim.SetLayerWeight(6, 0);
             }
             else
             {
-                anim.SetLayerWeight(5, 1); // turn on sword turret
-                anim.SetLayerWeight(4, 0);
+                anim.SetLayerWeight(6, 1); // turn on sword turret
+                anim.SetLayerWeight(5, 0);
             }
         }
     }
