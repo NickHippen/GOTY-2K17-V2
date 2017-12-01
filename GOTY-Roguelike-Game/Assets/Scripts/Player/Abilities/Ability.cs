@@ -10,6 +10,7 @@ public class Ability : MonoBehaviour {
     protected bool applyOnFrame;
     private float cooldownTimer;
     private bool isAvailible = true;
+    private float cooldownMultiplier = 1;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -20,7 +21,7 @@ public class Ability : MonoBehaviour {
 	protected virtual void Update () {
 		if(!isAvailible)
         {
-            cooldownTimer -= Time.deltaTime;
+            cooldownTimer -= Time.deltaTime * cooldownMultiplier;
             if(CooldownTimer < 0f)
             {
                 cooldownTimer = cooldownTime;
@@ -33,17 +34,20 @@ public class Ability : MonoBehaviour {
     {
         get { return applyOnFrame; }
     }
-
     public float CooldownTimer
     {
         get { return cooldownTimer; }
         set { cooldownTimer = value; }
     }
-
     public bool IsAvailible
     {
         get { return isAvailible; }
         set { isAvailible = value; }
+    }
+    public float CooldownMultiplier
+    {
+        get { return cooldownMultiplier; }
+        set { cooldownMultiplier = value; }
     }
 
     public virtual void applyEffect(GameObject player)

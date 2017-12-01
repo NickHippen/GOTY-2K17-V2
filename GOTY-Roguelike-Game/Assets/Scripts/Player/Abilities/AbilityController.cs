@@ -79,6 +79,11 @@ public class AbilityController : MonoBehaviour {
         }
     }
 
+    public List<Ability> getAbilityList()
+    {
+        return abilities;
+    }
+
     // returns whether or not the ability is used
     public bool useAbility(int abilityIndex) {
 
@@ -104,6 +109,7 @@ public class AbilityController : MonoBehaviour {
         return true;
     }
 
+    // called by animation frame functions
 	public void applyEffectOnFrame(int abilityIndex){
         abilities[abilityIndex].applyEffect(gameObject);
     }

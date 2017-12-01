@@ -4,30 +4,28 @@ using UnityEngine;
 
 public class ArcaneFormAbility : Ability {
 
-    public float damageMultiplier = 2f;
+    public float cooldownMuliplier = 3f;
     public float duration;
-    public ParticleSystem particleEffect;
-    public float effectDistance;
 
-    //   public override void applyEffect(GameObject player)
-    //   {
-    //       base.applyEffect(player);
+    public override void applyEffect(GameObject player)
+    {
+        base.applyEffect(player);
+        List<Ability> abilities = player.GetComponent<AbilityController>().getAbilityList();
+        foreach(Ability ability in abilities)
+        {
+            if (ability is ArcaneFormAbility) continue;
+            ability.CooldownMultiplier += cooldownMuliplier;
+        }
+        StartCoroutine(StopBuff(abilities));
+    }
 
-    //	this.transform.position = player.transform.position + player.transform.forward * effectDistance;
-    //	this.transform.parent = player.transform;
-
-    //       foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)
-    //       {
-    //           weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
-    //       }
-
-    //	StartCoroutine (effectTimer ());
-    //	//effect.Emit (50);
-    //   }
-
-    //private IEnumerator effectTimer(){
-    //	particleEffect.Play ();
-    //	yield return new WaitForSeconds (duration);
-    //	particleEffect.Stop ();
-    //}
+    private IEnumerator StopBuff(List<Ability> abilities)
+    {
+        yield return new WaitForSeconds(duration);
+        foreach (Ability ability in abilities)
+        {
+            if (ability is ArcaneFormAbility) continue;
+            ability.CooldownMultiplier -= cooldownMuliplier;
+        }
+    }
 }
