@@ -12,6 +12,7 @@ public class TankUpAbility : Ability {
     {
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData>();
     }
 
     public override void applyEffect(GameObject player)
@@ -20,11 +21,13 @@ public class TankUpAbility : Ability {
 
 		this.transform.position = player.transform.position + player.transform.forward * effectDistance;
 		this.transform.parent = player.transform;
+
 		StartCoroutine(TankTimer(player));
 	}
 
 	private IEnumerator TankTimer(GameObject player){
 		particleEffect.Play ();
+		sfx.playSound ();
         player.GetComponent<HealthManager>().invincible = true;
 		yield return new WaitForSeconds (effectDuration);
         player.GetComponent<HealthManager>().invincible = false;

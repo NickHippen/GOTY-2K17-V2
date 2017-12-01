@@ -9,6 +9,10 @@ public class AdrenalineAbility : Ability {
 	public ParticleSystem particleEffect;
 	public float effectDistance;
 
+	protected override void Start(){
+		sfx = GetComponent<SoundData> ();
+	}
+
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
@@ -27,7 +31,10 @@ public class AdrenalineAbility : Ability {
 
 	private IEnumerator effectTimer(){
 		particleEffect.Play ();
+		sfx.playSound ();
+		sfx.playLoop ();
 		yield return new WaitForSeconds (duration);
 		particleEffect.Stop ();
+		sfx.stopLoop();
 	}
 }

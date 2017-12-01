@@ -24,7 +24,7 @@ public class GunData : WeaponData {
 
 	public override void Attack() {
 		if (timeSinceLastShot >= 1f / bulletsPerSecond) {
-			PlayAttackAudio();
+			PlayAttackAudio(0);
 			timeSinceLastShot = 0f;
 			RaycastShoot();
 		}
@@ -50,6 +50,7 @@ public class GunData : WeaponData {
                 damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
 				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
 				monster.Damage(damage);
+				//PlayAttackAudio (1);
 			}
 			//if (hit.rigidbody != null) {
 			//	hit.rigidbody.AddForce(-hit.normal * hitForce);

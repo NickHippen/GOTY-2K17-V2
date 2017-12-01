@@ -11,9 +11,11 @@ public class Ability : MonoBehaviour {
     private float cooldownTimer;
     private bool isAvailible = true;
     private float cooldownMultiplier = 1;
+	public SoundData sfx;
 
 	// Use this for initialization
 	protected virtual void Start () {
+		//sfx.GetComponent<SoundData> ();
         cooldownTimer = cooldownTime;
 	}
 	
@@ -53,5 +55,8 @@ public class Ability : MonoBehaviour {
     public virtual void applyEffect(GameObject player)
     {
         if(faceCameraDirection) player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+		if (sfx != null) {
+			sfx.playSound ();
+		}
     }
 }

@@ -17,13 +17,15 @@ public class WeaponData : MonoBehaviour {
 
 	public ParticleSystem effect;
 
-	private AudioSource audioSource;
+	private SoundData sfx;
+	//private AudioSource audioSource;
     protected float damageMultiplier = 1f;
 
 	protected virtual void Start() {
-		audioSource = GetComponent<AudioSource>();
+		//audioSource = GetComponent<AudioSource>();
 		//effect.transform.parent = transform.parent;
 		//effect.transform.position = transform.position;
+		sfx = GetComponent<SoundData>();
 	}
 
 	public string FullName {
@@ -41,7 +43,7 @@ public class WeaponData : MonoBehaviour {
 	}
 
 	public virtual void Attack() {
-		PlayAttackAudio();
+		PlayAttackAudio(0);
 		if (effect != null) {
 			//effect.transform.position = transform.position + transform.forward;
 			effect.Emit(10);
@@ -60,9 +62,10 @@ public class WeaponData : MonoBehaviour {
         damageMultiplier = 1f;
     }
 
-    protected virtual void PlayAttackAudio() {
-		if (audioSource != null) {
-			audioSource.Play();
+	//Index 0 = fired, index 1 = impact
+	protected virtual void PlayAttackAudio(int index) {
+		if (sfx != null) {
+			sfx.playSound(index);
 		}
 	}
 }
