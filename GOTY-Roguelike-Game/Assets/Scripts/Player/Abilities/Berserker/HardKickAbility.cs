@@ -12,6 +12,7 @@ public class HardKickAbility : Ability {
     protected override void Start(){
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
 
         // change particleEffect size for to match damage radius
         ParticleSystem[] pSystems = particleEffect.GetComponentsInChildren<ParticleSystem>();
@@ -41,6 +42,7 @@ public class HardKickAbility : Ability {
 				monster.Damage(damage);
 			}
         }
+		sfx.playSound ();
         particleEffect.Play();
     }
 }

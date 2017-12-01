@@ -14,6 +14,7 @@ public class CycloneAbility : Ability {
 	protected override void Start(){
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
         ParticleSystem.MainModule mainEffect = particleEffect.main;
         mainEffect.startSize = damageRadius;
 	}
@@ -35,6 +36,7 @@ public class CycloneAbility : Ability {
 				monster.Damage(damage);
 			}
         }
+		sfx.playSound ();
         particleEffect.Play();
     }
 }
