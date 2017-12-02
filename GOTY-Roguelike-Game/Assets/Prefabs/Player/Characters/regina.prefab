@@ -2466,6 +2466,7 @@ MonoBehaviour:
   rightHand: {fileID: 1071523714628366}
   leftHand: {fileID: 1513657150405664}
   grabRadius: 1
+  m_Animator: {fileID: 0}
 --- !u!114 &114449783525548538
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2535,6 +2536,8 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   invincible: 0
+  mainHUD: {fileID: 223265371968291764, guid: 8e3925630e6a0634a823f7e2b0964730, type: 2}
+  deathHUD: {fileID: 223947945676122854, guid: 8f5df4628ee763c4181364821f6c410c, type: 2}
 --- !u!114 &114954334911864570
 MonoBehaviour:
   m_ObjectHideFlags: 1

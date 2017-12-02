@@ -2438,6 +2438,8 @@ MonoBehaviour:
   maxHealth: 100
   health: 100
   invincible: 0
+  mainHUD: {fileID: 223265371968291764, guid: 8e3925630e6a0634a823f7e2b0964730, type: 2}
+  deathHUD: {fileID: 223947945676122854, guid: 8f5df4628ee763c4181364821f6c410c, type: 2}
 --- !u!114 &114230535491081166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2460,8 +2462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03ce6c708689d7a44bd6a64e98c0a059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 0}
+  weapons: []
   test: 0
   current: 0
   multiplier: 1
@@ -2507,6 +2508,7 @@ MonoBehaviour:
   rightHand: {fileID: 1998140287834328}
   leftHand: {fileID: 1470846311064524}
   grabRadius: 5
+  m_Animator: {fileID: 0}
 --- !u!114 &114990600665135022
 MonoBehaviour:
   m_ObjectHideFlags: 1
