@@ -4,53 +4,57 @@ using UnityEngine;
 
 public class BlinkAbility : Ability {
 
-    public ParticleSystem particleEffect;
     public float effectDistance;
     public float effectDuration;
+    public float particleHeight = 1f;
+    public float particleChargeSize = 5f;
+    public float raycastHeight = 0.3f;
+    public float range = 5f;
+    //public float collisionOffset = 0.01f; noticed walls have width so not necessary, but commented underneath if needed
+
+    Vector3 move;
+    GameObject particleObject;
 
     protected override void Start()
     {
         base.Start();
-        applyOnFrame = true;
+        particleObject = transform.GetChild(0).gameObject;
     }
 
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
+        GameObject playerParticle = Instantiate(particleObject, player.transform, false);
+        playerParticle.transform.position += player.transform.up * particleHeight;
+        ParticleSystem.MainModule partMain = playerParticle.GetComponent<ParticleSystem>().main;
+        partMain.startSize = particleChargeSize;
+        playerParticle.SetActive(true);
+        StartCoroutine(WaitForParticleExplosion(player));
+        StartCoroutine(DisableParticle(playerParticle));
+    }
 
-        // Kevin's self-notes before starting again: get move vector from ThirdPersonCharacter to determine direction, else camera direction if move=0.
-        // check if floor exists in one direction, move if true
-        // else raycastAll for wall collisions and teleport to wall w/ a hair towards the player as to not move thru wall
+    IEnumerator WaitForParticleExplosion(GameObject player)
+    {
+        yield return new WaitForSeconds(0.79f); // particle explosion start is at 0.8f
+        move = player.GetComponent<ThirdPersonCharacter>().getMoveDirection();
+        RaycastHit hit;
 
-        //player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
-        //shootPoint = new Vector3(0, playerHeight, 0) + player.transform.position;
+        Vector3 goalPoint = new Vector3(player.transform.position.x + move.x * range, player.transform.position.y + raycastHeight, player.transform.position.z + move.z * range);
 
-        //RaycastHit hit;
-        //if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range))
-        //{
-        //    particleEffect.transform.position = hit.point;
+        int layerMask = LayerMask.GetMask("Unwalkable"); // Only collisions in layer Unwalkable
+        if (Physics.Raycast(player.transform.position + player.transform.up * raycastHeight, goalPoint, out hit, range, layerMask))
+        {
+            player.transform.position = hit.point; //+ (player.transform.position - hit.transform.position)*collisionOffset;
+        }
+        else
+        {
+            player.transform.position = goalPoint;
+        }
+    }
 
-        //    GameObject mark = Instantiate(particleEffect.transform.gameObject, hit.transform, true);
-        //    mark.gameObject.SetActive(true);
-
-        //    RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
-        //    if (rigCollider == null)
-        //    {
-        //        StartCoroutine(RemoveParticle(missDuration, mark));
-        //        return;
-        //    }
-
-        //    Unit unit = rigCollider.RootUnit;
-        //    if (unit is AggressiveUnit)
-        //    {
-        //        AggressiveUnit monster = (AggressiveUnit)unit;
-        //        monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
-        //        StartCoroutine(RemoveParticle(markDuration, mark));
-        //    }
-        //    else
-        //    {
-        //        StartCoroutine(RemoveParticle(missDuration, mark));
-        //    }
-        //}
+    IEnumerator DisableParticle(GameObject particleSys)
+    {
+        yield return new WaitUntil(() => particleSys.GetComponent<ParticleSystem>().IsAlive(true));
+        Destroy(particleSys);
     }
 }

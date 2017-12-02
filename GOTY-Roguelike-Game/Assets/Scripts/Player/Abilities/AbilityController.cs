@@ -11,7 +11,7 @@ public class AbilityController : MonoBehaviour {
     public float iconSize = 50f;
     public Text abilityText;
     public Text cooldownText;
-    public float feedbackTimer = 0.8f;
+    public float feedbackTimer = 0.1f;
 
     string COOLDOWN_FORMAT = "{0:00.0}";
     List<Ability> abilities;

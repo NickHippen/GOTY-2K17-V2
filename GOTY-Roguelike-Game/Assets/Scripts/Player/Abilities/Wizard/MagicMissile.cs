@@ -67,8 +67,6 @@ public class MagicMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print(other.tag != "Pickup");
-        print(other.tag != "Equipped");
         if (other.tag != "Pickup" && other.tag != "Equipped") {
             StartCoroutine(Explode());
         }
@@ -83,13 +81,12 @@ public class MagicMissile : MonoBehaviour
     IEnumerator Explode()
     {
         exploded = true;
-        Destroy(missileParticle);
+        Destroy(missileParticle.transform.gameObject);
         GetComponent<Rigidbody>().velocity = new Vector3();
 
         explosionParticle.transform.position = this.transform.position;
         ParticleSystem.MainModule mainSystem = explosionParticle.main;
         mainSystem.startSize = particleRadius;
-        //explosionParticle.transform.localScale = new Vector3(damageRadius * particleRadius, damageRadius * particleRadius, damageRadius * particleRadius);
         explosionParticle.gameObject.SetActive(true);
 
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
@@ -104,7 +101,7 @@ public class MagicMissile : MonoBehaviour
             }
         }
 
-        yield return new WaitForSeconds(explosionParticle.main.duration);
+        yield return new WaitUntil(() => !explosionParticle.IsAlive(true));
         Destroy(this.gameObject);
     }
 }

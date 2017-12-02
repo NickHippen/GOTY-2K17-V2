@@ -32,6 +32,7 @@ public class MarkForDeathAbility : Ability
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 
         RaycastHit hit;
+        //int layerMask = LayerMask.GetMask("Unwalkable", "Monster"); // what about floor?
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range))
         {
             particleEffect.transform.position = hit.point;

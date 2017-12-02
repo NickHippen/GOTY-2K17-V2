@@ -34,6 +34,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
 	AbilityController abilities;
+    Vector3 moveDirection;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -59,8 +60,15 @@ public class ThirdPersonCharacter : MonoBehaviour
 		setWeaponAnimations();
 	}
 
+    public Vector3 getMoveDirection()
+    {
+        print(moveDirection);
+        return moveDirection;
+    }
+
     public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
     {
+        moveDirection = move;
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired direction.
         if (move.magnitude > 1f)

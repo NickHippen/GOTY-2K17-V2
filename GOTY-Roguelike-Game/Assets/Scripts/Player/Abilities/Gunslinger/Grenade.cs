@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    public ParticleSystem particleEffect;
-
+    private ParticleSystem particleEffect;
     private float timer;
     private float damage;
     private float damageRadius;
@@ -37,6 +36,7 @@ public class Grenade : MonoBehaviour
 
     private void Start()
     {
+        particleEffect = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         StartCoroutine(PullPin());
     }
 
@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
 
     IEnumerator removeGrenade()
     {
-        yield return new WaitForSeconds(particleEffect.main.duration);
+        yield return new WaitUntil(() => !particleEffect.IsAlive(true));
         Destroy(this.gameObject);
     }
 }
