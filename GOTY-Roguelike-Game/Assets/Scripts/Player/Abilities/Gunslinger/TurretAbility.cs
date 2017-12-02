@@ -28,13 +28,17 @@ public class TurretAbility : Ability
         if (isActive) {
             if (playerInv.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
             {
-                anim.SetLayerWeight(5, 1);  // turn on gun turret
-                anim.SetLayerWeight(6, 0);
+                anim.SetLayerWeight(9, 1);  // turn on gun turret
+                anim.SetLayerWeight(10, 0);
+                anim.SetLayerWeight(11, 0);
+                anim.SetLayerWeight(12, 0);
             }
             else
             {
-                anim.SetLayerWeight(6, 1); // turn on sword turret
-                anim.SetLayerWeight(5, 0);
+                anim.SetLayerWeight(10, 1); // turn on sword turret
+                anim.SetLayerWeight(9, 0);
+                anim.SetLayerWeight(11, 0);
+                anim.SetLayerWeight(12, 0);
             }
         }
     }
@@ -60,8 +64,10 @@ public class TurretAbility : Ability
     {
         yield return new WaitForSeconds(duration);
         isActive = false;
-        anim.SetLayerWeight(4, 0); // turn off turret
-        anim.SetLayerWeight(5, 0);
+        anim.SetLayerWeight(9, 0); // turn off turret
+        anim.SetLayerWeight(10, 0);
+        anim.SetLayerWeight(11, 0);
+        anim.SetLayerWeight(12, 0);
         particleEffect.Stop();
     }
 }
