@@ -13,6 +13,7 @@ public class SwordData : WeaponData
         Collider[] colliders = Physics.OverlapBox(player.transform.position + player.transform.up + player.transform.forward*swordRange,
             new Vector3(swordBoxRadius,swordBoxRadius,swordBoxRadius), player.transform.rotation);
 
+		PlayAttackAudio (0);
         foreach (Collider collider in colliders)
         {
             RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
