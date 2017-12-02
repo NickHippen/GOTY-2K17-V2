@@ -27,6 +27,7 @@ public class CameraController : MonoBehaviour {
 		}
 		
 		camTransform = transform;
+		Time.timeScale = 1f;
 		//cam = Camera.main;
 	}
 

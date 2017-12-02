@@ -148,6 +148,7 @@ public abstract class Unit : MonoBehaviour {
 		if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), rayDirection, out hit, distance, layerMask)) {
 			return hit.transform == targetTransform;
 		}
+		Debug.Log("No LoS");
 		return false;
 	}
 
