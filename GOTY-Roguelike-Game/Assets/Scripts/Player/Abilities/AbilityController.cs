@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,46 +8,98 @@ public class AbilityController : MonoBehaviour {
 
     public AbilityPrefabList abilityList;
     public string classType;
-    public Text uiText;
-    public Text cdText;
-    string abiltyText = "Z: {0} X: {1} C: {2} V: {3}";
-    string cooldownText = "Z: {0:0.00} X: {1:0.00} C: {2:0.00} V: {3:0.00}";
+    public float iconSize = 50f;
+    public Text abilityText;
+    public Text cooldownText;
+    public float feedbackTimer = 0.1f;
 
-    private List<Ability> abilities;
+    string COOLDOWN_FORMAT = "{0:00.0}";
+    List<Ability> abilities;
+    List<Image> abilityIcons = new List<Image>();
+    List<Text> cooldownTimers = new List<Text>();
+    Animator anim;
+    int layerNum;
 
     // Use this for initialization
     void Start() {
+        anim = GetComponent<Animator>();
 
         if (classType.ToLower().Equals("berserker"))
         {
-			abilities = abilityList.getBerserkerAbilities(gameObject.transform.parent);
-
+            layerNum = 3;
+            anim.SetLayerWeight(layerNum, 1);
+            abilities = abilityList.getBerserkerAbilities(gameObject.transform.parent);
         }
-		else abilities = abilityList.getGunslingerAbilities(gameObject.transform.parent);
-
-        if (uiText != null)
+        else if (classType.ToLower().Equals("wizard"))
         {
-            string uitext = string.Format(abiltyText, abilities[0].name, abilities[1].name, abilities[2].name, abilities[3].name);
-            uiText.text = uitext;
+            layerNum = 4;
+            anim.SetLayerWeight(layerNum, 1);
+            abilities = abilityList.getWizardAbilities(gameObject.transform.parent);
+        }
+        else
+        {
+            layerNum = 2;
+            anim.SetLayerWeight(layerNum, 1);
+            abilities = abilityList.getGunslingerAbilities(gameObject.transform.parent);
+        }
+
+        for(int i = 0; i < abilities.Count; i++)
+        {
+            // Find the ability frames in the UI
+            GameObject abilityFrame = GameObject.Find("Ability " + i);
+            abilityFrame.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(iconSize, iconSize);
+
+            // duplicate frame and add ability icon
+            GameObject abilityIcon = Instantiate(abilityFrame, abilityFrame.transform.parent, false);
+            abilityIcon.transform.SetSiblingIndex(1); // place behind frame
+            
+            // add text to abilities
+            Instantiate(abilityText, abilityFrame.transform, false).text =
+                Regex.Replace(abilities[i].name.Substring(0, abilities[i].name.Length - "Ability".Length), "([a-z])_?([A-Z])", "$1 $2");
+            cooldownTimers.Add(Instantiate(cooldownText, abilityFrame.transform, false));
+            cooldownTimers[i].enabled = false;
+            Text inputButton = Instantiate(abilityText, abilityFrame.transform, false);
+            inputButton.alignment = TextAnchor.LowerCenter;
+            inputButton.fontSize += 2;
+            if (i == 0) inputButton.text = "Z";
+            else if (i == 1) inputButton.text = "X";
+            else if (i == 2) inputButton.text = "C";
+            else inputButton.text = "V";
+
+            abilityIcon.GetComponent<Image>().sprite = abilities[i].icon;
+            abilityIcons.Add(abilityIcon.GetComponent<Image>());
         }
     }
 
     private void Update()
     {
-        if (cdText != null)
+        for (int i = 0; i < abilities.Count; i++)
         {
-            string cdtext = string.Format(cooldownText, abilities[0].CooldownTimer, abilities[1].CooldownTimer, abilities[2].CooldownTimer, abilities[3].CooldownTimer);
-            cdText.text = cdtext;
+            cooldownTimers[i].text = string.Format(COOLDOWN_FORMAT, abilities[i].CooldownTimer);
         }
+    }
+
+    public List<Ability> getAbilityList()
+    {
+        return abilities;
     }
 
     // returns whether or not the ability is used
     public bool useAbility(int abilityIndex) {
-        // ability is not availible
+
         if (!abilities[abilityIndex].IsAvailible)
+        {   // ability is not availible
             return false;
+        }
+        if (!anim.GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"))
+        {   // if another ability is active
+            StartCoroutine(abilityOpacity(feedbackTimer, abilityIndex));
+            return false;
+        }
         // else use the ability
         abilities[abilityIndex].IsAvailible = false;
+        cooldownTimers[abilityIndex].enabled = true;
+        StartCoroutine(abilityOpacity(abilities[abilityIndex].cooldownTime, abilityIndex));
 
         // if the animation will by applied during animation, then skip
         if (!abilities[abilityIndex].ApplyOnFrame)
@@ -56,20 +109,16 @@ public class AbilityController : MonoBehaviour {
         return true;
     }
 
+    // called by animation frame functions
 	public void applyEffectOnFrame(int abilityIndex){
         abilities[abilityIndex].applyEffect(gameObject);
     }
 
-    // applies the proper layer of ability animations in animator
-    public void setClassAbilities(Animator anim)
+    IEnumerator abilityOpacity(float duration, int index)
     {
-        if (classType.ToLower().Equals("berserker"))
-        {
-            anim.SetLayerWeight(4, 1);
-        }
-        else
-        {
-            anim.SetLayerWeight(3, 1);
-        }
+        abilityIcons[index].color = new Color(1, 1, 1, 0.5f);
+        yield return new WaitForSeconds(duration);
+        abilityIcons[index].color = new Color(1, 1, 1, 1f);
+        cooldownTimers[index].enabled = false;
     }
 }

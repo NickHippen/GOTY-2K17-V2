@@ -34,7 +34,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	CapsuleCollider m_Capsule;
 	bool m_isDead;
 	AbilityController abilities;
-    bool stopMovement;
+    Vector3 moveDirection;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -58,17 +58,17 @@ public class ThirdPersonCharacter : MonoBehaviour
 		initializeEquip(inventory.getCurrentWeapon());
 		inventory.getCurrentWeapon ().SetActive (true);
 		setWeaponAnimations();
-        abilities.setClassAbilities(m_Animator); // set proper layer for abilities
 	}
-			
-    public bool StopMovement
+
+    public Vector3 getMoveDirection()
     {
-        get { return stopMovement; }
-        set { stopMovement = value; }
+        print(moveDirection);
+        return moveDirection;
     }
 
-    public void Move(Vector3 move, bool jump, bool atk, bool a1, bool a2, bool a3, bool a4)
+    public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
     {
+        moveDirection = move;
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired direction.
         if (move.magnitude > 1f)
@@ -76,19 +76,14 @@ public class ThirdPersonCharacter : MonoBehaviour
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);
-        m_ForwardAmount = stopMovement ? 0f : move.z;
+        m_ForwardAmount = move.z;
 
-        // if using a ranged weapon, have camera over shoulder
-        if (isRangedAttacking(atk))
+        // if attacking with ranged weapon, have camera over shoulder
+        if (atk && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
         {
-            if (StopMovement)
-            {   // will move left and right if turn amount is applied
-                m_TurnAmount = 0f;
-            }
-            else
-            {   // apply turn amount relative to direction controls rather than cartesian
-                m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
-            }
+            // apply turn amount relative to direction controls rather than cartesian
+            m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
+            transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         }
         else
         {   // camera is independent of player rotation, use cartesian controls
@@ -104,42 +99,28 @@ public class ThirdPersonCharacter : MonoBehaviour
 		}
 
 		// send input and other state parameters to the animator
-		UpdateAnimator(move, atk, a1, a2, a3, a4);
-	}
-
-	// if player is in the middle of an attack/ability animation
-	private bool isRangedAttacking(bool attack){
-            if (inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData && attack) {
-			transform.rotation = Quaternion.Euler (0, Camera.main.transform.eulerAngles.y, 0);
-			return true;
-		}
-		return false;
+		UpdateAnimator(move, atk, abilityInputs);
 	}
 			
-	void UpdateAnimator(Vector3 move, bool atk, bool a1, bool a2, bool a3, bool a4)
+	void UpdateAnimator(Vector3 move, bool atk, bool[] abilityInputs)
 	{
 		// update the animator parameters
 		m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetBool("OnGround", m_IsGrounded);
 		m_Animator.SetBool("Attack", atk);
-        if (!a1 || abilities.useAbility(0))
+
+        // skip abilities if they are unavailible, else update bool, and only for one ability
+        bool oneAbilityUsed = false;
+        for(int i = 0; i < abilityInputs.Length; i++)
         {
-            m_Animator.SetBool("Ability1", a1);
+            if (!abilityInputs[i] || oneAbilityUsed || (oneAbilityUsed = abilities.useAbility(i)))
+            {
+                m_Animator.SetBool("Ability"+(i+1), abilityInputs[i]);
+            }
         }
-        if (!a2 || abilities.useAbility(1))
-        {
-            m_Animator.SetBool("Ability2", a2);
-        }
-        if (!a3 || abilities.useAbility(2))
-        {
-            m_Animator.SetBool("Ability3", a3);
-        }
-        if (!a4 || abilities.useAbility(3))
-        {
-            m_Animator.SetBool("Ability4", a4);
-        }
-		m_Animator.SetBool ("Dead", m_isDead);
+
+        //m_Animator.SetBool ("Dead", m_isDead);
 
         if (!m_IsGrounded)
 		{
@@ -310,14 +291,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void setWeaponAnimations(){
 		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
             m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
-            m_Animator.SetLayerWeight(1, 1); // turn on Gun mask
-            m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
-            //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(gunController);
+            m_Animator.SetLayerWeight(1, 0); // turn off sword weapon layer
 		} else {
-            m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
+            m_Animator.SetLayerWeight(1, 1); // turn on sword weapon layer
             m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
-            m_Animator.SetLayerWeight(1, 0); // turn off gun mask
-                                             //m_Animator.runtimeAnimatorController = abilities.getClassOverrideController(swordController);
         }
 	}
 
@@ -348,7 +325,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		}
 	}
 
-	public void ProcessAttack() {
+    public void ProcessAttack() {
 		inventory.getCurrentWeapon().GetComponent<WeaponData>().Attack();
 	}
 
