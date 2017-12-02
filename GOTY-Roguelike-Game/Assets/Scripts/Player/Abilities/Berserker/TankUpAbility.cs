@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TankUpAbility : Ability {
-
-	public ParticleSystem particleEffect;
-	public float effectDistance;
+    
 	public float effectDuration;
+
+    ParticleSystem particleEffect;
 
     protected override void Start()
     {
         base.Start();
         applyOnFrame = true;
 		sfx = GetComponent<SoundData>();
+        particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
     }
 
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
 
-		this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+		this.transform.position = player.transform.position;
 		this.transform.parent = player.transform;
 
 		StartCoroutine(TankTimer(player));

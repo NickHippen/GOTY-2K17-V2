@@ -55,7 +55,7 @@ public class TurretAbility : Ability
         {
             weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
         }
-        particleEffect.transform.position = player.transform.position;
+        particleEffect.transform.position.Set(player.transform.position.x, particleEffect.transform.position.y, player.transform.position.z);
         particleEffect.Play();
         StartCoroutine(CrouchEffect());
     }

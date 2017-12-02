@@ -5,18 +5,22 @@ using UnityEngine;
 public class CycloneAbility : Ability {
 
     public float damage;
-    public ParticleSystem particleEffect;
 	//Distance of particle effect from player
     public Vector2 effectPosition;
 	//Radius of damage the effect has
 	public float damageRadius;
 
-	protected override void Start(){
+    ParticleSystem particleEffect;
+
+    protected override void Start(){
         base.Start();
         applyOnFrame = true;
 		sfx = GetComponent<SoundData> ();
+        particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
         ParticleSystem.MainModule mainEffect = particleEffect.main;
-        mainEffect.startSize = damageRadius;
+        mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
+        mainEffect = particleEffect.transform.GetChild(0).GetComponent<ParticleSystem>().main;
+        mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
 	}
 
     public override void applyEffect(GameObject player)

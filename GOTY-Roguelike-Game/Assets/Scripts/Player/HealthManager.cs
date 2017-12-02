@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 public class HealthManager : MonoBehaviour {
 
@@ -9,10 +10,8 @@ public class HealthManager : MonoBehaviour {
 	public float health;
 	public bool invincible;
 
-	void Start () {
-		health = maxHealth;
-		invincible = false;
-	}
+	public Canvas mainHUD;
+	public Canvas deathHUD;
 
 	public float Health {
 		get {
@@ -24,7 +23,7 @@ public class HealthManager : MonoBehaviour {
 			} else if (value >= 0) {
 				health = value;
 			} else {
-				value = 0;
+				health = 0;
 			}
 		}
 	}
@@ -33,6 +32,31 @@ public class HealthManager : MonoBehaviour {
 		get {
 			return health > 0;
 		}
+	}
+
+	void Start() {
+		health = maxHealth;
+		invincible = false;
+	}
+
+	void Update() {
+		if (!Living) {
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.None;
+			Camera.main.GetComponent<CameraController>().enabled = false;
+			transform.GetComponent<ThirdPersonCharacter>().m_Animator.SetBool("Dead", true);
+			transform.GetComponent<ThirdPersonCharacter>().enabled = false;
+			transform.GetComponent<ThirdPersonUserControl>().enabled = false;
+			transform.GetComponent<Rigidbody>().isKinematic = true;
+			mainHUD.gameObject.SetActive(false);
+			StartCoroutine("ShowDeathHUD");
+			Time.timeScale = 0.5f;
+		}
+	}
+
+	private IEnumerator ShowDeathHUD() {
+		yield return new WaitForSeconds(3);
+		deathHUD.gameObject.SetActive(true);
 	}
 	
 	public void Damage(float amount) {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityStandardAssets.Characters.ThirdPerson;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
@@ -22,7 +23,7 @@ public class ThirdPersonCharacter : MonoBehaviour
     public float grabRadius = 1f;
 
     Rigidbody m_Rigidbody;
-	Animator m_Animator;
+	public Animator m_Animator;
 	bool m_IsGrounded;
 	float m_OrigGroundCheckDistance;
 	const float k_Half = 0.5f;
@@ -52,7 +53,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
-		//Debug.Log (gunController);
+        //Debug.Log (gunController);
+
+        GameObject parent = new GameObject("Player");
+        this.transform.SetParent(parent.transform);
 
 		//Initialize the weapon held at the start of the game
 		initializeEquip(inventory.getCurrentWeapon());
@@ -100,10 +104,18 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 		// send input and other state parameters to the animator
 		UpdateAnimator(move, atk, abilityInputs);
+		if (!transform.GetComponent<HealthManager>().Living) {
+
+		}
 	}
 			
 	void UpdateAnimator(Vector3 move, bool atk, bool[] abilityInputs)
 	{
+		if (!transform.GetComponent<HealthManager>().Living) {
+			m_Animator.SetBool("Dead", true);
+			return; // Stop all other animations
+		}
+
 		// update the animator parameters
 		m_Animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
 		m_Animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
