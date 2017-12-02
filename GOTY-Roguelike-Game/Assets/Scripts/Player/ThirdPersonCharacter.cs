@@ -52,7 +52,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 		m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
 		m_OrigGroundCheckDistance = m_GroundCheckDistance;
-		//Debug.Log (gunController);
+        //Debug.Log (gunController);
+
+        GameObject parent = new GameObject("Player");
+        this.transform.SetParent(parent.transform);
 
 		//Initialize the weapon held at the start of the game
 		initializeEquip(inventory.getCurrentWeapon());

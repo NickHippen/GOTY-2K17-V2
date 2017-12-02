@@ -5,22 +5,26 @@ using UnityEngine;
 public class HardKickAbility : Ability {
 
     public float damage;
-    public ParticleSystem particleEffect;
     public Vector2 effectPosition;
 	public float damageRadius;
+
+    ParticleSystem particleEffect;
 
     protected override void Start(){
         base.Start();
         applyOnFrame = true;
 		sfx = GetComponent<SoundData> ();
 
+        particleEffect = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         // change particleEffect size for to match damage radius
         ParticleSystem[] pSystems = particleEffect.GetComponentsInChildren<ParticleSystem>();
-        
+
         // took the time to adjust the values in particle effect to scale with damage
         ParticleSystem.MainModule mainEffect = pSystems[0].main;
         mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
         mainEffect = pSystems[1].main;
+        mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
+        mainEffect = pSystems[3].main;
         mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
     }
 

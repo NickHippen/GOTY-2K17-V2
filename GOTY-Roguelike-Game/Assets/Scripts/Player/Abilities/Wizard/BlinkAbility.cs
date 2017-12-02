@@ -54,7 +54,8 @@ public class BlinkAbility : Ability {
 
     IEnumerator DisableParticle(GameObject particleSys)
     {
-        yield return new WaitUntil(() => particleSys.GetComponent<ParticleSystem>().IsAlive(true));
+        yield return new WaitUntil(() => !particleSys.GetComponent<ParticleSystem>().IsAlive(true));
+        print("Destroyed");
         Destroy(particleSys);
     }
 }
