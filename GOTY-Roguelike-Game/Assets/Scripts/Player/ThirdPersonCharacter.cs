@@ -289,12 +289,26 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 	/*Checks the characteristics of the currently held weapon and sets the appropriate animator controller to match it*/
 	public void setWeaponAnimations(){
-		if (inventory.getCurrentWeapon() != null && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
-            m_Animator.SetLayerWeight(0, 1); // turn on Gun weapon layer
-            m_Animator.SetLayerWeight(1, 0); // turn off sword weapon layer
-		} else {
-            m_Animator.SetLayerWeight(1, 1); // turn on sword weapon layer
-            m_Animator.SetLayerWeight(0, 0); // turn off gun weapon layer
+		if (inventory.getCurrentWeapon() != null) {
+            WeaponData weapon = inventory.getCurrentWeapon().GetComponent<WeaponData>();
+            if (weapon is GunData)
+            {
+                m_Animator.SetLayerWeight(1, 1); // turn on Gun weapon layer
+                m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
+                m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
+            }
+            else if(weapon is SwordData)
+            {
+                m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
+                m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
+                m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
+            }
+            else
+            {
+                m_Animator.SetLayerWeight(3, 1); // turn on staff weapon layer
+                m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
+                m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
+            }
         }
 	}
 
