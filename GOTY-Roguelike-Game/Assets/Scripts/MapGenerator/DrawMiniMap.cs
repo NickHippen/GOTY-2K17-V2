@@ -169,11 +169,6 @@ public class DrawMiniMap : MonoBehaviour {
 
 		int offset =12;
 
-		try{
-			//mapNodeArr[(int)(playerToken.transform.position.x / 16) - (offset + 17),(int)(playerToken.transform.position.y / 16) - offset].makeVisible();
-		}
-		catch{
-		}
 		for (int i = -3; i <= 3; i++) {
 			for (int j = -3; j <= 3; j++) {
 				try{
