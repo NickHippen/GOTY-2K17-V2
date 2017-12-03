@@ -75,13 +75,13 @@ public class MagicMissile : MonoBehaviour
     IEnumerator Active()
     {
         yield return new WaitForSeconds(timer);
-        StartCoroutine(Explode());
+        if(!exploded) StartCoroutine(Explode());
     }
 
     IEnumerator Explode()
     {
         exploded = true;
-        Destroy(missileParticle.transform.gameObject);
+        missileParticle.transform.gameObject.SetActive(false);
         GetComponent<Rigidbody>().velocity = new Vector3();
 
         explosionParticle.transform.position = this.transform.position;
