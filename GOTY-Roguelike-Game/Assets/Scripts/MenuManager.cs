@@ -91,4 +91,14 @@ public class MenuManager : MonoBehaviour {
 	public void gamestart(){
 		playerSelected = true;
 	}
+
+	public void selectBerseker(){
+		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "berserker";
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
+	}
+
+	public void selectGunslinger(){
+		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "gunslinger";
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
+	}
 }
