@@ -40,7 +40,7 @@ public class CycloneAbility : Ability {
 				monster.Damage(damage);
 			}
         }
-		sfx.playSound ();
+		//sfx.playSound ();
         particleEffect.Play();
     }
 }
