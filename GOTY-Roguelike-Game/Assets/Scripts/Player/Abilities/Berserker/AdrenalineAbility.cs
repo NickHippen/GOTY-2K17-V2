@@ -34,7 +34,7 @@ public class AdrenalineAbility : Ability {
 
 	private IEnumerator effectTimer(){
 		particleEffect.Play ();
-		sfx.playSound ();
+		//sfx.playSound ();
 		sfx.playLoop ();
 		yield return new WaitForSeconds (duration);
 		particleEffect.Stop ();
