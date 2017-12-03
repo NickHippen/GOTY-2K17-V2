@@ -8,6 +8,7 @@ public class SoundData : MonoBehaviour {
 	AudioSource source;
 	public int directIndex;
 	public int loopIndex;
+	public float delay;
 
 	// Use this for initialization
 	protected virtual void Start () {
@@ -27,7 +28,9 @@ public class SoundData : MonoBehaviour {
 
 	public virtual void playSound(){
 		if (soundEffects [directIndex] != null) {
-			source.PlayOneShot (soundEffects [directIndex]);
+			source.clip = soundEffects [directIndex];
+			//source.PlayOneShot (soundEffects [directIndex]);
+			source.PlayDelayed(delay);
 		}
 	}
 

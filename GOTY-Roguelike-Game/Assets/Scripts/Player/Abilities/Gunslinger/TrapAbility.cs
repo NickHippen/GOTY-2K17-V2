@@ -17,6 +17,7 @@ public class TrapAbility : Ability
         base.Start();
         applyOnFrame = true;
         trapObject = this.transform.GetChild(0).GetComponent<Trap>();
+		sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)
