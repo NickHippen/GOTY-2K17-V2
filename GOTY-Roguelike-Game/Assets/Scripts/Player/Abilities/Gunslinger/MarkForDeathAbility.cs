@@ -28,11 +28,10 @@ public class MarkForDeathAbility : Ability
     {
         base.applyEffect(player);
 
-        player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 
         RaycastHit hit;
-        int layerMask = LayerMask.GetMask("Unwalkable", "Monster"); // what about floor?
+        int layerMask = LayerMask.GetMask("Unwalkable", "Monster", "Ground");
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range, layerMask))
         {
             particleEffect.transform.position = hit.point;

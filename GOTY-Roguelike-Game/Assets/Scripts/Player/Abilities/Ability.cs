@@ -54,9 +54,23 @@ public class Ability : MonoBehaviour {
 
     public virtual void applyEffect(GameObject player)
     {
-        if(faceCameraDirection) player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        if (faceCameraDirection)
+        {
+            player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+            player.GetComponent<ThirdPersonCharacter>().LockTurnRotation = true;
+            StartCoroutine(AbilityAvailible(player));
+        }
 		if (sfx != null) {
 			sfx.playSound ();
 		}
+    }
+
+    IEnumerator AbilityAvailible(GameObject player)
+    {
+        int layerNum = player.GetComponent<AbilityController>().getLayerNumber();
+        yield return new WaitWhile(() => player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"));
+        yield return new WaitUntil(() => player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"));
+        print(player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(player.GetComponent<AbilityController>().getLayerNumber()).IsName("Grounded"));
+        player.GetComponent<ThirdPersonCharacter>().LockTurnRotation = false;
     }
 }

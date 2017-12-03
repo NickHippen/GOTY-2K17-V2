@@ -67,7 +67,8 @@ public class MagicMissile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag != "Pickup" && other.tag != "Equipped") {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") ||
+            other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
             StartCoroutine(Explode());
         }
     }

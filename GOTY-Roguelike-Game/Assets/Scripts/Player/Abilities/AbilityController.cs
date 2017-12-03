@@ -89,6 +89,10 @@ public class AbilityController : MonoBehaviour {
     {
         return abilities;
     }
+    public int getLayerNumber()
+    {
+        return layerNum;
+    }
 
     // returns whether or not the ability is used
     public bool useAbility(int abilityIndex) {
