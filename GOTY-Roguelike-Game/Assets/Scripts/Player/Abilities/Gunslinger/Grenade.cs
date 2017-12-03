@@ -66,7 +66,7 @@ public class Grenade : MonoBehaviour
 
     IEnumerator removeGrenade()
     {
-        yield return new WaitUntil(() => !particleEffect.IsAlive(true));
+        yield return new WaitWhile(() => particleEffect.IsAlive(true));
         Destroy(this.gameObject);
     }
 }

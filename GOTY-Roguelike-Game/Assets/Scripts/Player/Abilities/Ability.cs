@@ -10,7 +10,7 @@ public class Ability : MonoBehaviour {
     protected bool applyOnFrame;
     private float cooldownTimer;
     private bool isAvailible = true;
-    private float cooldownMultiplier = 1;
+    private float cooldownMultiplier = 1f;
 	public SoundData sfx;
 
 	// Use this for initialization
@@ -24,7 +24,7 @@ public class Ability : MonoBehaviour {
 		if(!isAvailible)
         {
             cooldownTimer -= Time.deltaTime * cooldownMultiplier;
-            if(CooldownTimer < 0f)
+            if(CooldownTimer <= 0f)
             {
                 cooldownTimer = cooldownTime;
                 isAvailible = true;

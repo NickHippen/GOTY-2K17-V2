@@ -36,6 +36,12 @@ public class AbilityController : MonoBehaviour {
             anim.SetLayerWeight(layerNum, 1);
             abilities = abilityList.getWizardAbilities(gameObject.transform.parent);
         }
+        else if(classType.ToLower().Equals("rogue"))
+        {
+            layerNum = 8;
+            anim.SetLayerWeight(layerNum, 1);
+            abilities = abilityList.getRogueAbilities(gameObject.transform.parent);
+        }
         else
         {
             layerNum = 5;
@@ -93,13 +99,13 @@ public class AbilityController : MonoBehaviour {
         }
         if (!anim.GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"))
         {   // if another ability is active
-            StartCoroutine(abilityOpacity(feedbackTimer, abilityIndex));
+            StartCoroutine(abilityOpacity(false, abilityIndex));
             return false;
         }
         // else use the ability
         abilities[abilityIndex].IsAvailible = false;
         cooldownTimers[abilityIndex].enabled = true;
-        StartCoroutine(abilityOpacity(abilities[abilityIndex].cooldownTime, abilityIndex));
+        StartCoroutine(abilityOpacity(true, abilityIndex));
 
         // if the animation will by applied during animation, then skip
         if (!abilities[abilityIndex].ApplyOnFrame)
@@ -114,10 +120,11 @@ public class AbilityController : MonoBehaviour {
         abilities[abilityIndex].applyEffect(gameObject);
     }
 
-    IEnumerator abilityOpacity(float duration, int index)
+    IEnumerator abilityOpacity(bool useAbility, int index)
     {
         abilityIcons[index].color = new Color(1, 1, 1, 0.5f);
-        yield return new WaitForSeconds(duration);
+        if(useAbility) yield return new WaitUntil(() => abilities[index].IsAvailible);
+        else yield return new WaitForSeconds(feedbackTimer);
         abilityIcons[index].color = new Color(1, 1, 1, 1f);
         cooldownTimers[index].enabled = false;
     }

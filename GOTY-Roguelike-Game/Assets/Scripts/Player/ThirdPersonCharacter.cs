@@ -66,7 +66,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     public Vector3 getMoveDirection()
     {
-        print(moveDirection);
         return moveDirection;
     }
 

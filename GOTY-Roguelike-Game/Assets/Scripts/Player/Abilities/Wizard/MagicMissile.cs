@@ -101,7 +101,7 @@ public class MagicMissile : MonoBehaviour
             }
         }
 
-        yield return new WaitUntil(() => !explosionParticle.IsAlive(true));
+        yield return new WaitWhile(() => explosionParticle.IsAlive(true));
         Destroy(this.gameObject);
     }
 }

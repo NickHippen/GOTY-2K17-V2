@@ -7,6 +7,7 @@ public class AbilityPrefabList : MonoBehaviour {
     public List<Ability> gunslingerList;
     public List<Ability> berserkerList;
     public List<Ability> wizardList;
+    public List<Ability> rogueList;
 
 	public List<Ability> getGunslingerAbilities(Transform parent)
     {
@@ -38,6 +39,19 @@ public class AbilityPrefabList : MonoBehaviour {
         // return an instantated list
         List<Ability> list = new List<Ability>();
         foreach (Ability item in wizardList)
+        {
+            Ability clone = Instantiate(item, parent);
+            clone.name = item.name;
+            list.Add(clone);
+        }
+        return list;
+    }
+
+    public List<Ability> getRogueAbilities(Transform parent)
+    {
+        // return an instantated list
+        List<Ability> list = new List<Ability>();
+        foreach (Ability item in rogueList)
         {
             Ability clone = Instantiate(item, parent);
             clone.name = item.name;
