@@ -18,6 +18,7 @@ public class GrenadeAbility : Ability
         base.Start();
         applyOnFrame = true;
         grenadeObject = this.transform.GetChild(0).gameObject.GetComponent<Grenade>();
+		sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)

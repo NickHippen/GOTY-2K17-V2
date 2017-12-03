@@ -266,7 +266,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -368,9 +368,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bfd73efe17a6f4aa67374920ca58b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - {fileID: 8300000, guid: 15b61cecc9c413944b23744fbd523914, type: 3}
   directIndex: 0
   loopIndex: 0
+  delay: 3
 --- !u!114 &114978309312395620
 MonoBehaviour:
   m_ObjectHideFlags: 1
