@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class KinematicProjectileAttack : Attack {
 
+	private float heightOffset;
+
 	public KinematicProjectile Projectile { get; set; }
 	public PlayerCollision HandlePlayerCollision { get; set; }
 	public float AttackDelay { get; set; }
 
-	public KinematicProjectileAttack(AttackController controller, KinematicProjectile projectile, PlayerCollision handlePlayerCollision, float attackDelay) : base(controller) {
+	public KinematicProjectileAttack(AttackController controller, KinematicProjectile projectile, PlayerCollision handlePlayerCollision, float attackDelay, float heightOffset=1f) : base(controller) {
 		this.Projectile = projectile;
 		this.HandlePlayerCollision = handlePlayerCollision;
 		this.AttackDelay = attackDelay;
+		this.heightOffset = heightOffset;
 	}
 
 	public override void Use(Transform target) {
