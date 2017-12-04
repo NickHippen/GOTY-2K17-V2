@@ -9,6 +9,7 @@ public class HealthManager : MonoBehaviour {
 	public float maxHealth;
 	public float health;
 	public bool invincible;
+	public Image healthSlider;
 
 	public Canvas mainHUD;
 	public Canvas deathHUD;
@@ -70,13 +71,13 @@ public class HealthManager : MonoBehaviour {
 		}
 		if (!invincible) {
 			Health -= amount;
-			GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
+			healthSlider.fillAmount = Health/100;
 		}
 	}
 
 	public void Heal(float amount) {
 		Health += amount;
-		GameObject.Find ("HealthSlider").GetComponent<Slider> ().value = Health;
+		healthSlider.fillAmount = Health/100;
 	}
 
 }
