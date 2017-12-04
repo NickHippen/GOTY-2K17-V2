@@ -35,7 +35,7 @@ public class BlinkAbility : Ability {
 
     IEnumerator WaitForParticleExplosion(GameObject player)
     {
-        yield return new WaitForSeconds(0.79f); // particle explosion start is at 0.8f
+        yield return new WaitForSeconds(particleObject.GetComponentsInChildren<ParticleSystem>()[1].main.startDelay.constant - 0.01f);
         move = player.GetComponent<ThirdPersonCharacter>().getMoveDirection();
         RaycastHit hit;
 

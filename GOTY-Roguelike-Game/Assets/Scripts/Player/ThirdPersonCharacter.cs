@@ -36,6 +36,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	bool m_isDead;
 	AbilityController abilities;
     Vector3 moveDirection;
+    bool lockTurnRotation;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -68,6 +69,12 @@ public class ThirdPersonCharacter : MonoBehaviour
     {
         return moveDirection;
     }
+    
+    public bool LockTurnRotation
+    {
+        get { return lockTurnRotation; }
+        set { lockTurnRotation = value; }
+    }
 
     public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
     {
@@ -91,7 +98,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         else
         {   // camera is independent of player rotation, use cartesian controls
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
-            ApplyExtraTurnRotation();
+            if(!lockTurnRotation) ApplyExtraTurnRotation();
         }
 
         // control and velocity handling is different when grounded and airborne:

@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class ConeOfColdAbility : Ability {
     
-    //public ParticleSystem particleEffect;
-    public float effectHeight = 2f;
     public float effectSize;
     public float freezeDuration = 3f;
     public float coneDuration = 3f;
-    
 
     protected override void Start()
     {
