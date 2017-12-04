@@ -9,6 +9,7 @@ public class BoardManager : MonoBehaviour
 	public LevelManager levelmanager;
 
 	public GameObject[] monsters;
+	public GameObject boss;
 	public GameObject[] items;
 	public GameObject tile;
 	public GameObject wall;
@@ -32,6 +33,10 @@ public class BoardManager : MonoBehaviour
 	private Transform boardHolder;
 	private Transform monsterHolder;
 	private Transform exitHolder;
+	private Transform bossHolder;
+
+	private AggressiveUnit spawnedBoss;
+	private GameObject spawnedPortal;
 
 	private List <Vector3> gridPositions = new List<Vector3> ();
 	private int tilesize = 8;
@@ -56,6 +61,7 @@ public class BoardManager : MonoBehaviour
 		boardHolder = new GameObject ("Board").transform;
 		monsterHolder = new GameObject ("Monsters").transform;
 		exitHolder = new GameObject ("Exit Portal").transform;
+		bossHolder = new GameObject("Boss").transform;
 
 		for (int i = 0; i < mapw; i++) {
 			for (int j = 0; j < maph; j++) {
@@ -170,6 +176,7 @@ public class BoardManager : MonoBehaviour
 		}
 
 		//Spawn exit portal
+		//Spawn boss
 		Room farthestRoom = roomList [0];
 		float maxDist = 0;
 		foreach (Room room in roomList) {
@@ -179,8 +186,15 @@ public class BoardManager : MonoBehaviour
 				farthestRoom = room;
 			}
 		}
-		instance = Instantiate(exitPortal, new Vector3 ((farthestRoom.startx + farthestRoom.width / 2)*tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2)*tilesize), Quaternion.Euler(-90,0,0));
-		instance.transform.SetParent (exitHolder);
+		instance = Instantiate(boss, new Vector3((farthestRoom.startx + farthestRoom.width / 2) * tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2) * tilesize), Quaternion.Euler(0, 0, 0));
+		spawnedBoss = (AggressiveUnit)instance.GetComponent<Unit>();
+		instance.GetComponent<Unit>().pathRequestManager = GameObject.Find("A_").GetComponent<PathRequestManager>();
+		instance.transform.SetParent(bossHolder);
+		
+		instance = Instantiate(exitPortal, new Vector3((farthestRoom.startx + farthestRoom.width / 2) * tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2) * tilesize), Quaternion.Euler(-90, 0, 0));
+		instance.transform.SetParent(exitHolder);
+		spawnedPortal = instance;
+		spawnedPortal.SetActive(false);
 
 		// Calculate pathfinding walk regions
 		Grid grid = GameObject.Find("A_").GetComponent<Grid>();
@@ -219,20 +233,19 @@ public class BoardManager : MonoBehaviour
 	}
 
 	private GameObject remy;
-	private GameObject generatedExitPortal;
 
 	public void Update()
 	{
 		if (remy == null) {
 			remy = GameObject.Find("remy");
 		}
-		if (generatedExitPortal == null) {
-			generatedExitPortal = GameObject.Find("Exit Portal");
-		}
 		Vector3 remyPos = remy.transform.localPosition;
-		Vector3 exitPos = generatedExitPortal.transform.GetChild(0).transform.localPosition;
+		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.localPosition;
 		if (Math.Abs(remyPos.x - exitPos.x) + Math.Abs(remyPos.z - exitPos.z) < 1) {
 			levelmanager.LoadNextLevel();
+		}
+		if (!spawnedBoss.Living) {
+			spawnedPortal.SetActive(true);
 		}
 	}
 }

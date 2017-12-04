@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.3731193, g: 0.38073996, b: 0.35872698, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -385,7 +385,7 @@ RectTransform:
   m_Children:
   - {fileID: 835320800}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -503,7 +503,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 189
+      value: 214
       objectReference: {fileID: 0}
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_LocalPosition.y
@@ -511,7 +511,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 200
+      value: 247
       objectReference: {fileID: 0}
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_LocalRotation.x
@@ -531,17 +531,17 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
         type: 2}
       propertyPath: gridWorldSize.x
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
         type: 2}
       propertyPath: gridWorldSize.y
-      value: 400
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
         type: 2}
@@ -933,6 +933,34 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00014895946, y: 0.16608, z: 0.1657767}
     m_Extent: {x: 0.09567264, y: 0.035390377, z: 0.035524614}
   m_DirtyAABB: 0
+--- !u!1 &526147233
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 928485315}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 526147234}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &526147234
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 928485315}
+  m_GameObject: {fileID: 526147233}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &529551756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,7 +1135,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseName: Sword
   desc: 
-  baseDamage: 0
   damage: 10
   rotation: {x: 73, y: 0, z: 17}
   model: {fileID: 567937208}
@@ -1116,6 +1143,8 @@ MonoBehaviour:
   modifier: 0
   emotion: 0
   effect: {fileID: 0}
+  swordRange: 1
+  swordBoxRadius: 1
 --- !u!114 &567937210
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,7 +1224,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &583972860
 GameObject:
@@ -1286,7 +1315,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &583972866
 MonoBehaviour:
@@ -1510,8 +1539,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityList: {fileID: 0}
   classType: 
-  uiText: {fileID: 0}
-  cdText: {fileID: 0}
+  iconSize: 50
+  abilityText: {fileID: 0}
+  cooldownText: {fileID: 0}
+  feedbackTimer: 0.1
 --- !u!114 &766236172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1527,6 +1558,8 @@ MonoBehaviour:
   maxHealth: 100
   health: 50
   invincible: 0
+  mainHUD: {fileID: 0}
+  deathHUD: {fileID: 0}
 --- !u!114 &766236173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1583,7 @@ MonoBehaviour:
   rightHand: {fileID: 804520996}
   leftHand: {fileID: 1263233048}
   grabRadius: 5
+  m_Animator: {fileID: 0}
 --- !u!114 &766236174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1810,7 +1844,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918414048
 GameObject:
@@ -2464,7 +2498,7 @@ Transform:
   - {fileID: 1094844449}
   - {fileID: 2113915034}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1289305841
 GameObject:
@@ -2919,7 +2953,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1488708348
 GameObject:
@@ -3124,7 +3158,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseName: 
   desc: 
-  baseDamage: 0
   damage: 100
   rotation: {x: 8, y: 83.5, z: 89}
   model: {fileID: 1565079420}
