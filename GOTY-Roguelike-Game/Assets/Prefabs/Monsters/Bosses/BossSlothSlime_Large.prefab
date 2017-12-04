@@ -400,7 +400,7 @@ Transform:
   m_GameObject: {fileID: 1553691678805790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -58.499985, y: 14.169365, z: -51.499992}
-  m_LocalScale: {x: 500, y: 500, z: 500}
+  m_LocalScale: {x: 300, y: 300, z: 300}
   m_Children:
   - {fileID: 4772670309956174}
   - {fileID: 4506498772321138}
@@ -568,6 +568,7 @@ MonoBehaviour:
   turnSpeed: 4
   turnDist: 1
   destinationRadius: 6
+  forceDestinationRadius: 0
   atGoal: 0
   health: 100
   maxHealth: 100
@@ -577,7 +578,7 @@ MonoBehaviour:
   targetTag: Player
   aggroRadius: 20
   attackPower: 5
-  slimeUnit: {fileID: 114961925804887120, guid: 7471874d777f51743a760e2261154f5e,
+  slimeUnit: {fileID: 114570708070448734, guid: bf0a785e066ef5046bd669c2a2810d4c,
     type: 2}
 --- !u!137 &137885881463674256
 SkinnedMeshRenderer:
