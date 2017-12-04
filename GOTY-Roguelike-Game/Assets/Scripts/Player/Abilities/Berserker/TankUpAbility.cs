@@ -28,7 +28,7 @@ public class TankUpAbility : Ability {
 
 	private IEnumerator TankTimer(GameObject player){
 		particleEffect.Play ();
-		sfx.playSound ();
+		//sfx.playSound ();
         player.GetComponent<HealthManager>().invincible = true;
 		yield return new WaitForSeconds (effectDuration);
         player.GetComponent<HealthManager>().invincible = false;

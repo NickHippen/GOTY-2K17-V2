@@ -46,7 +46,7 @@ public class HardKickAbility : Ability {
 				monster.Damage(damage);
 			}
         }
-		sfx.playSound ();
+		//sfx.playSound ();
         particleEffect.Play();
     }
 }
