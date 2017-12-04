@@ -19,7 +19,7 @@ public class TurretAbility : Ability
         ParticleSystem.MainModule pMain = particleEffect.main;
         pMain.startSize = particleEffectSize;
 
-        
+		sfx = GetComponent<SoundData> ();
     }
 
     protected override void Update()
