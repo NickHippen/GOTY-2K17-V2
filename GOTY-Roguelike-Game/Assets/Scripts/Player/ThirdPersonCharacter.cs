@@ -42,6 +42,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 	bool m_Use;
 	PlayerInventory inventory;
 
+	//Components for weapon pickup text
+	GameObject remy;
+	GameObject pickuppopup;
+	GameObject pickupmessage;
+
 	void Start()
 	{
 		inventory = GetComponent<PlayerInventory>();
@@ -63,6 +68,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 		initializeEquip(inventory.getCurrentWeapon());
 		inventory.getCurrentWeapon ().SetActive (true);
 		setWeaponAnimations();
+
+		remy = GameObject.Find ("remy");
+		pickuppopup = GameObject.Find ("PickupPopup");
+		pickupmessage = GameObject.Find ("WeaponPickupMessage");
 	}
 
     public Vector3 getMoveDirection()
@@ -376,9 +385,10 @@ public class ThirdPersonCharacter : MonoBehaviour
 		}
 
 		if (other.gameObject.CompareTag ("Pickup")) {
-			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName;
+			pickupmessage.GetComponent<Text>().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName;
+			pickuppopup.GetComponent<CanvasGroup> ().alpha = 1;
 			if (other.gameObject.GetComponent<WeaponData> ().cost > 0) {
-				GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName + "\nCosts " + other.gameObject.GetComponent<WeaponData> ().cost + " gems.";
+				pickupmessage.GetComponent<Text>().text = "Press \'E\' to pick up " + other.gameObject.GetComponent<WeaponData>().FullName + "\nCosts " + other.gameObject.GetComponent<WeaponData> ().cost + " gems.";
 			}
 		}
 	}
@@ -386,7 +396,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 	void OnTriggerExit(Collider other)
 	{
 		if (other.gameObject.CompareTag ("Pickup")) {
-			GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
+			pickupmessage.GetComponent<Text>().text = "";
+			pickuppopup.GetComponent<CanvasGroup> ().alpha = 0;
 		}
 	}
 }
