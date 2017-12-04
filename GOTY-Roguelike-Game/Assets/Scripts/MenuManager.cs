@@ -94,11 +94,42 @@ public class MenuManager : MonoBehaviour {
 
 	public void selectBerseker(){
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "berserker";
-		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
+		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
+
+		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 1;
+		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
 	}
 
 	public void selectGunslinger(){
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "gunslinger";
-		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
+		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
+
+		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 1;
+		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
+	}
+
+	public void selectWizard(){
+		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "wizard";
+		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
+
+		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 1;
+		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
+	}
+
+	public void selectRogue(){
+		Debug.Log ("YO");
+		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
+		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
+		Debug.Log (GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha);
+		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
+		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 1;
 	}
 }
