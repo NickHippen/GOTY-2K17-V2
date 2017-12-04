@@ -7,7 +7,7 @@ public class EvadeAbility : Ability {
     protected override void Start()
     {
         base.Start();
-		sfx = GetComponent<SoundData>();
+		//sfx = GetComponent<SoundData>();
     }
 
     public override void applyEffect(GameObject player)

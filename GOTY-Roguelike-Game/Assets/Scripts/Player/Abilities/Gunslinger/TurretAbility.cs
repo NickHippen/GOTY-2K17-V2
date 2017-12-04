@@ -6,7 +6,6 @@ public class TurretAbility : Ability
 {
     public float damageMultiplier = 2f;
     public float duration = 5f;
-    //public ParticleSystem particleEffect;
     public float particleEffectSize = 5f;
 
     ParticleSystem particleEffect;

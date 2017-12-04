@@ -70,7 +70,6 @@ public class Ability : MonoBehaviour {
         int layerNum = player.GetComponent<AbilityController>().getLayerNumber();
         yield return new WaitWhile(() => player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"));
         yield return new WaitUntil(() => player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(layerNum).IsName("Grounded"));
-        print(player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(player.GetComponent<AbilityController>().getLayerNumber()).IsName("Grounded"));
         player.GetComponent<ThirdPersonCharacter>().LockTurnRotation = false;
     }
 }

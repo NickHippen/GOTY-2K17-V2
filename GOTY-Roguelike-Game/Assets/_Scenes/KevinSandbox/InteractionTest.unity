@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311947, g: 0.38074005, b: 0.35872722, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -171,6 +171,10 @@ Prefab:
         type: 2}
       propertyPath: damage
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1534932496154960, guid: 53925465321384d47bc4d854b2197d57, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 53925465321384d47bc4d854b2197d57, type: 2}
@@ -952,6 +956,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
+      propertyPath: slots.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
+        type: 2}
       propertyPath: weapons.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -997,6 +1006,17 @@ Prefab:
       propertyPath: classType
       value: rogue
       objectReference: {fileID: 0}
+    - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
+        type: 2}
+      propertyPath: slots.Array.data[0]
+      value: 
+      objectReference: {fileID: 30070388}
+    - target: {fileID: 114392429017325620, guid: 87b83d356f51dc24894d449e312926c9,
+        type: 2}
+      propertyPath: mainHUD
+      value: 
+      objectReference: {fileID: 223678062851337110, guid: 8e3925630e6a0634a823f7e2b0964730,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87b83d356f51dc24894d449e312926c9, type: 2}
   m_IsPrefabParent: 0
@@ -1988,11 +2008,6 @@ Transform:
   m_Father: {fileID: 1972430417}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!224 &1400667991 stripped
-RectTransform:
-  m_PrefabParentObject: {fileID: 224973920655321060, guid: 8e3925630e6a0634a823f7e2b0964730,
-    type: 2}
-  m_PrefabInternal: {fileID: 2103027541}
 --- !u!1 &1422208212
 GameObject:
   m_ObjectHideFlags: 0
@@ -2648,6 +2663,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!224 &1902501817 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224300428924355172, guid: 8e3925630e6a0634a823f7e2b0964730,
+    type: 2}
+  m_PrefabInternal: {fileID: 2103027541}
 --- !u!1 &1903059725
 GameObject:
   m_ObjectHideFlags: 0
@@ -2835,7 +2855,7 @@ Transform:
   - {fileID: 226683407}
   - {fileID: 1264513594}
   - {fileID: 1223467102}
-  - {fileID: 1400667991}
+  - {fileID: 1902501817}
   - {fileID: 1341776665}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -2950,6 +2970,11 @@ Prefab:
     - target: {fileID: 1620942056525884, guid: 8e3925630e6a0634a823f7e2b0964730, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224300428924355172, guid: 8e3925630e6a0634a823f7e2b0964730,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 16
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8e3925630e6a0634a823f7e2b0964730, type: 2}

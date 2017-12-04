@@ -55,7 +55,6 @@ MeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -71,7 +70,6 @@ MeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -200,8 +198,8 @@ MonoBehaviour:
   modifier: 0
   emotion: 0
   effect: {fileID: 0}
-  swordRange: 1
-  swordBoxRadius: 1
+  swordRange: 2
+  swordRadius: 20
 --- !u!114 &114128034682166962
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +215,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
   directIndex: 0
   loopIndex: 0
+  delay: 0
 --- !u!114 &114547238658440474
 MonoBehaviour:
   m_ObjectHideFlags: 1

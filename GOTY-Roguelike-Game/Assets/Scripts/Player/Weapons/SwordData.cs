@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SwordData : WeaponData
 {
-    public float swordRange = 1f;
-    public float swordBoxRadius = 1f;
+    public float swordRange = 2f;
+    public float swordRadius = 2.5f;
     
     public override void Attack()
     {
         ThirdPersonCharacter player = this.GetComponentInParent<ThirdPersonCharacter>();
-        Collider[] colliders = Physics.OverlapBox(player.transform.position + player.transform.up + player.transform.forward*swordRange,
-            new Vector3(swordBoxRadius,swordBoxRadius,swordBoxRadius), player.transform.rotation);
+		Collider[] colliders = Physics.OverlapCapsule(player.transform.position + player.transform.forward * swordRange,
+			player.transform.position + player.transform.up*2 + player.transform.forward * swordRange, swordRadius);
 
 		PlayAttackAudio (0);
         foreach (Collider collider in colliders)
