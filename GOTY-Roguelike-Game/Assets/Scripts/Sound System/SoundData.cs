@@ -12,6 +12,7 @@ public class SoundData : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
+		this.gameObject.AddComponent<AudioSource>();
 		source = GetComponent<AudioSource> ();
 	}
 	
