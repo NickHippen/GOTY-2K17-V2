@@ -13,6 +13,7 @@ public class ArcaneFormAbility : Ability {
     {
         base.Start();
         particleEffect = this.transform.GetChild(0).gameObject;
+		sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)
@@ -31,6 +32,7 @@ public class ArcaneFormAbility : Ability {
 
     private IEnumerator StopBuff(List<Ability> abilities, GameObject particles)
     {
+		sfx.playLoop ();
         yield return new WaitForSeconds(duration);
         foreach (Ability ability in abilities)
         {
@@ -38,5 +40,6 @@ public class ArcaneFormAbility : Ability {
             ability.CooldownMultiplier -= cooldownMuliplier;
         }
         Destroy(particles);
+		sfx.stopLoop ();
     }
 }

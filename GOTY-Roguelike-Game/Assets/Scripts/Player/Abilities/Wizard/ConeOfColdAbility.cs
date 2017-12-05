@@ -12,6 +12,7 @@ public class ConeOfColdAbility : Ability {
     {
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)

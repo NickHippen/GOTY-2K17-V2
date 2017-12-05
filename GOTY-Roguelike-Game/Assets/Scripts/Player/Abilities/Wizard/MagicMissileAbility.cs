@@ -18,6 +18,7 @@ public class MagicMissileAbility : Ability {
     {
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
         magicMissileObject = transform.GetChild(0).gameObject.GetComponent<MagicMissile>();
     }
 

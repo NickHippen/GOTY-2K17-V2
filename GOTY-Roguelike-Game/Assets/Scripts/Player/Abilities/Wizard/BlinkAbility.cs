@@ -19,6 +19,7 @@ public class BlinkAbility : Ability {
     {
         base.Start();
         particleObject = transform.GetChild(0).gameObject;
+		sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)

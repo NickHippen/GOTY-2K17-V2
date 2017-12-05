@@ -35,7 +35,7 @@ public class SoundData : MonoBehaviour {
 	}
 
 	public virtual void playLoop(){
-		if (soundEffects [directIndex] != null) {
+		if (soundEffects [loopIndex] != null) {
 			source.loop = true;
 			source.PlayOneShot (soundEffects [loopIndex]);
 		}
