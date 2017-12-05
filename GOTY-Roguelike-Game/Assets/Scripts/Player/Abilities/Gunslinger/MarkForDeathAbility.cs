@@ -18,6 +18,7 @@ public class MarkForDeathAbility : Ability
     {
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
         // instantiates a camera attached to particle affect and puts it on Main Camera so it will always render the particle effect
         Instantiate(this.transform.GetChild(1), Camera.main.transform, false).gameObject.SetActive(true);
         ParticleSystem.MainModule mainSystem = particleEffect.main;
