@@ -37,6 +37,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	AbilityController abilities;
     Vector3 moveDirection;
     bool lockTurnRotation;
+    bool isInvisible;
 
 	//Status of the Use Key 'E'
 	bool m_Use;
@@ -78,11 +79,15 @@ public class ThirdPersonCharacter : MonoBehaviour
     {
         return moveDirection;
     }
-    
     public bool LockTurnRotation
     {
         get { return lockTurnRotation; }
         set { lockTurnRotation = value; }
+    }
+    public bool IsInvisible
+    {
+        get { return isInvisible; }
+        set { isInvisible = value; }
     }
 
     public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
