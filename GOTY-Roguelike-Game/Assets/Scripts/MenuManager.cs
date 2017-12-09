@@ -8,6 +8,7 @@ public class MenuManager : MonoBehaviour {
 	public GameObject primaryCanvas;
 	public GameObject optionsCanvas;
 	public GameObject playerSelectCanvas;
+	public GameObject levelManager;
 
 	public float speed;
 
@@ -68,9 +69,10 @@ public class MenuManager : MonoBehaviour {
 			mycam.transform.rotation = Quaternion.RotateTowards (mycam.transform.rotation, Quaternion.Euler (0, 0, 0), step * 20);
 
 			playerSelectCanvas.GetComponent<CanvasGroup> ().alpha -= step / 4;
-
-			if (mycam.transform.position == new Vector3 (-8, 2, 8)) {
-				Debug.Log ("LOAD LEVEL NOW");
+			Debug.Log ("YO");
+			Debug.Log (mycam.transform.position.z);
+			if (mycam.transform.position == new Vector3 (-8, 2, 10)) {
+				levelManager.GetComponent<LevelManager> ().LoadNextLevel ();
 			}
 		}
 	}
@@ -123,7 +125,6 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectRogue(){
-		Debug.Log ("YO");
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
 		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (1);
 		Debug.Log (GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha);
