@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1860060297083786}
+  m_IsPrefabParent: 1
+--- !u!1 &1860060297083786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4061349588195168}
+  - component: {fileID: 114144974914406810}
+  - component: {fileID: 114310218738678238}
+  m_Layer: 0
+  m_Name: _Lust_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4061349588195168
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114144974914406810
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84affe162073cd249968a7c837e4b033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelmanager: {fileID: 0}
+  monsters:
+  - {fileID: 1953699167637816, guid: fc0eda77891fcb0468e5fa36bc58ecf7, type: 2}
+  items:
+  - {fileID: 1533085259526468, guid: b141c3ffdf85ba14da0d1606894cbbc0, type: 2}
+  tile: {fileID: 1732383957279304, guid: 3f534bbf31bc6844d97adb04a42f5bb7, type: 2}
+  wall: {fileID: 1549515493027492, guid: 019c7afaff3587a439de8048dc48668e, type: 2}
+  torch: {fileID: 1281317626351866, guid: 188207eedac6aba47b07914a4a37ded3, type: 2}
+  exitPortal: {fileID: 194316, guid: 11387396ccd933544b0567a831ce751a, type: 2}
+  texture: {fileID: 2800000, guid: 18782d55ba3825f448c5754962c9b98c, type: 3}
+  player: {fileID: 1538242925778622, guid: 980110219f544ea4f85fdb6400f864c7, type: 2}
+  miniMap: {fileID: 114271782723061750, guid: 4c52f665f407215489856da05959db53, type: 2}
+  mapGenerator: {fileID: 114281106395256080, guid: da2ca4b3c15614e4b8584db3daf1da28,
+    type: 2}
+--- !u!114 &114310218738678238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1860060297083786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1274bbccd3dcaf49a5ae0b9520bd6aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelStartDelay: 2
+  turnDelay: 0.1
+  boardScript: {fileID: 0}
+  playersTurn: 1
