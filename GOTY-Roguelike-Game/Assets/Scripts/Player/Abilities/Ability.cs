@@ -7,7 +7,9 @@ public class Ability : MonoBehaviour {
     public Sprite icon;
     public float cooldownTime;
     public bool faceCameraDirection;
+    public string bonusDescription;
     protected bool applyOnFrame;
+    protected bool bonusEffect;
     private float cooldownTimer;
     private bool isAvailible = true;
     private float cooldownMultiplier = 1;
@@ -50,6 +52,11 @@ public class Ability : MonoBehaviour {
     {
         get { return cooldownMultiplier; }
         set { cooldownMultiplier = value; }
+    }
+    public bool BonusEffectActive
+    {
+        get { return bonusEffect; }
+        set { bonusEffect = value; }
     }
 
     public virtual void applyEffect(GameObject player)

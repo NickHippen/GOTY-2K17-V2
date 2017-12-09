@@ -5,10 +5,15 @@ using UnityEngine;
 public class CycloneAbility : Ability {
 
     public float damage;
-	//Distance of particle effect from player
-    public Vector2 effectPosition;
 	//Radius of damage the effect has
 	public float damageRadius;
+
+    public float bonusEffectDuration;
+    public float bonusDamageOverTime;
+    public float bonusTicksPerSecond;
+    
+    //Distance of particle effect from player
+    public Vector2 effectPosition;
 
     ParticleSystem particleEffect;
 
@@ -36,7 +41,9 @@ public class CycloneAbility : Ability {
 			Debug.Log (collider);
 			if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
 				AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-				float damage = this.damage;
+                if (bonusEffect) {
+                    monster.ApplyStatus(new StatusPoison(monster, bonusEffectDuration, bonusDamageOverTime, bonusTicksPerSecond));
+                }
 				monster.Damage(damage);
 			}
         }
