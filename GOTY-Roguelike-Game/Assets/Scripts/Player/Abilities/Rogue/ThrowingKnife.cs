@@ -8,6 +8,7 @@ public class ThrowingKnife : MonoBehaviour
     float timer;
     float damage;
     float particleRadius;
+    float collisionOffset;
     bool isHit;
 
     public float Damage
@@ -28,9 +29,15 @@ public class ThrowingKnife : MonoBehaviour
         set { timer = value; }
     }
 
+    public float CollisionOffset
+    {
+        get { return collisionOffset; }
+        set { collisionOffset = value; }
+    }
+
     private void Start()
     {
-        //impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
         //StartCoroutine(RemoveObject(false));
     }
 
@@ -39,12 +46,12 @@ public class ThrowingKnife : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") ||
             other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+
+            impactParticle.gameObject.SetActive(true);
+
+            transform.position = this.transform.position - GetComponent<Rigidbody>().velocity * collisionOffset;
             GetComponent<Rigidbody>().velocity = new Vector3();
-			RaycastHit hit;
-			if (Physics.Raycast(transform.position, transform.forward, out hit))
-			{
-				transform.position = hit.point;
-			}
+
             GetComponent<MeshCollider>().enabled = false;
             RigCollider rigCollider = other.gameObject.GetComponent<RigCollider>();
             if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
@@ -59,7 +66,7 @@ public class ThrowingKnife : MonoBehaviour
 
     IEnumerator RemoveObject(bool hit)
     {
-        if(hit) yield return new WaitWhile(() => impactParticle.IsAlive(true));
+        if (hit) yield return new WaitWhile(() => impactParticle.IsAlive(true));
         else yield return new WaitForSeconds(timer);
         Destroy(this.gameObject);
     }

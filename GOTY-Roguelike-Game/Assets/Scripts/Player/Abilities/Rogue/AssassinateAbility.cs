@@ -17,6 +17,7 @@ public class AssassinateAbility : Ability {
     protected override void Start()
     {
         base.Start();
+        
         sfx = GetComponent<SoundData>();
         particleEffect = transform.GetChild(0).gameObject;
         //ParticleSystem.MainModule mainEffect = particleEffect.main;
