@@ -6,7 +6,7 @@ public class AdrenalineAbility : Ability {
     
     public float damageMultiplier = 2f;
     public float duration;
-	public float effectDistance;
+    public float bonusCdMultiplier;
 
     ParticleSystem particleEffect;
 
@@ -20,8 +20,19 @@ public class AdrenalineAbility : Ability {
     {
         base.applyEffect(player);
 
-		this.transform.position = player.transform.position + player.transform.forward * effectDistance;
+		this.transform.position = player.transform.position;
 		this.transform.parent = player.transform;
+
+        if(bonusEffect)
+        {
+            List<Ability> abilities = player.GetComponent<AbilityController>().getAbilityList();
+            foreach (Ability ability in abilities)
+            {
+                if (ability is AdrenalineAbility) continue;
+                ability.CooldownMultiplier += bonusCdMultiplier;
+            }
+            StartCoroutine(StopBonus(abilities));
+        }
 
         foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)
         {
@@ -32,7 +43,7 @@ public class AdrenalineAbility : Ability {
 		//effect.Emit (50);
     }
 
-	private IEnumerator effectTimer(){
+	IEnumerator effectTimer(){
 		particleEffect.Play ();
 		//sfx.playSound ();
 		sfx.playLoop ();
@@ -40,4 +51,15 @@ public class AdrenalineAbility : Ability {
 		particleEffect.Stop ();
 		sfx.stopLoop();
 	}
+
+    IEnumerator StopBonus(List<Ability> abilities)
+    {
+        sfx.playLoop();
+        yield return new WaitForSeconds(duration);
+        foreach (Ability ability in abilities)
+        {
+            if (ability is AdrenalineAbility) continue;
+            ability.CooldownMultiplier -= bonusCdMultiplier;
+        }
+    }
 }

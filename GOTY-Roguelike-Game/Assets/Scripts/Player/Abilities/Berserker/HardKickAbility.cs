@@ -5,8 +5,9 @@ using UnityEngine;
 public class HardKickAbility : Ability {
 
     public float damage;
-    public Vector2 effectPosition;
 	public float damageRadius;
+    public float bonusDamage;
+    public Vector2 effectPosition;
 
     ParticleSystem particleEffect;
 
@@ -42,6 +43,10 @@ public class HardKickAbility : Ability {
 			if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
 				AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
 				float damage = this.damage;
+                if(bonusEffect)
+                {
+                    damage += bonusDamage;
+                }
 				monster.ApplyStatus (new StatusStun(monster, 5f));
 				monster.Damage(damage);
 			}

@@ -5,6 +5,7 @@ using UnityEngine;
 public class TankUpAbility : Ability {
     
 	public float effectDuration;
+    public float bonusHealAmount;
 
     ParticleSystem particleEffect;
 
@@ -23,6 +24,10 @@ public class TankUpAbility : Ability {
 		this.transform.position = player.transform.position;
 		this.transform.parent = player.transform;
 
+        if(bonusEffect)
+        {
+            player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+        }
 		StartCoroutine(TankTimer(player));
 	}
 
