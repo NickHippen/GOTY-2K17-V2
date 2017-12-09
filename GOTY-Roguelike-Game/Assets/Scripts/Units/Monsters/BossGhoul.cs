@@ -12,6 +12,11 @@ public class BossGhoul : AggressiveUnit {
 	private CloudSpawn spawnedCloud;
 	private bool maskDestroyed = false;
 
+	protected override void Start(){
+		base.Start ();
+		sfx = GetComponent<SoundData> ();
+	}
+
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new KinematicProjectileAttack(
 			new IntervalAttackController(this, 2, 2),

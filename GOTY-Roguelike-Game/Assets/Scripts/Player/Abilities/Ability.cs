@@ -60,7 +60,7 @@ public class Ability : MonoBehaviour {
             player.GetComponent<ThirdPersonCharacter>().LockTurnRotation = true;
             StartCoroutine(AbilityAvailible(player));
         }
-		if (sfx != null) {
+		if (sfx != null && sfx.soundEffects.Count > 0) {
 			sfx.playSound ();
 		}
     }

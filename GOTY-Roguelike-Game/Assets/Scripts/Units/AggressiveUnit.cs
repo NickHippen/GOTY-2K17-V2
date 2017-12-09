@@ -12,6 +12,8 @@ public abstract class AggressiveUnit : LivingUnit {
 
 	public float attackPower = 5f;
 
+	public SoundData sfx;
+
 	public bool HasWeapon { get; set; }
 
 	protected override void Start() {
@@ -34,6 +36,9 @@ public abstract class AggressiveUnit : LivingUnit {
 			if (collider.tag.Equals(targetTag)) {
 				target = collider.transform;
 				BeginPathing();
+				if (sfx != null && sfx.soundEffects.Count > 0) {
+					sfx.playSound ();
+				}
 				break;
 			}
 		}

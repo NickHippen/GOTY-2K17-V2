@@ -15,6 +15,7 @@ public class ThrowingKnifeAbility : Ability {
     {
         base.Start();
         applyOnFrame = true;
+		sfx = GetComponent<SoundData> ();
         throwingKnife = transform.GetChild(0).gameObject.GetComponent<ThrowingKnife>();
     }
 

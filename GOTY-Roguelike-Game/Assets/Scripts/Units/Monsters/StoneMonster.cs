@@ -6,6 +6,11 @@ public class StoneMonster : AggressiveUnit {
 
 	public KinematicProjectile projectile;
 
+	protected override void Start(){
+		base.Start ();
+		sfx = GetComponent<SoundData> ();
+	}
+
 	protected override void ApplyAttackBehavior() {
 		//attacks.Add(new BasicDamageAttack(
 		//	new IntervalAttackController(this, 2, 2)

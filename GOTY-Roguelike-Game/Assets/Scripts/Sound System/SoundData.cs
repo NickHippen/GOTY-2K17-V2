@@ -12,6 +12,7 @@ public class SoundData : MonoBehaviour {
 
 	// Use this for initialization
 	protected virtual void Start () {
+		this.gameObject.AddComponent<AudioSource>();
 		source = GetComponent<AudioSource> ();
 	}
 	
@@ -35,7 +36,7 @@ public class SoundData : MonoBehaviour {
 	}
 
 	public virtual void playLoop(){
-		if (soundEffects [directIndex] != null) {
+		if (soundEffects [loopIndex] != null) {
 			source.loop = true;
 			source.PlayOneShot (soundEffects [loopIndex]);
 		}
