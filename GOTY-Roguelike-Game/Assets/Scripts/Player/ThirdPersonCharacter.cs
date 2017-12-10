@@ -265,6 +265,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 					GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold -= (int) temp.GetComponent<WeaponData> ().cost;
 					GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
 					GameObject.Find ("WeaponPickupMessage").GetComponent<Text> ().text = "";
+					GameObject.Find ("PickupPopup").GetComponent<CanvasGroup> ().alpha = 0;
 				}
 
 				if (temp.GetComponent<Floating> () != null) {
@@ -285,7 +286,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 
 	/*Changes characteristics of an object that has been picked up or equipped. Most notably, setting the parents
 	and transforms.*/
-	void initializeEquip(GameObject temp){
+	public void initializeEquip(GameObject temp){
 		temp.tag = "Equipped";
 		//temp.GetComponent<Rigidbody>().useGravity = false;
 		GameObject hand;
