@@ -14,7 +14,6 @@ public class BasicDamageAttack : Attack {
 		} else {
 			Debug.LogError("Can't damage target without HealthManager");
 		}
-		Debug.Log("Attack");
 		Attacker.UnitAnimator.SetBool("Attack", true);
 	}
 

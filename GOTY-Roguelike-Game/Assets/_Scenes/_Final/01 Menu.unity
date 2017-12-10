@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -2835,6 +2835,11 @@ MonoBehaviour:
 --- !u!1 &459341256 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1177385123717930, guid: 3c80df149468212448a7a90294cb7e64,
+    type: 2}
+  m_PrefabInternal: {fileID: 927382583}
+--- !u!223 &459341259 stripped
+Canvas:
+  m_PrefabParentObject: {fileID: 223044573581758488, guid: 3c80df149468212448a7a90294cb7e64,
     type: 2}
   m_PrefabInternal: {fileID: 927382583}
 --- !u!114 &459341261
@@ -8022,6 +8027,16 @@ Prefab:
       propertyPath: classType
       value: berserker
       objectReference: {fileID: 0}
+    - target: {fileID: 114392429017325620, guid: 87b83d356f51dc24894d449e312926c9,
+        type: 2}
+      propertyPath: healthSlider
+      value: 
+      objectReference: {fileID: 2116950391}
+    - target: {fileID: 114392429017325620, guid: 87b83d356f51dc24894d449e312926c9,
+        type: 2}
+      propertyPath: mainHUD
+      value: 
+      objectReference: {fileID: 459341259}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 87b83d356f51dc24894d449e312926c9, type: 2}
   m_IsPrefabParent: 0
@@ -11700,6 +11715,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 188207eedac6aba47b07914a4a37ded3, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &2116950391 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114640750189144550, guid: 3c80df149468212448a7a90294cb7e64,
+    type: 2}
+  m_PrefabInternal: {fileID: 927382583}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &2120780465
 Prefab:
   m_ObjectHideFlags: 0
