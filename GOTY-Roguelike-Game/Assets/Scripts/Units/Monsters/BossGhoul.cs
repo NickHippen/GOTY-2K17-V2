@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossGhoul : AggressiveUnit {
+public class BossGhoul : BossUnit {
 
 	public KinematicProjectile projectile;
 	public CloudSpawn cloudSummon;

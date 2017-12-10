@@ -28,6 +28,15 @@ public class MenuManager : MonoBehaviour {
 	public Sprite wizIcon;
 	public Sprite rogIcon;
 
+	public GameObject berAbilities;
+	public GameObject gunAbilities;
+	public GameObject wizAbilities;
+	public GameObject rogAbilities;
+
+	public GameObject sword;
+	public GameObject gun;
+	public GameObject staff;
+
 	public float speed;
 
 	bool transformForward = false;
@@ -35,10 +44,13 @@ public class MenuManager : MonoBehaviour {
 	bool transformPlayerSelect = false;
 	bool playerSelected = false;
 
+	Animator anim;
+
 	// Use this for initialization
 	void Start () {
 		mycam = GameObject.Find ("Main Camera").GetComponent<Camera> ();
 	}
+
 	
 	// Update is called once per frame
 	void Update () {
@@ -109,7 +121,6 @@ public class MenuManager : MonoBehaviour {
 
 		//Turn the select sounds and buttons off
 		if (select_back.GetComponent<Button> ().interactable == true) {
-			Debug.Log ("HELLO");
 			toggleSelectButtons ();
 			toggleSelectSounds ();
 		}
@@ -139,52 +150,55 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectBerseker(){
-		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
-
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "berserker";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
+
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
+		GameObject.Find ("remy").GetComponent<ThirdPersonCharacter> ().setWeaponAnimations ();
+
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = berIcon;
-		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 1;
-		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
+		berAbilities.GetComponent<CanvasGroup> ().alpha = 1;
+		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		wizAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		rogAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 	}
 
 	public void selectGunslinger(){
-		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "gunslinger";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
+
+		GameObject.Find ("remy").GetComponent<PlayerInventory>().setCurrentWeapon(1);
+		GameObject.Find ("remy").GetComponent<ThirdPersonCharacter> ().setWeaponAnimations ();
+
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = gunIcon;
-		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 1;
-		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
+		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		gunAbilities.GetComponent<CanvasGroup> ().alpha = 1;
+		wizAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		rogAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 	}
 
 	public void selectWizard(){
-		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "wizard";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = wizIcon;
-		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 1;
-		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 0;
+		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		wizAbilities.GetComponent<CanvasGroup> ().alpha = 1;
+		rogAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 	}
 
 	public void selectRogue(){
-		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = rogIcon;
-		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Gunslinger").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Wizard").GetComponent<CanvasGroup> ().alpha = 0;
-		GameObject.Find ("Rogue").GetComponent<CanvasGroup> ().alpha = 1;
+		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		wizAbilities.GetComponent<CanvasGroup> ().alpha = 0;
+		rogAbilities.GetComponent<CanvasGroup> ().alpha = 1;
 	}
 
 	public void togglePrimaryButtons(){
