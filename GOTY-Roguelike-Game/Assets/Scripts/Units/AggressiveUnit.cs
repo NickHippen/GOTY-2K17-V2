@@ -50,17 +50,21 @@ public abstract class AggressiveUnit : LivingUnit {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRadius);
 		foreach (Collider collider in hitColliders) {
 			if (collider.tag.Equals(targetTag)) {
-				ThirdPersonCharacter tpc = collider.transform.GetComponent<ThirdPersonCharacter>();
-				if (tpc != null && tpc.IsInvisible) {
-					break;
-				}
-				target = collider.transform;
-				BeginPathing();
-				if (sfx != null && sfx.soundEffects.Count > 0) {
-					sfx.playSound ();
-				}
+				SetAggro(collider.transform);
 				break;
 			}
+		}
+	}
+
+	public void SetAggro(Transform target) {
+		ThirdPersonCharacter tpc = target.GetComponent<ThirdPersonCharacter>();
+		if (tpc != null && tpc.IsInvisible) {
+			return;
+		}
+		this.target = target;
+		BeginPathing();
+		if (sfx != null && sfx.soundEffects.Count > 0) {
+			sfx.playSound();
 		}
 	}
 
@@ -117,6 +121,11 @@ public abstract class AggressiveUnit : LivingUnit {
 				healthManager.Damage(CalculateAttackPower()); // TODO Possibly add damage modifiers for special attacks
 			}
 		}
+	}
+
+	public override void Damage(float amount, Transform attacker) {
+		base.Damage(amount, attacker);
+		SetAggro(attacker);
 	}
 
 }

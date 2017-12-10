@@ -44,7 +44,7 @@ public class CycloneAbility : Ability {
                 if (bonusEffect) {
                     monster.ApplyStatus(new StatusPoison(monster, bonusEffectDuration, bonusDamageOverTime, bonusTicksPerSecond));
                 }
-				monster.Damage(damage);
+				monster.Damage(damage, player.transform);
 			}
         }
 		//sfx.playSound ();

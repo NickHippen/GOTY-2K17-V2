@@ -41,6 +41,7 @@ public class MagicMissile : MonoBehaviour
         get { return timer; }
         set { timer = value; }
     }
+	public GameObject Player { get; set; }
 
     private void Start()
     {
@@ -98,7 +99,7 @@ public class MagicMissile : MonoBehaviour
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
-                monster.Damage(damage);
+                monster.Damage(damage, Player.transform);
             }
         }
 

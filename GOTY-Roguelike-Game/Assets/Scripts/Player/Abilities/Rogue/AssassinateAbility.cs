@@ -59,7 +59,7 @@ public class AssassinateAbility : Ability {
                 if (unit is AggressiveUnit)
                 {
                     AggressiveUnit monster = (AggressiveUnit)unit;
-                    monster.Damage(damage);
+                    monster.Damage(damage, player.transform);
                     if(bonusEffect)
                     {
                         player.GetComponent<HealthManager>().Heal(damage * bonusHealPercent);

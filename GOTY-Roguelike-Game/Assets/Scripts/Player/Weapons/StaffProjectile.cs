@@ -52,6 +52,7 @@ public class StaffProjectile : MonoBehaviour
         get { return modifier; }
         set { modifier = value; }
     }
+	public GameObject Player { get; set; }
 
     void Start()
     {
@@ -78,7 +79,7 @@ public class StaffProjectile : MonoBehaviour
                     damage *= damageMultiplier;
                     damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(staff, monster, damage);
                     damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(staff, monster, damage);
-                    monster.Damage(damage);
+                    monster.Damage(damage, Player.transform);
                 }
             }
             Remove();

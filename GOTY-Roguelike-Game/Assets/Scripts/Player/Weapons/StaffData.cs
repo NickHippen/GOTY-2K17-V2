@@ -29,6 +29,7 @@ public class StaffData : WeaponData {
         proj.Emotion = emotion;
         proj.Modifier = modifier;
         proj.gameObject.SetActive(true);
+		proj.Player = Player;
         proj.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * projectileSpeed);
 
 

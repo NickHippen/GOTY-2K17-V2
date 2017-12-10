@@ -49,7 +49,7 @@ public class GunData : WeaponData {
                 damage *= damageMultiplier;
                 damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
 				damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
-				monster.Damage(damage);
+				monster.Damage(damage, Player.transform);
 				//PlayAttackAudio (1);
 			}
 			//if (hit.rigidbody != null) {
