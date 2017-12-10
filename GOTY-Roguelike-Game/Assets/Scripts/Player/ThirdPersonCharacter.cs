@@ -64,6 +64,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 
         GameObject parent = new GameObject("Player");
         this.transform.SetParent(parent.transform);
+		DontDestroyOnLoad (parent);
 
 		//Initialize the weapon held at the start of the game
 		initializeEquip(inventory.getCurrentWeapon());

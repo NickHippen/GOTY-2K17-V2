@@ -30,15 +30,14 @@ public class CameraFollow : MonoBehaviour {
 		rotX = rot.x;
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
+		cameraFollowObj = GameObject.Find ("CameraPoint");
 	}
 	
 	void Update () {
-		float inputX = Input.GetAxis("RightStickHorizontal");
-		float inputZ = Input.GetAxis("RightStickVertical");
 		mouseX = Input.GetAxis("Mouse X");
 		mouseY = Input.GetAxis("Mouse Y");
-		finalInputX = inputX + mouseX;
-		finalInputZ = inputZ + mouseY;
+		finalInputX = mouseX;
+		finalInputZ = mouseY;
 
 		rotY += finalInputX * inputSensitivity * Time.deltaTime;
 		rotX += finalInputZ * inputSensitivity * Time.deltaTime;

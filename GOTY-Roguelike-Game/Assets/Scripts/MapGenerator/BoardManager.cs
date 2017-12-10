@@ -159,8 +159,9 @@ public class BoardManager : MonoBehaviour
 		//Spawn player
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
-		GameObject player = GameObject.Find ("remy");
+		GameObject player = GameObject.Find ("Player");
 		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
+
 
 		//GameObject mycam = GameObject.Find ("Main Camera");
 		//mycam.GetComponent<CameraController> ().lookAt = player.transform;
@@ -246,7 +247,7 @@ public class BoardManager : MonoBehaviour
 	public void Update()
 	{
 		if (remy == null) {
-			remy = GameObject.Find("remy");
+			remy = GameObject.Find("Player");
 		}
 		Vector3 remyPos = remy.transform.localPosition;
 		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.localPosition;
