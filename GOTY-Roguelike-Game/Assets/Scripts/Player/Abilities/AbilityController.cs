@@ -90,6 +90,8 @@ public class AbilityController : MonoBehaviour {
 	void OnEnable()
 	{
 		var ability_children = new List<GameObject> ();
+
+		if (GameObject.Find("Player") != null)
 		foreach (Transform child in GameObject.Find ("Player").transform) {
 			if(child.gameObject.transform.name != "remy")
 				ability_children.Add (child.gameObject);
@@ -98,6 +100,12 @@ public class AbilityController : MonoBehaviour {
 		cooldownTimers.Clear ();
 		abilities.Clear ();
 		abilityIcons.Clear ();
+
+		anim.SetLayerWeight (5, 0);
+		anim.SetLayerWeight (6, 0);
+		anim.SetLayerWeight (7, 0);
+		anim.SetLayerWeight (8, 0);
+
 
 		if (classType.ToLower().Equals("berserker"))
 		{

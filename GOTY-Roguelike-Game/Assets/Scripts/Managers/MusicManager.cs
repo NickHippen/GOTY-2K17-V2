@@ -7,6 +7,10 @@ public class MusicManager : MonoBehaviour {
 	public AudioClip[] levelMusicChangeArray;
 	private AudioSource audioSource;
 
+	void Awake(){
+		DontDestroyOnLoad (gameObject);
+	}
+
 	// Use this for initialization
 	void Start () {
 		audioSource = GetComponent<AudioSource> ();
@@ -14,7 +18,7 @@ public class MusicManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		//Debug.Log (audioSource.volume);
 	}
 
 	void OnLevelWasLoaded(int level){
@@ -28,5 +32,9 @@ public class MusicManager : MonoBehaviour {
 
 	public void ChangeVolume(float volume){
 		audioSource.volume = volume;
+	}
+
+	public float getVolume(){
+		return audioSource.volume;
 	}
 }

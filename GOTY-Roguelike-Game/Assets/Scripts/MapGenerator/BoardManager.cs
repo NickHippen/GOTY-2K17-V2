@@ -52,6 +52,7 @@ public class BoardManager : MonoBehaviour
 	//Creates a board object. Places cubes as children of that board object based on our map array
 	void BoardSetup ()
 	{
+		Debug.Log (PlayerPrefsManager.GetMasterVolume ());
 		BuildMap:
 			mymap = mapGenerator.generate (mapw, maph);
 			maparr = mymap.maparr;
