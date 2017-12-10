@@ -30,7 +30,7 @@ public class CameraFollow : MonoBehaviour {
 		rotX = rot.x;
 		Cursor.lockState = CursorLockMode.Locked;
 		Cursor.visible = false;
-		cameraFollowObj = GameObject.Find ("CameraPoint");
+		cameraFollowObj = GameObject.Find ("LookPoint");
 	}
 	
 	void Update () {

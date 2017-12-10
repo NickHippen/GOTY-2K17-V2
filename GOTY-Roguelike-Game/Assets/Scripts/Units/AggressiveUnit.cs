@@ -25,15 +25,35 @@ public abstract class AggressiveUnit : LivingUnit {
 		base.Update();
 		if (target == null) { // Only search if no target already
 			CheckAggro();
+		} else {
+			ThirdPersonCharacter tpc = target.GetComponent<ThirdPersonCharacter>();
+			if (tpc != null) {
+				if (tpc.IsInvisible) {
+					CancelAggro();
+				}
+			}
 		}
 
 		UpdateAttacks();
+	}
+
+	public void CancelAggro() {
+		target = null;
+		atGoal = false;
+		StopCoroutine("FollowPath");
+		if (UnitAnimator != null) {
+			UnitAnimator.SetBool("Move", false);
+		}
 	}
 
 	private void CheckAggro() {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRadius);
 		foreach (Collider collider in hitColliders) {
 			if (collider.tag.Equals(targetTag)) {
+				ThirdPersonCharacter tpc = collider.transform.GetComponent<ThirdPersonCharacter>();
+				if (tpc != null && tpc.IsInvisible) {
+					break;
+				}
 				target = collider.transform;
 				BeginPathing();
 				if (sfx != null && sfx.soundEffects.Count > 0) {
