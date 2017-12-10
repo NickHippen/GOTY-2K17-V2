@@ -67,9 +67,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 		DontDestroyOnLoad (parent);
 
 		//Initialize the weapon held at the start of the game
+		//Do this for every weapon in the scene so that everything works nice :)
 		initializeEquip(inventory.getCurrentWeapon());
 		inventory.getCurrentWeapon ().SetActive (true);
 		setWeaponAnimations();
+
 
 		remy = GameObject.Find ("remy");
 		pickuppopup = GameObject.Find ("PickupPopup");
