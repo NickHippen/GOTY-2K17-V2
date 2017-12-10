@@ -28,7 +28,10 @@ public class LevelManager : MonoBehaviour {
 	}
 
 	public void ReturnToMainMenu() {
+		GameObject.Find("remy").GetComponent<HealthManager>().Heal(99999);
+		Time.timeScale = 1f;
 		Application.LoadLevel(1);
+		Destroy(GameObject.Find("DeathHUD"));
 	}
 
 }

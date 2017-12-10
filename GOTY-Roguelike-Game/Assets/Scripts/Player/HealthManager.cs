@@ -14,6 +14,8 @@ public class HealthManager : MonoBehaviour {
 	public Canvas mainHUD;
 	public Canvas deathHUD;
 
+	private bool created = false;
+
 	public float Health {
 		get {
 			return health;
@@ -44,7 +46,8 @@ public class HealthManager : MonoBehaviour {
 		if (!Living) {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.None;
-			Camera.main.GetComponent<CameraController>().enabled = false;
+			//Camera.main.GetComponent<CameraController>().enabled = false;
+			Camera.main.GetComponentInParent<CameraFollow>().enabled = false;
 			transform.GetComponent<ThirdPersonCharacter>().m_Animator.SetBool("Dead", true);
 			transform.GetComponent<ThirdPersonCharacter>().enabled = false;
 			transform.GetComponent<ThirdPersonUserControl>().enabled = false;
@@ -57,9 +60,13 @@ public class HealthManager : MonoBehaviour {
 
 	private IEnumerator ShowDeathHUD() {
 		yield return new WaitForSeconds(3);
-		deathHUD.gameObject.SetActive(true);
+		if (!created) {
+			Instantiate(deathHUD);
+			created = true;
+		}
+		//deathHUD.gameObject.SetActive(true);
 	}
-	
+
 	public void Damage(float amount) {
 		WeaponEmotion emotion = GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>().emotion;
 		if (emotion == WeaponEmotion.Confidence) {
