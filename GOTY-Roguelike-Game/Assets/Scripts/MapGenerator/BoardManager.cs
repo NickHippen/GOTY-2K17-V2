@@ -161,7 +161,7 @@ public class BoardManager : MonoBehaviour
 		int playerSpawn = Random.Range (0,roomList.Count);
 		GameObject player = GameObject.Find ("Player");
 		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
-
+		GameObject.Find ("remy").GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl> ().enabled = true;
 
 		GameObject.Find ("HUD").GetComponent<CanvasGroup> ().alpha = 1;
 
