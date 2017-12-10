@@ -139,6 +139,8 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectBerseker(){
+		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
+
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "berserker";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
@@ -150,6 +152,7 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectGunslinger(){
+		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "gunslinger";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
@@ -161,6 +164,7 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectWizard(){
+		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "wizard";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
@@ -172,6 +176,7 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectRogue(){
+		Debug.Log (GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha);
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
