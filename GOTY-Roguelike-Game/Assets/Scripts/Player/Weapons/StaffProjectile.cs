@@ -9,6 +9,11 @@ public class StaffProjectile : MonoBehaviour
     float damage;
     float radius;
     bool hit;
+    float damageMultiplier;
+    StaffData staff;
+    WeaponEmotion emotion;
+    WeaponModifier modifier;
+    
 
     public float Damage
     {
@@ -27,6 +32,26 @@ public class StaffProjectile : MonoBehaviour
         get { return timer; }
         set { timer = value; }
     }
+    public float DamageMultiplier
+    {
+        get { return damageMultiplier; }
+        set { damageMultiplier = value; }
+    }
+    public StaffData StaffObject
+    {
+        get { return staff; }
+        set { staff = value; }
+    }
+    public WeaponEmotion Emotion
+    {
+        get { return emotion; }
+        set { emotion = value; }
+    }
+    public WeaponModifier Modifier
+    {
+        get { return modifier; }
+        set { modifier = value; }
+    }
 
     void Start()
     {
@@ -36,7 +61,6 @@ public class StaffProjectile : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        print(damage);
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") ||
             other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
             
@@ -51,8 +75,9 @@ public class StaffProjectile : MonoBehaviour
                 {
                     AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                     float damage = this.damage;
-                    //damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(this, monster, damage);
-                    //damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(this, monster, damage);
+                    damage *= damageMultiplier;
+                    damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(staff, monster, damage);
+                    damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(staff, monster, damage);
                     monster.Damage(damage);
                 }
             }

@@ -873,7 +873,7 @@ Prefab:
     - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
       propertyPath: slots.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
@@ -916,11 +916,11 @@ Prefab:
         type: 2}
       propertyPath: weapons.Array.data[0]
       value: 
-      objectReference: {fileID: 102350, guid: 758e12dc751c3974f9ea828b826a0894, type: 2}
+      objectReference: {fileID: 1639580164}
     - target: {fileID: 114137789837877664, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
       propertyPath: classType
-      value: rogue
+      value: gunslinger
       objectReference: {fileID: 0}
     - target: {fileID: 114500818516481774, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
@@ -2512,6 +2512,10 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1607215237}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1639580164 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 102350, guid: 758e12dc751c3974f9ea828b826a0894, type: 2}
+  m_PrefabInternal: {fileID: 799605488}
 --- !u!1 &1667296125
 GameObject:
   m_ObjectHideFlags: 0

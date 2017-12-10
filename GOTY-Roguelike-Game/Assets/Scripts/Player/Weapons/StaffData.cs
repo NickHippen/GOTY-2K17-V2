@@ -5,7 +5,7 @@ using UnityEngine;
 public class StaffData : WeaponData {
 
     public float projectileDuration;
-    public float projectileSpeed = 2000f;
+    public float projectileSpeed = 3000f;
     public float radius;
     public Vector2 effectPosition = new Vector2(0, 2);
     StaffProjectile staffProjectile;
@@ -24,6 +24,10 @@ public class StaffData : WeaponData {
         proj.Damage = damage;
         proj.Radius = radius;
         proj.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
+        proj.DamageMultiplier = damageMultiplier;
+        proj.StaffObject = this;
+        proj.Emotion = emotion;
+        proj.Modifier = modifier;
         proj.gameObject.SetActive(true);
         proj.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * projectileSpeed);
 
