@@ -36,4 +36,11 @@ public class LevelManager : MonoBehaviour {
 		Destroy(GameObject.Find("DeathHUD"));
 	}
 
+	public void Resume() {
+		Destroy(GameObject.Find("PauseHUD"));
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
+		Time.timeScale = 1f;
+	}
+
 }

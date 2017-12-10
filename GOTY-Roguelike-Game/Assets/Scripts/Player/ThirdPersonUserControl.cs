@@ -14,6 +14,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool m_Jump;
 		private bool m_Attacking;
 		private bool[] m_Abilities = new bool[4];
+		private GameObject pauseHUD;
 
         private void Start()
         {
@@ -41,14 +42,26 @@ namespace UnityStandardAssets.Characters.ThirdPerson
                 m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().transform.localPosition = new Vector3(0, 0, 0);
             }
             float scroll = Input.GetAxis("Mouse ScrollWheel");
-			//Debug.Log (scroll);
 			if (Input.anyKeyDown || scroll != 0) {
-				//Debug.Log ("Pressed");
 				WeaponSelect (scroll);
 			}
             
 			if (m_Attacking && m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
 				m_Character.ProcessAttack();
+			}
+			if (Input.GetKeyDown(KeyCode.Escape)) {
+				if (pauseHUD == null) {
+					pauseHUD = Instantiate(Resources.Load("PauseHUD")) as GameObject;
+					pauseHUD.name = "PauseHUD";
+					Cursor.visible = true;
+					Cursor.lockState = CursorLockMode.None;
+					Time.timeScale = 0f;
+				} else {
+					Destroy(pauseHUD);
+					Cursor.visible = false;
+					Cursor.lockState = CursorLockMode.Locked;
+					Time.timeScale = 1f;
+				}
 			}
         }
 
