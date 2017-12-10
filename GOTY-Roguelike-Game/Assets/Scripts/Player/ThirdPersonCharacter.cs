@@ -104,7 +104,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_ForwardAmount = move.z;
 
         // if attacking with ranged weapon, have camera over shoulder
-        if (atk && inventory.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
+        if (atk && !(inventory.getCurrentWeapon().GetComponent<WeaponData>() is SwordData))
         {
             // apply turn amount relative to direction controls rather than cartesian
             m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
