@@ -5,10 +5,13 @@ using UnityEngine;
 public class ThrowingKnifeAbility : Ability {
 
     public float damage;
-    public Vector2 effectPosition;
     public float despawnTimer = 6f;
     public float throwForce = 5000f;
     public float collisionOffset = 0.02f;
+    public float bonusEffectDamage;
+    public float bonusEffectDuration;
+    public float bonusTicksPerSecond;
+    public Vector2 effectPosition;
 
     ThrowingKnife throwingKnife;
 
@@ -32,6 +35,10 @@ public class ThrowingKnifeAbility : Ability {
         knife.transform.rotation = player.transform.rotation;
         knife.transform.Rotate(0f, 270f, 0f);
         knife.gameObject.SetActive(true);
+        knife.BonusEffect = bonusEffect;
+        knife.PoisonDamage = bonusEffectDamage;
+        knife.PoisonDuration = bonusEffectDuration;
+        knife.PoisonTPS = bonusTicksPerSecond;
         knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
     }
 }

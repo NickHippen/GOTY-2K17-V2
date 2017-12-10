@@ -346,8 +346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 712c7500e49c089468a500f4be09f396, type: 3}
-  cooldownTime: 1
+  cooldownTime: 10
   faceCameraDirection: 1
+  bonusDescription: Increase range and damage
   sfx: {fileID: 0}
   damage: 10
   damageRadius: 5
@@ -355,6 +356,8 @@ MonoBehaviour:
   explosionTimer: 3
   throwForce: 2000
   throwAngle: {x: 3, y: 1}
+  bonusSizeMultiplier: 1.5
+  bonusDamage: 10
 --- !u!114 &114335679145972058
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -4,36 +4,50 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    private ParticleSystem particleEffect;
-    private float timer;
-    private float damage;
-    private float damageRadius;
-    private float particleRadius;
+    ParticleSystem particleEffect;
+    float timer;
+    float damage;
+    float damageRadius;
+    float particleRadius;
+    bool bonusEffect;
+    float bonusDamage;
+    float bonusRadiusMultiplier;
 
     public float Damage
     {
         get { return damage; }
         set { damage = value; }
     }
-
     public float DamageRadius
     {
         get { return damageRadius; }
         set { damageRadius = value; }
     }
-
     public float ParticleRadius
     {
         get { return particleRadius; }
         set { particleRadius = value; }
     }
-
     public float Timer
     {
         get { return timer; }
         set { timer = value; }
     }
-
+    public bool BonusEffect
+    {
+        get { return bonusEffect; }
+        set { bonusEffect = value; }
+    }
+    public float BonusDamage
+    {
+        get { return bonusDamage; }
+        set { bonusDamage = value; }
+    }
+    public float BonusRadiusMultiplier
+    {
+        get { return bonusRadiusMultiplier; }
+        set { bonusRadiusMultiplier = value; }
+    }
     private void Start()
     {
         particleEffect = this.transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -47,10 +61,12 @@ public class Grenade : MonoBehaviour
         GetComponent<Rigidbody>().velocity = new Vector3();
             
         particleEffect.transform.position = this.transform.position;
-        particleEffect.transform.localScale = new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
+        particleEffect.transform.localScale = bonusEffect
+            ? new Vector3(damageRadius * particleRadius * BonusRadiusMultiplier, damageRadius * particleRadius * BonusRadiusMultiplier, damageRadius * particleRadius * bonusRadiusMultiplier) 
+            : new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
         particleEffect.gameObject.SetActive(true);
 
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusEffect? damageRadius * bonusRadiusMultiplier: damageRadius);
         foreach (Collider collider in colliders)
         {
             RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
@@ -58,6 +74,10 @@ public class Grenade : MonoBehaviour
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
+                if(bonusEffect)
+                {
+                    damage += bonusDamage;
+                }
                 monster.Damage(damage);
             }
         }

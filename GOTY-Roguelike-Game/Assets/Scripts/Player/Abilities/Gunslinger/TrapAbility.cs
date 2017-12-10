@@ -9,7 +9,9 @@ public class TrapAbility : Ability
     public float slowDuration = 5f;
     public float slowPercent = .7f;
     public int durability = 5;
-
+    public float bonusEffectDamage;
+    public float bonusEffectDuration;
+    public float bonusTicksPerSecond;
     Trap trapObject;
 
     protected override void Start()
@@ -33,6 +35,10 @@ public class TrapAbility : Ability
         trap.transform.position = player.transform.position;
         trap.transform.localScale = new Vector3(trapDiameter, 1, trapDiameter);
         trap.gameObject.SetActive(true);
+        trap.BonusEffect = bonusEffect;
+        trap.PoisonDamage = bonusEffectDamage;
+        trap.PoisonDuration = bonusEffectDuration;
+        trap.PoisonTPS = bonusTicksPerSecond;
         GameObject particleSys = trap.transform.GetChild(0).gameObject;
         ParticleSystem.MainModule particleMain = particleSys.GetComponent<ParticleSystem>().main;
         particleMain.startSize = particleMain.startSize.constant * trapDiameter;

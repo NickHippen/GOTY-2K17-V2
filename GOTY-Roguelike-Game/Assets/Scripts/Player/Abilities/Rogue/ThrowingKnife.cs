@@ -9,32 +9,51 @@ public class ThrowingKnife : MonoBehaviour
     float damage;
     float particleRadius;
     float collisionOffset;
-    bool isHit;
+    bool bonusEffect;
+    float poisonDuration;
+    float poisonDamage;
+    float poisonTPS;
 
     public float Damage
     {
         get { return damage; }
         set { damage = value; }
     }
-
     public float ParticleRadius
     {
         get { return particleRadius; }
         set { particleRadius = value; }
     }
-
     public float Timer
     {
         get { return timer; }
         set { timer = value; }
     }
-
     public float CollisionOffset
     {
         get { return collisionOffset; }
         set { collisionOffset = value; }
     }
-
+    public bool BonusEffect
+    {
+        get { return bonusEffect; }
+        set { bonusEffect = value; }
+    }
+    public float PoisonDuration
+    {
+        get { return poisonDuration; }
+        set { poisonDuration = value; }
+    }
+    public float PoisonDamage
+    {
+        get { return poisonDamage; }
+        set { poisonDamage = value; }
+    }
+    public float PoisonTPS
+    {
+        get { return poisonTPS; }
+        set { poisonTPS = value; }
+    }
     private void Start()
     {
         impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -59,6 +78,10 @@ public class ThrowingKnife : MonoBehaviour
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
                 monster.Damage(damage);
+                if(bonusEffect)
+                {
+                    monster.ApplyStatus(new StatusPoison(monster, poisonDuration, poisonDamage, poisonTPS));
+                }
             }
             //StartCoroutine(RemoveObject(true));
         }

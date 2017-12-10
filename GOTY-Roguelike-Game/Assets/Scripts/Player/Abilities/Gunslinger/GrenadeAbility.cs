@@ -10,6 +10,8 @@ public class GrenadeAbility : Ability
     public float explosionTimer = 3f;
     public float throwForce = 3000f;
     public Vector2 throwAngle = new Vector2(2f, 1f);
+    public float bonusSizeMultiplier;
+    public float bonusDamage;
 
     Grenade grenadeObject;
 
@@ -30,6 +32,9 @@ public class GrenadeAbility : Ability
         grenade.DamageRadius = damageRadius;
         grenade.ParticleRadius = particleScale;
         grenade.transform.position = player.transform.position + player.transform.up * 2;
+        grenade.BonusEffect = bonusEffect;
+        grenade.BonusDamage = bonusDamage;
+        grenade.BonusRadiusMultiplier = bonusSizeMultiplier;
         grenade.gameObject.SetActive(true);
         grenade.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward*throwAngle.x + player.transform.up*throwAngle.y) * throwForce);
     }

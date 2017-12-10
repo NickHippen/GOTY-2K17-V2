@@ -11,6 +11,7 @@ public class BossSlime : AggressiveUnit {
 	protected override void Start() {
 		base.Start();
 		baseScale = transform.localScale;
+		sfx = GetComponent<SoundData> ();
 	}
 
 	protected override void ApplyAttackBehavior() {

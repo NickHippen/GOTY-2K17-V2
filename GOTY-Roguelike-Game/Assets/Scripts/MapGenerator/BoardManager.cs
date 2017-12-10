@@ -10,6 +10,7 @@ public class BoardManager : MonoBehaviour
 
 	public GameObject[] monsters;
 	public GameObject boss;
+	public GameObject bossTrigger;
 	public GameObject[] items;
 	public GameObject tile;
 	public GameObject wall;
@@ -34,6 +35,7 @@ public class BoardManager : MonoBehaviour
 	private Transform monsterHolder;
 	private Transform exitHolder;
 	private Transform bossHolder;
+	private Transform bossTriggerHolder;
 
 	private AggressiveUnit spawnedBoss;
 	private GameObject spawnedPortal;
@@ -61,7 +63,7 @@ public class BoardManager : MonoBehaviour
 		boardHolder = new GameObject ("Board").transform;
 		monsterHolder = new GameObject ("Monsters").transform;
 		exitHolder = new GameObject ("Exit Portal").transform;
-		bossHolder = new GameObject("Boss").transform;
+		bossTriggerHolder = new GameObject("Boss Trigger").transform;
 
 		for (int i = 0; i < mapw; i++) {
 			for (int j = 0; j < maph; j++) {
@@ -160,12 +162,15 @@ public class BoardManager : MonoBehaviour
 		GameObject player = GameObject.Find ("Player");
 		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
 
-		GameObject mycam = GameObject.Find ("Main Camera");
-		mycam.GetComponent<CameraController> ().lookAt = player.transform;
 
-		GameObject.Find("MiniMap").GetComponent<DrawMiniMap>().Draw (maparr);
-		playerRoom = roomList [playerSpawn];
-		roomList.Remove (playerRoom);
+		//GameObject mycam = GameObject.Find ("Main Camera");
+		//mycam.GetComponent<CameraController> ().lookAt = player.transform;
+		GameObject miniMap = GameObject.Find("MiniMap");
+		if (miniMap != null) {
+			miniMap.GetComponent<DrawMiniMap>().Draw(maparr);
+		}
+		playerRoom = roomList[playerSpawn];
+		roomList.Remove(playerRoom);
 
 		//Spawn shops
 		int numShops = roomList.Count / 4;
@@ -196,6 +201,10 @@ public class BoardManager : MonoBehaviour
 		instance.transform.SetParent(exitHolder);
 		spawnedPortal = instance;
 		spawnedPortal.SetActive(false);
+
+		instance = Instantiate(bossTrigger, new Vector3((farthestRoom.startx + farthestRoom.width / 2) * tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2) * tilesize), Quaternion.Euler(-90, 0, 0));
+		instance.transform.SetParent(bossTriggerHolder);
+		instance.transform.localScale = new Vector3(farthestRoom.width * 8, farthestRoom.width * 8, 8); // 8 for full room trigger
 
 		// Calculate pathfinding walk regions
 		Grid grid = GameObject.Find("A_").GetComponent<Grid>();
