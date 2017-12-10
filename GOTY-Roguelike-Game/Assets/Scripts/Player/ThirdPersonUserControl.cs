@@ -15,6 +15,11 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool m_Attacking;
 		private bool[] m_Abilities = new bool[4];
         
+		void Awake(){
+			DontDestroyOnLoad (gameObject);
+			Debug.Log ("hEy nick");
+		}
+
         private void Start()
         {
             // get the transform of the main camera
