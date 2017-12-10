@@ -5,10 +5,11 @@ using UnityEngine;
 public class AssassinateAbility : Ability {
 
     public float damage;
-    //Distance of particle effect from player
-    public Vector2 effectPosition;
     //Radius of damage the effect has
     public float range = 10;
+    public float bonusHealPercent;
+    //Distance of particle effect from player
+    public Vector2 effectPosition;
 
     GameObject particleEffect;
     GameObject tempParticle;
@@ -59,6 +60,10 @@ public class AssassinateAbility : Ability {
                 {
                     AggressiveUnit monster = (AggressiveUnit)unit;
                     monster.Damage(damage);
+                    if(bonusEffect)
+                    {
+                        player.GetComponent<HealthManager>().Heal(damage * bonusHealPercent);
+                    }
                 }
             }
             else

@@ -25,6 +25,7 @@ public class ArcaneFormAbility : Ability {
         foreach(Ability ability in abilities)
         {
             if (ability is ArcaneFormAbility) continue;
+            if (bonusEffect) ability.IsAvailible = true;
             ability.CooldownMultiplier += cooldownMuliplier;
         }
         StartCoroutine(StopBuff(abilities, particles));

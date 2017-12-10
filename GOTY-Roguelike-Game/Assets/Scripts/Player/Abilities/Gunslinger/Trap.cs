@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    private float duration;
-    private float diameter;
-    private float slowDuration;
-    private float slowPercent;
-    private int durability;
+    float duration;
+    float diameter;
+    float slowDuration;
+    float slowPercent;
+    int durability;
+    bool bonusEffect;
+    float poisonDuration;
+    float poisonDamage;
+    float poisonTPS;
 
     public float Duration
     {
@@ -35,6 +39,26 @@ public class Trap : MonoBehaviour
         get { return durability; }
         set { durability = value; }
     }
+    public bool BonusEffect
+    {
+        get { return bonusEffect; }
+        set { bonusEffect = value; }
+    }
+    public float PoisonDuration
+    {
+        get { return poisonDuration; }
+        set { poisonDuration = value; }
+    }
+    public float PoisonDamage
+    {
+        get { return poisonDamage; }
+        set { poisonDamage = value; }
+    }
+    public float PoisonTPS
+    {
+        get { return poisonTPS; }
+        set { poisonTPS = value; }
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,6 +74,10 @@ public class Trap : MonoBehaviour
         {
             AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
             monster.ApplyStatus(new StatusSlow(monster, slowDuration, slowPercent));
+            if(bonusEffect)
+            {
+                monster.ApplyStatus(new StatusPoison(monster, poisonDuration, poisonDamage, PoisonTPS));
+            }
             durability--;
         }
     }

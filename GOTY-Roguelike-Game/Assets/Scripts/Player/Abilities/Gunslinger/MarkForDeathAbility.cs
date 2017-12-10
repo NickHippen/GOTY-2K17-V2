@@ -11,6 +11,9 @@ public class MarkForDeathAbility : Ability
     public float damageMultiplier = 2f;
     public float range = 40f;
     public float playerHeight = 2f;
+    public float bonusNewMultiplier;
+    public float bonusNewDuration;
+    //public float bonusEffectRadius = 2f;
     
      Vector3 shootPoint;
 
@@ -36,9 +39,10 @@ public class MarkForDeathAbility : Ability
         if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range, layerMask))
         {
             particleEffect.transform.position = hit.point;
-            
-            GameObject mark = Instantiate(particleEffect.transform.gameObject, hit.transform, true);
-            mark.gameObject.SetActive(true);
+
+            List<GameObject> mark = new List<GameObject>();
+            mark.Add(Instantiate(particleEffect.transform.gameObject, hit.transform, true));
+            mark[0].gameObject.SetActive(true);
 
             RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
             if (rigCollider == null)
@@ -51,7 +55,33 @@ public class MarkForDeathAbility : Ability
             if (unit is AggressiveUnit)
             {
                 AggressiveUnit monster = (AggressiveUnit)unit;
-                monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
+                if (bonusEffect)
+                {
+                    monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
+                }
+                else
+                {
+                    monster.ApplyStatus(new StatusVulnerable(monster, bonusNewDuration, bonusNewMultiplier));
+                }
+
+                // attempt at aoe Mark
+                //if(!bonusEffect)
+                //{
+                //    Collider[] colliders = Physics.OverlapSphere(hit.point, bonusEffectRadius);
+                //    foreach (Collider collider in colliders)
+                //    {
+                //        RigCollider areaCollider = collider.gameObject.GetComponent<RigCollider>();
+                //        if (areaCollider != null && areaCollider.RootUnit is AggressiveUnit)
+                //        {
+                //            AggressiveUnit areaMonster = ((AggressiveUnit) areaCollider.RootUnit);
+                //            if (bonusEffect)
+                //            {
+                //                mark.Add(Instantiate(mark[0].transform.gameObject, areaMonster.transform, true));
+                //                areaMonster.ApplyStatus(new StatusVulnerable(areaMonster, markDuration, damageMultiplier));
+                //            }
+                //        }
+                //    }
+                //}
                 StartCoroutine(RemoveParticle(markDuration, mark));
             }
             else
@@ -61,9 +91,12 @@ public class MarkForDeathAbility : Ability
         }
     }
 
-    private IEnumerator RemoveParticle(float timer, GameObject mark)
+    private IEnumerator RemoveParticle(float timer, List<GameObject> mark)
     {
         yield return new WaitForSeconds(timer);
-        Destroy(mark);
+        foreach(GameObject m in mark)
+        {
+            Destroy(m);
+        }
     }
 }

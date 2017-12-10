@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EvadeAbility : Ability {
 
+    public float bonusHealAmount;
+
     protected override void Start()
     {
         base.Start();
@@ -13,7 +15,11 @@ public class EvadeAbility : Ability {
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
-		//lolz no effect needed
+
+		if(bonusEffect)
+        {
+            player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+        }
 	}
 		
 }

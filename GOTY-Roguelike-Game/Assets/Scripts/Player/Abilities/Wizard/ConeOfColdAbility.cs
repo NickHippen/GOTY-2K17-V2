@@ -7,6 +7,8 @@ public class ConeOfColdAbility : Ability {
     public float effectSize;
     public float freezeDuration = 3f;
     public float coneDuration = 3f;
+    public float bonusDuration;
+    public float bonusSlowPercent;
 
     protected override void Start()
     {
@@ -18,16 +20,19 @@ public class ConeOfColdAbility : Ability {
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
-        GameObject cone = this.transform.GetChild(0).gameObject;
-        cone.SetActive(true);
-        cone.GetComponent<ConeOfCold>().FreezeDuration = freezeDuration;
-        cone.transform.position = player.transform.position + player.transform.up * 1.2f;
-        cone.transform.rotation = player.transform.rotation;
+        ConeOfCold cone = this.transform.GetChild(0).GetComponent<ConeOfCold>();
+        cone.gameObject.SetActive(true);
+        cone.gameObject.transform.position = player.transform.position + player.transform.up * 1.2f;
+        cone.gameObject.transform.rotation = player.transform.rotation;
+        cone.FreezeDuration = freezeDuration;
+        cone.BonusEffect = bonusEffect;
+        cone.BonusDuration = bonusDuration;
+        cone.BonusSlowPercent = bonusSlowPercent;
         StartCoroutine(StopCone(cone));
     }
-    IEnumerator StopCone(GameObject cone)
+    IEnumerator StopCone(ConeOfCold cone)
     {
         yield return new WaitForSeconds(coneDuration);
-        cone.SetActive(false);
+        cone.gameObject.SetActive(false);
     }
 }
