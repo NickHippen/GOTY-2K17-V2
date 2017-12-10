@@ -134,6 +134,10 @@ public abstract class LivingUnit : Unit {
 		Health -= amount;
 	}
 
+	public virtual void Damage(float amount, Transform attacker) {
+		Damage(amount);
+	}
+
 	public void Heal(float amount) {
 		Health += amount;
 	}

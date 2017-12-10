@@ -39,6 +39,7 @@ public class ThrowingKnifeAbility : Ability {
         knife.PoisonDamage = bonusEffectDamage;
         knife.PoisonDuration = bonusEffectDuration;
         knife.PoisonTPS = bonusTicksPerSecond;
+		knife.Player = player;
         knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
     }
 }

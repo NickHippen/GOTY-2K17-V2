@@ -54,6 +54,8 @@ public class ThrowingKnife : MonoBehaviour
         get { return poisonTPS; }
         set { poisonTPS = value; }
     }
+	public GameObject Player { get; set; }
+
     private void Start()
     {
         impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -77,7 +79,7 @@ public class ThrowingKnife : MonoBehaviour
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
-                monster.Damage(damage);
+                monster.Damage(damage, Player.transform);
                 if(bonusEffect)
                 {
                     monster.ApplyStatus(new StatusPoison(monster, poisonDuration, poisonDamage, poisonTPS));

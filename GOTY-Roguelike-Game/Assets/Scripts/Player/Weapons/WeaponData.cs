@@ -17,6 +17,8 @@ public class WeaponData : MonoBehaviour {
 
 	public ParticleSystem effect;
 
+	public GameObject Player { get; set; }
+
 	private SoundData sfx;
 	//private AudioSource audioSource;
     protected float damageMultiplier = 1f;
@@ -26,6 +28,7 @@ public class WeaponData : MonoBehaviour {
 		//effect.transform.parent = transform.parent;
 		//effect.transform.position = transform.position;
 		sfx = GetComponent<SoundData>();
+		Player = GameObject.Find("remy");
 	}
 
 	public string FullName {

@@ -35,6 +35,7 @@ public class MagicMissileAbility : Ability {
         missile.ParticleRadius = bonusEffect? particleScale * bonusRadiusMuliplier: particleScale;
         missile.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
         missile.gameObject.SetActive(true);
+		missile.Player = player;
         missile.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
     }
 }

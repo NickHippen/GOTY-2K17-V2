@@ -10,14 +10,21 @@ public class SoundData : MonoBehaviour {
 	public int loopIndex;
 	public float delay;
 
+	GameObject mm;
+
 	// Use this for initialization
 	protected virtual void Start () {
 		this.gameObject.AddComponent<AudioSource>();
 		source = GetComponent<AudioSource> ();
+		mm = GameObject.Find ("MusicManager");
+		source.volume = mm.GetComponent<MusicManager> ().getVolume ();
 	}
 	
 	// Update is called once per frame
 	protected virtual void Update () {
+
+		//Debug.Log("THING" + mm.GetComponent<MusicManager> ().getVolume ());
+		//Debug.Log ("SOUND EFFECTS"source.volume);
 		
 	}
 

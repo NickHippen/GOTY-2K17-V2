@@ -48,6 +48,8 @@ public class Grenade : MonoBehaviour
         get { return bonusRadiusMultiplier; }
         set { bonusRadiusMultiplier = value; }
     }
+	public GameObject Player { get; set; }
+
     private void Start()
     {
         particleEffect = this.transform.GetChild(0).GetComponent<ParticleSystem>();
@@ -78,7 +80,7 @@ public class Grenade : MonoBehaviour
                 {
                     damage += bonusDamage;
                 }
-                monster.Damage(damage);
+                monster.Damage(damage, Player.transform);
             }
         }
         StartCoroutine(removeGrenade());

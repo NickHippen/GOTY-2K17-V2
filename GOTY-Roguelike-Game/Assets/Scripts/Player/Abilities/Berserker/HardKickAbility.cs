@@ -48,7 +48,7 @@ public class HardKickAbility : Ability {
                     damage += bonusDamage;
                 }
 				monster.ApplyStatus (new StatusStun(monster, 5f));
-				monster.Damage(damage);
+				monster.Damage(damage, player.transform);
 			}
         }
 		//sfx.playSound ();

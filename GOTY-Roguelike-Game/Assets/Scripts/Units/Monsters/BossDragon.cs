@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossDragon : AggressiveUnit {
+public class BossDragon : BossUnit {
 
 	public Transform flameThrowerOriginPoint;
 	public GameObject explosionPillar;

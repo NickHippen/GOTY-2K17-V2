@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BossSlime : AggressiveUnit {
+public class BossSlime : BossUnit {
 
 	public BossSlimeSpawn slimeUnit;
 

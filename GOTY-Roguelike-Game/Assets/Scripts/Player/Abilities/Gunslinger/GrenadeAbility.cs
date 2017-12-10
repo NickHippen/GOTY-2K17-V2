@@ -36,6 +36,7 @@ public class GrenadeAbility : Ability
         grenade.BonusDamage = bonusDamage;
         grenade.BonusRadiusMultiplier = bonusSizeMultiplier;
         grenade.gameObject.SetActive(true);
+		grenade.Player = player;
         grenade.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward*throwAngle.x + player.transform.up*throwAngle.y) * throwForce);
     }
 }
