@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LustSlime : AggressiveUnit {
+	protected override void Start() {
+		base.Start();
+		sfx = GetComponent<SoundData> ();
+	}
 
 	protected override void ApplyAttackBehavior() {
 		attacks.Add(new BasicDamageAttack(
