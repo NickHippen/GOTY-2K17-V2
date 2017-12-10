@@ -332,18 +332,28 @@ public class ThirdPersonCharacter : MonoBehaviour
                 m_Animator.SetLayerWeight(1, 1); // turn on Gun weapon layer
                 m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
                 m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
+                m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
             }
             else if(weapon is SwordData)
             {
                 m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
                 m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
                 m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
+                m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
             }
-            else
+            else if(weapon is StaffData)
             {
                 m_Animator.SetLayerWeight(3, 1); // turn on staff weapon layer
                 m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
                 m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
+                m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
+            }
+            else
+            {
+                m_Animator.SetLayerWeight(4, 1); // turn on dagger weapon layer
+                m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
+                m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
+                m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
             }
         }
 	}
