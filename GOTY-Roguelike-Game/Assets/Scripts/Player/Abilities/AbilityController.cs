@@ -58,7 +58,8 @@ public class AbilityController : MonoBehaviour {
             // duplicate frame and add ability icon
             GameObject abilityIcon = Instantiate(abilityFrame, abilityFrame.transform.parent, false);
             abilityIcon.transform.SetSiblingIndex(1); // place behind frame
-            
+			abilityIcon.name = "AbilityIcon " + i;
+
             // add text to abilities
             Instantiate(abilityText, abilityFrame.transform, false).text =
                 Regex.Replace(abilities[i].name.Substring(0, abilities[i].name.Length - "Ability".Length), "([a-z])_?([A-Z])", "$1 $2");
@@ -84,6 +85,81 @@ public class AbilityController : MonoBehaviour {
             cooldownTimers[i].text = string.Format(COOLDOWN_FORMAT, abilities[i].CooldownTimer);
         }
     }
+
+	//Switching classes on the main menu
+	void OnEnable()
+	{
+		var ability_children = new List<GameObject> ();
+		foreach (Transform child in GameObject.Find ("Player").transform) {
+			if(child.gameObject.transform.name != "remy")
+				ability_children.Add (child.gameObject);
+		}
+		ability_children.ForEach (child => Destroy (child));
+		cooldownTimers.Clear ();
+		abilities.Clear ();
+		abilityIcons.Clear ();
+
+		if (classType.ToLower().Equals("berserker"))
+		{
+			layerNum = 6;
+			anim.SetLayerWeight(layerNum, 1);
+			abilities = abilityList.getBerserkerAbilities(gameObject.transform.parent);
+		}
+		else if (classType.ToLower().Equals("wizard"))
+		{
+			layerNum = 7;
+			anim.SetLayerWeight(layerNum, 1);
+			abilities = abilityList.getWizardAbilities(gameObject.transform.parent);
+		}
+		else if(classType.ToLower().Equals("rogue"))
+		{
+			layerNum = 8;
+			anim.SetLayerWeight(layerNum, 1);
+			abilities = abilityList.getRogueAbilities(gameObject.transform.parent);
+		}
+		else
+		{
+			layerNum = 5;
+			anim.SetLayerWeight(layerNum, 1);
+			abilities = abilityList.getGunslingerAbilities(gameObject.transform.parent);
+		}
+
+		for(int i = 0; i < abilities.Count; i++)
+		{
+			// Find the ability frames in the UI
+			GameObject abilityFrame = GameObject.Find("Ability " + i);
+
+			var children = new List<GameObject> ();
+			foreach (Transform child in abilityFrame.transform)
+				children.Add (child.gameObject);
+			children.ForEach (child => Destroy (child));
+
+			Destroy (GameObject.Find ("AbilityIcon " + i));
+
+			abilityFrame.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(iconSize, iconSize);
+
+			// duplicate frame and add ability icon
+			GameObject abilityIcon = Instantiate(abilityFrame, abilityFrame.transform.parent, false);
+			abilityIcon.name = "AbilityIcon " + i;
+			abilityIcon.transform.SetSiblingIndex(1); // place behind frame
+
+			// add text to abilities
+			Instantiate(abilityText, abilityFrame.transform, false).text =
+				Regex.Replace(abilities[i].name.Substring(0, abilities[i].name.Length - "Ability".Length), "([a-z])_?([A-Z])", "$1 $2");
+			cooldownTimers.Add(Instantiate(cooldownText, abilityFrame.transform, false));
+			cooldownTimers[i].enabled = false;
+			Text inputButton = Instantiate(abilityText, abilityFrame.transform, false);
+			inputButton.alignment = TextAnchor.LowerCenter;
+			inputButton.fontSize += 2;
+			if (i == 0) inputButton.text = "Z";
+			else if (i == 1) inputButton.text = "X";
+			else if (i == 2) inputButton.text = "C";
+			else inputButton.text = "V";
+
+			abilityIcon.GetComponent<Image>().sprite = abilities[i].icon;
+			abilityIcons.Add(abilityIcon.GetComponent<Image>());
+		}
+	}
 
     public List<Ability> getAbilityList()
     {

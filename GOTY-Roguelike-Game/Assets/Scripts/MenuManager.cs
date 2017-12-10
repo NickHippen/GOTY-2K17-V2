@@ -134,7 +134,11 @@ public class MenuManager : MonoBehaviour {
 	}
 
 	public void selectBerseker(){
+		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
+
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "berserker";
+		Destroy (GameObject.Find ("MagicMissileAbility"));
+		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
 		//GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
 
 		GameObject.Find ("Berserker").GetComponent<CanvasGroup> ().alpha = 1;
