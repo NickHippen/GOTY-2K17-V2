@@ -15,6 +15,7 @@ public class TankUpAbility : Ability {
         applyOnFrame = true;
 		sfx = GetComponent<SoundData>();
         particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
+        particleEffect.Stop();
     }
 
     public override void applyEffect(GameObject player)

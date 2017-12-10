@@ -58,7 +58,8 @@ public abstract class Unit : MonoBehaviour {
 	}
 
 	public void BeginPathing() {
-		StartCoroutine(UpdatePath());
+		StopCoroutine("UpdatePath");
+		StartCoroutine("UpdatePath");
 	}
 
 	IEnumerator UpdatePath() {
@@ -71,12 +72,16 @@ public abstract class Unit : MonoBehaviour {
 		Vector3 targetPosOld = target.position;
 
 		while (true) {
+			if (target == null) {
+				yield return null;
+				continue;
+			}
 			if (HasLineOfSight(target)) {
 				OnPathFound(new Vector3[] { target.position }, true);
 				yield return new WaitForSeconds(minPathUpdateTime / 2); // Allow updating here twice as fast
 			} else {
 				yield return new WaitForSeconds(minPathUpdateTime);
-				if ((target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
+				if (target != null && (target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
 					pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
 					targetPosOld = target.position;
 				}
