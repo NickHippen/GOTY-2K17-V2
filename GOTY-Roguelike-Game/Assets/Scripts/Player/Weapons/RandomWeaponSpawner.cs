@@ -6,9 +6,10 @@ public class RandomWeaponSpawner : MonoBehaviour {
 
 	public GameObject swordBase;
 	public GameObject gunBase;
+    public GameObject staffBase;
 
 	void Start () {
-		int roll = Random.Range(0,2);
+		int roll = Random.Range(0,3);
 		switch (roll) {
 			case 0:
 				WeaponFactory.CreateRandomSword (swordBase, this.transform.position, 1, 0.5f, this.transform);
@@ -16,7 +17,10 @@ public class RandomWeaponSpawner : MonoBehaviour {
 			case 1:
 				WeaponFactory.CreateRandomGun(gunBase, this.transform.position, 1, 0.5f, this.transform);
 				break;
-			default:
+            case 2:
+                WeaponFactory.CreateRandomStaff(staffBase, this.transform.position, 1, 0.5f, this.transform);
+                break;
+            default:
 				break;
 		}
 	}
