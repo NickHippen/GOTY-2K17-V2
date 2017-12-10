@@ -206,6 +206,10 @@ public class MenuManager : MonoBehaviour {
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
+
+		GameObject.Find ("remy").GetComponent<PlayerInventory>().setCurrentWeapon(3);
+		GameObject.Find ("remy").GetComponent<ThirdPersonCharacter> ().setWeaponAnimations ();
+
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = rogIcon;
 		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;
