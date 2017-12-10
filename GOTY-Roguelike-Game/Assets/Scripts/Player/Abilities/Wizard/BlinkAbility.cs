@@ -10,6 +10,7 @@ public class BlinkAbility : Ability {
     public float particleChargeSize = 5f;
     public float raycastHeight = 0.3f;
     public float range = 5f;
+    public float bonusHealAmount = 5f;
     //public float collisionOffset = 0.01f; noticed walls have width so not necessary, but commented underneath if needed
 
     Vector3 move;
@@ -30,6 +31,10 @@ public class BlinkAbility : Ability {
         ParticleSystem.MainModule partMain = playerParticle.GetComponent<ParticleSystem>().main;
         partMain.startSize = particleChargeSize;
         playerParticle.SetActive(true);
+        if(bonusEffect)
+        {
+            player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+        }
         StartCoroutine(WaitForParticleExplosion(player));
         StartCoroutine(DisableParticle(playerParticle));
     }
