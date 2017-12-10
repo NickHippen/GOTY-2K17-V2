@@ -101,6 +101,34 @@ public class WeaponFactory {
 
         return staffData;
     }
+
+    public static DaggerData CreateRandomDagger(GameObject daggerBase, Vector3 position, int level, float quality, Transform spawner)
+    {
+        GameObject daggerObj = GameObject.Instantiate(daggerBase, position, Quaternion.identity);
+        daggerObj.transform.SetParent(spawner);
+        DaggerData daggerData = daggerObj.GetComponent<DaggerData>();
+
+        // Generate stats
+        float damage = 4 + level * 2;
+
+        ApplyBonuses(daggerData, level, quality);
+        switch (daggerData.modifier)
+        {
+            case WeaponModifier.Weak:
+                damage *= 0.9f; // 10% less damage
+                break;
+            case WeaponModifier.Strong:
+                damage *= 1.3f; // 30% more damage
+                break;
+            case WeaponModifier.Karma:
+                damage *= 1.5f; // 50% more damage (but health may be lost on hit)
+                break;
+        }
+
+        daggerData.damage = damage;
+
+        return daggerData;
+    }
     private static WeaponData ApplyBonuses(WeaponData weaponData, int level, float quality) {
 		int modifierCount = System.Enum.GetNames(typeof(WeaponModifier)).Length;
 		WeaponModifier modifier = (WeaponModifier)Random.Range(0, modifierCount);
