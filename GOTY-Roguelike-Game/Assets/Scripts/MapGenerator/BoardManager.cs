@@ -163,6 +163,8 @@ public class BoardManager : MonoBehaviour
 		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
 
 
+		GameObject.Find ("HUD").GetComponent<CanvasGroup> ().alpha = 1;
+
 		//GameObject mycam = GameObject.Find ("Main Camera");
 		//mycam.GetComponent<CameraController> ().lookAt = player.transform;
 		GameObject miniMap = GameObject.Find("MiniMap");

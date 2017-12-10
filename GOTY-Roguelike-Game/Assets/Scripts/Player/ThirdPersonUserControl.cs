@@ -14,26 +14,9 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 		private bool m_Jump;
 		private bool m_Attacking;
 		private bool[] m_Abilities = new bool[4];
-        
-		void Awake(){
-			DontDestroyOnLoad (gameObject);
-			Debug.Log ("hEy nick");
-		}
 
         private void Start()
         {
-            // get the transform of the main camera
-            if (Camera.main != null)
-            {
-                m_Cam = Camera.main.transform;
-            }
-            else
-            {
-                Debug.LogWarning(
-                    "Warning: no main camera found. Third person character needs a Camera tagged \"MainCamera\", for camera-relative controls.", gameObject);
-                // we use self-relative controls in this case, which probably isn't what the user wants, but hey, we warned them!
-            }
-
             // get the third person character ( this should never be null due to require component )
             m_Character = GetComponent<ThirdPersonCharacter>();
         }
@@ -41,6 +24,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
         private void Update()
         {
+			m_Cam = Camera.main.transform;
             if (!m_Jump)
             {
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
