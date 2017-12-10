@@ -49,7 +49,7 @@ public abstract class AggressiveUnit : LivingUnit {
 	private void CheckAggro() {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRadius);
 		foreach (Collider collider in hitColliders) {
-			if (collider.tag.Equals(targetTag)) {
+			if (collider.tag.Equals(targetTag) && HasLineOfSight(collider.transform, aggroRadius)) {
 				SetAggro(collider.transform);
 				break;
 			}
