@@ -74,7 +74,34 @@ public class WeaponFactory {
 		return gunData;
 	}
 
-	private static WeaponData ApplyBonuses(WeaponData weaponData, int level, float quality) {
+    public static StaffData CreateRandomStaff(GameObject staffBase, Vector3 position, int level, float quality, Transform spawner)
+    {
+        GameObject staffObj = GameObject.Instantiate(staffBase, position, Quaternion.identity);
+        staffObj.transform.SetParent(spawner);
+        StaffData staffData = staffObj.GetComponent<StaffData>();
+
+        // Generate stats
+        float damage = 4 + level * 2;
+
+        ApplyBonuses(staffData, level, quality);
+        switch (staffData.modifier)
+        {
+            case WeaponModifier.Weak:
+                damage *= 0.9f; // 10% less damage
+                break;
+            case WeaponModifier.Strong:
+                damage *= 1.3f; // 30% more damage
+                break;
+            case WeaponModifier.Karma:
+                damage *= 1.5f; // 50% more damage (but health may be lost on hit)
+                break;
+        }
+
+        staffData.damage = damage;
+
+        return staffData;
+    }
+    private static WeaponData ApplyBonuses(WeaponData weaponData, int level, float quality) {
 		int modifierCount = System.Enum.GetNames(typeof(WeaponModifier)).Length;
 		WeaponModifier modifier = (WeaponModifier)Random.Range(0, modifierCount);
 

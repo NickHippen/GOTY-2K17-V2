@@ -25,7 +25,7 @@ public class ShadowAbility : Ability {
         GameObject playerEffect = Instantiate(particleEffect, player.transform, false);
         playerEffect.transform.position += player.transform.up * effectHeight;
         playerEffect.gameObject.SetActive(true);
-        StartCoroutine(effectTimer(player, particleEffect));
+        StartCoroutine(effectTimer(player, playerEffect));
     }
 
     private IEnumerator effectTimer(GameObject player, GameObject effect)

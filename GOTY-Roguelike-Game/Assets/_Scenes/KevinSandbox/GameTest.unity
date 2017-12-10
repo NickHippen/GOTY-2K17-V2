@@ -631,7 +631,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockMouse: 1
-  lookAt: {fileID: 0}
+  lookAt: {fileID: 1231639686}
   relativePos: {x: 0, y: 2, z: 0}
   cameraHeight: 0
   currentZoom: 5
@@ -753,6 +753,11 @@ GameObject:
   m_PrefabParentObject: {fileID: 1873282536754740, guid: 87b83d356f51dc24894d449e312926c9,
     type: 2}
   m_PrefabInternal: {fileID: 1454573701}
+--- !u!4 &1231639686 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4178784115743814, guid: 87b83d356f51dc24894d449e312926c9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1454573701}
 --- !u!23 &1231639687
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -841,7 +846,7 @@ Prefab:
     - target: {fileID: 114137789837877664, guid: 87b83d356f51dc24894d449e312926c9,
         type: 2}
       propertyPath: classType
-      value: gunslinger
+      value: rogue
       objectReference: {fileID: 0}
     - target: {fileID: 4178784115743814, guid: 87b83d356f51dc24894d449e312926c9, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y

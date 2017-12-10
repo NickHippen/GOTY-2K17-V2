@@ -53,7 +53,7 @@ namespace UnityStandardAssets.Characters.ThirdPerson
         }
 
         // frames of sword attacks call this function
-        public void SwordHitOnFrame()
+        public void AttackOnFrame()
         {
             m_Character.ProcessAttack();
         }
