@@ -11,7 +11,7 @@ public class MarkForDeathAbility : Ability
     public float damageMultiplier = 2f;
     public float range = 40f;
     public float playerHeight = 2f;
-    public float bonusCdMuliplier =  2f;
+    public float bonusCdReduction =  5f;
     //public float bonusEffectRadius = 2f;
     
      Vector3 shootPoint;
@@ -31,7 +31,7 @@ public class MarkForDeathAbility : Ability
     {
         base.applyEffect(player);
 
-        if (bonusEffect) reduceCooldownTime(cooldownTime/bonusCdMuliplier);
+        if (bonusEffect) newCooldownTime(cooldownTime += bonusCdReduction);
 
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 

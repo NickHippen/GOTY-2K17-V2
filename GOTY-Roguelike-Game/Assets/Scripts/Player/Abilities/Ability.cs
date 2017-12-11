@@ -57,7 +57,7 @@ public class Ability : MonoBehaviour {
         get { return bonusEffect; }
         set { bonusEffect = value; }
     }
-    protected void reduceCooldownTime(float newCdTime)
+    protected void newCooldownTime(float newCdTime)
     {
         cooldownTime = newCdTime;
     }

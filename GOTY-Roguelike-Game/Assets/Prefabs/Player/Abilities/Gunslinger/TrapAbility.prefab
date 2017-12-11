@@ -261,17 +261,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 40b4362d599dcc443a78891cf1be3e93, type: 3}
-  cooldownTime: 3
+  cooldownTime: 25
   faceCameraDirection: 0
-  bonusDescription: Add burning damage over time to monsters
   sfx: {fileID: 0}
-  trapDuration: 500
-  trapDiameter: 1.5
-  slowDuration: 5
-  slowPercent: 0.7
-  durability: 500
-  bonusEffectDamage: 5
-  bonusEffectDuration: 20
+  trapDuration: 150
+  trapDiameter: 2
+  slowDuration: 8
+  slowPercent: 0.5
+  durability: 5
+  bonusEffectDamage: 1
+  bonusEffectDuration: 10
   bonusTicksPerSecond: 0.5
 --- !u!114 &114954104652598556
 MonoBehaviour:

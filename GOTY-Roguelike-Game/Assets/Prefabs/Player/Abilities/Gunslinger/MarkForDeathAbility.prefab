@@ -247,19 +247,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: cc8370cbdb7a1434fb25841f7134aef9, type: 3}
-  cooldownTime: 3
+  cooldownTime: 15
   faceCameraDirection: 1
-  bonusDescription: increase duration and damage multiplier of mark
   sfx: {fileID: 0}
   particleEffect: {fileID: 198268207452455854}
   particleSize: 1
   missDuration: 1
-  markDuration: 20
+  markDuration: 10
   damageMultiplier: 2
-  range: 50
+  range: 100
   playerHeight: 2
-  bonusNewMultiplier: 4
-  bonusNewDuration: 50
+  bonusCdReduction: 7
 --- !u!198 &198268207452455854
 ParticleSystem:
   m_ObjectHideFlags: 1
