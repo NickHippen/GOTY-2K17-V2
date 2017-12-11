@@ -5,6 +5,7 @@ using UnityEngine;
 public class HardKickAbility : Ability {
 
     public float damage;
+    public float duration = 4f;
 	public float damageRadius;
     public float bonusDamage;
     public Vector2 effectPosition;
@@ -47,7 +48,7 @@ public class HardKickAbility : Ability {
                 {
                     damage += bonusDamage;
                 }
-				monster.ApplyStatus (new StatusStun(monster, 5f));
+				monster.ApplyStatus (new StatusStun(monster, duration));
 				monster.Damage(damage, player.transform);
 			}
         }

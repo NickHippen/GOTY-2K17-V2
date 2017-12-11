@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class BlinkAbility : Ability {
 
-    public float effectDistance;
-    public float effectDuration;
+    public float range = 15f;
     public float particleHeight = 1f;
     public float particleChargeSize = 5f;
     public float raycastHeight = 0.3f;
-    public float range = 5f;
     public float bonusHealAmount = 5f;
     public float bonusHealRadius = 20f;
     //public float collisionOffset = 0.01f; noticed walls have width so not necessary, but commented underneath if needed
@@ -34,7 +32,7 @@ public class BlinkAbility : Ability {
         playerParticle.SetActive(true);
         if (bonusEffect)
         {
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusHealRadius);
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, bonusHealRadius);
             foreach (Collider collider in colliders)
             {
                 RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();

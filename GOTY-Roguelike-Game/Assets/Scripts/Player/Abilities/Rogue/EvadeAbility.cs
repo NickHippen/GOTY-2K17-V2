@@ -17,9 +17,10 @@ public class EvadeAbility : Ability {
     {
         base.applyEffect(player);
 
+        print(bonusEffect);
         if (bonusEffect)
         {
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusHealRadius);
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, bonusHealRadius);
             foreach (Collider collider in colliders)
             {
                 RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
@@ -29,7 +30,9 @@ public class EvadeAbility : Ability {
                     AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                     if (bonusEffect)
                     {
+                        print("Before: " + player.GetComponent<HealthManager>().health);
                         player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+                        print("After: " + player.GetComponent<HealthManager>().health);
                         break;
                     }
                 }

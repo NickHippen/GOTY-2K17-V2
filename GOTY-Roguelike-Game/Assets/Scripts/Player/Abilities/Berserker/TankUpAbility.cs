@@ -27,7 +27,7 @@ public class TankUpAbility : Ability {
 
         if(bonusEffect)
         {
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusHealRadius);
+            Collider[] colliders = Physics.OverlapSphere(player.transform.position, bonusHealRadius);
             foreach (Collider collider in colliders)
             {
                 RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();

@@ -387,14 +387,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: de6c4dabd79286748b77565798509579, type: 3}
-  cooldownTime: 1
+  cooldownTime: 20
   faceCameraDirection: 0
-  bonusDescription: slows enemies afterwards
   sfx: {fileID: 0}
   effectSize: 5
-  freezeDuration: 3
+  freezeDuration: 5
   coneDuration: 1
-  bonusDuration: 10
+  bonusDuration: 8
   bonusSlowPercent: 0.5
 --- !u!198 &198348524368233172
 ParticleSystem:

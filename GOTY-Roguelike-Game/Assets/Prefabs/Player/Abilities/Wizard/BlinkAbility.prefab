@@ -423,17 +423,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 99c2f51b2c247e64e8b6186bacdeb1db, type: 3}
-  cooldownTime: 1
+  cooldownTime: 10
   faceCameraDirection: 0
-  bonusDescription: heal a small amount
   sfx: {fileID: 0}
-  effectDistance: 5
-  effectDuration: 5
+  range: 15
   particleHeight: 1.5
   particleChargeSize: 5
   raycastHeight: 0.4
-  range: 10
-  bonusHealAmount: 5
+  bonusHealAmount: 2.5
+  bonusHealRadius: 20
 --- !u!114 &114572654344231328
 MonoBehaviour:
   m_ObjectHideFlags: 1

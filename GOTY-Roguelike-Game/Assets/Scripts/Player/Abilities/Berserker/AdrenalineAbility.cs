@@ -6,7 +6,6 @@ public class AdrenalineAbility : Ability {
     
     public float damageMultiplier = 2f;
     public float duration;
-    public float bonusCdMultiplier;
 
     ParticleSystem particleEffect;
     Ability hardKick;
