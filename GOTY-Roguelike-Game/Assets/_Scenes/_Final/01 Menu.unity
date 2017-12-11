@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4529,6 +4529,7 @@ MonoBehaviour:
   effect: {fileID: 0}
   daggerRange: 2
   daggerRadius: 2.5
+  hitsPerSecond: 10
 --- !u!114 &135341602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8066,7 +8067,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Throws a knife that damages enemies.
+  m_Text: Throws poisoned blade at enemy.
 --- !u!222 &212507158
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13001,7 +13002,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: <b>DAGGER TOSS</b>
+  m_Text: <b>BLADE THROW</b>
 --- !u!222 &1041294364
 CanvasRenderer:
   m_ObjectHideFlags: 0

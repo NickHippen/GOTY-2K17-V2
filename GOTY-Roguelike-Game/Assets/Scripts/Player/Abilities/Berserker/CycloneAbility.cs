@@ -9,8 +9,7 @@ public class CycloneAbility : Ability {
 	public float damageRadius;
 
     public float bonusEffectDuration;
-    public float bonusDamageOverTime;
-    public float bonusTicksPerSecond;
+    public float bonusMultiplier;
     
     //Distance of particle effect from player
     public Vector2 effectPosition;
@@ -42,7 +41,7 @@ public class CycloneAbility : Ability {
 			if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit) {
 				AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 if (bonusEffect) {
-                    monster.ApplyStatus(new StatusPoison(monster, bonusEffectDuration, bonusDamageOverTime, bonusTicksPerSecond));
+                    monster.ApplyStatus(new StatusVulnerable(monster, bonusEffectDuration, bonusMultiplier));
                 }
 				monster.Damage(damage, player.transform);
 			}

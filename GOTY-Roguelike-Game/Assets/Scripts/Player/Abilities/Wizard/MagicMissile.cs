@@ -6,42 +6,18 @@ public class MagicMissile : MonoBehaviour
 {
     ParticleSystem missileParticle;
     ParticleSystem explosionParticle;
-    float timer;
-    float damage;
-    float missileRadius;
-    float damageRadius;
-    float particleRadius;
     bool exploded;
 
-    public float Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-
-    public float DamageRadius
-    {
-        get { return damageRadius; }
-        set { damageRadius = value; }
-    }
-    public float MissileRadius
-    {
-        get { return missileRadius; }
-        set { missileRadius = value; }
-    }
-
-    public float ParticleRadius
-    {
-        get { return particleRadius; }
-        set { particleRadius = value; }
-    }
-
-    public float Timer
-    {
-        get { return timer; }
-        set { timer = value; }
-    }
-	public GameObject Player { get; set; }
+    public float Damage { get; set; }
+    public float DamageRadius { get; set; }
+    public float MissileRadius { get; set; }
+    public float ParticleRadius { get; set; }
+    public float Timer { get; set; }
+    public bool BonusEffect { get; set; }
+    public float BonusDamage { get; set; }
+    public float BonusDuration { get; set; }
+    public float BonusTPS { get; set; }
+    public GameObject Player { get; set; }
 
     private void Start()
     {
@@ -55,14 +31,14 @@ public class MagicMissile : MonoBehaviour
         foreach (ParticleSystem pSys in pSystems)
         {
             ParticleSystem.MainModule mainEffect = pSys.main;
-            mainEffect.startSize = missileRadius * mainEffect.startSize.constant;
+            mainEffect.startSize = MissileRadius * mainEffect.startSize.constant;
         }
 
         pSystems = explosionParticle.GetComponentsInChildren<ParticleSystem>();
         foreach (ParticleSystem pSys in pSystems)
         {
             ParticleSystem.MainModule mainEffect = pSys.main;
-            mainEffect.startSize = damageRadius * mainEffect.startSize.constant / 2f;
+            mainEffect.startSize = DamageRadius * mainEffect.startSize.constant / 2f;
         }
     }
 
@@ -76,7 +52,7 @@ public class MagicMissile : MonoBehaviour
 
     IEnumerator Active()
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(Timer);
         if(!exploded) StartCoroutine(Explode());
     }
 
@@ -88,18 +64,19 @@ public class MagicMissile : MonoBehaviour
 
         explosionParticle.transform.position = this.transform.position;
         ParticleSystem.MainModule mainSystem = explosionParticle.main;
-        mainSystem.startSize = particleRadius;
+        mainSystem.startSize = ParticleRadius;
         explosionParticle.gameObject.SetActive(true);
 
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, damageRadius);
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, DamageRadius);
         foreach (Collider collider in colliders)
         {
             RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
             if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                float damage = this.damage;
+                float damage = this.Damage;
                 monster.Damage(damage, Player.transform);
+                if(BonusEffect) monster.ApplyStatus(new StatusPoison(monster, BonusDuration, BonusDamage, BonusTPS));
             }
         }
 

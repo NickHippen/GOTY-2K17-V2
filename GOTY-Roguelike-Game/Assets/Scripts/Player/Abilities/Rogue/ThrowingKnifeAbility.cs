@@ -8,9 +8,11 @@ public class ThrowingKnifeAbility : Ability {
     public float despawnTimer = 6f;
     public float throwForce = 5000f;
     public float collisionOffset = 0.02f;
-    public float bonusEffectDamage;
-    public float bonusEffectDuration;
-    public float bonusTicksPerSecond;
+    public float PoisonDamage;
+    public float PoisonDuration;
+    public float PoisonTicksPerSecond;
+    public float bonusVulnDuration;
+    public float bonusVulnMulitplier;
     public Vector2 effectPosition;
 
     ThrowingKnife throwingKnife;
@@ -28,17 +30,19 @@ public class ThrowingKnifeAbility : Ability {
         print(throwingKnife);
         base.applyEffect(player);
         ThrowingKnife knife = Instantiate(throwingKnife);
-        knife.Timer = despawnTimer;
-        knife.Damage = damage;
-        knife.CollisionOffset = collisionOffset;
         knife.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
         knife.transform.rotation = player.transform.rotation;
         knife.transform.Rotate(0f, 270f, 0f);
+        knife.Timer = despawnTimer;
+        knife.Damage = damage;
+        knife.CollisionOffset = collisionOffset;
         knife.gameObject.SetActive(true);
         knife.BonusEffect = bonusEffect;
-        knife.PoisonDamage = bonusEffectDamage;
-        knife.PoisonDuration = bonusEffectDuration;
-        knife.PoisonTPS = bonusTicksPerSecond;
+        knife.PoisonDamage = PoisonDamage;
+        knife.PoisonDuration = PoisonDuration;
+        knife.PoisonTPS = PoisonTicksPerSecond;
+        knife.BonusDuration = bonusVulnDuration;
+        knife.BonusMultiplier = bonusVulnMulitplier;
 		knife.Player = player;
         knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
     }

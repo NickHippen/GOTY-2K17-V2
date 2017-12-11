@@ -5,49 +5,13 @@ using UnityEngine;
 public class Grenade : MonoBehaviour
 {
     ParticleSystem particleEffect;
-    float timer;
-    float damage;
-    float damageRadius;
-    float particleRadius;
-    bool bonusEffect;
-    float bonusDamage;
-    float bonusRadiusMultiplier;
 
-    public float Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-    public float DamageRadius
-    {
-        get { return damageRadius; }
-        set { damageRadius = value; }
-    }
-    public float ParticleRadius
-    {
-        get { return particleRadius; }
-        set { particleRadius = value; }
-    }
-    public float Timer
-    {
-        get { return timer; }
-        set { timer = value; }
-    }
-    public bool BonusEffect
-    {
-        get { return bonusEffect; }
-        set { bonusEffect = value; }
-    }
-    public float BonusDamage
-    {
-        get { return bonusDamage; }
-        set { bonusDamage = value; }
-    }
-    public float BonusRadiusMultiplier
-    {
-        get { return bonusRadiusMultiplier; }
-        set { bonusRadiusMultiplier = value; }
-    }
+    public float Damage { get; set; }
+    public float DamageRadius { get; set; }
+    public float ParticleRadius { get; set; }
+    public float Timer { get; set; }
+    public bool BonusEffect { get; set; }
+    public float BonusDuration { get; set; }
 	public GameObject Player { get; set; }
 
     private void Start()
@@ -58,29 +22,24 @@ public class Grenade : MonoBehaviour
 
     IEnumerator PullPin()
     {
-        yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(Timer);
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Rigidbody>().velocity = new Vector3();
             
         particleEffect.transform.position = this.transform.position;
-        particleEffect.transform.localScale = bonusEffect
-            ? new Vector3(damageRadius * particleRadius * BonusRadiusMultiplier, damageRadius * particleRadius * BonusRadiusMultiplier, damageRadius * particleRadius * bonusRadiusMultiplier) 
-            : new Vector3(damageRadius*particleRadius, damageRadius*particleRadius, damageRadius*particleRadius);
+        particleEffect.transform.localScale = new Vector3(DamageRadius*ParticleRadius, DamageRadius*ParticleRadius, DamageRadius*ParticleRadius);
         particleEffect.gameObject.SetActive(true);
 
-        Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusEffect? damageRadius * bonusRadiusMultiplier: damageRadius);
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, DamageRadius);
         foreach (Collider collider in colliders)
         {
             RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
             if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                float damage = this.damage;
-                if(bonusEffect)
-                {
-                    damage += bonusDamage;
-                }
+                float damage = this.Damage;
                 monster.Damage(damage, Player.transform);
+                if (BonusEffect) monster.ApplyStatus(new StatusStun(monster, BonusDuration));
             }
         }
         StartCoroutine(removeGrenade());

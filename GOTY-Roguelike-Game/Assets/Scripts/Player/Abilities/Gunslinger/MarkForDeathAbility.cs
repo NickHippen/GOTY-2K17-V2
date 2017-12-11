@@ -11,8 +11,7 @@ public class MarkForDeathAbility : Ability
     public float damageMultiplier = 2f;
     public float range = 40f;
     public float playerHeight = 2f;
-    public float bonusNewMultiplier;
-    public float bonusNewDuration;
+    public float bonusCdMuliplier =  2f;
     //public float bonusEffectRadius = 2f;
     
      Vector3 shootPoint;
@@ -31,6 +30,8 @@ public class MarkForDeathAbility : Ability
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
+
+        if (bonusEffect) reduceCooldownTime(cooldownTime/bonusCdMuliplier);
 
         shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
 
@@ -55,14 +56,7 @@ public class MarkForDeathAbility : Ability
             if (unit is AggressiveUnit)
             {
                 AggressiveUnit monster = (AggressiveUnit)unit;
-                if (bonusEffect)
-                {
-                    monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
-                }
-                else
-                {
-                    monster.ApplyStatus(new StatusVulnerable(monster, bonusNewDuration, bonusNewMultiplier));
-                }
+                monster.ApplyStatus(new StatusVulnerable(monster, markDuration, damageMultiplier));
 
                 // attempt at aoe Mark
                 //if(!bonusEffect)

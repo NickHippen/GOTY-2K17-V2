@@ -26,7 +26,7 @@ public class ArcaneFormAbility : Ability {
         {
             if (ability is ArcaneFormAbility) continue;
             if (bonusEffect) ability.IsAvailible = true;
-            ability.CooldownMultiplier += cooldownMuliplier;
+            ability.CooldownMultiplier *= cooldownMuliplier;
         }
         StartCoroutine(StopBuff(abilities, particles));
     }
@@ -38,7 +38,7 @@ public class ArcaneFormAbility : Ability {
         foreach (Ability ability in abilities)
         {
             if (ability is ArcaneFormAbility) continue;
-            ability.CooldownMultiplier -= cooldownMuliplier;
+            ability.CooldownMultiplier /= cooldownMuliplier;
         }
         Destroy(particles);
 		sfx.stopLoop ();

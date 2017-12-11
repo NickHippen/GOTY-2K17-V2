@@ -10,8 +10,9 @@ public class MagicMissileAbility : Ability {
     public float particleScale = 1f;
     public float explosionTimer = 6f;
     public float throwForce = 2000f;
-    public float bonusDamage = 20;
-    public float bonusRadiusMuliplier = 2;
+    public float bonusDamage = 2f;
+    public float bonusDuration = 15f;
+    public float bonusTicksPerSecond = 2;
     public Vector2 effectPosition = new Vector2(1.3f, 1.5f);
 
     MagicMissile magicMissileObject;
@@ -29,10 +30,13 @@ public class MagicMissileAbility : Ability {
         base.applyEffect(player);
         MagicMissile missile = Instantiate(magicMissileObject);
         missile.Timer = explosionTimer;
-        missile.Damage = bonusEffect ? damageRadius + bonusDamage : damage;
-        missile.DamageRadius = bonusEffect ? damageRadius * bonusRadiusMuliplier : damageRadius;
+        missile.Damage = damage;
+        missile.DamageRadius = damageRadius;
         missile.MissileRadius = missileRadius;
-        missile.ParticleRadius = bonusEffect? particleScale * bonusRadiusMuliplier: particleScale;
+        missile.ParticleRadius = particleScale;
+        missile.BonusDamage = bonusDamage;
+        missile.BonusDuration = bonusDuration;
+        missile.BonusTPS = bonusTicksPerSecond;
         missile.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
         missile.gameObject.SetActive(true);
 		missile.Player = player;

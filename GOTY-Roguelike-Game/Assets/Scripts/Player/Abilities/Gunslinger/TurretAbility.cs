@@ -14,7 +14,6 @@ public class TurretAbility : Ability
     Ability grenade;
     bool isActive;
     float effectHeight;
-    float disableGrenadeCD = 999999f;
 
     protected override void Start()
     {
@@ -32,25 +31,41 @@ public class TurretAbility : Ability
     {
         base.Update();
         if (isActive) {
-            if (playerInv.getCurrentWeapon().GetComponent<WeaponData>() is GunData)
+            WeaponData currentWeapon = playerInv.getCurrentWeapon().GetComponent<WeaponData>();
+            if (currentWeapon is GunData)
             {
                 anim.SetLayerWeight(9, 1);  // turn on gun turret
                 anim.SetLayerWeight(10, 0);
                 anim.SetLayerWeight(11, 0);
                 anim.SetLayerWeight(12, 0);
             }
-            else
+            else if(currentWeapon is SwordData)
             {
                 anim.SetLayerWeight(10, 1); // turn on sword turret
                 anim.SetLayerWeight(9, 0);
                 anim.SetLayerWeight(11, 0);
                 anim.SetLayerWeight(12, 0);
             }
-        }
 
-        if (bonusEffect)
-        {
-            grenade.IsAvailible = true;
+            else if (currentWeapon is StaffData)
+            {
+                anim.SetLayerWeight(11, 1); // turn on staff turret
+                anim.SetLayerWeight(9, 0);
+                anim.SetLayerWeight(10, 0);
+                anim.SetLayerWeight(12, 0);
+            }
+            else
+            {
+                anim.SetLayerWeight(12, 1); // turn on dagger turret
+                anim.SetLayerWeight(9, 0);
+                anim.SetLayerWeight(10, 0);
+                anim.SetLayerWeight(11, 0);
+            }
+
+            if (bonusEffect)
+            {
+                grenade.IsAvailible = true;
+            }
         }
     }
 
@@ -73,7 +88,6 @@ public class TurretAbility : Ability
         }
         else
         {
-            //yield return new WaitForSeconds(duration);
             isActive = false;
             anim.SetLayerWeight(9, 0); // turn off turret
             anim.SetLayerWeight(10, 0);
@@ -83,6 +97,7 @@ public class TurretAbility : Ability
         }
     }
     
+    // prevent applyEffect from being called twice in one frame
     IEnumerator WaitForFrame()
     {
         yield return new WaitForEndOfFrame();

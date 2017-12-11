@@ -12,7 +12,6 @@ public class TankUpAbility : Ability {
     protected override void Start()
     {
         base.Start();
-        applyOnFrame = true;
 		sfx = GetComponent<SoundData>();
         particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
         particleEffect.Stop();

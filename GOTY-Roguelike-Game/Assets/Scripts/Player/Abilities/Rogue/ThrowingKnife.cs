@@ -5,61 +5,23 @@ using UnityEngine;
 public class ThrowingKnife : MonoBehaviour
 {
     ParticleSystem impactParticle;
-    float timer;
-    float damage;
-    float particleRadius;
-    float collisionOffset;
-    bool bonusEffect;
-    float poisonDuration;
-    float poisonDamage;
-    float poisonTPS;
-
-    public float Damage
-    {
-        get { return damage; }
-        set { damage = value; }
-    }
-    public float ParticleRadius
-    {
-        get { return particleRadius; }
-        set { particleRadius = value; }
-    }
-    public float Timer
-    {
-        get { return timer; }
-        set { timer = value; }
-    }
-    public float CollisionOffset
-    {
-        get { return collisionOffset; }
-        set { collisionOffset = value; }
-    }
-    public bool BonusEffect
-    {
-        get { return bonusEffect; }
-        set { bonusEffect = value; }
-    }
-    public float PoisonDuration
-    {
-        get { return poisonDuration; }
-        set { poisonDuration = value; }
-    }
-    public float PoisonDamage
-    {
-        get { return poisonDamage; }
-        set { poisonDamage = value; }
-    }
-    public float PoisonTPS
-    {
-        get { return poisonTPS; }
-        set { poisonTPS = value; }
-    }
+    
+    public float Damage { get; set; }
+    public float ParticleRadius { get; set; }
+    public float Timer { get; set; }
+    public float CollisionOffset { get; set; }
+    public bool BonusEffect { get; set; }
+    public float PoisonDuration { get; set; }
+    public float PoisonDamage { get; set; }
+    public float PoisonTPS { get; set; }
+    public float BonusDuration { get; set; }
+    public float BonusMultiplier { get; set; }
 	public GameObject Player { get; set; }
 
     private void Start()
     {
         impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
-        //StartCoroutine(RemoveObject(false));
+        StartCoroutine(RemoveObject());
     }
 
 	// knife keeps going thru wall, will change to raycast
@@ -70,7 +32,7 @@ public class ThrowingKnife : MonoBehaviour
 
             impactParticle.gameObject.SetActive(true);
 
-            transform.position = this.transform.position - GetComponent<Rigidbody>().velocity * collisionOffset;
+            transform.position = this.transform.position - GetComponent<Rigidbody>().velocity * CollisionOffset;
             GetComponent<Rigidbody>().velocity = new Vector3();
 
             GetComponent<MeshCollider>().enabled = false;
@@ -78,21 +40,21 @@ public class ThrowingKnife : MonoBehaviour
             if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
             {
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                float damage = this.damage;
+                float damage = this.Damage;
                 monster.Damage(damage, Player.transform);
-                if(bonusEffect)
+                monster.ApplyStatus(new StatusPoison(monster, PoisonDuration, PoisonDamage, PoisonTPS));
+                if (BonusEffect)
                 {
-                    monster.ApplyStatus(new StatusPoison(monster, poisonDuration, poisonDamage, poisonTPS));
+                    monster.ApplyStatus(new StatusVulnerable(monster, BonusDuration, BonusMultiplier));
                 }
+                this.transform.SetParent(monster.transform, false);
             }
-            //StartCoroutine(RemoveObject(true));
         }
     }
 
-    IEnumerator RemoveObject(bool hit)
+    IEnumerator RemoveObject()
     {
-        if (hit) yield return new WaitWhile(() => impactParticle.IsAlive(true));
-        else yield return new WaitForSeconds(timer);
+        yield return new WaitForSeconds(Timer);
         Destroy(this.gameObject);
     }
 }
