@@ -23,8 +23,8 @@ public class UpgradeManager : MonoBehaviour {
 		Debug.Log("Start");
 		string classType = Player.GetComponent<AbilityController>().classType;
 		Debug.Log("Checking for " + classType);
-		transform.parent.parent.FindChild(classType).GetComponent<CanvasGroup>().alpha = 1;
-		transform.parent.parent.FindChild(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
+		transform.parent.parent.Find(classType).GetComponent<CanvasGroup>().alpha = 1;
+		transform.parent.parent.Find(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
 		Time.timeScale = 0f;
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;

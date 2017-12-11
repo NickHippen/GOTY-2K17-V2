@@ -11,7 +11,7 @@ public class SwordData : WeaponData
     {
         ThirdPersonCharacter player = this.GetComponentInParent<ThirdPersonCharacter>();
 		Collider[] colliders = Physics.OverlapCapsule(player.transform.position + player.transform.forward * swordRange,
-			player.transform.position + player.transform.up*2 + player.transform.forward * swordRange, swordRadius);
+			player.transform.position + player.transform.up*2f + player.transform.forward * swordRange, swordRadius);
 
 		PlayAttackAudio (0);
         foreach (Collider collider in colliders)
