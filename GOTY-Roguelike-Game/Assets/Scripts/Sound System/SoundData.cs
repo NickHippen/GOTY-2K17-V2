@@ -17,7 +17,11 @@ public class SoundData : MonoBehaviour {
 		this.gameObject.AddComponent<AudioSource>();
 		source = GetComponent<AudioSource> ();
 		mm = GameObject.Find ("MusicManager");
-		source.volume = mm.GetComponent<MusicManager> ().getVolume ();
+		if (mm.GetComponent<MusicManager>() != null) {
+			source.volume = mm.GetComponent<MusicManager>().getVolume();
+		} else {
+			source.volume = 1f;
+		}
 	}
 	
 	// Update is called once per frame

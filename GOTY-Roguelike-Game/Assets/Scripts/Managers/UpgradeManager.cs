@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class UpgradeManager : MonoBehaviour {
 
+	public Texture upgradedTexture;
+
 	private GameObject player;
 
 	public GameObject Player {
@@ -23,8 +25,8 @@ public class UpgradeManager : MonoBehaviour {
 		Debug.Log("Start");
 		string classType = Player.GetComponent<AbilityController>().classType;
 		Debug.Log("Checking for " + classType);
-		transform.parent.parent.FindChild(classType).GetComponent<CanvasGroup>().alpha = 1;
-		transform.parent.parent.FindChild(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
+		transform.parent.parent.Find(classType).GetComponent<CanvasGroup>().alpha = 1;
+		transform.parent.parent.Find(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
 		Time.timeScale = 0f;
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
@@ -33,15 +35,9 @@ public class UpgradeManager : MonoBehaviour {
 	void Update() {
 		int baseIndex = transform.GetSiblingIndex();
 		for (int i = 1; i <= 4; i++) {
-			if (IsUpgraded(i-1)) {
+			if (IsUpgraded(i - 1)) {
 				Transform upgradeButton = transform.parent.GetChild(baseIndex + i);
-				for (int j = 0; j < upgradeButton.childCount; j++) {
-					Text text = upgradeButton.GetChild(j).GetComponent<Text>();
-					if (text == null) {
-						continue;
-					}
-					text.color = Color.green;
-				}
+				upgradeButton.GetComponent<RawImage>().texture = upgradedTexture;
 			}
 		}
 	}
