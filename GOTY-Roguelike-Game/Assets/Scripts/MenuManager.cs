@@ -147,6 +147,14 @@ public class MenuManager : MonoBehaviour {
 		toggleSelectButtons ();
 		toggleSelectSounds ();
 		playerSelected = true;
+
+		GameObject temp = GameObject.Find ("remy").GetComponent<PlayerInventory> ().getCurrentWeapon ();
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().weapons.Clear ();
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().weapons.Add (temp);
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().current = 0;
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().setCurrentWeapon (0);
+		GameObject.Find ("remy").GetComponent<PlayerInventory> ().UpdateUI ();
+
 	}
 
 	public void selectBerseker(){
@@ -183,6 +191,10 @@ public class MenuManager : MonoBehaviour {
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "wizard";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
+
+		GameObject.Find ("remy").GetComponent<PlayerInventory>().setCurrentWeapon(2);
+		GameObject.Find ("remy").GetComponent<ThirdPersonCharacter> ().setWeaponAnimations ();
+
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = wizIcon;
 		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;
@@ -194,6 +206,10 @@ public class MenuManager : MonoBehaviour {
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = false;
 		GameObject.Find ("remy").GetComponent<AbilityController> ().classType = "rogue";
 		GameObject.Find ("remy").GetComponent<AbilityController> ().enabled = true;
+
+		GameObject.Find ("remy").GetComponent<PlayerInventory>().setCurrentWeapon(3);
+		GameObject.Find ("remy").GetComponent<ThirdPersonCharacter> ().setWeaponAnimations ();
+
 		GameObject.Find ("UserPic").GetComponent<Image> ().sprite = rogIcon;
 		berAbilities.GetComponent<CanvasGroup> ().alpha = 0;
 		gunAbilities.GetComponent<CanvasGroup> ().alpha = 0;

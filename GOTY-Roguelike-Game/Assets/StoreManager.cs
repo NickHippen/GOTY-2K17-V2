@@ -9,8 +9,6 @@ public class StoreManager : MonoBehaviour {
 	void Start () {
 		for (int i = -1; i < 2; i++) {
 			for (int j = -1; j < 2; j++) {
-				if ((int)(Random.Range (0, 2)) == 1)
-					continue;
 				GameObject instance = Instantiate (weaponSpawner);
 				instance.transform.SetParent (this.transform);
 				instance.transform.localPosition = new Vector3 (8 * i, .5f, 8 * j);
