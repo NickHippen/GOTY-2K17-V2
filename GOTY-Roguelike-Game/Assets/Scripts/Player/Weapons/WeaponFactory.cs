@@ -15,7 +15,7 @@ public class WeaponFactory {
 	//	}
 	//}
 
-	public static SwordData CreateRandomSword(GameObject swordBase, Vector3 position, int level, float quality, Transform spawner) {
+	public static SwordData CreateRandomSword(GameObject swordBase, Vector3 position, int level, float quality, Transform spawner, int minCost, int maxCost) {
 		GameObject swordObj = GameObject.Instantiate(swordBase, position, Quaternion.identity);
 		swordObj.transform.SetParent (spawner);
 		SwordData swordData = swordObj.GetComponent<SwordData>();
@@ -35,13 +35,13 @@ public class WeaponFactory {
 				damage *= 1.5f; // 50% more damage (but health may be lost on hit)
 				break;
 		}
-
+			
 		swordData.damage = damage;
-
+		swordData.cost = Random.Range (minCost, maxCost+1);
 		return swordData;
 	}
 
-	public static GunData CreateRandomGun(GameObject gunBase, Vector3 position, int level, float quality, Transform spawner) {
+	public static GunData CreateRandomGun(GameObject gunBase, Vector3 position, int level, float quality, Transform spawner, int minCost, int maxCost) {
 		GameObject gunObj = GameObject.Instantiate(gunBase, position, Quaternion.identity);
 		gunObj.transform.SetParent (spawner);
 		GunData gunData = gunObj.GetComponent<GunData>();
@@ -67,14 +67,14 @@ public class WeaponFactory {
 				bulletsPerSecond *= 1.3f; // 30% faster fire rate
 				break;
 		}
-		
+
 		gunData.damage = damage;
 		gunData.bulletsPerSecond = bulletsPerSecond;
-
+		gunData.cost = Random.Range (minCost, maxCost+1);
 		return gunData;
 	}
 
-    public static StaffData CreateRandomStaff(GameObject staffBase, Vector3 position, int level, float quality, Transform spawner)
+	public static StaffData CreateRandomStaff(GameObject staffBase, Vector3 position, int level, float quality, Transform spawner, int minCost, int maxCost)
     {
         GameObject staffObj = GameObject.Instantiate(staffBase, position, Quaternion.identity);
         staffObj.transform.SetParent(spawner);
@@ -98,11 +98,11 @@ public class WeaponFactory {
         }
 
         staffData.damage = damage;
-
+		staffData.cost = Random.Range (minCost, maxCost + 1);
         return staffData;
     }
 
-    public static DaggerData CreateRandomDagger(GameObject daggerBase, Vector3 position, int level, float quality, Transform spawner)
+	public static DaggerData CreateRandomDagger(GameObject daggerBase, Vector3 position, int level, float quality, Transform spawner, int minCost, int maxCost)
     {
         GameObject daggerObj = GameObject.Instantiate(daggerBase, position, Quaternion.identity);
         daggerObj.transform.SetParent(spawner);
@@ -126,7 +126,7 @@ public class WeaponFactory {
         }
 
         daggerData.damage = damage;
-
+		daggerData.cost = Random.Range (minCost, maxCost+1);
         return daggerData;
     }
     private static WeaponData ApplyBonuses(WeaponData weaponData, int level, float quality) {
