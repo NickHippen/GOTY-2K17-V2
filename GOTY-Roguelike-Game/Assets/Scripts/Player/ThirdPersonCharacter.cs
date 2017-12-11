@@ -106,7 +106,8 @@ public class ThirdPersonCharacter : MonoBehaviour
         m_ForwardAmount = move.z;
 
         // if attacking with ranged weapon, have camera over shoulder
-        if (atk && !(inventory.getCurrentWeapon().GetComponent<WeaponData>() is SwordData))
+        WeaponData currentWeapon = inventory.getCurrentWeapon().GetComponent<WeaponData>();
+        if (atk && (currentWeapon is GunData || currentWeapon is StaffData))
         {
             // apply turn amount relative to direction controls rather than cartesian
             m_TurnAmount = (move.z >= 0) ? Mathf.Atan2(move.x, move.z) : Mathf.Atan2(move.x, -move.z);
@@ -192,7 +193,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 		}
 	}
 
-
 	void HandleAirborneMovement()
 	{
 		// apply extra gravity from multiplier:
@@ -202,13 +202,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 		m_GroundCheckDistance = m_Rigidbody.velocity.y < 0 ? m_OrigGroundCheckDistance : 0.01f;
 	}
 
-
 	void HandleGroundedMovement(bool jump)
 	{
 		// check whether conditions are right to allow a jump:
 		if (jump && m_Animator.GetCurrentAnimatorStateInfo(0).IsName("Grounded"))
-		{
-			// jump!
+		{   // jump!
 			m_Rigidbody.velocity = new Vector3(m_Rigidbody.velocity.x, m_JumpPower, m_Rigidbody.velocity.z);
 			m_IsGrounded = false;
 			m_Animator.applyRootMotion = false;
@@ -222,8 +220,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
 		transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
 	}
-
-
+    
 	public void OnAnimatorMove()
 	{
 		// we implement this function to override the default root motion.
@@ -293,7 +290,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		//temp.GetComponent<Rigidbody>().useGravity = false;
 		GameObject hand;
 		WeaponData weaponData = temp.GetComponent<WeaponData>();
-		if (weaponData is GunData) {
+		if (weaponData is GunData || weaponData is StaffData || weaponData is DaggerData) {
 			hand = rightHand;
 		//} else if (temp.name.Contains ("sword")) {
 		} else if (weaponData is SwordData) {
@@ -305,11 +302,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 		temp.gameObject.transform.position = hand.transform.position;
 		temp.gameObject.transform.rotation = hand.transform.rotation;
 		//8, 83.5, 89
-		if (weaponData is GunData) {
+		//if (weaponData is GunData) {
 			//m_Animator.runtimeAnimatorController = gunController;
 			//temp.gameObject.transform.localEulerAngles = temp.gameObject.GetComponent<WeaponData>().rotation;//new Vector3(8f, 83.5f, 89f);
 			//inventory.setCurrentWeapon (editCollider (inventory.getCurrentWeapon (), false));
-		}
+		//}
 
 	}
 

@@ -45,8 +45,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			if (Input.anyKeyDown || scroll != 0) {
 				WeaponSelect (scroll);
 			}
-            
-			if (m_Attacking && m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>() is GunData) {
+            WeaponData currentWeapon = m_Character.gameObject.GetComponent<PlayerInventory>().getCurrentWeapon().GetComponent<WeaponData>();
+            if (m_Attacking && (currentWeapon is GunData || currentWeapon is DaggerData)) {
 				m_Character.ProcessAttack();
 			}
 			if (Input.GetKeyDown(KeyCode.Escape)) {
