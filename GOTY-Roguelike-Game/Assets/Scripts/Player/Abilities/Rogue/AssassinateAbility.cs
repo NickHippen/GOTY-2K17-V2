@@ -12,8 +12,7 @@ public class AssassinateAbility : Ability {
     public Vector2 effectPosition;
 
     GameObject particleEffect;
-    GameObject tempParticle;
-    Vector3 shootPoint;
+    GameObject particleClone;
 
     protected override void Start()
     {
@@ -34,18 +33,17 @@ public class AssassinateAbility : Ability {
         if (!applyOnFrame)
         {
             applyOnFrame = true;
-            tempParticle = Instantiate(particleEffect, player.transform, false);
-            tempParticle.transform.position += tempParticle.transform.forward * effectPosition.x + tempParticle.transform.up * effectPosition.y;
-            tempParticle.SetActive(true);
+            particleClone = Instantiate(particleEffect, player.transform, false);
+            particleClone.transform.position += particleClone.transform.forward * effectPosition.x + particleClone.transform.up * effectPosition.y;
+            particleClone.SetActive(true);
         }
         else
         {
             applyOnFrame = false;
-            shootPoint = new Vector3(0, effectPosition.y, 0) + player.transform.position;
 
             RaycastHit hit;
             int layerMask = LayerMask.GetMask("Unwalkable", "Monster", "Ground");
-            if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range, layerMask))
+            if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.forward, out hit, range++, layerMask))
             {
                 player.transform.position = new Vector3(hit.point.x, player.transform.position.y, hit.point.z);
 
@@ -71,7 +69,7 @@ public class AssassinateAbility : Ability {
                 player.transform.position = new Vector3(player.transform.position.x + Camera.main.transform.forward.x * range,
                     player.transform.position.y, player.transform.position.z + Camera.main.transform.forward.z * range);
             }
-            StartCoroutine(RemoveParticle(tempParticle.GetComponent<ParticleSystem>()));
+            StartCoroutine(RemoveParticle(particleClone.GetComponent<ParticleSystem>()));
         }
     }
 

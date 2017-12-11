@@ -6,7 +6,7 @@ public class ShadowAbility : Ability {
     
     public float duration;
     public float bonusDuration;
-    public float effectHeight = 1.5f;
+    public Vector2 effectPosition = new Vector2(.2f, 1.1f);
     GameObject particleEffect;
 
     protected override void Start()
@@ -23,7 +23,7 @@ public class ShadowAbility : Ability {
 
         player.GetComponent<ThirdPersonCharacter>().IsInvisible = true;
         GameObject playerEffect = Instantiate(particleEffect, player.transform, false);
-        playerEffect.transform.position += player.transform.up * effectHeight;
+        playerEffect.transform.position += player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
         playerEffect.gameObject.SetActive(true);
         StartCoroutine(effectTimer(player, playerEffect));
     }

@@ -95,11 +95,11 @@ public class ThirdPersonCharacter : MonoBehaviour
 
     public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
     {
-        moveDirection = move;
         // convert the world relative moveInput vector into a local-relative
         // turn amount and forward amount required to head in the desired direction.
         if (move.magnitude > 1f)
             move.Normalize();
+        moveDirection = move;
         move = transform.InverseTransformDirection(move);
         CheckGroundStatus();
         move = Vector3.ProjectOnPlane(move, m_GroundNormal);

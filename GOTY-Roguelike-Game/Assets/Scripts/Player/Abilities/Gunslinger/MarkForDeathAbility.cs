@@ -9,12 +9,9 @@ public class MarkForDeathAbility : Ability
     public float missDuration = 1f;
     public float markDuration = 20f;
     public float damageMultiplier = 2f;
-    public float range = 40f;
-    public float playerHeight = 2f;
+    public float range = 100f;
     public float bonusCdReduction =  5f;
     //public float bonusEffectRadius = 2f;
-    
-     Vector3 shootPoint;
 
     protected override void Start()
     {
@@ -33,11 +30,9 @@ public class MarkForDeathAbility : Ability
 
         if (bonusEffect) newCooldownTime(cooldownTime += bonusCdReduction);
 
-        shootPoint = new Vector3(0, playerHeight,0) + player.transform.position;
-
         RaycastHit hit;
         int layerMask = LayerMask.GetMask("Unwalkable", "Monster", "Ground");
-        if (Physics.Raycast(shootPoint, Camera.main.transform.forward, out hit, range, layerMask))
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.forward, out hit, range, layerMask))
         {
             particleEffect.transform.position = hit.point;
 

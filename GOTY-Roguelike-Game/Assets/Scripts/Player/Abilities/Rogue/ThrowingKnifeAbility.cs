@@ -14,6 +14,7 @@ public class ThrowingKnifeAbility : Ability {
     public float bonusVulnDuration;
     public float bonusVulnMulitplier;
     public Vector2 effectPosition;
+    public float raycastRange = 100f;
 
     ThrowingKnife throwingKnife;
 
@@ -30,8 +31,10 @@ public class ThrowingKnifeAbility : Ability {
         print(throwingKnife);
         base.applyEffect(player);
         ThrowingKnife knife = Instantiate(throwingKnife);
+        //knife.transform.position = Camera.main.transform.position;
         knife.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
-        knife.transform.rotation = player.transform.rotation;
+        knife.transform.rotation = Camera.main.transform.rotation;
+            //player.transform.rotation;
         knife.transform.Rotate(0f, 270f, 0f);
         knife.Timer = despawnTimer;
         knife.Damage = damage;
@@ -45,6 +48,17 @@ public class ThrowingKnifeAbility : Ability {
         knife.BonusMultiplier = bonusVulnMulitplier;
 		knife.Player = player;
         knife.gameObject.SetActive(true);
-        knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
+
+        RaycastHit hit;
+        int layerMask = LayerMask.GetMask("Unwalkable", "Monster", "Ground");
+        if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.forward, out hit, raycastRange, layerMask))
+        {
+            Vector3 throwPointToHitPoint = hit.point - knife.transform.position;
+            knife.GetComponent<Rigidbody>().AddForce(throwPointToHitPoint.normalized * throwForce);
+        }
+        else
+        {
+            knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
+        }
     }
 }

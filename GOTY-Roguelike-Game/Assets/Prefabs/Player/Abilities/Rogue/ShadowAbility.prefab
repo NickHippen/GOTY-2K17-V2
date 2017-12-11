@@ -307,7 +307,7 @@ MonoBehaviour:
   sfx: {fileID: 0}
   duration: 4
   bonusDuration: 3
-  effectHeight: 1.5
+  effectPosition: {x: 0.2, y: 1.1}
 --- !u!198 &198265995716816246
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -3702,7 +3702,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 5
       minScalar: 1
       maxCurve:
         serializedVersion: 2
