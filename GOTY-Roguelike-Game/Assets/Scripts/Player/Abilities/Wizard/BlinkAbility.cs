@@ -11,6 +11,7 @@ public class BlinkAbility : Ability {
     public float raycastHeight = 0.3f;
     public float range = 5f;
     public float bonusHealAmount = 5f;
+    public float bonusHealRadius = 20f;
     //public float collisionOffset = 0.01f; noticed walls have width so not necessary, but commented underneath if needed
 
     Vector3 move;
@@ -31,9 +32,23 @@ public class BlinkAbility : Ability {
         ParticleSystem.MainModule partMain = playerParticle.GetComponent<ParticleSystem>().main;
         partMain.startSize = particleChargeSize;
         playerParticle.SetActive(true);
-        if(bonusEffect)
+        if (bonusEffect)
         {
-            player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+            Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusHealRadius);
+            foreach (Collider collider in colliders)
+            {
+                RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
+                Debug.Log(collider);
+                if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
+                {
+                    AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+                    if (bonusEffect)
+                    {
+                        player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+                        break;
+                    }
+                }
+            }
         }
         StartCoroutine(WaitForParticleExplosion(player));
         StartCoroutine(DisableParticle(playerParticle));

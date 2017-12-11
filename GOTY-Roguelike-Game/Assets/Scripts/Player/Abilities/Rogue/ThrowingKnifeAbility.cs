@@ -44,6 +44,7 @@ public class ThrowingKnifeAbility : Ability {
         knife.BonusDuration = bonusVulnDuration;
         knife.BonusMultiplier = bonusVulnMulitplier;
 		knife.Player = player;
+        knife.gameObject.SetActive(true);
         knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
     }
 }

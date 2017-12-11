@@ -284,9 +284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wallIcon: {fileID: 1243207718962762, guid: 7732f39ca244d7b43a1d8a06f010942a, type: 2}
-  doorIcon: {fileID: 1405903207762250, guid: d453fb6af1935fd4394d9758969a5f8a, type: 2}
-  hallIcon: {fileID: 1707440039999516, guid: f47622e6b8e2b504692f5bb53194714a, type: 2}
-  roomIcon: {fileID: 1671632362500028, guid: 28ad448c7bea3ea4ea46ee9c467a542b, type: 2}
+  floorIcon: {fileID: 0}
   playerIcon: {fileID: 1750473820166788, guid: afc59f0bd43219445befac943f2a8494, type: 2}
 --- !u!1 &564501412
 GameObject:
@@ -439,6 +437,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lockMouse: 1
   lookAt: {fileID: 0}
+  relativePos: {x: 0, y: 0, z: 0}
+  cameraHeight: 5
+  currentZoom: 3
 --- !u!1 &747494961
 GameObject:
   m_ObjectHideFlags: 0
@@ -727,7 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1467539081}
   - component: {fileID: 1467539080}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GroundCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,8 +745,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1000, y: 0, z: 1000}
-  m_Center: {x: 100, y: 0.2, z: 100}
+  m_Size: {x: 1000, y: 0.4, z: 1000}
+  m_Center: {x: 100, y: 0, z: 100}
 --- !u!4 &1467539081
 Transform:
   m_ObjectHideFlags: 0

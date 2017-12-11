@@ -5,6 +5,7 @@ using UnityEngine;
 public class EvadeAbility : Ability {
 
     public float bonusHealAmount;
+    public float bonusHealRadius = 20f;
 
     protected override void Start()
     {
@@ -16,10 +17,24 @@ public class EvadeAbility : Ability {
     {
         base.applyEffect(player);
 
-		if(bonusEffect)
+        if (bonusEffect)
         {
-            player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+            Collider[] colliders = Physics.OverlapSphere(this.transform.position, bonusHealRadius);
+            foreach (Collider collider in colliders)
+            {
+                RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
+                Debug.Log(collider);
+                if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
+                {
+                    AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+                    if (bonusEffect)
+                    {
+                        player.GetComponent<HealthManager>().Heal(bonusHealAmount);
+                        break;
+                    }
+                }
+            }
         }
-	}
+    }
 		
 }

@@ -77,7 +77,10 @@ public class DaggerData : WeaponData
 
     private void OnEnable()
     {
-        secondDagger.SetActive(true);
+        if (secondDagger != null)
+        {
+            secondDagger.SetActive(true);
+        }
     }
 
     private void OnDestroy()

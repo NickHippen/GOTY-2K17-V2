@@ -5,7 +5,6 @@ using UnityEngine;
 public class ThrowingKnife : MonoBehaviour
 {
     ParticleSystem impactParticle;
-    
     public float Damage { get; set; }
     public float ParticleRadius { get; set; }
     public float Timer { get; set; }
@@ -21,10 +20,11 @@ public class ThrowingKnife : MonoBehaviour
     private void Start()
     {
         impactParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        transform.GetChild(1).GetComponent<ParticleSystem>().gameObject.SetActive(true);
         StartCoroutine(RemoveObject());
     }
 
-	// knife keeps going thru wall, will change to raycast
+	// knife keeps going thru wall, may change to raycast
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") ||
@@ -47,7 +47,7 @@ public class ThrowingKnife : MonoBehaviour
                 {
                     monster.ApplyStatus(new StatusVulnerable(monster, BonusDuration, BonusMultiplier));
                 }
-                this.transform.SetParent(monster.transform, false);
+                this.transform.SetParent(monster.transform);
             }
         }
     }
