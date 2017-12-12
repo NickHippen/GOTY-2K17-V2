@@ -19,6 +19,7 @@ public class StaffData : WeaponData {
 
 	public override void Attack()
     {
+		base.Attack ();
         ThirdPersonCharacter player = this.GetComponentInParent<ThirdPersonCharacter>();
         StaffProjectile proj = Instantiate(staffProjectile).GetComponent<StaffProjectile>();
         proj.transform.position = player.transform.position + player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;

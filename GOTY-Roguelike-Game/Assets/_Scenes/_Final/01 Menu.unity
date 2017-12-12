@@ -12809,7 +12809,7 @@ Prefab:
     - target: {fileID: 224998989728627406, guid: 3c80df149468212448a7a90294cb7e64,
         type: 2}
       propertyPath: m_LocalPosition.x
-      value: 458
+      value: 442.5
       objectReference: {fileID: 0}
     - target: {fileID: 224998989728627406, guid: 3c80df149468212448a7a90294cb7e64,
         type: 2}
@@ -12914,7 +12914,7 @@ Prefab:
     - target: {fileID: 224979066171525912, guid: 3c80df149468212448a7a90294cb7e64,
         type: 2}
       propertyPath: m_LocalPosition.y
-      value: -180.78601
+      value: -187.11865
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3c80df149468212448a7a90294cb7e64, type: 2}
@@ -13628,6 +13628,7 @@ GameObject:
   - component: {fileID: 1082735690}
   - component: {fileID: 1082735689}
   - component: {fileID: 1082735688}
+  - component: {fileID: 1082735693}
   m_Layer: 0
   m_Name: staff
   m_TagString: Equipped
@@ -13720,6 +13721,22 @@ Transform:
   m_Father: {fileID: 1725594239}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1082735693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1082735687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bfd73efe17a6f4aa67374920ca58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffects:
+  - {fileID: 8300000, guid: e33959251b1869d46ac135e5f7a61ac7, type: 3}
+  directIndex: 0
+  loopIndex: 0
+  delay: 0
 --- !u!1 &1085395430
 GameObject:
   m_ObjectHideFlags: 0
@@ -19704,7 +19721,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1804798380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 458, y: 207, z: 0}
+  m_LocalPosition: {x: 442.5, y: 207, z: 0}
   m_LocalScale: {x: 0.46, y: 0.46, z: 0.46}
   m_Children:
   - {fileID: 443529343}
