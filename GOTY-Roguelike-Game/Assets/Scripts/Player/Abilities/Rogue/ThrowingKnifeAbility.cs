@@ -44,8 +44,9 @@ public class ThrowingKnifeAbility : Ability {
         knife.BonusMultiplier = bonusVulnMulitplier;
 		knife.Player = player;
         knife.gameObject.SetActive(true);
-
-        RaycastHit hit;
+		sfx.playSound ();
+        
+		RaycastHit hit;
         int layerMask = LayerMask.GetMask("Unwalkable", "Monster", "Ground");
         if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.forward, out hit, raycastRange, layerMask))
         {

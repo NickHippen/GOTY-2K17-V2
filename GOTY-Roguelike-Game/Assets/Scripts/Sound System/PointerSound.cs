@@ -15,12 +15,12 @@ public class PointerSound : MonoBehaviour, IPointerEnterHandler {
 	// Update is called once per frame
 	void Update () {
 		if (mm != null && mm.GetComponent<MusicManager>() != null) {
-			source.GetComponent<AudioSource>().volume = mm.GetComponent<MusicManager>().getVolume();
+			source.GetComponent<AudioSource>().volume = (float)mm.GetComponent<MusicManager>().getVolume();
 		} else {
 			source.GetComponent<AudioSource>().volume = 1f;
 		}
 
-		Debug.Log("THING" + source.GetComponent<AudioSource>().volume);
+		//Debug.Log("THING" + source.GetComponent<AudioSource>().volume);
 		//Debug.Log ("SOUND EFFECTS"source.volume);
 	}
 

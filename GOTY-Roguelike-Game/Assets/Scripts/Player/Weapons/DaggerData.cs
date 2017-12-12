@@ -23,7 +23,7 @@ public class DaggerData : WeaponData
     {
         if (timeSinceLastAttack >= 1f / hitsPerSecond)
         {
-            //PlayAttackAudio(0);
+            PlayAttackAudio(0);
             timeSinceLastAttack = 0f;
             SlashAttack();
         }

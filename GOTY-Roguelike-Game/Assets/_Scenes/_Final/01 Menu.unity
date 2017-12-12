@@ -4559,6 +4559,7 @@ GameObject:
   - component: {fileID: 135341601}
   - component: {fileID: 135341600}
   - component: {fileID: 135341599}
+  - component: {fileID: 135341603}
   m_Layer: 0
   m_Name: dagger
   m_TagString: Equipped
@@ -4648,6 +4649,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 1.5
+--- !u!114 &135341603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 135341597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bfd73efe17a6f4aa67374920ca58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffects:
+  - {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
+  directIndex: 0
+  loopIndex: 0
+  delay: 0
 --- !u!1 &146880951
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,14 +10,17 @@ public class SoundData : MonoBehaviour {
 	public int loopIndex;
 	public float delay;
 
+	public float offset = 0.0f;
+
 	GameObject mm;
 
 	// Use this for initialization
 	protected virtual void Start () {
 		this.gameObject.AddComponent<AudioSource>();
 		source = GetComponent<AudioSource> ();
-		mm = GameObject.Find ("MusicManager");
-		if (mm.GetComponent<MusicManager>() != null) {
+
+		if (GameObject.Find ("MusicManager") != null) {
+			mm = GameObject.Find ("MusicManager");
 			source.volume = mm.GetComponent<MusicManager>().getVolume();
 		} else {
 			source.volume = 1f;
@@ -26,7 +29,16 @@ public class SoundData : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-		source.volume = mm.GetComponent<MusicManager>().getVolume();
+		if (mm != null) {
+			/*if (mm.GetComponent<MusicManager> ().getVolume () > offset) {
+				source.volume = mm.GetComponent<MusicManager> ().getVolume () + offset;
+			} else {
+				source.volume = mm.GetComponent<MusicManager> ().getVolume ();
+			}*/
+			source.volume = mm.GetComponent<MusicManager> ().getVolume ();
+		} else {
+			source.volume = 1f;
+		}
 		//Debug.Log("THING" + mm.GetComponent<MusicManager> ().getVolume ());
 		//Debug.Log ("SOUND EFFECTS"source.volume);
 		
