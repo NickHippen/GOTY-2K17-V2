@@ -18,6 +18,7 @@ public class TurretAbility : Ability
     protected override void Start()
     {
         base.Start();
+        applyOnFrame = true;
         particleEffect = this.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
         ParticleSystem.MainModule pMain = particleEffect.main;
         pMain.startSize = particleEffectSize;

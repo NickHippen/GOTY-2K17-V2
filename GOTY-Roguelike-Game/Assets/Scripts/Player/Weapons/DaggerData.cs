@@ -14,12 +14,6 @@ public class DaggerData : WeaponData
     Transform leftHand;
     GameObject secondDagger;
 
-    protected override void Start()
-    {
-        base.Start();
-        StartCoroutine(WaitForPickup());
-    }
-
     protected void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
@@ -54,32 +48,29 @@ public class DaggerData : WeaponData
         }
     }
 
-    IEnumerator WaitForPickup()
-    {
-        yield return new WaitUntil(() => this.tag == "Equipped");
-        leftHand = this.GetComponentInParent<ThirdPersonCharacter>().leftHand.transform;
-        secondDagger = Instantiate(this.transform.GetChild(0).gameObject, leftHand, false);
-        secondDagger.transform.localPosition = leftDaggerPosition;
-        secondDagger.transform.localEulerAngles = leftDaggerRotation;
-        StartCoroutine(WaitForDrop());
-    }
-
     IEnumerator WaitForDrop()
     {
-        yield return new WaitUntil(() => this.tag == "Pickup");
+        yield return new WaitWhile(() => this.tag == "Equipped");
         Destroy(secondDagger);
-        StartCoroutine(WaitForPickup());
     }
     private void OnDisable()
     {
-        secondDagger.SetActive(false);
+        if (secondDagger != null)
+        {
+            Destroy(secondDagger);
+        }
     }
 
     private void OnEnable()
     {
-        if (secondDagger != null)
+        if(this.tag == "Equipped")
         {
-            secondDagger.SetActive(true);
+            this.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            leftHand = this.GetComponentInParent<ThirdPersonCharacter>().leftHand.transform;
+            secondDagger = Instantiate(this.transform.GetChild(0).gameObject, leftHand, false);
+            secondDagger.transform.localPosition = leftDaggerPosition;
+            secondDagger.transform.localEulerAngles = leftDaggerRotation;
+            StartCoroutine(WaitForDrop());
         }
     }
 

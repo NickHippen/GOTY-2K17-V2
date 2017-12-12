@@ -13,7 +13,6 @@ public class ShadowAbility : Ability {
     {
         base.Start();
         sfx = GetComponent<SoundData>();
-        applyOnFrame = true;
         particleEffect = transform.GetChild(0).gameObject;
     }
 
