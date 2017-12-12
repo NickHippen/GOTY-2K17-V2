@@ -6,7 +6,7 @@ public class MusicManager : MonoBehaviour {
 
 	public AudioClip[] levelMusicChangeArray;
 	private AudioSource audioSource;
-	public float offset = 0.0f;
+	public float offset = 0.2f;
 
 	void Awake(){
 		DontDestroyOnLoad (gameObject);
@@ -32,11 +32,11 @@ public class MusicManager : MonoBehaviour {
 	}
 
 	public void ChangeVolume(float volume){
-		if (volume > offset) {
+		//if (volume > offset) {
 			audioSource.volume = (float)volume - offset;
-		} else {
+		/*} else {
 			audioSource.volume = (float)volume;
-		}
+		}*/
 	}
 
 	public float getVolume(){
