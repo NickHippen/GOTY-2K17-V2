@@ -19,6 +19,7 @@ public class SwordData : WeaponData
             RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
             if (rigCollider != null && !(rigCollider is AttackCollider) && rigCollider.RootUnit is AggressiveUnit)
             {
+				PlayAttackAudio (1);
                 AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
                 float damage = this.damage;
                 damage *= damageMultiplier;

@@ -19,7 +19,7 @@ public class WeaponData : MonoBehaviour {
 
 	public GameObject Player { get; set; }
 
-	private SoundData sfx;
+	SoundData sfx;
 	//private AudioSource audioSource;
     protected float damageMultiplier = 1f;
 
