@@ -37,7 +37,7 @@ public class WeaponEmotionActionHandler {
 	}
 
 	public static float ApplyRage(WeaponData weaponData, LivingUnit target, float damage) {
-		// TODO Need to discuss how this works
+        target.ApplyStatus(new StatusVulnerable(target, 2f, 1.5f), false);
 		return damage;
 	}
 
@@ -58,7 +58,6 @@ public class WeaponEmotionActionHandler {
 		}
 		return damage;
 	}
-
 }
 
 public delegate float EmotionAction(WeaponData weaponData, LivingUnit target, float damage);

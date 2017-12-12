@@ -20,8 +20,9 @@ public class WeaponFactory {
 		swordObj.transform.SetParent (spawner);
 		SwordData swordData = swordObj.GetComponent<SwordData>();
 
-		// Generate stats
-		float damage = 10 + level * 5;
+        // Generate stats
+        float damage = swordBase.GetComponent<SwordData>().damage;
+        damage += damage * level * 0.2f; // 20% damage increase per level
 		
 		ApplyBonuses(swordData, level, quality);
 		switch (swordData.modifier) {
@@ -47,8 +48,10 @@ public class WeaponFactory {
 		GunData gunData = gunObj.GetComponent<GunData>();
 
 		// Generate stats
-		float damage = 4 + level * 2;
-		float bulletsPerSecond = 2;
+		float damage = gunBase.GetComponent<GunData>().damage * gunBase.GetComponent<GunData>().bulletsPerSecond; // DPS
+        float bulletsPerSecond = Random.Range(2, 7); // Randomize rate
+        damage /= bulletsPerSecond; // calculate amount of damage per bullet to match DPS
+        damage += damage * level * 0.2f; // 20% damage increase per level
 
 		ApplyBonuses(gunData, level, quality);
 		switch (gunData.modifier) {
@@ -67,7 +70,7 @@ public class WeaponFactory {
 				bulletsPerSecond *= 1.3f; // 30% faster fire rate
 				break;
 		}
-
+        
 		gunData.damage = damage;
 		gunData.bulletsPerSecond = bulletsPerSecond;
 		gunData.cost = Random.Range (minCost, maxCost+1);
@@ -81,7 +84,8 @@ public class WeaponFactory {
         StaffData staffData = staffObj.GetComponent<StaffData>();
 
         // Generate stats
-        float damage = 4 + level * 2;
+        float damage = staffBase.GetComponent<StaffData>().damage;
+        damage += damage * level * 0.2f; // 20% damage increase per level
 
         ApplyBonuses(staffData, level, quality);
         switch (staffData.modifier)
@@ -109,7 +113,8 @@ public class WeaponFactory {
         DaggerData daggerData = daggerObj.GetComponent<DaggerData>();
 
         // Generate stats
-        float damage = 4 + level * 2;
+        float damage = daggerBase.GetComponent<DaggerData>().damage;
+        damage += damage * level * 0.2f; // 20% damage increase per level
 
         ApplyBonuses(daggerData, level, quality);
         switch (daggerData.modifier)
@@ -135,10 +140,9 @@ public class WeaponFactory {
 
 		int emotionCount = System.Enum.GetNames(typeof(WeaponEmotion)).Length;
 		WeaponEmotion emotion = (WeaponEmotion)Random.Range(0, emotionCount);
-
+        
 		weaponData.modifier = modifier;
 		weaponData.emotion = emotion;
 		return weaponData;
 	}
-
 }

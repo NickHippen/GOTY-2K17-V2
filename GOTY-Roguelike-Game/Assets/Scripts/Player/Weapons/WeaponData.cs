@@ -15,9 +15,9 @@ public class WeaponData : MonoBehaviour {
 	public WeaponModifier modifier;
 	public WeaponEmotion emotion;
 
-	public ParticleSystem effect;
-
-	public GameObject Player { get; set; }
+    ParticleSystem particleEffect;
+    ParticleSystem.MainModule particleMain;
+    public GameObject Player { get; set; }
 
 	SoundData sfx;
 	//private AudioSource audioSource;
@@ -29,7 +29,14 @@ public class WeaponData : MonoBehaviour {
 		//effect.transform.position = transform.position;
 		sfx = GetComponent<SoundData>();
 		Player = GameObject.Find("remy");
-	}
+
+        particleEffect = this.GetComponentInChildren<ParticleSystem>(true);
+        if (particleEffect != null)
+        {
+            particleMain = particleEffect.main;
+            ApplyWeaponParticleEffect();
+        }
+    }
 
 	public string FullName {
 		get {
@@ -47,10 +54,10 @@ public class WeaponData : MonoBehaviour {
 
 	public virtual void Attack() {
 		PlayAttackAudio(0);
-		if (effect != null) {
-			//effect.transform.position = transform.position + transform.forward;
-			effect.Emit(10);
-		}
+		//if (particleEffect != null) {
+		//	//effect.transform.position = transform.position + transform.forward;
+		//	particleEffect.Emit(10);
+		//}
 	}
 
     public void ApplyDamageMultiplier(float duration, float damageMultiplier)
@@ -65,8 +72,44 @@ public class WeaponData : MonoBehaviour {
         damageMultiplier = 1f;
     }
 
-	//Index 0 = fired, index 1 = impact
-	protected virtual void PlayAttackAudio(int index) {
+    void ApplyWeaponParticleEffect()
+    {
+        switch(emotion)
+        {
+            case WeaponEmotion.Sorrow:
+                particleMain.startColor = new Color(Color.grey.r, Color.grey.b, Color.grey.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Rage:
+                particleMain.startColor = new Color(Color.red.r, Color.red.b, Color.red.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Inspiration:
+                particleMain.startColor = new Color(Color.white.r, Color.white.b, Color.white.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Confidence:
+                particleMain.startColor = new Color(Color.blue.r, Color.blue.b, Color.blue.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Shame:
+                particleMain.startColor = new Color(Color.green.r, Color.green.b, Color.green.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Anxiety:
+                particleMain.startColor = new Color(Color.magenta.r, Color.magenta.b, Color.magenta.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Envy:
+                particleMain.startColor = new Color(Color.yellow.r, Color.yellow.b, Color.yellow.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            default: break;
+        }
+    }
+
+    //Index 0 = fired, index 1 = impact
+    protected virtual void PlayAttackAudio(int index) {
 		if (sfx != null) {
 			sfx.playSound(index);
 		}

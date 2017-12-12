@@ -70,7 +70,12 @@ public class DaggerData : WeaponData
             secondDagger = Instantiate(this.transform.GetChild(0).gameObject, leftHand, false);
             secondDagger.transform.localPosition = leftDaggerPosition;
             secondDagger.transform.localEulerAngles = leftDaggerRotation;
-            StartCoroutine(WaitForDrop());
+            // if dagger has particle effect on second child
+            if (transform.childCount > 1)
+            {
+                GameObject secondParticle = Instantiate(this.transform.GetChild(1).gameObject, secondDagger.transform, false);
+                secondParticle.transform.localPosition = new Vector3(0, .5f, 0);
+            }
         }
     }
 
