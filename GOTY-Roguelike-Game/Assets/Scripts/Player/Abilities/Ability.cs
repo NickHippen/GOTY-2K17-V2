@@ -7,6 +7,7 @@ public class Ability : MonoBehaviour {
     public Sprite icon;
     public float cooldownTime;
     public bool faceCameraDirection;
+    public bool lockTurnRotation;
     protected bool applyOnFrame;
     protected bool bonusEffect;
     private float cooldownTimer;
@@ -66,9 +67,13 @@ public class Ability : MonoBehaviour {
         if (faceCameraDirection)
         {
             player.transform.rotation = Quaternion.Euler(0, Camera.main.transform.eulerAngles.y, 0);
+        }
+        if(lockTurnRotation)
+        {
             player.GetComponent<ThirdPersonCharacter>().LockTurnRotation = true;
             StartCoroutine(AbilityAvailible(player));
         }
+
 		if (sfx != null && sfx.soundEffects.Count > 0) {
 			sfx.playSound ();
 		}

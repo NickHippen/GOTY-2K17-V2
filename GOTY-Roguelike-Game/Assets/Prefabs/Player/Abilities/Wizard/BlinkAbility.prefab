@@ -147,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4134870547087664
 Transform:
   m_ObjectHideFlags: 1
@@ -449,6 +449,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 99c2f51b2c247e64e8b6186bacdeb1db, type: 3}
   cooldownTime: 10
   faceCameraDirection: 0
+  lockTurnRotation: 0
   sfx: {fileID: 0}
   range: 15
   particleHeight: 1.5

@@ -32,7 +32,6 @@ public class ThrowingKnifeAbility : Ability {
         base.applyEffect(player);
         ThrowingKnife knife = Instantiate(throwingKnife);
         knife.transform.position = player.transform.position + player.transform.forward * throwPosition.x + player.transform.up * throwPosition.y;
-        knife.transform.Rotate(0f, 270f, 0f);
         knife.Timer = despawnTimer;
         knife.Damage = damage;
         knife.CollisionOffset = collisionOffset;
@@ -51,14 +50,16 @@ public class ThrowingKnifeAbility : Ability {
         if (Physics.Raycast(Camera.main.transform.position + Camera.main.transform.forward, Camera.main.transform.forward, out hit, raycastRange, layerMask))
         {
             knife.transform.LookAt(hit.point);
+            knife.transform.Rotate(0f, 270f, 0f);
             Vector3 throwPointToHitPoint = hit.point - knife.transform.position;
-            //knife.GetComponent<Rigidbody>().AddForce(throwPointToHitPoint.normalized * throwForce);
+            knife.GetComponent<Rigidbody>().AddForce(throwPointToHitPoint.normalized * throwForce);
         }
         else
         {
 
             knife.transform.rotation = player.transform.rotation;
-            //.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
+            knife.transform.Rotate(0f, 270f, 0f);
+            knife.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward) * throwForce);
         }
     }
 }
