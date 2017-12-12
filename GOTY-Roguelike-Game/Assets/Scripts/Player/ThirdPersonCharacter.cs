@@ -39,6 +39,8 @@ public class ThirdPersonCharacter : MonoBehaviour
     bool lockTurnRotation;
     bool isInvisible;
 
+	SoundData sfx;
+
 	//Status of the Use Key 'E'
 	bool m_Use;
 	PlayerInventory inventory;
@@ -76,6 +78,8 @@ public class ThirdPersonCharacter : MonoBehaviour
 		remy = GameObject.Find ("remy");
 		pickuppopup = GameObject.Find ("PickupPopup");
 		pickupmessage = GameObject.Find ("WeaponPickupMessage");
+
+		sfx = GetComponent<SoundData> ();
 	}
 
     public Vector3 getMoveDirection()
@@ -395,6 +399,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		}
 
 		if (other.gameObject.CompareTag ("Currency")) {
+			sfx.playSound (2);
 			Destroy (other.gameObject);
 			GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold += 1;
 			GameObject.Find ("PlayerMoney").GetComponent<Text> ().text = GameObject.Find ("remy").GetComponent<PlayerInventory> ().gold.ToString ();
