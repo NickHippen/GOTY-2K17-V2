@@ -20,8 +20,8 @@ public class TurretAbility : Ability
         base.Start();
         applyOnFrame = true;
         particleEffect = this.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
-        ParticleSystem.MainModule pMain = particleEffect.main;
-        pMain.startSize = particleEffectSize;
+        //ParticleSystem.MainModule pMain = particleEffect.main;
+        //pMain.startSize = particleEffectSize;
         effectHeight = particleEffect.transform.position.y;
         particleEffect.Stop();
 

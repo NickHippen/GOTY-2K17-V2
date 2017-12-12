@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class ConeOfColdAbility : Ability {
     
-    public float effectSize;
     public float freezeDuration = 3f;
     public float coneDuration = 3f;
     public float bonusDuration;
     public float bonusSlowPercent;
+    public Vector2 effectPosition = new Vector2(0.175f, 1.25f);
+
+    GameObject coneOfCold;
 
     protected override void Start()
     {
         base.Start();
         applyOnFrame = true;
-		sfx = GetComponent<SoundData> ();
+        coneOfCold = this.transform.GetChild(0).gameObject;
+        sfx = GetComponent<SoundData> ();
     }
 
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
-        ConeOfCold cone = this.transform.GetChild(0).GetComponent<ConeOfCold>();
-        cone.gameObject.SetActive(true);
-        cone.gameObject.transform.position = player.transform.position + player.transform.up * 1.2f;
+        ConeOfCold cone = Instantiate(coneOfCold).GetComponent<ConeOfCold>();
+        cone.gameObject.transform.position = player.transform.position + player.transform.up * effectPosition.y;
         cone.gameObject.transform.rotation = player.transform.rotation;
+        cone.transform.GetChild(0).transform.localPosition = new Vector3(0, 0, effectPosition.x);
+        cone.gameObject.SetActive(true);
         cone.FreezeDuration = freezeDuration;
         cone.BonusEffect = bonusEffect;
         cone.BonusDuration = bonusDuration;
@@ -33,6 +37,8 @@ public class ConeOfColdAbility : Ability {
     IEnumerator StopCone(ConeOfCold cone)
     {
         yield return new WaitForSeconds(coneDuration);
-        cone.gameObject.SetActive(false);
+        cone.transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+        yield return new WaitWhile(() => cone.transform.GetChild(0).GetComponent<ParticleSystem>().IsAlive());
+        Destroy(cone.gameObject);
     }
 }
