@@ -26,7 +26,7 @@ public class SoundData : MonoBehaviour {
 	
 	// Update is called once per frame
 	protected virtual void Update () {
-
+		source.volume = mm.GetComponent<MusicManager>().getVolume();
 		//Debug.Log("THING" + mm.GetComponent<MusicManager> ().getVolume ());
 		//Debug.Log ("SOUND EFFECTS"source.volume);
 		
