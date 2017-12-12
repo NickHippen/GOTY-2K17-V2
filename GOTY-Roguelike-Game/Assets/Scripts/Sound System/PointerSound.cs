@@ -7,6 +7,10 @@ public class PointerSound : MonoBehaviour, IPointerEnterHandler {
 	GameObject source;
 	// Use this for initialization
 	GameObject mm;
+	void Awake(){
+		DontDestroyOnLoad (gameObject);
+	}
+
 	void Start () {
 		source = GameObject.Find("ButtonSound");
 		mm = GameObject.Find ("MusicManager");
