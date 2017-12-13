@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 114962252060502574}
   - component: {fileID: 54897157246554702}
   - component: {fileID: 136792966841403586}
+  - component: {fileID: 114596485026395016}
   m_Layer: 0
   m_Name: DaggerWeapon
   m_TagString: Pickup
@@ -159,6 +160,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &114596485026395016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 121958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8bfd73efe17a6f4aa67374920ca58b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundEffects:
+  - {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
+  directIndex: 0
+  loopIndex: 0
+  delay: 0
+  oneTime: 0
+  offset: 0.2
 --- !u!114 &114632885286520444
 MonoBehaviour:
   m_ObjectHideFlags: 1
