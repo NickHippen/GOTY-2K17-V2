@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
+using System;
 public class DrawMiniMap : MonoBehaviour {
 
 	public GameObject wallIcon;
@@ -13,6 +14,7 @@ public class DrawMiniMap : MonoBehaviour {
 	private GameObject map;
 	private MiniMapNode[,] mapNodeArr;
 	private bool active = true;
+	private GameObject thiscanvas;
 
 	public class MiniMapNode
 	{
@@ -150,6 +152,7 @@ public class DrawMiniMap : MonoBehaviour {
 		player = GameObject.Find ("remy");
 		playerToken = Instantiate (playerIcon, new Vector3 (0f, 0f, 0f), Quaternion.Euler(0f,0f,0f)) as GameObject;
 		playerToken.transform.SetParent (map.transform);
+		thiscanvas = GameObject.Find ("Map");
 	}
 
 	// Update is called once per frame
@@ -163,7 +166,7 @@ public class DrawMiniMap : MonoBehaviour {
 		}
 
 		Vector3 playerpos = player.transform.position;
-		playerToken.transform.localPosition = new Vector3 (playerpos.x * 2f, playerpos.z * 2f, 0);
+		playerToken.transform.localPosition = new Vector3 (playerpos.x * 2f + 16/thiscanvas.GetComponent<RectTransform>().rect.width + 8f, playerpos.z * 2f + 16/thiscanvas.GetComponent<RectTransform>().rect.height, 0);
 		playerToken.transform.rotation = Quaternion.Euler(0f,0f,  -player.transform.rotation.eulerAngles.y);
 
 
@@ -172,7 +175,7 @@ public class DrawMiniMap : MonoBehaviour {
 		for (int i = -3; i <= 3; i++) {
 			for (int j = -3; j <= 3; j++) {
 				try{
-					mapNodeArr[(int)(playerToken.transform.position.x / 16) - (offset + 17) + i ,(int)(playerToken.transform.position.y / 16) - offset + j].makeVisible();
+					mapNodeArr[(int)Math.Round((playerpos.x / 8) + i), (int)Math.Round(playerpos.z / 8) + j].makeVisible();
 				}
 				catch{
 
