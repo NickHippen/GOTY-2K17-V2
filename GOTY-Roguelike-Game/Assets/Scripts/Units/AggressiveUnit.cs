@@ -63,8 +63,9 @@ public abstract class AggressiveUnit : LivingUnit {
 		}
 		this.target = target;
 		BeginPathing();
-		if (sfx != null && sfx.soundEffects.Count > 0) {
+		if (sfx != null && sfx.soundEffects.Count > 0 && !sfx.oneTime) {
 			sfx.playSound();
+			sfx.oneTime = true;
 		}
 	}
 
