@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    ParticleSystem particleEffect;
-
     public float Damage { get; set; }
     public float DamageRadius { get; set; }
     public float ParticleRadius { get; set; }
@@ -14,9 +12,12 @@ public class Grenade : MonoBehaviour
     public float BonusDuration { get; set; }
 	public GameObject Player { get; set; }
 
+    ParticleSystem particleExplosion;
+    ParticleSystem particleSparks;
     private void Start()
     {
-        particleEffect = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        particleExplosion = this.transform.GetChild(0).GetComponent<ParticleSystem>();
+        particleSparks = this.transform.GetChild(1).GetComponent<ParticleSystem>();
         StartCoroutine(PullPin());
     }
 
@@ -24,11 +25,12 @@ public class Grenade : MonoBehaviour
     {
         yield return new WaitForSeconds(Timer);
         GetComponent<MeshRenderer>().enabled = false;
+        particleSparks.Stop();
         GetComponent<Rigidbody>().velocity = new Vector3();
             
-        particleEffect.transform.position = this.transform.position;
-        particleEffect.transform.localScale = new Vector3(DamageRadius*ParticleRadius, DamageRadius*ParticleRadius, DamageRadius*ParticleRadius);
-        particleEffect.gameObject.SetActive(true);
+        particleExplosion.transform.position = this.transform.position;
+        particleExplosion.transform.localScale = new Vector3(DamageRadius*ParticleRadius, DamageRadius*ParticleRadius, DamageRadius*ParticleRadius);
+        particleExplosion.gameObject.SetActive(true);
 
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, DamageRadius);
         foreach (Collider collider in colliders)
@@ -47,7 +49,7 @@ public class Grenade : MonoBehaviour
 
     IEnumerator removeGrenade()
     {
-        yield return new WaitWhile(() => particleEffect.IsAlive(true));
+        yield return new WaitWhile(() => particleExplosion.IsAlive(true));
         Destroy(this.gameObject);
     }
 }

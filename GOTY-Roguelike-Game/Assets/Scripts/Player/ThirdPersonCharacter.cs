@@ -294,14 +294,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 		//temp.GetComponent<Rigidbody>().useGravity = false;
 		GameObject hand;
 		WeaponData weaponData = temp.GetComponent<WeaponData>();
-		if (weaponData is GunData || weaponData is StaffData || weaponData is DaggerData) {
-			hand = rightHand;
-		//} else if (temp.name.Contains ("sword")) {
-		} else if (weaponData is SwordData) {
-			hand = leftHand;
-		} else {
-			hand = rightHand;
-		}
+		hand = rightHand;
 		temp.gameObject.transform.parent = hand.transform;
 		temp.gameObject.transform.position = hand.transform.position;
 		temp.gameObject.transform.rotation = hand.transform.rotation;

@@ -14,12 +14,12 @@ public class WeaponData : MonoBehaviour {
 
 	public WeaponModifier modifier;
 	public WeaponEmotion emotion;
-
-    ParticleSystem particleEffect;
-    ParticleSystem.MainModule particleMain;
     public GameObject Player { get; set; }
 
-	SoundData sfx;
+    protected ParticleSystem particleEffect;
+    protected ParticleSystem.MainModule particleMain;
+
+    SoundData sfx;
 	//private AudioSource audioSource;
     protected float damageMultiplier = 1f;
 

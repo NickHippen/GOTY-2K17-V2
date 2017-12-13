@@ -35,6 +35,7 @@ public class GrenadeAbility : Ability
         grenade.BonusDuration = bonusDuration;
         grenade.gameObject.SetActive(true);
 		grenade.Player = player;
-        grenade.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward*throwAngle.x + player.transform.up*throwAngle.y) * throwForce);
+        grenade.GetComponent<Rigidbody>().AddForce((Camera.main.transform.forward * throwAngle.x + player.transform.up * throwAngle.y) * throwForce);
+        grenade.GetComponent<Rigidbody>().AddTorque(new Vector3(0, 0, -20)); // spin grenade on throw
     }
 }

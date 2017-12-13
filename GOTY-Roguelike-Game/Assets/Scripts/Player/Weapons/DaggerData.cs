@@ -76,6 +76,7 @@ public class DaggerData : WeaponData
                 GameObject secondParticle = Instantiate(this.transform.GetChild(1).gameObject, secondDagger.transform, false);
                 secondParticle.transform.localPosition = new Vector3(0, .5f, 0);
             }
+            StartCoroutine(WaitForDrop());
         }
     }
 

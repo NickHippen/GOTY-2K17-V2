@@ -113,7 +113,9 @@ public class WeaponFactory {
         DaggerData daggerData = daggerObj.GetComponent<DaggerData>();
 
         // Generate stats
-        float damage = daggerBase.GetComponent<DaggerData>().damage;
+        float damage = daggerBase.GetComponent<DaggerData>().damage * daggerBase.GetComponent<DaggerData>().hitsPerSecond; // DPS
+        float hitsPerSecond = Random.Range(4, 7); // Randomize rate
+        damage /= hitsPerSecond; // calculate amount of damage per bullet to match DPS
         damage += damage * level * 0.2f; // 20% damage increase per level
 
         ApplyBonuses(daggerData, level, quality);
@@ -127,6 +129,12 @@ public class WeaponFactory {
                 break;
             case WeaponModifier.Karma:
                 damage *= 1.5f; // 50% more damage (but health may be lost on hit)
+                break;
+        }
+        switch (daggerData.emotion)
+        {
+            case WeaponEmotion.Inspiration:
+                hitsPerSecond *= 1.3f; // 30% faster slash rate
                 break;
         }
 
