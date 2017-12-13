@@ -141,6 +141,7 @@ public class MenuManager : MonoBehaviour {
 		togglePrimarySounds ();
 		toggleSelectButtons ();
 		transformPlayerSelect = true;
+		selectBerseker ();
 	}
 
 	public void gamestart(){
