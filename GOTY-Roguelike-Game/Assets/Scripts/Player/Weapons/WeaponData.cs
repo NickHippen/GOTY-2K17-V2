@@ -4,24 +4,28 @@ using UnityEngine;
 
 public class WeaponData : MonoBehaviour {
 
-	public string baseName;
-	public string desc;
-	public float damage = 10f;
-	public Vector3 rotation;
-	public GameObject model;
-	public Sprite icon;
-	public float cost;
+    public string baseName;
+    public string desc;
+    public float damage = 10f;
+    public Vector3 rotation;
+    public GameObject model;
+    public Sprite icon;
+    public float cost;
+    public float lightMoveSpeed = 1.3f;
+    public float inspirationAtkRate = 1.3f;
+    public float compassionCdRate = 1.3f;
 
-	public WeaponModifier modifier;
-	public WeaponEmotion emotion;
+    public WeaponModifier modifier;
+    public WeaponEmotion emotion;
     public GameObject Player { get; set; }
+
 
     protected ParticleSystem particleEffect;
     protected ParticleSystem.MainModule particleMain;
+    protected float damageMultiplier = 1f;
 
     SoundData sfx;
 	//private AudioSource audioSource;
-    protected float damageMultiplier = 1f;
 
 	protected virtual void Start() {
 		//audioSource = GetComponent<AudioSource>();
@@ -38,7 +42,78 @@ public class WeaponData : MonoBehaviour {
         }
     }
 
-	public string FullName {
+    protected virtual void OnEnable()
+    {
+        if (this.tag == "Equipped")
+        {
+            // enable passive modifier weapon traits
+            switch (modifier)
+            {
+                case WeaponModifier.Light:
+                    Player.GetComponent<Animator>().SetFloat("MoveSpeed", lightMoveSpeed);
+                    break;
+                default: break;
+            }
+            // enable passive emotion weapon traits
+            switch (emotion)
+            {
+                case WeaponEmotion.Compassion:
+                    List<Ability> abilities = Player.GetComponent<AbilityController>().getAbilityList();
+                    foreach (Ability ability in abilities)
+                    {
+                        ability.CooldownMultiplier *= compassionCdRate;
+                    }
+                    break;
+                case WeaponEmotion.Inspiration:
+                    Player.GetComponent<Animator>().SetFloat("AttackSpeed", inspirationAtkRate);
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    protected virtual void OnDisable()
+    {
+        if (this.tag == "Equipped")
+        {
+            // enable passive modifier weapon traits
+            switch (modifier)
+            {
+                case WeaponModifier.Light:
+                    Player.GetComponent<Animator>().SetFloat("MoveSpeed", 1f); // default speed
+                    break;
+                default: break;
+            }
+            // disable passive emotion weapon traits
+            switch (emotion)
+            {
+                case WeaponEmotion.Compassion:
+                    List<Ability> abilities = Player.GetComponent<AbilityController>().getAbilityList();
+                    foreach (Ability ability in abilities)
+                    {
+                        if (ability.CooldownMultiplier / compassionCdRate > 1.01f)
+                        {
+                            ability.CooldownMultiplier /= compassionCdRate;
+                        }
+                        else ability.CooldownMultiplier = 1;
+                    }
+                    break;
+                case WeaponEmotion.Inspiration:
+                    Player.GetComponent<Animator>().SetFloat("AttackSpeed", 1f); // default speed
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    // call this method in subclasse's OnEnable function. Does OnDisable method when weapon is dropped
+    protected virtual IEnumerator WaitForDrop()
+    {
+        yield return new WaitWhile(() => this.tag == "Equipped");
+        OnDisable();
+    }
+
+    public string FullName {
 		get {
 			string fullName = "";
 			if (modifier != 0) {

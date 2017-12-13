@@ -39,7 +39,7 @@ public class SwordData : WeaponData
         }
     }
 
-    IEnumerator WaitForDrop()
+    protected override IEnumerator WaitForDrop()
     {
         yield return new WaitWhile(() => this.tag == "Equipped");
         this.GetComponent<MeshRenderer>().enabled = true;
@@ -48,10 +48,14 @@ public class SwordData : WeaponData
         {
             particleEffect.gameObject.SetActive(true);
         }
+        OnDisable();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+        StartCoroutine(WaitForDrop());
+
         if (this.tag == "Equipped")
         {
             this.GetComponent<MeshRenderer>().enabled = false;
@@ -60,7 +64,6 @@ public class SwordData : WeaponData
             {
                 particleEffect.gameObject.SetActive(false);
             }
-            StartCoroutine(WaitForDrop());
         }
     }
 }

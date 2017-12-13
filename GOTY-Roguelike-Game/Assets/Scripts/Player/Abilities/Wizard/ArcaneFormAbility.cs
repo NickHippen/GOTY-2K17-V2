@@ -38,7 +38,11 @@ public class ArcaneFormAbility : Ability {
         foreach (Ability ability in abilities)
         {
             if (ability is ArcaneFormAbility) continue;
-            ability.CooldownMultiplier /= cooldownMuliplier;
+            if (ability.CooldownMultiplier/cooldownMuliplier > 1.01f)
+            {
+                ability.CooldownMultiplier /= cooldownMuliplier;
+            }
+            else ability.CooldownMultiplier = 1;
         }
         particles.GetComponent<ParticleSystem>().Stop();
         yield return new WaitWhile(() => particles.GetComponent<ParticleSystem>().IsAlive());

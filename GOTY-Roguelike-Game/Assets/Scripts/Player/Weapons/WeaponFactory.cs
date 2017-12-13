@@ -65,11 +65,6 @@ public class WeaponFactory {
 				damage *= 1.5f; // 50% more damage (but health may be lost on hit)
 				break;
 		}
-		switch (gunData.emotion) {
-			case WeaponEmotion.Inspiration:
-				bulletsPerSecond *= 1.3f; // 30% faster fire rate
-				break;
-		}
         
 		gunData.damage = damage;
 		gunData.bulletsPerSecond = bulletsPerSecond;
@@ -129,12 +124,6 @@ public class WeaponFactory {
                 break;
             case WeaponModifier.Karma:
                 damage *= 1.5f; // 50% more damage (but health may be lost on hit)
-                break;
-        }
-        switch (daggerData.emotion)
-        {
-            case WeaponEmotion.Inspiration:
-                hitsPerSecond *= 1.3f; // 30% faster slash rate
                 break;
         }
 

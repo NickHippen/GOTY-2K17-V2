@@ -48,23 +48,31 @@ public class DaggerData : WeaponData
         }
     }
 
-    IEnumerator WaitForDrop()
+    protected override void OnDisable()
     {
-        yield return new WaitWhile(() => this.tag == "Equipped");
-        Destroy(secondDagger);
-    }
-    private void OnDisable()
-    {
+        base.OnDisable();
         if (secondDagger != null)
         {
             Destroy(secondDagger);
         }
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        if(this.tag == "Equipped")
+        base.OnEnable();
+        StartCoroutine(WaitForDrop());
+
+        if (this.tag == "Equipped")
         {
+            switch (emotion)
+            {
+                case WeaponEmotion.Inspiration:
+                    hitsPerSecond *= 1.3f; // 30% hit rate increase
+                    break;
+                default: break;
+            }
+
+            // spawn second dagger in hand
             this.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             leftHand = this.GetComponentInParent<ThirdPersonCharacter>().leftHand.transform;
             secondDagger = Instantiate(this.transform.GetChild(0).gameObject, leftHand, false);
@@ -76,8 +84,13 @@ public class DaggerData : WeaponData
                 GameObject secondParticle = Instantiate(this.transform.GetChild(1).gameObject, secondDagger.transform, false);
                 secondParticle.transform.localPosition = new Vector3(0, .5f, 0);
             }
-            StartCoroutine(WaitForDrop());
         }
+    }
+
+    protected override IEnumerator WaitForDrop()
+    {
+        yield return new WaitWhile(() => this.tag == "Equipped");
+        OnDisable();
     }
 
     private void OnDestroy()

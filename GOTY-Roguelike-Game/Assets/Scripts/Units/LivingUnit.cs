@@ -20,6 +20,7 @@ public abstract class LivingUnit : Unit {
 
 	public GameObject healthDrop;
 	public GameObject gemDrop;
+    public int DropIncrease { get; set; }
 
 	public virtual float Health {
 		get {
@@ -99,6 +100,20 @@ public abstract class LivingUnit : Unit {
 		ApplyStatus(status, true);
 	}
 
+    public void ApplyKnockback(float distance)
+    {
+        RaycastHit hit;
+        int layerMask = LayerMask.GetMask("Unwalkable", "Ground");
+        if (Physics.Raycast(this.transform.position, -this.transform.forward, out hit, distance, layerMask))
+        {
+            this.transform.position = hit.point;
+        }
+        else
+        {
+            this.transform.position -= this.transform.forward * distance;
+        }
+    }
+    
 	void UpdateStatuses() {
 		for (int i = 0; i < healthBar.transform.childCount; i++) {
 			healthBar.transform.GetChild(i).gameObject.SetActive(false);
@@ -157,7 +172,7 @@ public abstract class LivingUnit : Unit {
 		}
 
 		if (gemDrop != null) {
-			int maxamt = Random.Range (1, 5);
+			int maxamt = Random.Range (1, 5 + DropIncrease);
 			for (int i = 0; i < maxamt; i++) {
 				GameObject instance = Instantiate (gemDrop, new Vector3 (this.transform.position.x, this.transform.position.y, this.transform.position.z), Quaternion.identity) as GameObject;
 			}

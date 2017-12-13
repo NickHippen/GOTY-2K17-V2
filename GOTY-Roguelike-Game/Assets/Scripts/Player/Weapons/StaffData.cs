@@ -16,8 +16,13 @@ public class StaffData : WeaponData {
         staffProjectile = this.transform.GetChild(1).GetComponent<StaffProjectile>();
         
     }
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        StartCoroutine(WaitForDrop());
+    }
 
-	public override void Attack()
+    public override void Attack()
     {
 		base.Attack ();
         ThirdPersonCharacter player = this.GetComponentInParent<ThirdPersonCharacter>();

@@ -22,7 +22,24 @@ public class GunData : WeaponData {
 		timeSinceLastShot += Time.deltaTime;
 	}
 
-	public override void Attack() {
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        StartCoroutine(WaitForDrop());
+
+        if (this.tag == "Equipped")
+        {
+            switch (emotion)
+            {
+                case WeaponEmotion.Inspiration:
+                    bulletsPerSecond *= 1.3f; // 30% hit rate increase
+                    break;
+                default: break;
+            }
+        }
+    }
+
+    public override void Attack() {
 		if (timeSinceLastShot >= 1f / bulletsPerSecond) {
 			PlayAttackAudio(0);
 			timeSinceLastShot = 0f;

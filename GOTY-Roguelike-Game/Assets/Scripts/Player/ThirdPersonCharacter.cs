@@ -36,8 +36,9 @@ public class ThirdPersonCharacter : MonoBehaviour
 	bool m_isDead;
 	AbilityController abilities;
     Vector3 moveDirection;
-    bool lockTurnRotation;
-    bool isInvisible;
+    public bool LockTurnRotation { get; set; }
+    public bool IsInvisible { get; set; }
+    public int WeaponAnimationLayer { get; set; }
 
 	SoundData sfx;
 
@@ -86,16 +87,6 @@ public class ThirdPersonCharacter : MonoBehaviour
     {
         return moveDirection;
     }
-    public bool LockTurnRotation
-    {
-        get { return lockTurnRotation; }
-        set { lockTurnRotation = value; }
-    }
-    public bool IsInvisible
-    {
-        get { return isInvisible; }
-        set { isInvisible = value; }
-    }
 
     public void Move(Vector3 move, bool jump, bool atk, bool[] abilityInputs)
     {
@@ -120,7 +111,7 @@ public class ThirdPersonCharacter : MonoBehaviour
         else
         {   // camera is independent of player rotation, use cartesian controls
             m_TurnAmount = Mathf.Atan2(move.x, move.z);
-            if(!lockTurnRotation) ApplyExtraTurnRotation();
+            if(!LockTurnRotation) ApplyExtraTurnRotation();
         }
 
         // control and velocity handling is different when grounded and airborne:
@@ -323,28 +314,28 @@ public class ThirdPersonCharacter : MonoBehaviour
             WeaponData weapon = inventory.getCurrentWeapon().GetComponent<WeaponData>();
             if (weapon is GunData)
             {
-                m_Animator.SetLayerWeight(1, 1); // turn on Gun weapon layer
+                m_Animator.SetLayerWeight(WeaponAnimationLayer = 1, 1); // turn on Gun weapon layer
                 m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
                 m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
                 m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
             }
             else if(weapon is SwordData)
             {
-                m_Animator.SetLayerWeight(2, 1); // turn on sword weapon layer
+                m_Animator.SetLayerWeight(WeaponAnimationLayer = 2, 1); // turn on sword weapon layer
                 m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
                 m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer
                 m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
             }
             else if(weapon is StaffData)
             {
-                m_Animator.SetLayerWeight(3, 1); // turn on staff weapon layer
+                m_Animator.SetLayerWeight(WeaponAnimationLayer = 3, 1); // turn on staff weapon layer
                 m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
                 m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
                 m_Animator.SetLayerWeight(4, 0); // turn off dagger weapon layer
             }
             else
             {
-                m_Animator.SetLayerWeight(4, 1); // turn on dagger weapon layer
+                m_Animator.SetLayerWeight(WeaponAnimationLayer = 4, 1); // turn on dagger weapon layer
                 m_Animator.SetLayerWeight(1, 0); // turn off gun weapon layer
                 m_Animator.SetLayerWeight(2, 0); // turn off sword weapon layer
                 m_Animator.SetLayerWeight(3, 0); // turn off staff weapon layer

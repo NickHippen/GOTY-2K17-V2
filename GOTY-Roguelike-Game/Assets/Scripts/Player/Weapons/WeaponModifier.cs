@@ -8,6 +8,7 @@ public enum WeaponModifier {
 	None=0, Weak, Strong, Siphon, Light/*, Heavy*/, Karma, Focused
 
 }
+// Weak and Strong are on create, Light is in WeaponData
 
 public class WeaponModifierActionHandler {
 
@@ -25,18 +26,43 @@ public class WeaponModifierActionHandler {
 		return damage;
 	}
 
-	public static float ApplySiphon(WeaponData weaponData, LivingUnit target, float damage) {
-		// TODO Weapons need reference to user
-		return damage;
+	public static float ApplySiphon(WeaponData weaponData, LivingUnit target, float damage)
+    {
+        float chance;
+        if (weaponData is GunData || weaponData is DaggerData)
+        {
+            chance = 0.075f;
+        }
+        else
+        {
+            chance = .25f;
+        }
+        if (Random.Range(0f, 1f) < chance)
+        {
+            weaponData.Player.GetComponent<HealthManager>().Heal(damage * 0.05f); // 25% chance to heal 5% of damage dealt
+        }
+        return damage;
 	}
 
 	public static float ApplyKarma(WeaponData weaponData, LivingUnit target, float damage) {
-		// TODO Weapons need reference to user
-		return damage;
+        float chance;
+        if (weaponData is GunData || weaponData is DaggerData)
+        {
+            chance = 0.075f;
+        }
+        else
+        {
+            chance = .25f;
+        }
+        if (Random.Range(0f, 1f) < chance)
+        {
+            weaponData.Player.GetComponent<HealthManager>().Heal(3); // 25% chance take 3 damage on hit
+        }
+        return damage;
 	}
 
 	public static float ApplyFocused(WeaponData weaponData, LivingUnit target, float damage) {
-		if (Random.Range(0f, 1f) < 0.35f) {
+		if (Random.Range(0f, 1f) < 0.35f) { // 35% chance critical damage
 			damage *= 2f;
 		}
 		return damage;

@@ -248,10 +248,9 @@ MonoBehaviour:
   faceCameraDirection: 0
   lockTurnRotation: 1
   sfx: {fileID: 0}
-  damage: 10
+  damage: 15
   duration: 4
   damageRadius: 2
-  bonusDamage: 10
   effectPosition: {x: 1.8, y: 1.5}
 --- !u!114 &114597739925359714
 MonoBehaviour:
@@ -293,6 +292,8 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
+  offset: 0.2
 --- !u!198 &198097850240740926
 ParticleSystem:
   m_ObjectHideFlags: 1

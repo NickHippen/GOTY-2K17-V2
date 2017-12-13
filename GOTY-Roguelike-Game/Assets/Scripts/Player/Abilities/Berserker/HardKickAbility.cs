@@ -7,7 +7,6 @@ public class HardKickAbility : Ability {
     public float damage;
     public float duration = 4f;
 	public float damageRadius;
-    public float bonusDamage;
     public Vector2 effectPosition;
 
     ParticleSystem particleEffect;
@@ -46,9 +45,9 @@ public class HardKickAbility : Ability {
 				float damage = this.damage;
                 if(bonusEffect)
                 {
-                    damage += bonusDamage;
+                    monster.ApplyStatus(new StatusStun(monster, duration));
                 }
-				monster.ApplyStatus (new StatusStun(monster, duration));
+                monster.ApplyKnockback(10f);
 				monster.Damage(damage, player.transform);
 			}
         }
