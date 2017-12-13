@@ -7,15 +7,17 @@ public class AdrenalineAbility : Ability {
     public float damageMultiplier = 2f;
     public float duration;
 
-    ParticleSystem particleEffect;
+    GameObject portalEffect;
+    GameObject energyEffect;
+    private float energyHeight = 1.28f;
     Ability hardKick;
     bool isActive;
 
 	protected override void Start(){
         base.Start();
 		sfx = GetComponent<SoundData> ();
-        particleEffect = transform.GetChild(0).GetComponent<ParticleSystem>();
-        particleEffect.Stop();
+        energyEffect = transform.GetChild(0).gameObject;
+        portalEffect = transform.GetChild(1).gameObject;
 	}
 
     protected override void Update()
@@ -32,8 +34,6 @@ public class AdrenalineAbility : Ability {
         base.applyEffect(player);
 
         hardKick = player.GetComponent<AbilityController>().getAbilityList()[1];
-        this.transform.position = player.transform.position;
-		this.transform.parent = player.transform;
         isActive = true;
 
         foreach(GameObject weapon in player.GetComponent<PlayerInventory>().weapons)
@@ -41,16 +41,23 @@ public class AdrenalineAbility : Ability {
             weapon.GetComponent<WeaponData>().ApplyDamageMultiplier(duration, damageMultiplier);
         }
 
-		StartCoroutine (effectTimer ());
+		StartCoroutine (effectTimer (player));
     }
 
-	IEnumerator effectTimer(){
-		particleEffect.Play ();
-		//sfx.playSound ();
+	IEnumerator effectTimer(GameObject player){
+        ParticleSystem energy = Instantiate(energyEffect, player.transform, false).GetComponent<ParticleSystem>();
+        ParticleSystem portal = Instantiate(portalEffect, player.transform, false).GetComponent<ParticleSystem>();
+        energy.transform.position += player.transform.up * energyHeight;
+        energy.gameObject.SetActive(true);
+        portal.gameObject.SetActive(true);
 		sfx.playLoop ();
 		yield return new WaitForSeconds (duration);
+        energy.Stop();
+        portal.Stop();
         isActive = false;
-		particleEffect.Stop ();
-		sfx.stopLoop();
+        sfx.stopLoop();
+        yield return new WaitWhile(() => energy.IsAlive() || portal.IsAlive());
+        Destroy(energy.gameObject);
+        Destroy(portal.gameObject);
 	}
 }

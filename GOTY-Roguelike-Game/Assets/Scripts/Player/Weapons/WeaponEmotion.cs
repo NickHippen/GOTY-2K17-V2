@@ -37,7 +37,7 @@ public class WeaponEmotionActionHandler {
 	}
 
 	public static float ApplyRage(WeaponData weaponData, LivingUnit target, float damage) {
-        target.ApplyStatus(new StatusVulnerable(target, 2f, 1.5f), false);
+        target.ApplyStatus(new StatusVulnerable(target, 2f, 1.1f), false);
 		return damage;
 	}
 

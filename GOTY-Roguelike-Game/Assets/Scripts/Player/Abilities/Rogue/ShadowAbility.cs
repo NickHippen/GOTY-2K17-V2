@@ -30,7 +30,9 @@ public class ShadowAbility : Ability {
     private IEnumerator effectTimer(GameObject player, GameObject effect)
     {
         yield return new WaitForSeconds(bonusEffect ? duration + bonusDuration : duration);
+        particleEffect.GetComponent<ParticleSystem>().Stop();
         player.GetComponent<ThirdPersonCharacter>().IsInvisible = false;
+        yield return new WaitWhile(() => particleEffect.GetComponent<ParticleSystem>().IsAlive());
         if (effect != null) {
             Destroy(effect);
         }

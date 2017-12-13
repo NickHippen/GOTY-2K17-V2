@@ -13,7 +13,7 @@ public class StaffData : WeaponData {
 
 	protected override void Start() {
 		base.Start();
-        staffProjectile = this.transform.GetChild(0).GetComponent<StaffProjectile>();
+        staffProjectile = this.transform.GetChild(1).GetComponent<StaffProjectile>();
         
     }
 

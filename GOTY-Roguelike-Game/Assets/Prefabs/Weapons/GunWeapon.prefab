@@ -30,8 +30,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118234}
-  m_LocalRotation: {x: 0.4667226, y: 0.4749404, z: 0.5229185, w: 0.5321258}
-  m_LocalPosition: {x: -4.535, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4959815475252926}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 198691460428139338}
   - component: {fileID: 199486539539108104}
   m_Layer: 0
-  m_Name: Ingredient-Unite(Last)-Smoke (1)
+  m_Name: emotionGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -262,7 +262,6 @@ MonoBehaviour:
   cost: 0
   modifier: 0
   emotion: 0
-  effect: {fileID: 0}
   shootPoint: {fileID: 4959815475252926}
   range: 100
   bulletsPerSecond: 8
@@ -272,7 +271,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118234}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c530615d7795b1a4ab57655da98047b0, type: 3}
   m_Name: 
@@ -295,6 +294,8 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
+  offset: 0.2
 --- !u!120 &120740972109151914
 LineRenderer:
   m_ObjectHideFlags: 1

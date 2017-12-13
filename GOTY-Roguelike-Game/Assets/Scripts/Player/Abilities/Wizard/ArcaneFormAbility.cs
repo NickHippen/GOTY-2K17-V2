@@ -40,6 +40,8 @@ public class ArcaneFormAbility : Ability {
             if (ability is ArcaneFormAbility) continue;
             ability.CooldownMultiplier /= cooldownMuliplier;
         }
+        particles.GetComponent<ParticleSystem>().Stop();
+        yield return new WaitWhile(() => particles.GetComponent<ParticleSystem>().IsAlive());
         Destroy(particles);
 		sfx.stopLoop ();
     }

@@ -20,10 +20,6 @@ public class AssassinateAbility : Ability {
         
         sfx = GetComponent<SoundData>();
         particleEffect = transform.GetChild(0).gameObject;
-        //ParticleSystem.MainModule mainEffect = particleEffect.main;
-        //mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
-        //mainEffect = particleEffect.transform.GetChild(0).GetComponent<ParticleSystem>().main;
-        //mainEffect.startSize = damageRadius * mainEffect.startSize.constant;
     }
 
     public override void applyEffect(GameObject player)

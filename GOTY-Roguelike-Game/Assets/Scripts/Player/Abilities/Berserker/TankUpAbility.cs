@@ -52,6 +52,8 @@ public class TankUpAbility : Ability {
         player.GetComponent<HealthManager>().invincible = true;
 		yield return new WaitForSeconds (effectDuration);
         player.GetComponent<HealthManager>().invincible = false;
+        shield.GetComponent<ParticleSystem>().Stop();
+        yield return new WaitWhile(() => shield.GetComponent<ParticleSystem>().IsAlive());
         Destroy(shield);
 	}
 		
