@@ -10,6 +10,8 @@ public class SoundData : MonoBehaviour {
 	public int loopIndex;
 	public float delay;
 
+	public bool oneTime = false;
+
 	public float offset = 0.2f;
 
 	GameObject mm;
