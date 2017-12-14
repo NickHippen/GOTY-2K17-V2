@@ -66,7 +66,7 @@ public class MagicMissile : MonoBehaviour
         ParticleSystem.MainModule mainSystem = explosionParticle.main;
         mainSystem.startSize = ParticleRadius;
         explosionParticle.gameObject.SetActive(true);
-
+        this.GetComponent<SphereCollider>().enabled = false;
         Collider[] colliders = Physics.OverlapSphere(this.transform.position, DamageRadius);
         foreach (Collider collider in colliders)
         {

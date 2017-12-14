@@ -266,7 +266,6 @@ public class BoardManager : MonoBehaviour
 		}
 		Vector3 remyPos = remy.transform.position;
 		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.position;
-		Debug.Log ("REMY:" + (remyPos.x - exitPos.x) + "    " + (remyPos.z - exitPos.z));
 		if (Math.Abs(remyPos.x - exitPos.x) + Math.Abs(remyPos.z - exitPos.z) < 1) {
 			levelmanager.LoadNextLevel();
 		}

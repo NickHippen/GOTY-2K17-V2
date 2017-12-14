@@ -16,6 +16,8 @@ public class HealthManager : MonoBehaviour {
 
 	private bool created = false;
 
+	public SoundData sfx;
+
 	public float Health {
 		get {
 			return health;
@@ -40,6 +42,7 @@ public class HealthManager : MonoBehaviour {
 	void Start() {
 		health = maxHealth;
 		invincible = false;
+		sfx = GetComponent<SoundData> ();
 	}
 
 	void Update() {
@@ -76,7 +79,16 @@ public class HealthManager : MonoBehaviour {
 				return; // Dodge
 			}
 		}
-		if (!invincible) {
+		if (!invincible && Living) {
+			int roll = Random.Range (0, 5);
+			Debug.Log (roll);
+			switch (roll) {
+			case 0:
+				sfx.playSound (Random.Range (4, 8));
+				break;
+			default:
+				break;
+			}
 			Health -= amount;
 			healthSlider.fillAmount = Health/100;
 		}
