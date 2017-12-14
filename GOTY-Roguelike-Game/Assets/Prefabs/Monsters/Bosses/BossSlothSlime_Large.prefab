@@ -567,6 +567,7 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
 --- !u!114 &114961925804887120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -586,9 +587,10 @@ MonoBehaviour:
   turnDist: 1
   destinationRadius: 6
   forceDestinationRadius: 0
+  usingLoS: 0
   atGoal: 0
-  health: 100
-  maxHealth: 100
+  health: 750
+  maxHealth: 750
   canvasHeight: 0.018
   healthDrop: {fileID: 0}
   gemDrop: {fileID: 0}
@@ -607,7 +609,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -623,7 +624,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
