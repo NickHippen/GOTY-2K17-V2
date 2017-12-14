@@ -79,7 +79,16 @@ public class HealthManager : MonoBehaviour {
 				return; // Dodge
 			}
 		}
-		if (!invincible) {
+		if (!invincible && Living) {
+			int roll = Random.Range (0, 2);
+			Debug.Log (roll);
+			switch (roll) {
+			case 0:
+				sfx.playSound (Random.Range (4, 8));
+				break;
+			default:
+				break;
+			}
 			Health -= amount;
 			healthSlider.fillAmount = Health/100;
 		}
