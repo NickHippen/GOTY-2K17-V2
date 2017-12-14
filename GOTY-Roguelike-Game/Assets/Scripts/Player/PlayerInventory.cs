@@ -148,7 +148,6 @@ public class PlayerInventory : MonoBehaviour {
 	}
 
 	public void UpdateUI(){
-		Debug.Log ("YO");
 		for (int x = 0; x < maxCapacity; x++) {
 			slots [x].GetComponent<Image> ().sprite = empty;
 			slots [x].GetComponent<Image> ().rectTransform.sizeDelta = new Vector2 (defautIconSize, defautIconSize);
