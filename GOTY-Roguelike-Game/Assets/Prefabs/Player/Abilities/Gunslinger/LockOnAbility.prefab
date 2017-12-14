@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 114560318068580796}
   - component: {fileID: 82817405783116084}
   m_Layer: 0
-  m_Name: MarkForDeathAbility
+  m_Name: LockOnAbility
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,6 +235,7 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
 --- !u!114 &114566496926193364
 MonoBehaviour:
   m_ObjectHideFlags: 1
