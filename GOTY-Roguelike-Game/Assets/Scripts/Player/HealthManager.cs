@@ -16,6 +16,8 @@ public class HealthManager : MonoBehaviour {
 
 	private bool created = false;
 
+	public SoundData sfx;
+
 	public float Health {
 		get {
 			return health;
@@ -40,6 +42,7 @@ public class HealthManager : MonoBehaviour {
 	void Start() {
 		health = maxHealth;
 		invincible = false;
+		sfx = GetComponent<SoundData> ();
 	}
 
 	void Update() {
