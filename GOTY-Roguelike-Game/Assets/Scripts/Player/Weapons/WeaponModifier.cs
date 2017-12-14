@@ -28,36 +28,12 @@ public class WeaponModifierActionHandler {
 
 	public static float ApplySiphon(WeaponData weaponData, LivingUnit target, float damage)
     {
-        float chance;
-        if (weaponData is GunData || weaponData is DaggerData)
-        {
-            chance = 0.075f;
-        }
-        else
-        {
-            chance = .25f;
-        }
-        if (Random.Range(0f, 1f) < chance)
-        {
-            weaponData.Player.GetComponent<HealthManager>().Heal(damage * 0.05f); // 25% chance to heal 5% of damage dealt
-        }
+        if (weaponData.RandomChanceHit(0.2f)) weaponData.Player.GetComponent<HealthManager>().Heal(damage * 0.05f); // 25% chance to heal 5% of damage dealt
         return damage;
 	}
 
 	public static float ApplyKarma(WeaponData weaponData, LivingUnit target, float damage) {
-        float chance;
-        if (weaponData is GunData || weaponData is DaggerData)
-        {
-            chance = 0.075f;
-        }
-        else
-        {
-            chance = .25f;
-        }
-        if (Random.Range(0f, 1f) < chance)
-        {
-            weaponData.Player.GetComponent<HealthManager>().Heal(3); // 25% chance take 3 damage on hit
-        }
+        if (weaponData.RandomChanceHit(0.2f)) weaponData.Player.GetComponent<HealthManager>().Heal(3); // 25% chance take 3 damage on hit
         return damage;
 	}
 

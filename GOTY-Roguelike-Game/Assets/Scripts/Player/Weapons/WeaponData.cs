@@ -136,6 +136,20 @@ public class WeaponData : MonoBehaviour {
 		//}
 	}
 
+    public bool RandomChanceHit(float percent)
+    {
+        float chance;
+        if (this is GunData || this is DaggerData)
+        {
+            chance = percent/3f;
+        }
+        else
+        {
+            chance = percent;
+        }
+        return Random.Range(0f, 1f) < chance;
+    }
+
     public void ApplyDamageMultiplier(float duration, float damageMultiplier)
     {
         this.damageMultiplier = damageMultiplier;

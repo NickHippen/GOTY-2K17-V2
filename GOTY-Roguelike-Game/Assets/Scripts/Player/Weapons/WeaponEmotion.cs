@@ -27,47 +27,27 @@ public class WeaponEmotionActionHandler {
 	}
 
 	public static float ApplySorrow(WeaponData weaponData, LivingUnit target, float damage) {
-		target.ApplyStatus(new StatusSlow(target, 2f, 0.2f));
+        if (weaponData.RandomChanceHit(0.2f)) target.ApplyStatus(new StatusSlow(target, 2f, 0.2f));
 		return damage;
 	}
 
 	public static float ApplyIsolation(WeaponData weaponData, LivingUnit target, float damage) {
-        float chance;
-        if (weaponData is GunData || weaponData is DaggerData)
-        {
-            chance = 0.075f;
-        }
-        else
-        {
-            chance = .25f;
-        }
-        if (UnityEngine.Random.Range(0f, 1f) < chance)
-        {
-            target.ApplyKnockback(3f);
-        }
+        if (weaponData.RandomChanceHit(0.2f)) target.ApplyKnockback(2f);
 		return damage;
 	}
 
 	public static float ApplyRage(WeaponData weaponData, LivingUnit target, float damage) {
-        target.ApplyStatus(new StatusVulnerable(target, 2f, 1.1f), false);
+        if(weaponData.RandomChanceHit(0.2f)) target.ApplyStatus(new StatusVulnerable(target, 2f, 1.05f), false);
 		return damage;
 	}
 
 	public static float ApplyAnxiety(WeaponData weaponData, LivingUnit target, float damage) {
-		target.ApplyStatus(new StatusPoison(target, 2f, 3f, 1), false);
+		if(weaponData.RandomChanceHit(0.2f)) target.ApplyStatus(new StatusPoison(target, 4f, 2f, 1), false);
 		return damage;
 	}
 
 	public static float ApplyEnvy(WeaponData weaponData, LivingUnit target, float damage) {
-		float chance;
-		if (weaponData is GunData || weaponData is DaggerData) {
-			chance = 0.015f;
-		} else {
-			chance = 0.05f;
-		}
-		if (UnityEngine.Random.Range(0f, 1f) < chance) {
-			target.ApplyStatus(new StatusStun(target, 1f), false);
-		}
+        if (weaponData.RandomChanceHit(0.2f)) target.ApplyStatus(new StatusStun(target, 1f), false);
 		return damage;
 	}
 
