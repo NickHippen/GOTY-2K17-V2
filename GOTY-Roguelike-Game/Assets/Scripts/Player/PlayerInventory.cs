@@ -19,6 +19,8 @@ public class PlayerInventory : MonoBehaviour {
 
 	public int gold;
 
+	public Text weaponDes;
+
 	void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
@@ -68,6 +70,7 @@ public class PlayerInventory : MonoBehaviour {
 			current = x;
 			weapons [current].SetActive(true);
 			weapons [current].transform.localEulerAngles = weapons [current].GetComponent<WeaponData> ().rotation;
+			weaponDes.text = weapons [current].GetComponent<WeaponData> ().FullName;
 		}
 		UpdateUI ();
 	}
