@@ -218,7 +218,7 @@ public class BoardManager : MonoBehaviour
 
 		instance = Instantiate(bossTrigger, new Vector3((farthestRoom.startx + farthestRoom.width / 2) * tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2) * tilesize), Quaternion.Euler(-90, 0, 0));
 		instance.transform.SetParent(bossTriggerHolder);
-		instance.transform.localScale = new Vector3(farthestRoom.width * 8, farthestRoom.width * 8, 8); // 8 for full room trigger
+		instance.transform.localScale = new Vector3(farthestRoom.width * 8, farthestRoom.height * 8, 8); // 8 for full room trigger
 
 		// Calculate pathfinding walk regions
 		Grid grid = GameObject.Find("A_").GetComponent<Grid>();
@@ -265,6 +265,7 @@ public class BoardManager : MonoBehaviour
 		}
 		Vector3 remyPos = remy.transform.localPosition;
 		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.localPosition;
+		Debug.Log ("REMY:" + (remyPos.x - exitPos.x) + "    " + (remyPos.z - exitPos.z));
 		if (Math.Abs(remyPos.x - exitPos.x) + Math.Abs(remyPos.z - exitPos.z) < 1) {
 			levelmanager.LoadNextLevel();
 		}
