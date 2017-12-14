@@ -327,6 +327,10 @@ public class GenerateMap : MonoBehaviour
 			}
 		}
 
+		foreach (Room room in roomList2) {
+			roomList.Remove (room);
+		}
+
 		return new Map (maparr, roomList2);
 	}
 }
