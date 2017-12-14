@@ -76,6 +76,7 @@ public class WeaponData : MonoBehaviour {
     {
         if (this.tag == "Equipped")
         {
+            cost = 0;
             // enable passive modifier weapon traits
             switch (modifier)
             {
@@ -155,12 +156,20 @@ public class WeaponData : MonoBehaviour {
                 particleMain.startColor = new Color(Color.blue.r, Color.blue.b, Color.blue.g, 0.4588f);
                 particleEffect.gameObject.SetActive(true);
                 break;
+            case WeaponEmotion.Isolation:
+                particleMain.startColor = new Color(Color.gray.r, Color.gray.b, Color.gray.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
             case WeaponEmotion.Rage:
                 particleMain.startColor = new Color(Color.red.r, Color.red.b, Color.red.g, 0.4588f);
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Inspiration:
                 particleMain.startColor = new Color(Color.white.r, Color.white.b, Color.white.g, 0.4588f);
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Compassion:
+                particleMain.startColor = new Color(Color.cyan.r, Color.cyan.b, Color.cyan.g, 0.4588f);
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Confidence:
@@ -176,6 +185,10 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Envy:
+                particleMain.startColor = new Color(165f, 42f, 42f, 0.4588f); // brown
+                particleEffect.gameObject.SetActive(true);
+                break;
+            case WeaponEmotion.Elation:
                 particleMain.startColor = new Color(Color.yellow.r, Color.yellow.b, Color.yellow.g, 0.4588f);
                 particleEffect.gameObject.SetActive(true);
                 break;
