@@ -23,8 +23,8 @@ public class BoardManager : MonoBehaviour
 
 	public DrawMiniMap miniMap;
 
-	public int mapw = 60;
-	public int maph = 40;
+	public int mapw;
+	public int maph;
 	public GenerateMap mapGenerator;
 
 	private Map mymap;
@@ -43,16 +43,27 @@ public class BoardManager : MonoBehaviour
 	private List <Vector3> gridPositions = new List<Vector3> ();
 	private int tilesize = 8;
 
+	//Variables for hallways monsters
+	public float monsterSpawnTime;
+	public float hallMonsterMax;
+	private float currentHallMonsters = 0;
+	private float monsterSpawnTimeRemaining;
+
 	private float walloffset = 3.72f;
 	private float torchoffset = 3.44f;
+
+	PathRequestManager prm;
+	GameObject myAStar;
+
 	void Start(){
 		Random.seed = (int)System.DateTime.Now.Ticks;
+		prm = GameObject.Find("A_").GetComponent<PathRequestManager>();
+		monsterSpawnTimeRemaining = monsterSpawnTime;
 	}
 
 	//Creates a board object. Places cubes as children of that board object based on our map array
 	void BoardSetup ()
 	{
-		Debug.Log (PlayerPrefsManager.GetMasterVolume ());
 		BuildMap:
 			mymap = mapGenerator.generate (mapw, maph);
 			maparr = mymap.maparr;
@@ -214,7 +225,7 @@ public class BoardManager : MonoBehaviour
 		grid.CreateGrid();
 
 		//Spawn monsters
-		PathRequestManager prm = GameObject.Find("A_").GetComponent<PathRequestManager>();
+
 		foreach (Room room in roomList) {
 			int roomsize = room.width;
 			if (room.height > roomsize)
@@ -259,6 +270,25 @@ public class BoardManager : MonoBehaviour
 		}
 		if (!spawnedBoss.Living) {
 			spawnedPortal.SetActive(true);
+		}
+		monsterSpawnTimeRemaining -= Time.deltaTime;
+
+		if (currentHallMonsters > hallMonsterMax)
+			return;
+		if (monsterSpawnTimeRemaining < 0) {
+			monsterSpawnTimeRemaining = monsterSpawnTime;
+			while (true) {
+				int xpos = Random.Range (0, mapw);
+				int ypos = Random.Range (0, maph);
+				if (maparr[xpos,ypos] == "hall"){
+					int randomMonster = Random.Range (0, monsters.Length);
+					GameObject instance = Instantiate (monsters [randomMonster], new Vector3 (xpos * tilesize, .2f, ypos * tilesize), Quaternion.Euler (0, 90, 0)) as GameObject;
+					instance.GetComponent<Unit> ().pathRequestManager = prm;
+					instance.transform.SetParent(monsterHolder);
+					currentHallMonsters += 1;
+					break;
+				}
+			}
 		}
 	}
 }
