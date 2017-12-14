@@ -18,8 +18,6 @@ public class MarkForDeathAbility : Ability
         base.Start();
         applyOnFrame = true;
 		sfx = GetComponent<SoundData> ();
-        // instantiates a camera attached to particle affect and puts it on Main Camera so it will always render the particle effect
-        Instantiate(this.transform.GetChild(1), Camera.main.transform, false).gameObject.SetActive(true);
         ParticleSystem.MainModule mainSystem = particleEffect.main;
         mainSystem.startSize = particleSize;
     }
@@ -27,6 +25,10 @@ public class MarkForDeathAbility : Ability
     public override void applyEffect(GameObject player)
     {
         base.applyEffect(player);
+
+        // instantiates a camera attached to particle affect and puts it on Main Camera so it will always render the particle effect
+        GameObject camera = Instantiate(this.transform.GetChild(1), Camera.main.transform, false).gameObject;
+        camera.SetActive(true);
 
         if (bonusEffect) newCooldownTime(cooldownTime += bonusCdReduction);
 
@@ -43,7 +45,7 @@ public class MarkForDeathAbility : Ability
             RigCollider rigCollider = hit.transform.GetComponent<RigCollider>();
             if (rigCollider == null)
             {
-                StartCoroutine(RemoveParticle(missDuration, mark));
+                StartCoroutine(RemoveParticle(missDuration, mark, camera));
                 return;
             }
 
@@ -71,21 +73,22 @@ public class MarkForDeathAbility : Ability
                 //        }
                 //    }
                 //}
-                StartCoroutine(RemoveParticle(markDuration, mark));
+                StartCoroutine(RemoveParticle(markDuration, mark, camera));
             }
             else
             {
-                StartCoroutine(RemoveParticle(missDuration, mark));
+                StartCoroutine(RemoveParticle(missDuration, mark, camera));
             }
         }
     }
 
-    private IEnumerator RemoveParticle(float timer, List<GameObject> mark)
+    private IEnumerator RemoveParticle(float timer, List<GameObject> mark, GameObject camera)
     {
         yield return new WaitForSeconds(timer);
         foreach(GameObject m in mark)
         {
             Destroy(m);
         }
+        Destroy(camera);
     }
 }

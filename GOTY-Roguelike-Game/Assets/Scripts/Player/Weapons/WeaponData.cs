@@ -183,7 +183,7 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Compassion:
-                particleMain.startColor = new Color(Color.cyan.r, Color.cyan.b, Color.cyan.g, 0.4588f);
+                particleMain.startColor = new Color(255f, 192f, 203, 0.4588f); // pink
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Confidence:
@@ -191,7 +191,7 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Shame:
-                particleMain.startColor = new Color(Color.green.r, Color.green.b, Color.green.g, 0.4588f);
+                particleMain.startColor = new Color(165f, 42f, 42f, 0.4588f); // brown
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Anxiety:
@@ -199,7 +199,7 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Envy:
-                particleMain.startColor = new Color(165f, 42f, 42f, 0.4588f); // brown
+                particleMain.startColor = new Color(Color.green.r, Color.green.b, Color.green.g, 0.4588f);
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Elation:

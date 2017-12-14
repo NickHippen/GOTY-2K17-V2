@@ -14,17 +14,36 @@ public class Grenade : MonoBehaviour
 
     ParticleSystem particleExplosion;
     ParticleSystem particleSparks;
+    bool exploded;
+
     private void Start()
     {
         particleExplosion = this.transform.GetChild(0).GetComponent<ParticleSystem>();
         particleSparks = this.transform.GetChild(1).GetComponent<ParticleSystem>();
-        StartCoroutine(PullPin());
+        StartCoroutine(Active());
     }
 
-    IEnumerator PullPin()
+    private void FixedUpdate()
+    {
+        int layerMask = LayerMask.GetMask("Monster");
+        Collider[] colliders = Physics.OverlapSphere(this.transform.position, this.GetComponent<SphereCollider>().radius, layerMask);
+        if(colliders.Length > 0 && !exploded)
+        {
+            StartCoroutine(Explode());
+        }
+    }
+
+    IEnumerator Active()
     {
         yield return new WaitForSeconds(Timer);
+        if (!exploded) StartCoroutine(Explode());
+    }
+
+    IEnumerator Explode()
+    {
+        exploded = true;
         GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<SphereCollider>().enabled = false;
         particleSparks.Stop();
         GetComponent<Rigidbody>().velocity = new Vector3();
             
@@ -44,11 +63,6 @@ public class Grenade : MonoBehaviour
                 if (BonusEffect) monster.ApplyStatus(new StatusStun(monster, BonusDuration));
             }
         }
-        StartCoroutine(removeGrenade());
-    }
-
-    IEnumerator removeGrenade()
-    {
         yield return new WaitWhile(() => particleExplosion.IsAlive(true));
         Destroy(this.gameObject);
     }
