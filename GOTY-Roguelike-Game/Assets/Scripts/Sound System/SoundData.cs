@@ -12,7 +12,7 @@ public class SoundData : MonoBehaviour {
 
 	public bool oneTime = false;
 
-	public float offset = 0.2f;
+	//public float offset = 0.2f;
 
 	GameObject mm;
 
@@ -23,7 +23,8 @@ public class SoundData : MonoBehaviour {
 
 		if (GameObject.Find ("MusicManager") != null) {
 			mm = GameObject.Find ("MusicManager");
-			source.volume = mm.GetComponent<MusicManager>().getVolume() + offset;
+			source.volume = mm.GetComponent<MusicManager>().getVolume();
+			//Debug.Log (source.volume);
 		} else {
 			source.volume = 1f;
 		}
@@ -37,7 +38,7 @@ public class SoundData : MonoBehaviour {
 			} else {
 				source.volume = mm.GetComponent<MusicManager> ().getVolume ();
 			}*/
-			source.volume = mm.GetComponent<MusicManager> ().getVolume () + offset;
+			source.volume = mm.GetComponent<MusicManager> ().getVolume ();
 		} else {
 			source.volume = 1f;
 		}

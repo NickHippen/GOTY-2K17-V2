@@ -7,6 +7,7 @@ public class PointerSound : MonoBehaviour, IPointerEnterHandler {
 	GameObject source;
 	// Use this for initialization
 	GameObject mm;
+	float offset = 0.2f;
 	void Awake(){
 		DontDestroyOnLoad (gameObject);
 	}
