@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -7807,17 +7807,17 @@ Prefab:
     - target: {fileID: 224196198627935550, guid: 5b2f66786cc65ef4284d9b8f765a2897,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224196198627935550, guid: 5b2f66786cc65ef4284d9b8f765a2897,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 224196198627935550, guid: 5b2f66786cc65ef4284d9b8f765a2897,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 250
+      value: 275
       objectReference: {fileID: 0}
     - target: {fileID: 224196198627935550, guid: 5b2f66786cc65ef4284d9b8f765a2897,
         type: 2}
@@ -7868,6 +7868,47 @@ Prefab:
         type: 2}
       propertyPath: m_LocalScale.z
       value: 0.7619048
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690321213816564, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.014705896
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690321213816564, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.013408317
+      objectReference: {fileID: 0}
+    - target: {fileID: 114690321213816564, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.013408317
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565271520864056, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_FontData.m_FontSize
+      value: 29
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565271520864056, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 5f814346dcf6c0648b784425db6103e5,
+        type: 3}
+    - target: {fileID: 114565271520864056, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565271520864056, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114565271520864056, guid: 5b2f66786cc65ef4284d9b8f765a2897,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b2f66786cc65ef4284d9b8f765a2897, type: 2}
