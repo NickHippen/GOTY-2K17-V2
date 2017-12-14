@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LustSlime : AggressiveUnit {
+public class SlothSlime : AggressiveUnit {
 	protected override void Start() {
 		base.Start();
 		sfx = GetComponent<SoundData> ();
