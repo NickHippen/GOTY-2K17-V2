@@ -171,7 +171,7 @@ public class BoardManager : MonoBehaviour
 		//Spawn player
 		Room playerRoom;
 		int playerSpawn = Random.Range (0,roomList.Count);
-		GameObject player = GameObject.Find ("Player");
+		GameObject player = GameObject.Find ("remy");
 		player.transform.position = new Vector3((roomList[playerSpawn].startx + (roomList[playerSpawn].width/2)) * tilesize, .6f, (roomList[playerSpawn].starty + (roomList[playerSpawn].height/2)) * tilesize);
 		GameObject.Find ("remy").GetComponent<UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl> ().enabled = true;
 
@@ -261,10 +261,11 @@ public class BoardManager : MonoBehaviour
 	public void Update()
 	{
 		if (remy == null) {
-			remy = GameObject.Find("Player");
+			remy = GameObject.Find("remy");
 		}
-		Vector3 remyPos = remy.transform.localPosition;
-		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.localPosition;
+		Vector3 remyPos = remy.transform.position;
+		Vector3 exitPos = spawnedPortal.transform.GetChild(0).transform.position;
+		Debug.Log ("REMY:" + (remyPos.x - exitPos.x) + "    " + (remyPos.z - exitPos.z));
 		if (Math.Abs(remyPos.x - exitPos.x) + Math.Abs(remyPos.z - exitPos.z) < 1) {
 			levelmanager.LoadNextLevel();
 		}

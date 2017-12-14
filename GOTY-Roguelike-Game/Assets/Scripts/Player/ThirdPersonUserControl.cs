@@ -55,12 +55,32 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 					pauseHUD.name = "PauseHUD";
 					Cursor.visible = true;
 					Cursor.lockState = CursorLockMode.None;
+
+					string remyClass = GameObject.Find ("remy").GetComponent<AbilityController> ().classType;
+
+					if (remyClass == "berserker") {
+						GameObject.Find ("BerserkerPause").GetComponent<CanvasGroup> ().alpha = 1;
+					}
+					if (remyClass == "gunslinger") {
+						GameObject.Find ("GunslingerPause").GetComponent<CanvasGroup> ().alpha = 1;
+					}
+					if (remyClass == "wizard") {
+						GameObject.Find ("WizardPause").GetComponent<CanvasGroup> ().alpha = 1;
+					}
+					if (remyClass == "rogue") {
+						GameObject.Find ("RoguePause").GetComponent<CanvasGroup> ().alpha = 1;
+					}
+
 					Time.timeScale = 0f;
 				} else {
 					Destroy(pauseHUD);
 					Cursor.visible = false;
 					Cursor.lockState = CursorLockMode.Locked;
 					Time.timeScale = 1f;
+					GameObject.Find ("BerserkerPause").GetComponent<CanvasGroup> ().alpha = 1;
+					GameObject.Find ("GunslingerPause").GetComponent<CanvasGroup> ().alpha = 1;
+					GameObject.Find ("WizardPause").GetComponent<CanvasGroup> ().alpha = 1;
+					GameObject.Find ("RoguePause").GetComponent<CanvasGroup> ().alpha = 1;
 				}
 			}
         }
