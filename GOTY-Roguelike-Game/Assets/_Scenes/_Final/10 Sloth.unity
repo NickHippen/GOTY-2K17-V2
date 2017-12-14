@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1233,30 +1233,6 @@ Prefab:
     - target: {fileID: 4715846556707462, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
-        type: 2}
-      propertyPath: gridWorldSize.x
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
-        type: 2}
-      propertyPath: gridWorldSize.y
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
-        type: 2}
-      propertyPath: nodeRadius
-      value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 114099057665496690, guid: 6c1bae647f38d5e47a90aa0e53fa67c2,
-        type: 2}
-      propertyPath: unwalkableMask.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 1358492676726226, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6c1bae647f38d5e47a90aa0e53fa67c2, type: 2}

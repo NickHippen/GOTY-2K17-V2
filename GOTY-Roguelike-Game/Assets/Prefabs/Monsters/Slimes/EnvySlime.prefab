@@ -540,6 +540,7 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
 --- !u!114 &114440308202165614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,8 +556,8 @@ MonoBehaviour:
   target: {fileID: 0}
   pathRequestManager: {fileID: 0}
   speed: 5
-  turnSpeed: 4
-  turnDist: 1
+  turnSpeed: 9999999
+  turnDist: 0
   destinationRadius: 1.5
   forceDestinationRadius: 0
   atGoal: 0
@@ -578,7 +579,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -594,7 +594,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5

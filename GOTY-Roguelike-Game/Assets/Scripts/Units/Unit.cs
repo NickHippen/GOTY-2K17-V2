@@ -16,6 +16,7 @@ public abstract class Unit : MonoBehaviour {
 	public float turnDist = 1f;
 	public float destinationRadius = 1f;
 	public bool forceDestinationRadius = false;
+	public bool usingLoS = false;
 
 	public bool atGoal;
 
@@ -77,9 +78,11 @@ public abstract class Unit : MonoBehaviour {
 				continue;
 			}
 			if (HasLineOfSight(target)) {
+				usingLoS = true;
 				OnPathFound(new Vector3[] { target.position }, true);
 				yield return new WaitForSeconds(minPathUpdateTime / 2); // Allow updating here twice as fast
 			} else {
+				usingLoS = false;
 				yield return new WaitForSeconds(minPathUpdateTime);
 				if (target != null && (target.position - targetPosOld).sqrMagnitude > sqrMoveThreshold) {
 					pathRequestManager.RequestPath(new PathRequest(transform.position, target.position, OnPathFound));
@@ -153,7 +156,6 @@ public abstract class Unit : MonoBehaviour {
 		if (Physics.Raycast(transform.position + new Vector3(0, 1f, 0), rayDirection, out hit, distance, layerMask)) {
 			return hit.transform == targetTransform;
 		}
-		Debug.Log("No LoS");
 		return false;
 	}
 
