@@ -463,6 +463,20 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
+  m_FalloffTable:
+    m_Table[0]: 0
+    m_Table[1]: 0
+    m_Table[2]: 0
+    m_Table[3]: 0
+    m_Table[4]: 0
+    m_Table[5]: 0
+    m_Table[6]: 0
+    m_Table[7]: 0
+    m_Table[8]: 0
+    m_Table[9]: 0
+    m_Table[10]: 0
+    m_Table[11]: 0
+    m_Table[12]: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_ShadowRadius: 0
@@ -479,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: bc39922f3629ba44abd0bba4fa058048, type: 3}
-  cooldownTime: 40
+  cooldownTime: 5
   faceCameraDirection: 0
   lockTurnRotation: 0
   sfx: {fileID: 0}
@@ -502,6 +516,7 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
 --- !u!198 &198035157218409316
 ParticleSystem:
   m_ObjectHideFlags: 1
