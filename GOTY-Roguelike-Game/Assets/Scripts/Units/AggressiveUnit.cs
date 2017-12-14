@@ -73,7 +73,6 @@ public abstract class AggressiveUnit : LivingUnit {
 		Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRadius);
 		foreach (Collider collider in hitColliders) {
 			RigCollider rigCollider = collider.GetComponent<RigCollider>();
-			Debug.Log(collider.tag + ", " + collider.name);
 			if (rigCollider != null
 				&& rigCollider.RootUnit is AggressiveUnit
 				&& !(rigCollider.RootUnit is BossUnit)) {
