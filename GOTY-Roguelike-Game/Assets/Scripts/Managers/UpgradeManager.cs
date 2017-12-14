@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class UpgradeManager : MonoBehaviour {
 
 	public Texture upgradedTexture;
@@ -22,9 +22,11 @@ public class UpgradeManager : MonoBehaviour {
 	}
 
 	void Start() {
-		Debug.Log("Start");
+		if (SceneManager.GetActiveScene().name == "10 Sloth") {
+			CloseMenu ();
+			return;
+		}
 		string classType = Player.GetComponent<AbilityController>().classType;
-		Debug.Log("Checking for " + classType);
 		transform.parent.parent.Find(classType).GetComponent<CanvasGroup>().alpha = 1;
 		transform.parent.parent.Find(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
 		Time.timeScale = 0f;
