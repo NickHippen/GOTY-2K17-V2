@@ -8,7 +8,7 @@ public enum WeaponEmotion {
 	None=0, Sorrow, Isolation, Rage, Inspiration, Compassion, Confidence, Shame, Anxiety, Envy, Elation
 
 }
-// Inpiration and Compassion are applied in WeaponData
+// Inpiration and Compassion are applied in WeaponData, Same and Confidence in HealthManager
 
 public class WeaponEmotionActionHandler {
 
