@@ -80,7 +80,7 @@ public class HealthManager : MonoBehaviour {
 			}
 		}
 		if (!invincible && Living) {
-			int roll = Random.Range (0, 2);
+			int roll = Random.Range (0, 5);
 			Debug.Log (roll);
 			switch (roll) {
 			case 0:
