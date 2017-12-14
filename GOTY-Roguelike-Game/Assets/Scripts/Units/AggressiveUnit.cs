@@ -56,7 +56,7 @@ public abstract class AggressiveUnit : LivingUnit {
 		}
 	}
 
-	public void SetAggro(Transform target) {
+	public void SetAggro(Transform target, bool ignoreSound=false) {
 		ThirdPersonCharacter tpc = target.GetComponent<ThirdPersonCharacter>();
 		if (tpc != null && tpc.IsInvisible) {
 			return;
@@ -66,6 +66,19 @@ public abstract class AggressiveUnit : LivingUnit {
 		if (sfx != null && sfx.soundEffects.Count > 0 && !sfx.oneTime) {
 			sfx.playSound();
 			sfx.oneTime = true;
+		}
+	}
+
+	public void AlertNeighbors(Transform target) {
+		Collider[] hitColliders = Physics.OverlapSphere(transform.position, aggroRadius);
+		foreach (Collider collider in hitColliders) {
+			RigCollider rigCollider = collider.GetComponent<RigCollider>();
+			if (rigCollider != null
+				&& rigCollider.RootUnit is AggressiveUnit
+				&& !(rigCollider.RootUnit is BossUnit)) {
+				AggressiveUnit monster = rigCollider.RootUnit as AggressiveUnit;
+				monster.SetAggro(target, true);
+			}
 		}
 	}
 
@@ -127,6 +140,7 @@ public abstract class AggressiveUnit : LivingUnit {
 	public override void Damage(float amount, Transform attacker) {
 		base.Damage(amount, attacker);
 		SetAggro(attacker);
+		AlertNeighbors(attacker);
 	}
 
 }
