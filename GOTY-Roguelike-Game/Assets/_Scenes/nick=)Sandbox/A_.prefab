@@ -35,8 +35,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1358492676726226}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -16.048264, y: 14.719365, z: -8.912483}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 214, y: 0.2, z: 247}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53,14 +53,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3652b8f79c70ea943accc515f08d2f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  calculateOnAwake: 0
   displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 0
-  gridWorldSize: {x: 1500, y: 1500}
-  nodeRadius: 0.5
+    m_Bits: 256
+  gridWorldSize: {x: 500, y: 500}
+  nodeRadius: 0.7
   walkableRegions: []
-  obstacleProximityPenalty: 10
+  obstacleProximityPenalty: 20
 --- !u!114 &114486658760956020
 MonoBehaviour:
   m_ObjectHideFlags: 1
