@@ -62,7 +62,7 @@ public class Map
 public class GenerateMap : MonoBehaviour
 {
 	void Start(){
-		Random.seed = (int)System.DateTime.Now.Ticks;
+		Random.InitState(Random.Range(0,10000000));
 	}
 
 	//Receives a node and checks if the nodes around it are available to create a wall. Puts this node into the stack.
@@ -159,8 +159,8 @@ public class GenerateMap : MonoBehaviour
 		string[,] maparr = new string[mapw, maph];
 		List<Room> roomList = new List<Room> ();
 
-		Random.seed = System.DateTime.Now.Millisecond;
-		Random.seed = 0;
+		Random.InitState(Random.Range(0,10000000));
+
 		for (var i = 0; i < mapw; i++) {
 			for (var j = 0; j < maph; j++) {
 				maparr [i, j] = "wall";

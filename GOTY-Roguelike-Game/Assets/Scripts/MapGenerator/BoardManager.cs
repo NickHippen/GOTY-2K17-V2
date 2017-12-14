@@ -56,7 +56,7 @@ public class BoardManager : MonoBehaviour
 	GameObject myAStar;
 
 	void Start(){
-		Random.seed = (int)System.DateTime.Now.Ticks;
+		Random.InitState(Random.Range(0,10000000));
 		prm = GameObject.Find("A_").GetComponent<PathRequestManager>();
 		monsterSpawnTimeRemaining = monsterSpawnTime;
 	}
@@ -253,7 +253,7 @@ public class BoardManager : MonoBehaviour
 	//Creates a new map and builds the scene with our objects
 	public void SetupScene (int level)
 	{
-		Random.seed = 0;
+		Random.InitState(Random.Range(0,10000000));
 		BoardSetup ();
 	}
 
