@@ -24,10 +24,23 @@ public class ShadowAbility : Ability {
         GameObject playerEffect = Instantiate(particleEffect, player.transform, false);
         playerEffect.transform.position += player.transform.forward * effectPosition.x + player.transform.up * effectPosition.y;
         playerEffect.gameObject.SetActive(true);
+        StartCoroutine(endEventOnAction(player, playerEffect));
         StartCoroutine(effectTimer(player, playerEffect));
     }
 
-    private IEnumerator effectTimer(GameObject player, GameObject effect)
+    IEnumerator endEventOnAction(GameObject player, GameObject effect)
+    {
+        yield return new WaitUntil(() => player.GetComponent<Animator>().GetBool("Attack") == true);
+        particleEffect.GetComponent<ParticleSystem>().Stop();
+        player.GetComponent<ThirdPersonCharacter>().IsInvisible = false;
+        yield return new WaitWhile(() => particleEffect.GetComponent<ParticleSystem>().IsAlive());
+        if (effect != null)
+        {
+            Destroy(effect);
+        }
+    }
+
+    IEnumerator effectTimer(GameObject player, GameObject effect)
     {
         yield return new WaitForSeconds(bonusEffect ? duration + bonusDuration : duration);
         particleEffect.GetComponent<ParticleSystem>().Stop();
