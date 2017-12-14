@@ -29,9 +29,16 @@ public class UpgradeManager : MonoBehaviour {
 		string classType = Player.GetComponent<AbilityController>().classType;
 		transform.parent.parent.Find(classType).GetComponent<CanvasGroup>().alpha = 1;
 		transform.parent.parent.Find(classType + "Upgrade").GetComponent<CanvasGroup>().alpha = 1;
+		StartCoroutine("EnableCursor");
+	}
+
+	IEnumerator EnableCursor() {
+		yield return new WaitForSeconds(1);
 		Time.timeScale = 0f;
 		Cursor.lockState = CursorLockMode.None;
 		Cursor.visible = true;
+		StopCoroutine("EnableCursor");
+		yield return null;
 	}
 
 	void Update() {

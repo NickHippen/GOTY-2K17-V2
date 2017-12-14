@@ -123,7 +123,12 @@ public abstract class AggressiveUnit : LivingUnit {
 		AttackCollision(collider);
 	}
 
+	bool recentlyAttacked = false;
+
 	private void AttackCollision(Collider collider) {
+		if (recentlyAttacked) {
+			return;
+		}
 		if (collider.gameObject.tag == "Player") {
 			HealthManager healthManager = collider.gameObject.GetComponent<HealthManager>();
 			if (healthManager == null) {
@@ -131,10 +136,19 @@ public abstract class AggressiveUnit : LivingUnit {
 			}
 			if (this.UnitAnimator.GetBool("Attack")) {
 				healthManager.Damage(CalculateAttackPower());
+				recentlyAttacked = true;
+				StartCoroutine("ResetAttack");
 			} else if (this.UnitAnimator.GetBool("SpecialAttack")) {
 				healthManager.Damage(CalculateAttackPower()); // TODO Possibly add damage modifiers for special attacks
 			}
 		}
+	}
+
+	IEnumerator ResetAttack() {
+		yield return new WaitForSeconds(1.5f);
+		recentlyAttacked = false;
+		StopCoroutine("ResetAttack");
+		yield return null;
 	}
 
 	public override void Damage(float amount, Transform attacker) {
