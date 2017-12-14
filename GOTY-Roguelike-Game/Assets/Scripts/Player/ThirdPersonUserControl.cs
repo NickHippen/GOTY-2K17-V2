@@ -51,8 +51,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			}
 			if (Input.GetKeyDown(KeyCode.Escape)) {
 				if (pauseHUD == null) {
-					pauseHUD = Instantiate(Resources.Load("PauseHUD")) as GameObject;
-					pauseHUD.name = "PauseHUD";
+					pauseHUD = Instantiate(Resources.Load("PauseStuff")) as GameObject;
+					pauseHUD.name = "PauseStuff";
 					Cursor.visible = true;
 					Cursor.lockState = CursorLockMode.None;
 
