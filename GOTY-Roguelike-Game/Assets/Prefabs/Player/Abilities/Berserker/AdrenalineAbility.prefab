@@ -121,7 +121,6 @@ MonoBehaviour:
   loopIndex: 1
   delay: 0
   oneTime: 0
-  offset: 0.2
 --- !u!114 &114967622511960412
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -134,12 +133,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 908d5ff103a2e1d45927a3a2c7dae398, type: 3}
-  cooldownTime: 40
+  cooldownTime: 35
   faceCameraDirection: 0
   lockTurnRotation: 1
   sfx: {fileID: 0}
   damageMultiplier: 2
-  duration: 8
+  duration: 10
 --- !u!198 &198051787524519184
 ParticleSystem:
   m_ObjectHideFlags: 1
