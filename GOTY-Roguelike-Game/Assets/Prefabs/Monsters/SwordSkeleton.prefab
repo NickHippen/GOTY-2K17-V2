@@ -1217,6 +1217,7 @@ MonoBehaviour:
   directIndex: 0
   loopIndex: 0
   delay: 0
+  oneTime: 0
 --- !u!114 &114268862459920240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1258,12 +1259,13 @@ MonoBehaviour:
   turnDist: 1
   destinationRadius: 2
   forceDestinationRadius: 0
+  usingLoS: 0
   atGoal: 0
   health: 100
   maxHealth: 100
   canvasHeight: 0.2
-  healthDrop: {fileID: 0}
-  gemDrop: {fileID: 0}
+  healthDrop: {fileID: 1501697415902056, guid: 8b31e6b42fe4cdd42b9a14fa47c6ee63, type: 2}
+  gemDrop: {fileID: 1420538984969680, guid: 8a9acfc9ee5c5cb4fb3388ccfe4576e3, type: 2}
   targetTag: Player
   aggroRadius: 20
   attackPower: 5
@@ -1303,7 +1305,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1319,7 +1320,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -1383,7 +1383,6 @@ SkinnedMeshRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -1399,7 +1398,6 @@ SkinnedMeshRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
