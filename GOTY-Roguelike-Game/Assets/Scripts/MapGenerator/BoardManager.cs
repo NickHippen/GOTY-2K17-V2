@@ -217,6 +217,7 @@ public class BoardManager : MonoBehaviour
 		spawnedPortal = instance;
 		spawnedPortal.SetActive(false);
 
+		// Boss Trigger
 		instance = Instantiate(bossTrigger, new Vector3((farthestRoom.startx + farthestRoom.width / 2) * tilesize, .26f, (farthestRoom.starty + farthestRoom.height / 2) * tilesize), Quaternion.Euler(-90, 0, 0));
 		instance.transform.SetParent(bossTriggerHolder);
 		instance.transform.localScale = new Vector3(farthestRoom.width * 8, farthestRoom.height * 8, 8); // 8 for full room trigger
