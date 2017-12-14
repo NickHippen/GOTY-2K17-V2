@@ -157,7 +157,7 @@ public class DrawMiniMap : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.M)) {
+		if (Input.GetKeyDown(KeyCode.M) || Input.GetKeyDown(KeyCode.Tab)) {
 			if (this.GetComponentInParent<CanvasGroup> ().alpha == 0)
 				this.GetComponentInParent<CanvasGroup> ().alpha = 1;
 			else
