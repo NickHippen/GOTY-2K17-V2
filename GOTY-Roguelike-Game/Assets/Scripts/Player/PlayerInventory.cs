@@ -20,8 +20,9 @@ public class PlayerInventory : MonoBehaviour {
 	public int gold;
 
 	public Text weaponDes;
+    GameObject ground;
 
-	void Start () {
+    void Start () {
 		for (int x = 0; x < maxCapacity; x++) {
 			slots.Add (GameObject.Find ("Weapon " + x));
 		}
@@ -37,13 +38,17 @@ public class PlayerInventory : MonoBehaviour {
 			test++;
 		}
 	}
+    private void OnLevelWasLoaded(int level)
+    {
+        if(level > 1) ground = GameObject.Find("GroundCollider");
 
-	//Addd GameObject weapon to the weapons list
-	public void addWeapon(GameObject weapon){
+    }
+
+    //Addd GameObject weapon to the weapons list
+    public void addWeapon(GameObject weapon){
 		if (weapons.Count < maxCapacity) {
 			//current++;
 			weapons.Add (weapon);
-			Debug.Log ("Weapon added");
 		}
 		//slots [weapons.Count - 1].GetComponent<Image> ().sprite = weapons [weapons.Count - 1].GetComponent<WeaponData> ().icon;
 		UpdateUI();
@@ -104,9 +109,8 @@ public class PlayerInventory : MonoBehaviour {
 	public void dropCurrentWeapon(){
 		//weapons [current].GetComponent<Rigidbody> ().useGravity = true;
 		GameObject temp = getCurrentWeapon();
-
 		temp.tag = "Pickup";
-		temp.transform.parent = null;
+        temp.transform.SetParent(ground.transform);
 		if (temp.GetComponent<Floating>() != null) {
 			temp.GetComponent<Floating>().enabled = true;
 		}

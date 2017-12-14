@@ -234,7 +234,7 @@ public class ThirdPersonCharacter : MonoBehaviour
 	public void isUse(bool E_Press) {
 		m_Use = E_Press;
 		if (m_Use) {
-			Debug.Log("Pressed");
+			//Debug.Log("Pressed");
 			pickupNearby(transform.position, grabRadius);
 		}
 	}
@@ -244,9 +244,9 @@ public class ThirdPersonCharacter : MonoBehaviour
 	to the player's inventory*/
 	void pickupNearby(Vector3 center, float radius){
 		Collider[] hitColliders = Physics.OverlapSphere (center, radius);
-		for (int x = 0; x < hitColliders.Length; x++) {
-			Debug.Log (hitColliders [x]);
-		}
+		//for (int x = 0; x < hitColliders.Length; x++) {
+		//	Debug.Log (hitColliders [x]);
+		//}
 		int i = 0;
 		while (i < hitColliders.Length) {
 			GameObject temp = hitColliders [i].gameObject;
@@ -266,7 +266,6 @@ public class ThirdPersonCharacter : MonoBehaviour
 					temp.GetComponent<Floating> ().enabled = false;
 				}
 				initializeEquip (temp);
-				Debug.Log (temp.name);
 				inventory.addWeapon (temp);
 				temp.gameObject.SetActive (false);
 				//Move into Weapon class later

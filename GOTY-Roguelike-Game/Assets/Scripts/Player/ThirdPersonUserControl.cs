@@ -36,6 +36,8 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 			m_Abilities[1] = Input.GetKeyDown (KeyCode.X);
 			m_Abilities[2] = Input.GetKeyDown (KeyCode.C);
 			m_Abilities[3] = Input.GetKeyDown (KeyCode.V);
+            m_Character.isUse(Input.GetKeyDown(KeyCode.E));
+            m_Character.drop(Input.GetKeyDown(KeyCode.Q));
 
             if (!m_Character.gameObject.GetComponent<PlayerInventory>().isEmpty())
             {
@@ -124,9 +126,6 @@ namespace UnityStandardAssets.Characters.ThirdPerson
 
 			//Temporary test of attack animation
 //			m_Character.attack (Input.GetMouseButton(0));
-
-			m_Character.isUse(Input.GetKeyDown(KeyCode.E));
-			m_Character.drop (Input.GetKeyDown(KeyCode.Q));
 
             // calculate move direction to pass to character
             if (m_Cam != null)
