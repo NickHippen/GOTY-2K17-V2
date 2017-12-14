@@ -290,8 +290,10 @@ public class GenerateMap : MonoBehaviour
 				default:
 					break;
 				}
+				/*Limits the amount of doors
 				if (count == 2)
 					break;
+				*/
 			}
 		}
 
