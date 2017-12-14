@@ -244,14 +244,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 97a9c654c0208d14881e0037ac333e87, type: 3}
-  cooldownTime: 20
+  cooldownTime: 8
   faceCameraDirection: 0
   lockTurnRotation: 1
   sfx: {fileID: 0}
-  damage: 15
-  duration: 4
+  damage: 20
   damageRadius: 2
   effectPosition: {x: 1.8, y: 1.5}
+  bonusDamage: 10
+  bonusStunDuration: 3
 --- !u!114 &114597739925359714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,7 +294,6 @@ MonoBehaviour:
   loopIndex: 0
   delay: 0
   oneTime: 0
-  offset: 0.2
 --- !u!198 &198097850240740926
 ParticleSystem:
   m_ObjectHideFlags: 1
