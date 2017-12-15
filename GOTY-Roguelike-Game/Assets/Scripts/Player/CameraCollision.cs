@@ -22,7 +22,7 @@ public class CameraCollision : MonoBehaviour {
 		Vector3 desiredCameraPos = transform.parent.TransformPoint(dollyDir * maxDistance);
 		RaycastHit hit;
 
-		int layerMask = LayerMask.GetMask("Unwalkable"); // Only collisions in layer Unwalkable
+		int layerMask = LayerMask.GetMask("Unwalkable", "Ground"); // Only collisions in layer Unwalkable
 		if (Physics.Linecast(transform.parent.position, desiredCameraPos, out hit, layerMask)) {
 			distance = Mathf.Clamp((hit.distance * 0.8f), minDistance, maxDistance);
 		} else {

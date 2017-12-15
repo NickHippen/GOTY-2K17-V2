@@ -56,44 +56,43 @@ public class StaffProjectile : MonoBehaviour
 
     void Start()
     {
-        missileParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
+        missileParticle = transform.GetComponent<ParticleSystem>();
         StartCoroutine(Active());
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster") || other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") ||
-            other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
-            
-            missileParticle.transform.gameObject.SetActive(false);
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster")) {
             GetComponent<Rigidbody>().velocity = new Vector3();
 
-            Collider[] colliders = Physics.OverlapSphere(this.transform.position, radius);
-            foreach (Collider collider in colliders)
+            RigCollider rigCollider = other.gameObject.GetComponent<RigCollider>();
+            if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
             {
-                RigCollider rigCollider = collider.gameObject.GetComponent<RigCollider>();
-                if (rigCollider != null && rigCollider.RootUnit is AggressiveUnit)
-                {
-                    AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
-                    float damage = this.damage;
-                    damage *= damageMultiplier;
-                    damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(staff, monster, damage);
-                    damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(staff, monster, damage);
-                    monster.Damage(damage, Player.transform);
-                }
+                AggressiveUnit monster = ((AggressiveUnit)rigCollider.RootUnit);
+                float damage = this.damage;
+                damage *= damageMultiplier;
+                damage = WeaponEmotionActionHandler.GetOnDamageAction(emotion)(staff, monster, damage);
+                damage = WeaponModifierActionHandler.GetOnDamageAction(modifier)(staff, monster, damage);
+                monster.Damage(damage, Player.transform);
             }
-            Remove();
+            StartCoroutine(RemoveParticle());
+        }
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Unwalkable") || other.gameObject.layer == LayerMask.NameToLayer("Ground")) {
+            GetComponent<Rigidbody>().velocity = new Vector3();
+            StartCoroutine(RemoveParticle());
         }
     }
 
     IEnumerator Active()
     {
         yield return new WaitForSeconds(timer);
-        Remove();
+        StartCoroutine(RemoveParticle());
     }
 
-    void Remove()
+    IEnumerator RemoveParticle()
     {
+        missileParticle.Stop(true);
+        yield return new WaitWhile(() => missileParticle.IsAlive());
         Destroy(this.gameObject);
     }
 }
