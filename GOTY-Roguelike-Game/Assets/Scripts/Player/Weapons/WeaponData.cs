@@ -171,7 +171,7 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Isolation:
-                particleMain.startColor = new Color(85, 107, 47, 0.4588f); // dark olive green
+                particleMain.startColor = (Color) new Color32(85, 107, 47, 117); // dark olive green
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Rage:
@@ -183,19 +183,19 @@ public class WeaponData : MonoBehaviour {
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Compassion:
-                particleMain.startColor = new Color(255f, 114, 114, 0.4588f); // pink salmonish (custom color)
+                particleMain.startColor = (Color) new Color32(255, 114, 114, 117); // pink salmonish (custom color)
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Confidence:
-                particleMain.startColor = new Color(255f, 165f, 0f, 0.4588f); // orange
+                particleMain.startColor = (Color) new Color32(255, 165, 0, 117); // orange
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Shame:
-                particleMain.startColor = new Color(160f, 82f, 45f, 0.4588f); // brown (Sienna specifically)
+                particleMain.startColor = (Color) new Color32(160, 82, 45, 117); // brown (Sienna specifically)
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Anxiety:
-                particleMain.startColor = new Color(238f, 130f, 238f, 0.4588f); // violet
+                particleMain.startColor = (Color) new Color32(238, 130, 238, 117); // violet
                 particleEffect.gameObject.SetActive(true);
                 break;
             case WeaponEmotion.Envy:
